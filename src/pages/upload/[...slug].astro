@@ -1,0 +1,73 @@
+---
+// Esta página captura todas las rutas /upload/*
+// y redirige a hosted.inled.es
+
+export function getStaticPaths() {
+  // Para sitios estáticos, necesitamos pre-generar algunas rutas comunes
+  // o dejar que Astro genere una página 404 fallback
+  return [];
+}
+
+const { slug } = Astro.params;
+const targetUrl = `https://hosted.inled.es/${slug || ''}`;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirigiendo...</title>
+
+  <!-- Meta refresh - redirección instantánea -->
+  <meta http-equiv="refresh" content="0;url={targetUrl}">
+
+  <!-- Link canónico para SEO -->
+  <link rel="canonical" href={targetUrl}>
+
+  <!-- JavaScript como fallback -->
+  <script is:inline define:vars={{ targetUrl }}>
+    window.location.replace(targetUrl);
+  </script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    .redirect-container {
+      text-align: center;
+    }
+    .spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top: 4px solid white;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="redirect-container">
+    <div class="spinner"></div>
+    <h1>Redirigiendo...</h1>
+    <p>Si no eres redirigido automáticamente, <a href={targetUrl}>haz clic aquí</a>.</p>
+  </div>
+</body>
+</html>

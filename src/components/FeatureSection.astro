@@ -1,0 +1,181 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt?: string;
+  buttonText?: string;
+  buttonHref?: string;
+  reversed?: boolean;
+}
+
+const { 
+  title, 
+  description, 
+  imageSrc, 
+  imageAlt = "Feature image", 
+  buttonText = "Más información", 
+  buttonHref = "#", 
+  reversed = false 
+} = Astro.props;
+---
+
+<section class:list={["feature-section", { reversed }]}>
+  <div class="container">
+    <div class="content">
+      <h2 class="title">{title}</h2>
+      <p class="description">{description}</p>
+      {buttonText && (
+        <a href={buttonHref} class="cta-button">
+          {buttonText}
+        </a>
+      )}
+    </div>
+    <div class="image-container">
+      <img src={imageSrc} alt={imageAlt} loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-section {
+    padding: 6rem 2rem;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .feature-section.reversed .container {
+    direction: rtl;
+  }
+
+  .feature-section.reversed .content {
+    direction: ltr;
+  }
+  
+  /* Alternative to direction rtl for grid items swapping */
+  .feature-section.reversed .container {
+      grid-template-areas: "image content";
+      direction: ltr;
+  }
+  .feature-section:not(.reversed) .container {
+      grid-template-areas: "content image";
+  }
+
+  .content {
+    grid-area: content;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+  }
+
+  .image-container {
+    grid-area: image;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.8s ease-out;
+  }
+
+  /* Reveal animations when in view (handled by JS below) */
+  .feature-section.visible .content {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .feature-section.visible .image-container {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: white;
+  }
+
+  .description {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2.5rem;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  .image-container:hover img {
+    transform: scale(1.05);
+  }
+
+  .cta-button {
+    display: inline-flex;
+    padding: 0.75rem 2rem;
+    background: white;
+    color: black;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+  }
+
+  @media (max-width: 968px) {
+    .container {
+      grid-template-columns: 1fr;
+      grid-template-areas: 
+        "image"
+        "content" !important; /* Force image top on mobile */
+      gap: 3rem;
+    }
+
+    .feature-section {
+      padding: 4rem 1.5rem;
+    }
+
+    .image-container {
+      order: -1; /* Ensure image is first visually if grid-area fails */
+    }
+  }
+</style>
+
+<script>
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.feature-section').forEach(section => {
+    observer.observe(section);
+  });
+</script>

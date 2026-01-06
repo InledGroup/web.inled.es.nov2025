@@ -1,0 +1,55 @@
+---
+import NewsletterForm from './NewsletterForm.astro';
+---
+
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-wrapper">
+      <NewsletterForm />
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter-section {
+    padding: 6rem 2rem;
+    background: transparent;
+    position: relative;
+  }
+
+  /* Optional: Background gradient or effect to separate it */
+  .newsletter-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+  }
+
+  .newsletter-wrapper {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(10, 10, 10, 0.6); /* Transparent background */
+    backdrop-filter: blur(12px); /* Blur effect */
+    -webkit-backdrop-filter: blur(12px);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+  
+  @media (max-width: 768px) {
+    .newsletter-wrapper {
+        padding: 2rem;
+    }
+  }
+</style>

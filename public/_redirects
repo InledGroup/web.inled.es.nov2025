@@ -1,0 +1,23 @@
+# Cloudflare Pages Redirects
+# https://developers.cloudflare.com/pages/configuration/redirects/
+
+# Regla 1: Redirigir /upload/* a hosted.inled.es/*
+/upload/:path https://hosted.inled.es/:path 302
+
+# Regla 2: Redirecciones personalizadas (302 = temporal)
+/swiftinstall https://inled.es/apps/swiftinstall 302
+/warp https://inled.es/apps/warp-vpn/ 302
+/startomnibox https://inled.es/apps/startomnibox/ 302
+/startntp https://inled.es/apps/startntp/ 302
+/winerror https://inled.es/apps/winerror/ 302
+/winbsod https://inled.es/apps/winbsod/ 302
+/tabstacker https://inled.es/apps/tabstacker/ 302
+/cleany https://inled.es/apps/cleany/ 302
+/archive.is https://inled.es/apps/archive.is/ 302
+/startchat https://inled.es/apps/startchat/ 302
+/inshare https://inled.es/apps/inshare/ 302
+
+/about-start https://start.inled.es/ 302
+/mdpdf https://mdpdf.inled.es/ 302
+/inlinked https://inlinked.inled.es/ 302
+/inmd https://inmd.inled.es/ 302

@@ -1,0 +1,241 @@
+---
+interface Section {
+  title: string;
+  subtitle?: string;
+  description: string;
+  href: string;
+  label?: string;
+}
+
+interface Props {
+  leftSection: Section;
+  rightSection: Section;
+}
+
+const { leftSection, rightSection } = Astro.props;
+---
+
+<section class="split-section" id="#options-2">
+  <a href={leftSection.href} class="split-panel left-panel">
+    <div class="panel-content">
+      {leftSection.subtitle && (
+        <p class="panel-subtitle">{leftSection.subtitle}</p>
+      )}
+      <h2 class="panel-title">{leftSection.title}</h2>
+      <p class="panel-description">{leftSection.description}</p>
+      {leftSection.label && (
+        <span class="panel-label">{leftSection.label}</span>
+      )}
+    </div>
+  </a>
+
+  <a href={rightSection.href} class="split-panel right-panel">
+    <div class="panel-content">
+      {rightSection.subtitle && (
+        <p class="panel-subtitle">{rightSection.subtitle}</p>
+      )}
+      <h2 class="panel-title">{rightSection.title}</h2>
+      <p class="panel-description">{rightSection.description}</p>
+      {rightSection.label && (
+        <span class="panel-label">{rightSection.label}</span>
+      )}
+    </div>
+  </a>
+
+  <div class="divider"></div>
+</section>
+
+<style>
+  .split-section {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+
+  .split-panel {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .split-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: white;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .left-panel::before {
+    transform-origin: left;
+  }
+
+  .right-panel::before {
+    transform-origin: right;
+  }
+
+  .split-panel:hover::before {
+    transform: scaleX(1);
+  }
+
+  .split-panel:hover {
+    flex: 1.1;
+  }
+
+  .split-panel:not(:hover) {
+    flex: 0.9;
+  }
+
+  .panel-content {
+    position: relative;
+    z-index: 1;
+    max-width: 500px;
+    text-align: center;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .split-panel:hover .panel-content {
+    transform: scale(1.05);
+  }
+
+  .panel-subtitle {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+    transition: color 0.6s ease;
+  }
+
+  .split-panel:hover .panel-subtitle {
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .panel-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 300;
+    color: white;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+    transition: color 0.6s ease;
+  }
+
+  .split-panel:hover .panel-title {
+    color: black;
+  }
+
+  .panel-description {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    transition: color 0.6s ease;
+  }
+
+  .split-panel:hover .panel-description {
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  .panel-label {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: all 0.6s ease;
+  }
+
+  .split-panel:hover .panel-label {
+    border-color: black;
+    color: black;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .divider {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    left: 50%;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(255, 255, 255, 0.3) 20%,
+      rgba(255, 255, 255, 0.3) 80%,
+      transparent
+    );
+    transform: translateX(-50%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @media (max-width: 968px) {
+    .split-section {
+      flex-direction: column;
+      min-height: auto;
+    }
+
+    .split-panel {
+      min-height: 60vh;
+      padding: 3rem 2rem;
+    }
+
+    .split-panel:hover {
+      flex: 1;
+    }
+
+    .split-panel:not(:hover) {
+      flex: 1;
+    }
+
+    .divider {
+      top: 50%;
+      left: 10%;
+      right: 10%;
+      width: auto;
+      height: 1px;
+      background: linear-gradient(
+        to right,
+        transparent,
+        rgba(255, 255, 255, 0.3) 20%,
+        rgba(255, 255, 255, 0.3) 80%,
+        transparent
+      );
+      transform: translateY(-50%);
+    }
+
+    .panel-content {
+      max-width: 100%;
+    }
+
+    .panel-title {
+      font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .panel-description {
+      font-size: 1rem;
+    }
+  }
+</style>

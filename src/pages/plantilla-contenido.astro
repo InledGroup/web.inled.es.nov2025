@@ -1,0 +1,206 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+---
+
+<Layout title="Plantilla de Contenido - INLED Group">
+  <Header />
+
+  <main class="content-page">
+    <div class="content-container">
+      <!--
+        INSTRUCCIONES:
+        Puedes añadir tu contenido HTML aquí.
+        Ejemplo de uso:
+
+        <h1>Tu Título Principal</h1>
+
+        <div class="content-text">
+          <h2>Sección 1</h2>
+          <p>Tu texto aquí...</p>
+
+          <h3>Subsección</h3>
+          <p>Más contenido...</p>
+
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+          </ul>
+
+          <h2>Sección 2</h2>
+          <p>Otro párrafo de texto...</p>
+        </div>
+      -->
+
+      <h1>Título de tu Contenido</h1>
+
+      <div class="content-text">
+        <p>Aquí puedes añadir tu contenido en HTML sin problema. El texto se mostrará sobre el fondo difuminado con un contenedor semitransparente.</p>
+
+        <h2>Ejemplo de Sección</h2>
+        <p>Este es un ejemplo de cómo se verá tu contenido. Puedes usar encabezados, párrafos, listas y más elementos HTML.</p>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .content-page {
+    min-height: 100vh;
+    padding-top: 150px;
+    padding-bottom: 50px;
+    position: relative;
+  }
+
+  /* Imagen de fondo fija */
+  .content-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://hosted.inled.es/better.inled.svg') center center / cover no-repeat;
+    z-index: -2;
+  }
+
+  /* Capa de difuminado sobre la imagen */
+  .content-page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+  }
+
+  /* Contenedor principal con backdrop blur */
+  .content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+  }
+
+  /* Estilos de tipografía */
+  h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .content-text {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+
+  .content-text p {
+    margin-bottom: 1rem;
+  }
+
+  .content-text h2 {
+    color: white;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .content-text h3 {
+    color: white;
+    font-size: 1.4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .content-text h4 {
+    color: white;
+    font-size: 1.2rem;
+    margin-top: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .content-text ul, .content-text ol {
+    margin-left: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .content-text li {
+    margin-bottom: 0.5rem;
+  }
+
+  .content-text a {
+    color: rgba(120, 119, 198, 1);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .content-text a:hover {
+    color: rgba(255, 69, 124, 1);
+  }
+
+  .content-text blockquote {
+    border-left: 3px solid rgba(255, 255, 255, 0.3);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .content-text code {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+  }
+
+  .content-text pre {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+  }
+
+  .content-text pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .content-page {
+      padding-top: 80px;
+    }
+
+    .content-container {
+      padding: 2rem 1.5rem;
+      border-radius: 15px;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .content-text {
+      font-size: 1rem;
+    }
+
+    .content-text h2 {
+      font-size: 1.5rem;
+    }
+
+    .content-text h3 {
+      font-size: 1.25rem;
+    }
+  }
+</style>

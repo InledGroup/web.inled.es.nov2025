@@ -1,0 +1,926 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+
+const slides = [
+  {
+    id: 1,
+    title: "Dream, Build",
+    subtitle: "Construimos el software de tus sueños",
+    link: "/proyectos",
+    linkText: "Descubre",
+    background: {
+      type: "image", // "image" o "video"
+      src: "https://hosted.inled.es/better.inled.svg",
+    },
+  },
+  /*{
+    id: 2,
+    title: "Nuevo Swiftinstall",
+    subtitle: "Instala, desinstala, corrige errores, busca virus",
+    link: "https://inled.es/apps/swiftinstall",
+    linkText: "Descarga",
+    background: {
+      type: "video",
+      src: "/hero-video.mp4" // Cambia esta ruta por tu video
+    }
+  },*/
+  {
+    id: 3,
+    title: "Pioneros en IA",
+    subtitle: "Pioneros en desarrollo con agentes de inteligencia artificial",
+    link: "https://ai.inled.es",
+    linkText: "Descubre InledAI",
+    background: {
+      type: "image",
+      src: "https://hosted.inled.es/ainclouddeco.png",
+    },
+  },
+];
+---
+
+<section class="hero" id="hero">
+  <div class="slider-container" id="sliderContainer">
+    {
+      slides.map((slide, index) => (
+        <div class="slide" data-slide={index} data-link={slide.link}>
+          {slide.background.type === "video" ? (
+            <video
+              class="slide-background slide-video"
+              autoplay
+              muted
+              loop
+              playsinline
+              data-slide-index={index}
+            >
+              <source src={slide.background.src} type="video/mp4" />
+            </video>
+          ) : (
+            <div
+              class="slide-background slide-image"
+              style={`background-image: url('${slide.background.src}');`}
+            />
+          )}
+          <div class="slide-content">
+            <h1 class="slide-title">{slide.title}</h1>
+            <p class="slide-subtitle">{slide.subtitle}</p>
+            <div class="slide-link-indicator">
+              <span class="link-text">{slide.linkText}</span>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="slider-controls">
+    <button class="slider-nav prev" id="prevSlide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M15 18L9 12L15 6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+    <div class="slider-dots" id="sliderDots"></div>
+    <button class="slider-nav next" id="nextSlide">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <path
+          d="M9 18L15 12L9 6"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="custom-cursor" id="customCursor">
+    <span class="cursor-text">Descubrir</span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    cursor: none;
+  }
+
+  .slider-container {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    transition: none;
+  }
+
+  .slider-container.wipe {
+    transition: transform 1.2s cubic-bezier(0.87, 0, 0.13, 1);
+  }
+
+  .slide {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: none;
+    clip-path: inset(0 0 0 0);
+    overflow: hidden;
+  }
+
+  .slide-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .slide-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .slide-video {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .slide.wipe-out {
+    animation: wipeOut 1.2s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+  }
+
+  .slide.wipe-in {
+    animation: wipeIn 1.2s cubic-bezier(0.87, 0, 0.13, 1) forwards;
+  }
+
+  @keyframes wipeOut {
+    from {
+      clip-path: inset(0 0 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 100%);
+    }
+  }
+
+  @keyframes wipeIn {
+    from {
+      clip-path: inset(0 100% 0 0);
+    }
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  .slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.4) 0%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .slide-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 1200px;
+  }
+
+  .slide-title {
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.7) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .slide-subtitle {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease-out 0.2s backwards;
+  }
+
+  .slide-link-indicator {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .link-text {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .slider-controls {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    z-index: 10;
+  }
+
+  .slider-nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .slider-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  .slider-dots {
+    display: flex;
+    gap: 0.8rem;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: white;
+    width: 30px;
+    border-radius: 5px;
+  }
+
+  .custom-cursor {
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 1000;
+    transform: translate(-50%, -50%) scale(0);
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .custom-cursor.active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  .custom-cursor.hidden {
+    opacity: 0 !important;
+    transform: translate(-50%, -50%) scale(0) !important;
+  }
+
+  .custom-cursor.particles {
+    animation: particleExplosion 2s ease-in-out infinite;
+  }
+
+  .cursor-text {
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: opacity 0.3s ease;
+  }
+
+  .custom-cursor.particles .cursor-text {
+    opacity: 0;
+  }
+
+  .particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  }
+
+  @keyframes particleExplosion {
+    0% {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      transform: translate(-50%, -50%) scale(1.3);
+    }
+    100% {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes particleFloat0 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(60px, 0) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat1 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(52px, 30px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat2 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(30px, 52px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat3 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(0, 60px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat4 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(-30px, 52px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat5 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(-52px, 30px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat6 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(-60px, 0) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat7 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(-52px, -30px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat8 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(-30px, -52px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat9 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(0, -60px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat10 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(30px, -52px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes particleFloat11 {
+    0%,
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+      transform: translate(-50%, -50%) translate(52px, -30px) scale(0.5);
+    }
+    90% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      cursor: auto;
+    }
+
+    .custom-cursor {
+      display: none;
+    }
+
+    .slider-controls {
+      bottom: 2rem;
+    }
+
+    .slider-nav {
+      width: 40px;
+      height: 40px;
+    }
+
+    .slide-link-indicator {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  let currentSlide = 0;
+  let isScrollLocked = true;
+  let sliderCentered = false;
+  const slides = document.querySelectorAll(".slide");
+  const totalSlides = slides.length;
+  const sliderContainer = document.getElementById(
+    "sliderContainer",
+  ) as HTMLElement;
+  const customCursor = document.getElementById("customCursor") as HTMLElement;
+  const hero = document.getElementById("hero") as HTMLElement;
+  const prevBtn = document.getElementById("prevSlide") as HTMLButtonElement;
+  const nextBtn = document.getElementById("nextSlide") as HTMLButtonElement;
+  const dotsContainer = document.getElementById("sliderDots") as HTMLElement;
+
+  // Crear dots
+  function createDots() {
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement("div");
+      dot.classList.add("dot");
+      if (i === 0) dot.classList.add("active");
+      dot.addEventListener("click", () => {
+        goToSlide(i, true);
+        resetAutoSlide();
+      });
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  // Ir a un slide específico
+  function goToSlide(index: number, useWipe: boolean = false) {
+    const previousSlide = currentSlide;
+    currentSlide = index;
+
+    if (useWipe) {
+      // Aplicar efecto wipe
+      const allSlides = Array.from(slides) as HTMLElement[];
+      const prevSlideElement = allSlides[previousSlide];
+      const nextSlideElement = allSlides[currentSlide];
+
+      // Limpiar clases anteriores
+      allSlides.forEach((slide) => {
+        slide.classList.remove("wipe-out", "wipe-in");
+      });
+
+      // Aplicar animaciones
+      prevSlideElement.classList.add("wipe-out");
+      nextSlideElement.classList.add("wipe-in");
+
+      // Mover el contenedor con transición suave
+      sliderContainer.classList.add("wipe");
+      sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+      // Limpiar clases después de la animación
+      setTimeout(() => {
+        prevSlideElement.classList.remove("wipe-out");
+        nextSlideElement.classList.remove("wipe-in");
+        sliderContainer.classList.remove("wipe");
+      }, 1200);
+    } else {
+      sliderContainer.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    updateDots();
+
+    // Reproducir video del slide actual si existe
+    if (playCurrentSlideVideo) {
+      playCurrentSlideVideo();
+    }
+  }
+
+  // Actualizar dots
+  function updateDots() {
+    const dots = dotsContainer.querySelectorAll(".dot");
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentSlide);
+    });
+  }
+
+  // Declarar función para controlar videos (se definirá más adelante)
+  let playCurrentSlideVideo: () => void;
+
+  // Auto-advance slides
+  let autoSlideInterval: number;
+
+  function startAutoSlide() {
+    autoSlideInterval = setInterval(() => {
+      const nextSlide = (currentSlide + 1) % totalSlides;
+      goToSlide(nextSlide, true);
+    }, 4000);
+  }
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
+
+  // Navegación
+  prevBtn.addEventListener("click", () => {
+    const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    goToSlide(prevSlide, true);
+    resetAutoSlide();
+  });
+
+  nextBtn.addEventListener("click", () => {
+    const nextSlide = (currentSlide + 1) % totalSlides;
+    goToSlide(nextSlide, true);
+    resetAutoSlide();
+  });
+
+  // Custom cursor
+  let cursorX = 0;
+  let cursorY = 0;
+  let particles: HTMLElement[] = [];
+
+  // Crear partículas
+  function createParticles() {
+    const particleCount = 12;
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement("div");
+      particle.classList.add("particle");
+      customCursor.appendChild(particle);
+      particles.push(particle);
+    }
+  }
+
+  // Animar partículas
+  function animateParticles() {
+    particles.forEach((particle, index) => {
+      // Aplicar animación específica para cada partícula
+      particle.style.animation = `particleFloat${index} 2s ease-out forwards`;
+    });
+  }
+
+  // Resetear animaciones de partículas
+  function resetParticles() {
+    particles.forEach((particle) => {
+      particle.style.animation = "none";
+      // Forzar reflow para reiniciar la animación
+      void particle.offsetWidth;
+    });
+  }
+
+  // Iniciar efecto de partículas en bucle
+  function startParticleLoop() {
+    // Primera ejecución inmediata
+    setTimeout(() => {
+      customCursor.classList.add("particles");
+      animateParticles();
+
+      setTimeout(() => {
+        customCursor.classList.remove("particles");
+        resetParticles();
+      }, 2000);
+    }, 1000);
+
+    // Bucle continuo
+    setInterval(() => {
+      customCursor.classList.add("particles");
+      animateParticles();
+
+      setTimeout(() => {
+        customCursor.classList.remove("particles");
+        resetParticles();
+      }, 2000);
+    }, 4000);
+  }
+
+  hero.addEventListener("mousemove", (e) => {
+    cursorX = e.clientX;
+    cursorY = e.clientY;
+    customCursor.style.left = cursorX + "px";
+    customCursor.style.top = cursorY + "px";
+  });
+
+  hero.addEventListener("mouseenter", () => {
+    customCursor.classList.add("active");
+  });
+
+  hero.addEventListener("mouseleave", () => {
+    customCursor.classList.remove("active");
+  });
+
+  // Ocultar cursor en hover de controles
+  const sliderControls = document.querySelector(
+    ".slider-controls",
+  ) as HTMLElement;
+
+  sliderControls.addEventListener("mouseenter", () => {
+    customCursor.classList.add("hidden");
+  });
+
+  sliderControls.addEventListener("mouseleave", () => {
+    customCursor.classList.remove("hidden");
+  });
+
+  // Inicializar partículas
+  createParticles();
+  startParticleLoop();
+
+  // Control de videos
+  const videos = document.querySelectorAll(
+    ".slide-video",
+  ) as NodeListOf<HTMLVideoElement>;
+
+  playCurrentSlideVideo = () => {
+    videos.forEach((video, index) => {
+      if (index === currentSlide) {
+        video.currentTime = 0; // Reiniciar desde el inicio
+        video.play().catch((error) => {
+          console.log("Video autoplay prevented:", error);
+        });
+      } else {
+        video.pause();
+      }
+    });
+  };
+
+  // Reproducir video del primer slide
+  if (videos.length > 0) {
+    playCurrentSlideVideo();
+  }
+
+  // Click en slide para ir al enlace
+  slides.forEach((slide) => {
+    slide.addEventListener("click", () => {
+      const link = slide.getAttribute("data-link");
+      if (link) {
+        window.location.href = link;
+      }
+    });
+  });
+
+  // Scroll locking hasta que el slider esté centrado
+  function handleScroll(e: WheelEvent) {
+    if (!sliderCentered) {
+      e.preventDefault();
+
+      const heroRect = hero.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const heroCenter = heroRect.top + heroRect.height / 2;
+      const windowCenter = windowHeight / 2;
+
+      // Verificar si el hero está centrado
+      if (Math.abs(heroCenter - windowCenter) < 50) {
+        sliderCentered = true;
+        isScrollLocked = false;
+        document.body.style.overflow = "auto";
+      }
+    }
+  }
+
+  // Bloquear scroll al inicio
+  document.body.style.overflow = "hidden";
+  window.addEventListener("wheel", handleScroll, { passive: false });
+
+  // Observer para detectar cuando el slider está centrado
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.9) {
+          sliderCentered = true;
+          isScrollLocked = false;
+          document.body.style.overflow = "auto";
+        }
+      });
+    },
+    { threshold: 0.9 },
+  );
+
+  observer.observe(hero);
+
+  // Inicializar
+  createDots();
+  startAutoSlide();
+
+  // Liberar el scroll después de 3 segundos (fallback)
+  setTimeout(() => {
+    if (isScrollLocked) {
+      sliderCentered = true;
+      isScrollLocked = false;
+      document.body.style.overflow = "auto";
+    }
+  }, 3000);
+</script>

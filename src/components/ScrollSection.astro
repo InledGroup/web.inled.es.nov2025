@@ -1,0 +1,154 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<section class="scroll-section" data-scroll-section>
+  <div class="content">
+    <h2 class="gradient-title">{title}</h2>
+    <p class="description">{description}</p>
+    <slot />
+  </div>
+</section>
+
+<script>
+  // Animación de aparición desde el centro
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px'
+  };
+
+  const animateOnScroll = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll('.scroll-section').forEach((section) => {
+    animateOnScroll.observe(section);
+  });
+</script>
+
+<style>
+  .scroll-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  /* Fondo fijo que continúa del hero */
+  .scroll-section::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://hosted.inled.es/better.inled.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    filter: brightness(0.7);
+    z-index: -2;
+  }
+
+  .content {
+    max-width: 1200px;
+    width: 100%;
+    text-align: center;
+    z-index: 1;
+
+    /* Animación de aparición desde el centro */
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+  }
+
+  .scroll-section.is-visible .content {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  /* Título con fondo degradado animado */
+  .gradient-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+    position: relative;
+
+    /* Texto con degradado blanco animado */
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 1) 25%,
+      rgba(255, 255, 255, 1) 50%,
+      rgba(255, 255, 255, 0.6) 75%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: gradientShift 3s ease-in-out infinite;
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 0%;
+    }
+  }
+
+  .description {
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.9);
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Línea decorativa superior */
+  .scroll-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 1200px;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  @media (max-width: 768px) {
+    .scroll-section {
+      padding: 3rem 1rem;
+    }
+
+    .gradient-title {
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>

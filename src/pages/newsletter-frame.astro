@@ -1,0 +1,41 @@
+---
+import NewsletterForm from '../components/NewsletterForm.astro';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Newsletter</title>
+  </head>
+  <body>
+    <div class="frame-wrapper">
+      <NewsletterForm />
+    </div>
+  </body>
+</html>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+  
+  .frame-wrapper {
+    padding: 1.5rem; /* Better padding */
+  }
+
+  /* Override form styles for the iframe context if needed */
+  :global(.newsletter-form-container) {
+    max-width: 100% !important;
+  }
+  
+  /* Ensure text is white as per global styles which are not inherited in iframe */
+  body {
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  }
+</style>

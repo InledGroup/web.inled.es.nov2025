@@ -1,0 +1,87 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import ScrollSection from '../components/ScrollSection.astro';
+import StatsCounter from '../components/StatsCounter.astro';
+import HeroCTA from '../components/HeroCTA.astro';
+import AudioModal from '../components/AudioModal.astro';
+import ProductsGrid from '../components/ProductsGrid.astro';
+import FeatureSection from '../components/FeatureSection.astro';
+import { apps } from '../config/apps';
+import { saas } from '../config/saas';
+
+import NewsletterSection from '../components/NewsletterSection.astro';
+import BlogSection from '../components/BlogSection.astro';
+import NewsletterNotification from '../components/NewsletterNotification.astro';
+
+const stats = [
+  { value: 60, label: 'Aplicaciones y Herramientas', suffix: '+' },
+  { value: 100, label: 'Usuarios Satisfechos', suffix: '%' },
+];
+
+const appProducts = apps.map(a => ({
+  icon: a.icon,
+  name: a.name,
+  description: a.description,
+  link: a.link
+}));
+
+const saasProducts = saas.map(s => ({
+  icon: s.icon,
+  name: s.name,
+  description: s.description,
+  link: s.link
+}));
+---
+
+<Layout title="Inled Group - Dream, build" description="Inled Group es una marca de software pionera en el desarrollo con agentes de inteligencia artificial y tecnologías libres. En Inled construimos el software que todos han soñado, por ello nuestro lema es Dream, build.">
+  <AudioModal />
+  <Header />
+  <Hero title="Dream, build" />
+  <ScrollSection
+    title="Hacemos el software de tus sueños"
+    description="Inled Group es una marca de software pionera en el desarrollo con agentes de inteligencia artificial y tecnologías libres. En Inled construimos el software que todos han soñado, por ello nuestro lema es Dream, build.">
+    <StatsCounter stats={stats} />
+  </ScrollSection>
+
+  <HeroCTA
+    title="¿Listo para descubrir un mundo de posibilidades?"
+    description="Explora nuestros servicios gratuitos en línea o nuestras apps de escritorio."
+    primaryButtonText="Ver Proyectos Online"
+    secondaryButtonText="Descubrir Apps"
+    primaryButtonHref="/proyectos"
+    secondaryButtonHref="#apps"
+  />
+
+  <FeatureSection
+    title="Inteligencia Artificial libre, local y privada"
+    description="Somos pioneros en desarrollar servicios de IA local, agéntica y privada que funciona en tu ordenador y cuyas conversaciones permanecen en él.."
+    imageSrc="https://hosted.inled.es/ainclouddeco.png"
+    buttonText="Conocer InledAI"
+    buttonHref="https://ai.inled.es"
+  />
+
+  <FeatureSection
+    title="Accede a la beta! AiCloud"
+    description="Y escríbenos para cualquier problema o sugerencia."
+    imageSrc="https://hosted.inled.es/better.inled.png"
+    buttonText="¡Quiero acceder!"
+    buttonHref="https://aicloud.inled.es"
+    reversed={true}
+  />
+
+  <div id="saas">
+    <ProductsGrid title="Servicios en Línea (SaaS)" products={saasProducts} />
+  </div>
+
+  <div id="apps">
+    <ProductsGrid title="Nuestras Aplicaciones" products={appProducts} />
+  </div>
+
+  <BlogSection />
+
+  <NewsletterSection />
+  <NewsletterNotification />
+  
+</Layout>

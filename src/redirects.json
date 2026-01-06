@@ -1,0 +1,19 @@
+{
+  "redirects": {
+    "/swiftinstall": "https://inled.es/apps/swiftinstall",
+    "/warp": "https://inled.es/apps/warp-vpn/",
+    "/startomnibox": "https://inled.es/apps/startomnibox/",
+    "/startntp": "https://inled.es/apps/startntp/",
+    "/winerror": "https://inled.es/apps/winerror/",
+    "/winbsod": "https://inled.es/apps/winbsod/",
+    "/tabstacker": "https://inled.es/apps/tabstacker/",
+    "/cleany": "https://inled.es/apps/cleany/",
+    "/archive.is": "https://inled.es/apps/archive.is/",
+    "/startchat": "https://inled.es/apps/startchat/",
+    "/inshare": "https://inled.es/apps/inshare/",
+    "/about-start": "https://start.inled.es/",
+    "/mdpdf": "https://mdpdf.inled.es/",
+    "/inlinked": "https://inlinked.inled.es/",
+    "/inmd": "https://inmd.inled.es/"
+  }
+}

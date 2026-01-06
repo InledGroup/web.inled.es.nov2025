@@ -1,0 +1,211 @@
+---
+---
+
+<div class="newsletter-form-container">
+  <div id="sib-form-container" class="sib-form-container">
+    
+    <div id="error-message" class="sib-form-message-panel error-message">
+      <div class="sib-form-message-panel__text">
+        <span class="sib-form-message-panel__inner-text">
+          No hemos podido validar su suscripción.
+        </span>
+      </div>
+    </div>
+    
+    <div id="success-message" class="sib-form-message-panel success-message">
+      <div class="sib-form-message-panel__text">
+        <span class="sib-form-message-panel__inner-text">
+          Se ha realizado su suscripción.
+        </span>
+      </div>
+    </div>
+
+    <div id="sib-container" class="sib-container">
+      <form id="sib-form" method="POST" action="https://7c0cb458.sibforms.com/serve/MUIFAPqS4aMwyG9eiASS-LRNOT1zsY2xefVUxEuu2jAL8znxvos7hP7gQsASGgyC6FdUHJvi2SOr4NUmxUqmkcBOTRyGUZauKcn6dvP24DSLYDmXnHyIO3ZToBhJ6PGaE5JnYTdECW_d6ezFdrjwEmRihA2TkJsf8HueD3VesU8vkYGa_1iHNFWwq3yvrRD7gVXgiEj2l8rib1CL5A==" data-type="subscription">
+        
+        <div class="form-header">
+          <p class="form-title">Un segundo...</p>
+        </div>
+        
+        <div class="form-description">
+          <p>Tenemos una newsletter no publicitaria en la que te enviamos, sin molestar, novedades muy interesantes de Inled</p>
+        </div>
+        
+        <div class="form-input-group">
+          <div class="sib-input sib-form-block">
+            <div class="form__entry entry_block">
+              <div class="form__label-row">
+                <label class="entry__label" for="EMAIL" data-required="*">
+                  Si nos dejas aquí un email, podrás descubrir novedades antes que otros
+                </label>
+
+                <div class="entry__field">
+                  <input class="input" type="text" id="EMAIL" name="EMAIL" autocomplete="off" placeholder="tu@email.com" data-required="true" required />
+                </div>
+              </div>
+
+              <label class="entry__error entry__error--primary"></label>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-footer">
+          <button class="cta-button sib-form-block__button-with-loader" form="sib-form" type="submit">
+            <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512">
+              <path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" />
+            </svg>
+            SUSCRIBIRSE
+          </button>
+        </div>
+
+        <input type="text" name="email_address_check" value="" class="input--hidden" style="display:none;">
+        <input type="hidden" name="locale" value="es">
+      </form>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // @ts-nocheck
+  window.REQUIRED_CODE_ERROR_MESSAGE = 'Elija un código de país';
+  window.LOCALE = 'es';
+  window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "La información no es válida.";
+  window.REQUIRED_ERROR_MESSAGE = "Campo obligatorio. ";
+  window.GENERIC_INVALID_MESSAGE = "La información no es válida.";
+  window.translation = {
+    common: {
+      selectedList: '{quantity} lista seleccionada',
+      selectedLists: '{quantity} listas seleccionadas',
+      selectedOption: '{quantity} seleccionado',
+      selectedOptions: '{quantity} seleccionados',
+    }
+  };
+  var AUTOHIDE = Boolean(0);
+</script>
+
+<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
+<style>
+  .newsletter-form-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    font-family: inherit;
+    color: #fff;
+  }
+
+  .sib-form-message-panel {
+    display: none;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .sib-form-message-panel.error-message {
+    background-color: rgba(255, 73, 73, 0.1);
+    border: 1px solid #ff4949;
+    color: #ff4949;
+  }
+
+  .sib-form-message-panel.success-message {
+    background-color: rgba(19, 206, 102, 0.1);
+    border: 1px solid #13ce66;
+    color: #13ce66;
+  }
+
+  .form-header {
+    margin-bottom: 0.25rem;
+  }
+
+  .form-title {
+    font-size: 1.25rem; /* Smaller title */
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .form-description {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.4;
+  }
+
+  .entry__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #fff;
+  }
+
+  .form-input-group {
+    margin-bottom: 1rem;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .input {
+    width: 94%;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    background: white;
+    color: black;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+  }
+
+  .entry__error {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    color: #ff4949;
+  }
+
+  /* Loader styling from Brevo */
+  .sib-hide-loader-icon {
+    display: none;
+  }
+  
+  .progress-indicator__icon {
+    height: 1.2rem;
+    width: 1.2rem;
+    margin-right: 0.5rem;
+    animation: spin 1s linear infinite;
+    fill: currentColor;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+</style>

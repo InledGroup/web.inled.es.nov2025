@@ -1,0 +1,378 @@
+---
+import { apps } from '../config/apps';
+import { saas } from '../config/saas';
+---
+
+<header>
+  <a href="/"> <img class="logo"  src="https://hosted.inled.es/inled-logo-full.png"></a> 
+
+  <nav class="nav-links">
+    <div class="dropdown">
+      <button class="dropdown-toggle">
+        SaaS
+        <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="dropdown-menu">
+        {saas.map((item) => (
+          <a href={item.link} class="dropdown-item">
+            <span class="item-name">{item.name}</span>
+            <span class="item-description">{item.description}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropdown-toggle">
+        Apps
+        <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="dropdown-menu">
+        {apps.map((app) => (
+          <a href={app.link} class="dropdown-item">
+            <span class="item-name">{app.name}</span>
+            <span class="item-description">{app.description}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+
+  </nav>
+
+  <a class="cta-button" href="/contacto" style="text-decoration: none;">Contacto</a>
+
+  <button class="mobile-menu-toggle" aria-label="Toggle menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<style>
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: var(--logo-height, 48px); /* ajusta aquí la altura deseada */
+    font-weight: 700;
+    color: white;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    line-height: 0; /* para que una <img> dentro escale sin espacio extra */
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav-links a {
+    color: white;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Dropdown */
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+  }
+
+  .dropdown-toggle:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .dropdown-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 1rem;
+    background: rgba(10, 10, 20, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 0.75rem;
+    min-width: 320px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, margin-top 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 0.5rem;
+  }
+
+  .dropdown-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+  }
+
+  .dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .item-name {
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+
+  .item-description {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+  }
+
+  .cta-button {
+    position: relative;
+    padding: 0.75rem 2rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.4s ease;
+    z-index: 1;
+  }
+
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+  }
+
+  .cta-button:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .cta-button:hover {
+    color: white;
+    border-color: white;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .mobile-menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: white;
+    transition: all 0.3s ease;
+  }
+
+  @media (max-width: 1024px) {
+    .nav-links {
+      gap: 1.5rem;
+    }
+
+    .dropdown-menu {
+      min-width: 280px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    header {
+      padding: 1rem 1.5rem;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(10, 10, 20, 0.98);
+      backdrop-filter: blur(20px);
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      max-height: calc(100vh - 70px);
+      overflow-y: auto;
+    }
+
+    .nav-links.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .nav-links a {
+      padding: 1rem;
+      width: 100%;
+      text-align: center;
+    }
+
+    .dropdown {
+      width: 100%;
+    }
+
+    .dropdown-toggle {
+      width: 100%;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .dropdown-menu {
+      position: static;
+      transform: none;
+      display: none;
+      opacity: 1;
+      visibility: visible;
+      margin-top: 0;
+      width: 100%;
+      padding: 0;
+      border: none;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .dropdown.open .dropdown-menu {
+      display: block;
+      padding: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      /* Disable hover effect on mobile */
+      display: none;
+    }
+    
+    .dropdown.open:hover .dropdown-menu {
+       display: block;
+    }
+    
+    /* Re-enable hover for desktop if needed, or keep click-only for consistency across touch devices */
+    
+    .dropdown.open .dropdown-icon {
+      transform: rotate(180deg);
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+    }
+
+    .cta-button {
+      padding: 0.6rem 1.5rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  // Toggle mobile menu
+  const mobileToggle = document.querySelector('.mobile-menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+  mobileToggle?.addEventListener('click', () => {
+    navLinks?.classList.toggle('active');
+  });
+
+  // Toggle dropdowns on click (especially for mobile)
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      // Prevent event bubbling if necessary, though mostly we want to stop immediate closing
+      e.stopPropagation();
+      
+      const parent = toggle.closest('.dropdown');
+      if (parent) {
+        // Close other dropdowns if needed (optional behavior)
+        document.querySelectorAll('.dropdown.open').forEach(d => {
+          if (d !== parent) d.classList.remove('open');
+        });
+        
+        parent.classList.toggle('open');
+      }
+    });
+  });
+
+  // Close mobile menu when clicking outside
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    
+    // Close dropdowns if clicking outside
+    if (!target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown.open').forEach(d => {
+            d.classList.remove('open');
+        });
+    }
+
+    if (!target.closest('header')) {
+      navLinks?.classList.remove('active');
+    }
+  });
+</script>

@@ -1,0 +1,412 @@
+---
+interface Card {
+  number: string;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  cards: Card[];
+}
+
+const { title, subtitle, cards } = Astro.props;
+---
+
+<section class="horizontal-cards-section" data-scroll-section>
+  <div class="sticky-wrapper">
+    <div class="section-content">
+      {title && (
+        <div class="section-header">
+          {subtitle && <p class="subtitle">{subtitle}</p>}
+          <h2 class="section-title">{title}</h2>
+        </div>
+      )}
+
+      <div class="cards-container">
+        <div class="cards-wrapper">
+          {cards.map((card, index) => (
+            <div class="card" data-index={index}>
+              <div class="card-number">{card.number}</div>
+              <h3 class="card-title">{card.title}</h3>
+              <p class="card-description">{card.description}</p>
+            </div>
+          ))}
+        </div>
+        <!-- Controles de navegación (flechas) -->
+        <div class="cards-controls" aria-hidden="false">
+          <button class="cards-control prev-card" aria-label="Anterior" type="button">‹</button>
+          <button class="cards-control next-card" aria-label="Siguiente" type="button">›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .horizontal-cards-section {
+    position: relative;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .sticky-wrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .section-content {
+    padding: 4rem 2rem;
+  }
+
+  .section-header {
+    max-width: 1200px;
+    margin: 0 auto 4rem;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: #888;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 1.2;
+  }
+
+  .cards-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .cards-wrapper {
+    display: flex;
+    gap: 2rem;
+    padding: 2rem max(2rem, calc((100vw - 1400px) / 2));
+    will-change: transform;
+  }
+
+  .card {
+    flex: 0 0 400px;
+    min-height: 350px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    border: 1px solid #222;
+    border-radius: 1rem;
+    padding: 3rem 2rem;
+    position: relative;
+    opacity: 0;
+    transform: translateX(100px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .card:hover::before {
+    opacity: 0.3;
+  }
+
+  .card:hover {
+    border-color: #333;
+    transform: translateY(-10px);
+  }
+
+  .card-number {
+    font-size: 4rem;
+    font-weight: 100;
+    color: #fff;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    opacity: 0.3;
+  }
+
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #fff;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  .card-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #888;
+    font-weight: 300;
+  }
+
+  @media (max-width: 768px) {
+    .horizontal-cards-section {
+      padding: 4rem 1rem;
+    }
+
+    .card {
+      flex: 0 0 300px;
+      min-height: 300px;
+      padding: 2rem 1.5rem;
+    }
+
+    .card-number {
+      font-size: 3rem;
+    }
+
+    .card-title {
+      font-size: 1.25rem;
+    }
+
+    .card-description {
+      font-size: 0.875rem;
+    }
+  }
+
+  /* Controles de navegación (flechas) */
+  .cards-controls {
+    position: absolute;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    z-index: 30;
+  }
+
+  .cards-control {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.08s ease, opacity 0.2s ease;
+  }
+
+  .cards-control:hover {
+    background: rgba(255,255,255,0.06);
+    transform: translateY(-2px);
+  }
+
+  .cards-control:disabled {
+    opacity: 0.35;
+    cursor: default;
+    transform: none;
+  }
+</style>
+
+<script>
+  function initHorizontalCards() {
+    const section = document.querySelector('.horizontal-cards-section') as HTMLElement;
+    const cardsWrapper = document.querySelector('.cards-wrapper') as HTMLElement;
+    const cards = document.querySelectorAll('.card');
+
+    if (!section || !cardsWrapper || !cards.length) return;
+
+    let isScrollLocked = false;
+    let scrollAnimationProgress = 0;
+    let sectionScrollStart = 0;
+
+    // Calcular la altura necesaria para el scroll
+    function calculateSectionHeight() {
+      const wrapperWidth = cardsWrapper.scrollWidth;
+      const viewportWidth = window.innerWidth;
+      const maxScroll = Math.max(20, wrapperWidth - viewportWidth);
+      // Volvemos a la altura original
+      const scrollHeight = window.innerHeight;
+      section.style.height = `${scrollHeight}px`;
+      return maxScroll;
+    }
+
+    let maxScroll = calculateSectionHeight();
+
+    // Función para animar el desplazamiento horizontal
+    function updateCardsPosition() {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top;
+      const windowHeight = window.innerHeight;
+
+      // Si estamos en el viewport
+      if (sectionTop <= 0) {
+        // Mantener el scroll bloqueado mientras estemos en la sección
+        isScrollLocked = true;
+        
+        // Calcular el progreso basado solo en el scrollAnimationProgress
+        const translateX = -scrollAnimationProgress * maxScroll;
+        cardsWrapper.style.transform = `translateX(${translateX}px)`;
+
+        // Actualizar visibilidad de las cards
+        cards.forEach((card, index) => {
+          const cardStartProgress = (index * 0.8) / cards.length;
+          if (scrollAnimationProgress >= cardStartProgress) {
+            card.classList.add('visible');
+            (card as HTMLElement).style.transitionDelay = '0s';
+          }
+        });
+
+        // Solo desbloquear cuando lleguemos al final
+        if (scrollAnimationProgress >= 1) {
+          isScrollLocked = false;
+        }
+      } else {
+        // Reset cuando estamos arriba de la sección
+        isScrollLocked = false;
+        scrollAnimationProgress = 0;
+        cardsWrapper.style.transform = `translateX(0px)`;
+        cards.forEach(card => card.classList.remove('visible'));
+      }
+    }
+
+    // Bloquear el scroll completamente hasta que la última carta esté visible
+    function preventScrollDown(e: WheelEvent) {
+      const rect = section.getBoundingClientRect();
+      const sectionTop = rect.top;
+      const sectionBottom = rect.bottom;
+      const windowHeight = window.innerHeight;
+
+      // Consideramos la sección en viewport si parte superior está en o encima
+      // del borde y aún queda parte visible en la ventana
+      const inViewport = sectionTop <= 0 && sectionBottom > 0;
+
+      // Si la sección está visible y no hemos completado la animación, bloqueamos el scroll
+      if (inViewport && scrollAnimationProgress < 1) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Mover progreso con la rueda. Permitimos también retroceder si el usuario hace scroll hacia arriba.
+        // Ajusta `factor` si quieres movimiento más/menos sensible en trackpads.
+        const factor = 0.007; // sensibilidad
+        const delta = e.deltaY;
+
+        // Actualizamos el progreso (delta puede ser positivo o negativo)
+        scrollAnimationProgress = Math.min(1, Math.max(0, scrollAnimationProgress + delta * factor));
+
+        // Aplicar la transformación inmediatamente
+        const translateX = -scrollAnimationProgress * maxScroll;
+        cardsWrapper.style.transform = `translateX(${translateX}px)`;
+
+        // Actualizar visibilidad de cards según el nuevo progreso
+        cards.forEach((card, index) => {
+          const cardStartProgress = (index * 0.8) / cards.length;
+          if (scrollAnimationProgress >= cardStartProgress) {
+            card.classList.add('visible');
+            (card as HTMLElement).style.transitionDelay = '0s';
+          } else {
+            card.classList.remove('visible');
+          }
+        });
+
+        // Cuando lleguemos al final desbloqueamos el scroll vertical
+        if (scrollAnimationProgress >= 1) {
+          isScrollLocked = false;
+        } else {
+          isScrollLocked = true;
+        }
+      }
+    }
+
+    // Usar requestAnimationFrame para suavizar la animación
+    let ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateCardsPosition();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    function onResize() {
+      maxScroll = calculateSectionHeight();
+      updateCardsPosition();
+    }
+
+    // Escuchar eventos
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('resize', onResize);
+    window.addEventListener('wheel', preventScrollDown, { passive: false });
+
+    // Controles: flechas prev/next
+    const prevBtn = document.querySelector('.prev-card') as HTMLButtonElement | null;
+    const nextBtn = document.querySelector('.next-card') as HTMLButtonElement | null;
+
+    function updateControlsState() {
+      if (!prevBtn || !nextBtn) return;
+      prevBtn.disabled = scrollAnimationProgress <= 0.001;
+      nextBtn.disabled = scrollAnimationProgress >= 0.999;
+    }
+
+    function stepProgress(step: number) {
+      scrollAnimationProgress = Math.min(1, Math.max(0, scrollAnimationProgress + step));
+      // aplicar transform y visibilidad
+      const translateX = -scrollAnimationProgress * maxScroll;
+      cardsWrapper.style.transform = `translateX(${translateX}px)`;
+
+      cards.forEach((card, index) => {
+        const cardStartProgress = (index * 0.8) / cards.length;
+        if (scrollAnimationProgress >= cardStartProgress) {
+          card.classList.add('visible');
+          (card as HTMLElement).style.transitionDelay = '0s';
+        } else {
+          card.classList.remove('visible');
+        }
+      });
+
+      // Mantener o liberar bloqueo según progreso
+      isScrollLocked = scrollAnimationProgress < 1;
+      updateControlsState();
+    }
+
+    if (prevBtn) prevBtn.addEventListener('click', () => {
+      const step = -1 / Math.max(1, cards.length);
+      stepProgress(step);
+    });
+
+    if (nextBtn) nextBtn.addEventListener('click', () => {
+      const step = 1 / Math.max(1, cards.length);
+      stepProgress(step);
+    });
+
+    // Inicializar estado de controles
+    updateControlsState();
+
+    // Inicializar
+    updateCardsPosition();
+  }
+
+  // Inicializar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHorizontalCards);
+  } else {
+    initHorizontalCards();
+  }
+</script>

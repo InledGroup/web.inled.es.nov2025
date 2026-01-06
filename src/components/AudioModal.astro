@@ -1,0 +1,276 @@
+---
+---
+
+<div id="audio-modal" class="modal-overlay">
+  <div class="modal-content">
+    <h2>Bienvenido a Inled Group</h2>
+    <p>Le presentamos nuestro nuevo sitio web.</p>
+    <p>Estamos haciendo trabajos de migración por lo que puede que no encuentre algunas páginas.</p>
+    <p>Le recordamos que utilizamos cookies y herramientas de analítica. Respetamos su privacidad y no recopilamos datos relacionados con usted.</p>
+    <button id="activate-audio" class="activate-btn">Continuar</button>
+  </div>
+</div>
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.114);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .modal-content {
+    background: rgba(0, 0, 0, 0.114);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 3rem 4rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-content h2 {
+    margin: 0 0 1rem 0;
+    font-size: 2rem;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  .modal-content p {
+    margin: 0 0 2rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+  }
+
+  .activate-btn {
+    position: relative;
+    padding: 0.75rem 2.5rem;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.4s ease;
+    z-index: 1;
+  }
+
+  .activate-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+  }
+
+  .activate-btn:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .activate-btn:hover {
+    color: white;
+    border-color: white;
+  }
+
+  @media (max-width: 768px) {
+    .modal-content {
+      padding: 2rem 2.5rem;
+      max-width: 90%;
+    }
+
+    .modal-content h2 {
+      font-size: 1.5rem;
+    }
+
+    .modal-content p {
+      font-size: 1rem;
+    }
+
+    .activate-btn {
+      padding: 0.6rem 2rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  class AudioManager {
+    private backgroundMusic: HTMLAudioElement | null = null;
+    private hoverSound: HTMLAudioElement | null = null;
+    private fadeOutTimeout: number | null = null;
+    private isHovering: boolean = false;
+
+    constructor() {
+      this.initAudio();
+      this.initModal();
+    }
+
+    private initAudio() {
+      // Crear elementos de audio
+      this.backgroundMusic = new Audio('/music-1.mp3');
+      this.backgroundMusic.loop = true;
+      this.backgroundMusic.volume = 0.5;
+
+      // Restaurar la posición de reproducción guardada
+      const savedTime = localStorage.getItem('music-current-time');
+      if (savedTime) {
+        this.backgroundMusic.currentTime = parseFloat(savedTime);
+      }
+
+      // Guardar la posición actual cada segundo
+      this.backgroundMusic.addEventListener('timeupdate', () => {
+        if (this.backgroundMusic) {
+          localStorage.setItem('music-current-time', this.backgroundMusic.currentTime.toString());
+        }
+      });
+
+      this.hoverSound = new Audio('/sound-1.mp3');
+      this.hoverSound.loop = true;
+      this.hoverSound.volume = 0;
+    }
+
+    private initModal() {
+      const modal = document.getElementById('audio-modal');
+      const activateBtn = document.getElementById('activate-audio');
+
+      // Verificar si ya existe una preferencia guardada
+      const audioPreference = localStorage.getItem('audio-preference');
+
+      if (audioPreference === 'enabled') {
+        // Si ya activó el audio previamente, activarlo automáticamente
+        this.activateAudio();
+        modal?.classList.add('hidden');
+        setTimeout(() => {
+          modal?.remove();
+        }, 300);
+        return;
+      }
+
+      activateBtn?.addEventListener('click', () => {
+        // Guardar la preferencia en localStorage
+        localStorage.setItem('audio-preference', 'enabled');
+
+        this.activateAudio();
+        modal?.classList.add('hidden');
+        setTimeout(() => {
+          modal?.remove();
+        }, 300);
+      });
+    }
+
+    private activateAudio() {
+      // Iniciar música de fondo
+      this.backgroundMusic?.play().catch(err => {
+        console.error('Error playing background music:', err);
+      });
+
+      // Configurar eventos de hover en todos los elementos interactivos
+      this.setupHoverEvents();
+    }
+
+    private setupHoverEvents() {
+      // Selectores para elementos que deberían tener sonido al hacer hover
+      const selectors = [
+        'a',
+        'button',
+        '.card',
+        '.service-card',
+        '.stat-item',
+        '[role="button"]',
+        '.clickable'
+      ];
+
+      const elements = document.querySelectorAll(selectors.join(', '));
+
+      elements.forEach(element => {
+        element.addEventListener('mouseenter', () => this.handleHoverStart());
+        element.addEventListener('mouseleave', () => this.handleHoverEnd());
+      });
+    }
+
+    private handleHoverStart() {
+      if (!this.hoverSound) return;
+
+      this.isHovering = true;
+
+      // Cancelar fade out si existe
+      if (this.fadeOutTimeout) {
+        clearTimeout(this.fadeOutTimeout);
+        this.fadeOutTimeout = null;
+      }
+
+      // Fade in del sonido de hover
+      this.hoverSound.currentTime = 0;
+      this.hoverSound.play().catch(err => {
+        console.error('Error playing hover sound:', err);
+      });
+
+      this.fadeVolume(this.hoverSound, 0.3, 100);
+    }
+
+    private handleHoverEnd() {
+      if (!this.hoverSound) return;
+
+      this.isHovering = false;
+
+      // Fade out durante 0.5 segundos
+      this.fadeVolume(this.hoverSound, 0, 500);
+
+      // Detener el sonido completamente después de 0.5 segundos
+      this.fadeOutTimeout = window.setTimeout(() => {
+        if (!this.isHovering && this.hoverSound) {
+          this.hoverSound.pause();
+          this.hoverSound.currentTime = 0;
+        }
+      }, 500);
+    }
+
+    private fadeVolume(audio: HTMLAudioElement, targetVolume: number, duration: number) {
+      const startVolume = audio.volume;
+      const volumeChange = targetVolume - startVolume;
+      const steps = 20;
+      const stepDuration = duration / steps;
+      let currentStep = 0;
+
+      const fadeInterval = setInterval(() => {
+        currentStep++;
+        const progress = currentStep / steps;
+        audio.volume = Math.max(0, Math.min(1, startVolume + volumeChange * progress));
+
+        if (currentStep >= steps) {
+          clearInterval(fadeInterval);
+          audio.volume = targetVolume;
+        }
+      }, stepDuration);
+    }
+  }
+
+  // Inicializar el gestor de audio cuando se carga la página
+  if (typeof window !== 'undefined') {
+    new AudioManager();
+  }
+</script>

@@ -1,0 +1,129 @@
+---
+---
+
+<div id="page-transition-curtain" class="page-transition-curtain">
+  <div class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<style>
+  .page-transition-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(0);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: all;
+  }
+
+  .page-transition-curtain.hide {
+    transform: translateY(-100%);
+    pointer-events: none;
+  }
+
+  .spinner-container {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .page-transition-curtain.hide .spinner-container {
+    opacity: 0;
+  }
+
+  .spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
+
+<script>
+  // Función para mostrar la cortina (remover clase hide)
+  function showCurtain() {
+    const curtain = document.getElementById('page-transition-curtain');
+    if (curtain) {
+      curtain.classList.remove('hide');
+    }
+  }
+
+  // Función para ocultar la cortina (agregar clase hide)
+  function hideCurtain() {
+    const curtain = document.getElementById('page-transition-curtain');
+    if (curtain) {
+      curtain.classList.add('hide');
+    }
+  }
+
+  // Interceptar clics en enlaces internos
+  function setupInternalLinkTransitions() {
+    const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="../"]');
+
+    links.forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+
+        // Verificar que no sea un ancla en la misma página
+        if (href && !href.startsWith('#')) {
+          e.preventDefault();
+          showCurtain();
+
+          // Esperar a que la cortina baje antes de navegar
+          setTimeout(() => {
+            window.location.href = href;
+          }, 600);
+        }
+      });
+    });
+  }
+
+  // Verificar el estado de carga de la página
+  function checkNavigationState() {
+    // La cortina ya está visible por defecto
+    // Esperar a que todos los componentes estén cargados
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        hideCurtain();
+        sessionStorage.removeItem('isNavigating');
+      }, 300);
+    });
+  }
+
+  // Marcar que estamos navegando cuando se intercepta un enlace
+  document.addEventListener('DOMContentLoaded', () => {
+    setupInternalLinkTransitions();
+    checkNavigationState();
+
+    // Actualizar enlaces cuando el contenido cambie dinámicamente
+    const observer = new MutationObserver(() => {
+      setupInternalLinkTransitions();
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
+
+  // Guardar estado de navegación antes de navegar
+  window.addEventListener('beforeunload', () => {
+    sessionStorage.setItem('isNavigating', 'true');
+  });
+</script>

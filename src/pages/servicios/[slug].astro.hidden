@@ -1,0 +1,69 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import AudioModal from '../../components/AudioModal.astro';
+import ServiceHero from '../../components/ServiceHero.astro';
+import ServiceFeatures from '../../components/ServiceFeatures.astro';
+import PricingSection from '../../components/PricingSection.astro';
+import PricingDisclaimer from '../../components/PricingDisclaimer.astro';
+import AddonsSection from '../../components/AddonsSection.astro';
+import HeroCTA from '../../components/HeroCTA.astro';
+import { services, getAllServiceSlugs, getServiceBySlug } from '../../config/services.ts';
+
+export function getStaticPaths() {
+  return services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+
+if (!service) {
+  return Astro.redirect('/404');
+}
+---
+
+<Layout
+  title={`${service.name} - Inled Group`}
+  description={service.description}
+>
+  <AudioModal />
+  <Header />
+
+  <ServiceHero
+    title={service.name}
+    tagline={service.tagline}
+    description={service.description}
+    backgroundImage={service.heroImage}
+  />
+
+  <ServiceFeatures features={service.features} />
+
+  <div style="max-width: 1600px; margin: 0 auto; padding: 0 2rem;">
+    <PricingDisclaimer />
+  </div>
+
+  <PricingSection
+    plans={service.pricingPlans}
+    title={`Planes de ${service.name}`}
+    subtitle="Elige la opción que mejor se adapte a tus necesidades"
+  />
+
+  {service.addons && service.addons.length > 0 && (
+    <AddonsSection
+      addons={service.addons}
+      title="Paquetes Adicionales"
+      subtitle="Mejora tu plan con estos complementos exclusivos"
+    />
+  )}
+
+  <HeroCTA
+    title="¿Listo para comenzar?"
+    description={`Hablemos sobre tu proyecto de ${service.name.toLowerCase()}. Estamos aquí para ayudarte a hacerlo realidad.`}
+    primaryButtonText="Solicitar cotización"
+    secondaryButtonText="Ver más servicios"
+    primaryButtonHref="/contacto#form"
+    secondaryButtonHref="/#services"
+  />
+</Layout>

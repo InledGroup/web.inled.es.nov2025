@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import ProductsGrid from '../components/ProductsGrid.astro';
+import HeroCTA from '../components/HeroCTA.astro';
+import AudioModal from '../components/AudioModal.astro';
+
+const products = [
+  {
+    icon: 'https://hosted.inled.es/start-simple-blanco-sinfondo.png',
+    name: 'Start',
+    description: 'Busca más rápido, accede al instante. Tu multibuscador y página de inicio.',
+    link: 'https://start.inled.es'
+  },
+  {
+    icon: 'https://hosted.inled.es/pajaro-tomando-el-nectar-de-una-flor-que-resulta-ser-arena.jpeg',
+    name: 'Songbird',
+    description: 'Música creada con IA, títulos hechos por humanos.',
+    link: 'https://suno.com/@songbird_music'
+  },
+  {
+    icon: 'https://hosted.inled.es/MDPDF.png',
+    name: 'MDPDF',
+    description: 'Free Markdown Editor and MD to PDF converter.',
+    link: 'https://mdpdf.inled.es'
+  },
+  {
+    icon: 'https://hosted.inled.es/INDOC.png',
+    name: 'InDoc',
+    description: 'Editor de texto en línea.',
+    link: 'https://indoc.inled.es'
+  },
+  {
+    icon: 'https://hosted.inled.es/inMD.png',
+    name: 'InMD',
+    description: 'El único editor visual de Markdown libre.',
+    link: 'https://inmd.inled.es'
+  },
+  {
+    icon: 'https://hosted.inled.es/INLINKED.png',
+    name: 'InLinked',
+    description: 'Formateador de Post de LinkedIN con IA privada.',
+    link: 'https://inlinked.inled.es'
+  },
+  {
+    icon: '',
+    name: 'InPDF',
+    description: 'Visor de PDF con IA para navegador.',
+    link: 'https://inpdf.inled.es'
+  },
+  {
+    icon: '',
+    name: 'InQR',
+    description: 'Generador de códigos QR de enlace, wifi y de barras. Privado y seguro',
+    link: 'https://inqr.inled.es'
+  },
+  {
+    icon: 'https://hosted.inled.es/inledai.svg',
+    name: 'Inled AI',
+    description: 'El futuro de la IA local y gratuita.',
+    link: 'https://ai.inled.es'
+  },
+  {
+    icon: '',
+    name: 'Domain Info',
+    description: 'Obtén información sobre un dominio o dirección IP.',
+    link: 'https://status.inled.es/ipcheck.html'
+  },
+  {
+    icon: '',
+    name: 'Devreka',
+    description: 'Generador de ideas de negocio para devs.',
+    link: 'https://devreka.inled.es'
+  },
+  {
+    icon: 'https://hosted.inled.es/matrixwww.ico',
+    name: 'Matrix WWW',
+    description: 'Sitio web con simulaciones de software de Matrix.',
+    link: 'https://matrix-www.inled.es'
+  },
+  {
+    icon: 'https://hosted.inled.es/glassy.svg',
+    name: 'Glassy',
+    description: 'Crea preciosos SVG con estilo liquid glass a partir de uno normal.',
+    link: 'https://glassy.inled.es'
+  },
+];
+---
+
+<Layout title="Proyectos - Inled Group">
+  <AudioModal />
+  <Header />
+
+  <ProductsGrid
+    subtitle="Nuestros Productos"
+    title="Descubre el ecosistema de Inled"
+    products={products}
+  />
+
+  <HeroCTA
+    title="¿Listo para empezar?"
+    description="Descubre nuestras apps que potenciarán tu productividad."
+    primaryButtonText="Descubrir"
+    secondaryButtonText="Ver más"
+    primaryButtonHref="https://apps.inled.es"
+    secondaryButtonHref="/"
+  />
+</Layout>
+
