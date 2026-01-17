@@ -1,0 +1,826 @@
+---
+import { apps } from '../../config/apps';
+
+const app = apps.find(a => a.id === 'swiftinstall');
+const title = "SwiftInstall - Gestión de paquetes simplificada";
+const description = "Instala, desinstala y gestiona paquetes .deb y .appimage fácilmente en Linux.";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="icon" href="https://hosted.inled.es/swiftinstall-logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script is:inline type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "rkxkde17af");
+    </script>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'en,es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        } 
+        body {
+            top: 0px !important; 
+        }
+        #google_translate_element {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="google_translate_element"></div>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="/" class="logo">
+                <img src="https://hosted.inled.es/swiftinstall-logo.png" alt="SwiftInstall Logo">
+                <span>SwiftInstall</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Características</a>
+                <a href="#compare">Comparativa</a>
+                <button id="lang-switch" class="btn-icon" aria-label="Cambiar idioma">
+                    <i class="fa-solid fa-language"></i>
+                </button>
+                <a href="#install" class="btn-primary small">Instalar</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="container hero-content">
+                <div class="hero-text fade-up">
+                    <h1>Gestión de paquetes <br><span class="gradient-text">sin complicaciones</span></h1>
+                    <p>La forma más sencilla de instalar, desinstalar y gestionar tus aplicaciones .deb y .appimage en Linux. Olvida la terminal para lo básico.</p>
+                    <div class="hero-buttons">
+                        <a href="#install" class="btn-primary">Descargar Ahora</a>
+                        <a href="#features" class="btn-secondary">Saber más</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title fade-up">Todo lo que necesitas</h2>
+                <div class="features-grid">
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-download"></i>
+                        </div>
+                        <h3>Instalación One-Click</h3>
+                        <p>Abre Swiftinstall, selecciona el paquete y pulsa en instalar.</p>
+                    </div>
+                    <div class="feature-card fade-up delay-1">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                        <h3>Desinstala paquetes que no se listan</h3>
+                        <p>Desinstala paquetes que no se listan en la tienda. Paquetes del sistema o aplicaciones .deb que no instalaste desde la store</p>
+                    </div>
+                    <div class="feature-card fade-up delay-2">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-linux"></i>
+                        </div>
+                        <h3>Soporte AppImage</h3>
+                        <p>Instala un AppImage como app nativa</p>
+                    </div>
+                    <div class="feature-card fade-up delay-2">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-recycle"></i>
+                        </div>
+                        <h3>Limpia archivos basura</h3>
+                        <p>Con Swiftinstall, limpiar los archivos innecesarios de tu Linux es tan simple como pulsar un botón. </p>
+                    </div>
+                    <div class="feature-card fade-up delay-2">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-broom"></i>
+                        </div>
+                        <h3>Corrige dependencias</h3>
+                        <p>¡No vuelvas a ejecutar comandos para corregir instaalciones fallidas! Con Swiftinstall, es todo a un clic</p>
+                    </div>
+                    <div class="feature-card fade-up delay-2">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3>Análisis antivirus</h3>
+                        <p>Integra un análisis antivirus para analizar tu sistema de forma sencilla</p>
+                    </div>
+                    <div class="feature-card fade-up delay-3">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3>Seguro y Ligero</h3>
+                        <p>Código abierto, ligero, cero telemetría, sin publicidad...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section id="compare" class="comparison">
+            <div class="container">
+                <h2 class="section-title fade-up">¿Por qué SwiftInstall?</h2>
+                <div class="table-container fade-up delay-1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th class="highlight">SwiftInstall</th>
+                                <th>Terminal (dpkg/apt)</th>
+                                <th>Tienda Software</th>
+                                <th>Gdebi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Facilidad de uso</td>
+                                <td class="highlight"><i class="fa-solid fa-check"></i> Extrema</td>
+                                <td><i class="fa-solid fa-xmark"></i> Difícil</td>
+                                <td><i class="fa-solid fa-check"></i> Fácil</td>
+                                <td><i class="fa-solid fa-check"></i> Medianamente</td>
+                            </tr>
+                            <tr>
+                                <td>Corregir dependencias</td>
+                                <td class="highlight"><i class="fa-solid fa-check"></i> Sí</td>
+                                <td><i class="fa-solid fa-xmark"></i> No</td>
+                                <td><i class="fa-solid fa-check"></i> Sí</td>
+                                <td><i class="fa-solid fa-xmark"></i> No</td>
+                            </tr>
+                            <tr>
+                                <td>Limpieza de basura</td>
+                                <td class="highlight"><i class="fa-solid fa-check"></i> Integrada</td>
+                                <td><i class="fa-solid fa-xmark"></i> Manual</td>
+                                <td><i class="fa-solid fa-xmark"></i> No</td>
+                                <td><i class="fa-solid fa-xmark"></i> No</td>
+                            </tr>
+                            <tr>
+                                <td>Antivirus</td>
+                                <td class="highlight"><i class="fa-solid fa-check"></i> Integrado</td>
+                                <td><i class="fa-solid fa-xmark"></i> No</td>
+                                <td><i class="fa-solid fa-xmark"></i> No</td>
+                                <td><i class="fa-solid fa-xmark"></i> No</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Guide -->
+        <section id="install" class="install-guide">
+            <div class="container">
+                <div class="guide-box fade-up">
+                    <h2>Instalación en 3 Pasos</h2>
+                    <p class="subtitle">Tan simple como usarlo.</p>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3>Descargalo</h3>
+                            <p>Obtén el último paquete .deb desde nuestro repositorio o GitHub.</p>
+                            <a href="https://github.com/InledGroup/swiftinstall/releases/download/v9.0/swiftinstall-9.0.10.deb" class="btn-download"><i class="fa-brands fa-github"></i> Descarga aquí</a>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3>Ejecuta</h3>
+                            <p>Haz doble clic en el archivo descargado. El instalador del sistema se abrirá.</p>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3>Listo</h3>
+                            <p>¡Ya está! SwiftInstall ahora es tu gestor predeterminado para paquetes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; {new Date().getFullYear()} Inled Group. Software libre licenciado bajo GNU General Public License v3.0.</p>
+            <div class="socials">
+                <a href="https://github.com/InledGroup/swiftinstall"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Animation Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Handle URL parameter ?en for translation
+        const langSwitch = document.getElementById('lang-switch');
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (urlParams.has('en')) {
+            langSwitch.classList.add('active');
+        }
+
+        langSwitch.addEventListener('click', () => {
+            if (urlParams.has('en')) {
+                // Switch to ES
+                urlParams.delete('en');
+                // Remove cookie to stop translation
+                document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/apps/swiftinstall;";
+            } else {
+                // Switch to EN
+                urlParams.set('en', '');
+            }
+            window.location.search = urlParams.toString();
+        });
+
+        window.addEventListener('load', function() {
+            if (urlParams.has('en')) {
+                // Set the cookie that Google Translate uses
+                document.cookie = "googtrans=/es/en; path=/";
+                document.cookie = "googtrans=/es/en; path=/apps/swiftinstall";
+                
+                // If the google translate element exists, we can try to reload if not already translated
+                // But usually setting the cookie and reloading is the most robust way if not already done.
+                // However, since we are doing this on load, it might need a reload if the cookie wasn't there.
+                
+                if (!document.cookie.includes('googtrans=/es/en')) {
+                     // Force reload to apply cookie if it wasn't set (though we just set it)
+                     // A simple way to ensure it picks it up is to just set it. 
+                     // The Google Translate script checks this cookie on init.
+                     location.reload();
+                }
+            }
+        });
+    </script>
+
+    <style>
+        :root {
+            --primary: #5271ff;
+            --secondary: #1c00ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(82, 113, 255, 0.3);
+        }
+
+        .btn-primary.small {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .btn-icon:hover, .btn-icon.active {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 180px 0 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(82, 113, 255, 0.15), transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-text {
+            max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .app-mockup {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .app-mockup:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .mockup-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .mockup-body {
+            padding: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 300px;
+        }
+
+        .mockup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .big-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-mockup {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, var(--dark-bg), #0f0f0f);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(82, 113, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Comparison */
+        .comparison {
+            padding: 100px 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        th {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        th.highlight {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        td.highlight {
+            background: rgba(82, 113, 255, 0.05);
+            border-bottom: 1px solid rgba(82, 113, 255, 0.1);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .fa-check { color: #27c93f; }
+        .fa-xmark { color: #ff5f56; }
+        .fa-bolt { color: #ffbd2e; }
+
+        /* Install Guide */
+        .install-guide {
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+
+        .guide-box {
+            background: var(--gradient);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .guide-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 4rem;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: white;
+            color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 200px;
+        }
+
+        .btn-download {
+            margin-top: 1rem;
+            background: white;
+            color: var(--secondary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .btn-download:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .socials a {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            transition: color 0.3s;
+        }
+
+        .socials a:hover {
+            color: white;
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none; /* Mobile menu simplification for now */
+            }
+
+            .logo span {
+                display: block;
+            }
+            
+            .step-connector {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>
