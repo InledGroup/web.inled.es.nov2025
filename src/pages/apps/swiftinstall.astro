@@ -253,9 +253,12 @@ const description = "Instala, desinstala y gestiona paquetes .deb y .appimage fÃ
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+                if (targetId) {
+                    document.querySelector(targetId)?.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
@@ -263,23 +266,25 @@ const description = "Instala, desinstala y gestiona paquetes .deb y .appimage fÃ
         const langSwitch = document.getElementById('lang-switch');
         const urlParams = new URLSearchParams(window.location.search);
 
-        if (urlParams.has('en')) {
-            langSwitch.classList.add('active');
-        }
-
-        langSwitch.addEventListener('click', () => {
+        if (langSwitch) {
             if (urlParams.has('en')) {
-                // Switch to ES
-                urlParams.delete('en');
-                // Remove cookie to stop translation
-                document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/apps/swiftinstall;";
-            } else {
-                // Switch to EN
-                urlParams.set('en', '');
+                langSwitch.classList.add('active');
             }
-            window.location.search = urlParams.toString();
-        });
+
+            langSwitch.addEventListener('click', () => {
+                if (urlParams.has('en')) {
+                    // Switch to ES
+                    urlParams.delete('en');
+                    // Remove cookie to stop translation
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/apps/swiftinstall;";
+                } else {
+                    // Switch to EN
+                    urlParams.set('en', '');
+                }
+                window.location.search = urlParams.toString();
+            });
+        }
 
         window.addEventListener('load', function() {
             if (urlParams.has('en')) {
