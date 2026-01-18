@@ -1,0 +1,1057 @@
+---
+import { apps } from '../../config/apps';
+
+const app = apps.find(a => a.id === 'swiftinstall');
+const title = "AppInstall - Gestión de paquetes simplificada";
+const description = "Instala, desinstala y gestiona paquetes .deb y .appimage fácilmente en Linux.";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="icon" href="https://hosted.inled.es/swiftinstall-logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script is:inline type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "rkxkde17af");
+    </script>
+</head>
+<body>
+    <!-- Notice Banner -->
+    <div id="name-notice" class="name-notice">
+        <p><i class="fa-solid fa-circle-info"></i> <span data-i18n="notice_text">SwiftInstall ahora es AppInstall</span></p>
+        <button id="close-notice" aria-label="Cerrar aviso"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="/" class="logo">
+                <img src="https://hosted.inled.es/swiftinstall-logo.png" alt="AppInstall Logo">
+                <span>AppInstall</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features" data-i18n="nav_features">Características</a>
+                <a href="#compare" data-i18n="nav_compare">Comparativa</a>
+                <button id="lang-switch" class="btn-icon" aria-label="Cambiar idioma">
+                    <i class="fa-solid fa-language"></i>
+                </button>
+                <a href="#install" class="btn-primary small" data-i18n="nav_install">Instalar</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="container hero-content">
+                <div class="hero-text fade-up">
+                    <h1 data-i18n="hero_title" data-i18n-html="true">Gestión de paquetes <br><span class="gradient-text">sin complicaciones</span></h1>
+                    <p data-i18n="hero_desc">La forma más sencilla de instalar, desinstalar y gestionar tus aplicaciones .deb y .appimage en Linux. Olvida la terminal para lo básico.</p>
+                    <div class="hero-buttons">
+                        <a href="#install" class="btn-primary" data-i18n="hero_btn_download">Descargar Ahora</a>
+                        <a href="#features" class="btn-secondary" data-i18n="hero_btn_more">Saber más</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="container">
+                <div class="video-container fade-up delay-1">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/P4Z6BUqDJxI?si=x1yEG0bdRK7LBwnu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title fade-up" data-i18n="feat_title">Todo lo que necesitas</h2>
+                <div class="features-grid">
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-download"></i>
+                        </div>
+                        <h3 data-i18n="feat_1_title">Instalación One-Click</h3>
+                        <p data-i18n="feat_1_desc">Abre AppInstall, selecciona el paquete y pulsa en instalar.</p>
+                    </div>
+                    <div class="feature-card fade-up delay-1">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </div>
+                        <h3 data-i18n="feat_2_title">Desinstala paquetes que no se listan</h3>
+                        <p data-i18n="feat_2_desc">Desinstala paquetes que no se listan en la tienda. Paquetes del sistema o aplicaciones .deb que no instalaste desde la store</p>
+                    </div>
+                    <div class="feature-card fade-up delay-2">
+                        <div class="icon-box">
+                            <i class="fa-brands fa-linux"></i>
+                        </div>
+                        <h3 data-i18n="feat_3_title">Soporte AppImage</h3>
+                        <p data-i18n="feat_3_desc">Instala un AppImage como app nativa</p>
+                    </div>
+                    <div class="feature-card fade-up delay-2">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-recycle"></i>
+                        </div>
+                        <h3 data-i18n="feat_4_title">Limpia archivos basura</h3>
+                        <p data-i18n="feat_4_desc">Con AppInstall, limpiar los archivos innecesarios de tu Linux es tan simple como pulsar un botón.</p>
+                    </div>
+                    <div class="feature-card fade-up delay-2">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-broom"></i>
+                        </div>
+                        <h3 data-i18n="feat_5_title">Corrige dependencias</h3>
+                        <p data-i18n="feat_5_desc">¡No vuelvas a ejecutar comandos para corregir instaalciones fallidas! Con AppInstall, es todo a un clic</p>
+                    </div>
+                    <div class="feature-card fade-up delay-2">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3 data-i18n="feat_6_title">Análisis antivirus</h3>
+                        <p data-i18n="feat_6_desc">Integra un análisis antivirus para analizar tu sistema de forma sencilla</p>
+                    </div>
+                    <div class="feature-card fade-up delay-3">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3 data-i18n="feat_7_title">Seguro y Ligero</h3>
+                        <p data-i18n="feat_7_desc">Código abierto, ligero, cero telemetría, sin publicidad...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Section -->
+        <section id="compare" class="comparison">
+            <div class="container">
+                <h2 class="section-title fade-up" data-i18n="comp_title">¿Por qué AppInstall?</h2>
+                <div class="table-container fade-up delay-1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th data-i18n="th_feature">Característica</th>
+                                <th class="highlight">AppInstall</th>
+                                <th data-i18n="th_terminal">Terminal (dpkg/apt)</th>
+                                <th data-i18n="th_store">Tienda Software</th>
+                                <th>Gdebi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-i18n="td_ease">Facilidad de uso</td>
+                                <td class="highlight"><i class="fa-solid fa-check"></i> <span data-i18n="td_ease_swift">Extrema</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_ease_term">Difícil</span></td>
+                                <td><i class="fa-solid fa-check"></i> <span data-i18n="td_ease_store">Fácil</span></td>
+                                <td><i class="fa-solid fa-check"></i> <span data-i18n="td_ease_gdebi">Medianamente</span></td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="td_deps">Corregir dependencias</td>
+                                <td class="highlight"><i class="fa-solid fa-check"></i> <span data-i18n="td_yes">Sí</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_no">No</span></td>
+                                <td><i class="fa-solid fa-check"></i> <span data-i18n="td_yes">Sí</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_no">No</span></td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="td_clean">Limpieza de basura</td>
+                                <td class="highlight"><i class="fa-solid fa-check"></i> <span data-i18n="td_clean_swift">Integrada</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_clean_term">Manual</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_no">No</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_no">No</span></td>
+                            </tr>
+                            <tr>
+                                <td data-i18n="td_av">Antivirus</td>
+                                <td class="highlight"><i class="fa-solid fa-check"></i> <span data-i18n="td_av_swift">Integrado</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_no">No</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_no">No</span></td>
+                                <td><i class="fa-solid fa-xmark"></i> <span data-i18n="td_no">No</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Installation Guide -->
+        <section id="install" class="install-guide">
+            <div class="container">
+                <div class="guide-box fade-up">
+                    <h2 data-i18n="install_title">Instalación en 3 Pasos</h2>
+                    <p class="subtitle" data-i18n="install_subtitle">Tan simple como usarlo.</p>
+                    
+                    <div class="steps">
+                        <div class="step">
+                            <div class="step-number">1</div>
+                            <h3 data-i18n="step_1_title">Descargalo</h3>
+                            <p data-i18n="step_1_desc">Descarga pulsando en este botón. Compatible con distribuciones basadas en Debian (Ubuntu y muchas otras están basadas en Debian).</p> <a href="https://sourceforge.net/projects/swiftinstall/files/v9.0/swiftinstall-9.0.10.deb/download" class="btn-download"><i class="fa-brands fa-debian"></i> <span data-i18n="btn_download_git">Descarga aquí</span></a></a>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step">
+                            <div class="step-number">2</div>
+                            <h3 data-i18n="step_2_title">Ejecuta</h3>
+                            <p data-i18n="step_2_desc">Haz doble clic en el archivo descargado. El instalador del sistema se abrirá.</p>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step">
+                            <div class="step-number">3</div>
+                            <h3 data-i18n="step_3_title">Listo</h3>
+                            <p data-i18n="step_3_desc">¡Ya está! AppInstall ahora es tu gestor predeterminado para paquetes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; {new Date().getFullYear()} <span data-i18n="footer_text">Inled Group. Software libre licenciado bajo GNU General Public License v3.0.</span></p>
+            <div class="socials">
+                <a href="https://github.com/InledGroup/swiftinstall"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            "es": {
+                "notice_text": "SwiftInstall ahora es AppInstall",
+                "nav_features": "Características",
+                "nav_compare": "Comparativa",
+                "nav_install": "Instalar",
+                "hero_title": "Gestión de paquetes <br><span class=\"gradient-text\">sin complicaciones</span>",
+                "hero_desc": "La forma más sencilla de instalar, desinstalar y gestionar tus aplicaciones .deb y .appimage en Linux. Olvida la terminal para lo básico.",
+                "hero_btn_download": "Descargar Ahora",
+                "hero_btn_more": "Saber más",
+                "feat_title": "Todo lo que necesitas",
+                "feat_1_title": "Instalación One-Click",
+                "feat_1_desc": "Abre AppInstall, selecciona el paquete y pulsa en instalar.",
+                "feat_2_title": "Desinstala paquetes que no se listan",
+                "feat_2_desc": "Desinstala paquetes que no se listan en la tienda. Paquetes del sistema o aplicaciones .deb que no instalaste desde la store",
+                "feat_3_title": "Soporte AppImage",
+                "feat_3_desc": "Instala un AppImage como app nativa",
+                "feat_4_title": "Limpia archivos basura",
+                "feat_4_desc": "Con AppInstall, limpiar los archivos innecesarios de tu Linux es tan simple como pulsar un botón.",
+                "feat_5_title": "Corrige dependencias",
+                "feat_5_desc": "¡No vuelvas a ejecutar comandos para corregir instaalciones fallidas! Con AppInstall, es todo a un clic",
+                "feat_6_title": "Análisis antivirus",
+                "feat_6_desc": "Integra un análisis antivirus para analizar tu sistema de forma sencilla",
+                "feat_7_title": "Seguro y Ligero",
+                "feat_7_desc": "Código abierto, ligero, cero telemetría, sin publicidad...",
+                "comp_title": "¿Por qué AppInstall?",
+                "th_feature": "Característica",
+                "th_terminal": "Terminal (dpkg/apt)",
+                "th_store": "Tienda Software",
+                "td_ease": "Facilidad de uso",
+                "td_ease_swift": "Extrema",
+                "td_ease_term": "Difícil",
+                "td_ease_store": "Fácil",
+                "td_ease_gdebi": "Medianamente",
+                "td_deps": "Corregir dependencias",
+                "td_yes": "Sí",
+                "td_no": "No",
+                "td_clean": "Limpieza de basura",
+                "td_clean_swift": "Integrada",
+                "td_clean_term": "Manual",
+                "td_av": "Antivirus",
+                "td_av_swift": "Integrado",
+                "install_title": "Instalación en 3 Pasos",
+                "install_subtitle": "Tan simple como usarlo.",
+                "step_1_title": "Descargalo",
+                "step_1_desc": "Descarga pulsando en este botón. Compatible con distribuciones basadas en Debian (Ubuntu y muchas otras están basadas en Debian)",
+                "btn_download_git": "Descarga aquí",
+                "step_2_title": "Ejecuta",
+                "step_2_desc": "Haz doble clic en el archivo descargado. El instalador del sistema se abrirá.",
+                "step_3_title": "Listo",
+                "step_3_desc": "¡Ya está! AppInstall ahora es tu gestor predeterminado para paquetes.",
+                "footer_text": "Inled Group. Software libre licenciado bajo GNU General Public License v3.0."
+            },
+            "en": {
+                "notice_text": "SwiftInstall is now AppInstall",
+                "nav_features": "Features",
+                "nav_compare": "Comparison",
+                "nav_install": "Install",
+                "hero_title": "Package Management <br><span class=\"gradient-text\">Hassle-free</span>",
+                "hero_desc": "The easiest way to install, uninstall, and manage your .deb and .appimage applications on Linux. Forget the terminal for the basics.",
+                "hero_btn_download": "Download Now",
+                "hero_btn_more": "Learn more",
+                "feat_title": "Everything you need",
+                "feat_1_title": "One-Click Installation",
+                "feat_1_desc": "Open AppInstall, select the package, and click install.",
+                "feat_2_title": "Uninstall unlisted packages",
+                "feat_2_desc": "Uninstall packages not listed in the store. System packages or .deb applications you didn't install from the store.",
+                "feat_3_title": "AppImage Support",
+                "feat_3_desc": "Install an AppImage as a native app.",
+                "feat_4_title": "Clean Junk Files",
+                "feat_4_desc": "With AppInstall, cleaning unnecessary files from your Linux is as simple as pressing a button.",
+                "feat_5_title": "Fix Dependencies",
+                "feat_5_desc": "Never run commands to fix failed installations again! With AppInstall, it's all one click away.",
+                "feat_6_title": "Antivirus Analysis",
+                "feat_6_desc": "Integrates antivirus analysis to scan your system easily.",
+                "feat_7_title": "Secure and Lightweight",
+                "feat_7_desc": "Open source, lightweight, zero telemetry, no ads...",
+                "comp_title": "Why AppInstall?",
+                "th_feature": "Feature",
+                "th_terminal": "Terminal (dpkg/apt)",
+                "th_store": "Software Store",
+                "td_ease": "Ease of use",
+                "td_ease_swift": "Extreme",
+                "td_ease_term": "Hard",
+                "td_ease_store": "Easy",
+                "td_ease_gdebi": "Moderate",
+                "td_deps": "Fix dependencies",
+                "td_yes": "Yes",
+                "td_no": "No",
+                "td_clean": "Junk cleaning",
+                "td_clean_swift": "Integrated",
+                "td_clean_term": "Manual",
+                "td_av": "Antivirus",
+                "td_av_swift": "Integrated",
+                "install_title": "3-Step Installation",
+                "install_subtitle": "As simple as using it.",
+                "step_1_title": "Download it",
+                "step_1_desc": "Download by clicking this button. Compatible with Debian-based distributions (Ubuntu and many others are based on Debian).",
+                "btn_download_git": "Download here",
+                "step_2_title": "Run it",
+                "step_2_desc": "Double-click the downloaded file. The system installer will open.",
+                "step_3_title": "Done",
+                "step_3_desc": "That's it! AppInstall is now your default package manager.",
+                "footer_text": "Inled Group. Free software licensed under GNU General Public License v3.0."
+            }
+        };
+
+        function updateLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    if (el.getAttribute('data-i18n-html') === 'true') {
+                        el.innerHTML = translations[lang][key];
+                    } else {
+                        el.innerText = translations[lang][key];
+                    }
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        // Close notice logic
+        const notice = document.getElementById('name-notice');
+        const closeBtn = document.getElementById('close-notice');
+        const navbar = document.querySelector('.navbar');
+        
+        if (notice && closeBtn) {
+            // Check if already closed in this session
+            if (sessionStorage.getItem('notice-closed') === 'true') {
+                notice.style.display = 'none';
+                if (navbar) navbar.style.marginTop = '0';
+            } else {
+                closeBtn.addEventListener('click', () => {
+                    notice.style.opacity = '0';
+                    setTimeout(() => {
+                        notice.style.display = 'none';
+                        if (navbar) navbar.style.marginTop = '0';
+                        sessionStorage.setItem('notice-closed', 'true');
+                    }, 300);
+                });
+            }
+        }
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+                if (targetId) {
+                    document.querySelector(targetId)?.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Handle URL parameter ?en for translation
+        const langSwitch = document.getElementById('lang-switch');
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (langSwitch) {
+            if (urlParams.has('en')) {
+                langSwitch.classList.add('active');
+                updateLanguage('en');
+            }
+
+            langSwitch.addEventListener('click', () => {
+                if (urlParams.has('en')) {
+                    // Switch to ES
+                    urlParams.delete('en');
+                    updateLanguage('es');
+                } else {
+                    // Switch to EN
+                    urlParams.set('en', '');
+                    updateLanguage('en');
+                }
+                // Update URL without reloading
+                window.history.replaceState({}, '', `${window.location.pathname}${urlParams.toString() ? '?' + urlParams.toString() : ''}`);
+                
+                // Toggle active state on button
+                if (urlParams.has('en')) {
+                    langSwitch.classList.add('active');
+                } else {
+                    langSwitch.classList.remove('active');
+                }
+            });
+        }
+
+        // Hero Fade Out on Scroll
+        window.addEventListener('scroll', () => {
+            const scrollPosition = window.scrollY;
+            const heroText = document.querySelector('.hero-text');
+            
+            if (heroText) {
+                // Disable transition during scroll to prevent lag
+                // We check if it has the inline style for transition 'none' yet
+                if (!heroText.style.transition && heroText.classList.contains('visible')) {
+                     // We can't just check style.transition because it might be computed.
+                     // But we can force it if we are scrolling.
+                     heroText.style.transition = 'none';
+                }
+                
+                // Start fading immediately, fully transparent by 400px
+                const opacity = 1 - (scrollPosition / 400);
+                heroText.style.opacity = Math.max(0, opacity).toString();
+                // Move it up slightly faster than scroll to give a "leaving" feel
+                heroText.style.transform = `translateY(${scrollPosition * 0.4}px)`;
+            }
+        });
+    </script>
+
+    <style>
+        :root {
+            --primary: #5271ff;
+            --secondary: #1c00ff;
+            --dark-bg: #0a0a0a;
+            --card-bg: #141414;
+            --text-main: #ffffff;
+            --text-muted: #a0a0a0;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        /* Notice Banner */
+        .name-notice {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            color: #000;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease;
+        }
+
+        .name-notice p {
+            margin: 0;
+        }
+
+        #close-notice {
+            background: rgba(0,0,0,0.1);
+            border: none;
+            color: #000;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: background 0.2s;
+        }
+
+        #close-notice:hover {
+            background: rgba(0,0,0,0.2);
+        }
+
+        /* Navbar adjusted for notice */
+        .navbar {
+            position: fixed;
+            top: 0; 
+            margin-top: 40px; /* Approximate height of notice */
+            width: 100%;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: margin-top 0.3s ease;
+        }
+        
+        /* Video Section */
+        .video-section {
+            padding: 0 0 100px;
+            margin-top: -50px; /* Slight overlap with hero */
+            position: relative;
+            z-index: 10;
+        }
+        
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            aspect-ratio: 16/9;
+            background: #000;
+        }
+        
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navbar */
+        /* Adjusted above */
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: white;
+            font-weight: 700;
+            font-size: 1.25rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(82, 113, 255, 0.3);
+        }
+
+        .btn-primary.small {
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        .btn-icon {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .btn-icon:hover, .btn-icon.active {
+            color: white;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            padding: 180px 0 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 0%, rgba(82, 113, 255, 0.15), transparent 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-text {
+            max-width: 850px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 650px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .app-mockup {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .app-mockup:hover {
+            transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+        }
+
+        .mockup-header {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .mockup-body {
+            padding: 3rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            min-height: 300px;
+        }
+
+        .mockup-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .big-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .btn-mockup {
+            background: var(--primary);
+            border: none;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: linear-gradient(to bottom, var(--dark-bg), #0f0f0f);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .icon-box {
+            width: 50px;
+            height: 50px;
+            background: rgba(82, 113, 255, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Comparison */
+        .comparison {
+            padding: 100px 0;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th:first-child, td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        th {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        th.highlight {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        td.highlight {
+            background: rgba(82, 113, 255, 0.05);
+            border-bottom: 1px solid rgba(82, 113, 255, 0.1);
+            color: white;
+            font-weight: 600;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .fa-check { color: #27c93f; }
+        .fa-xmark { color: #ff5f56; }
+        .fa-bolt { color: #ffbd2e; }
+
+        /* Install Guide */
+        .install-guide {
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+
+        .guide-box {
+            background: var(--gradient);
+            border-radius: 24px;
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .guide-box h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 4rem;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: white;
+            color: var(--secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.25rem;
+        }
+
+        .step h3 {
+            font-size: 1.5rem;
+        }
+
+        .step p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            max-width: 200px;
+        }
+
+        .btn-download {
+            margin-top: 1rem;
+            background: white;
+            color: var(--secondary);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.2s;
+        }
+
+        .btn-download:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .socials {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .socials a {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            transition: color 0.3s;
+        }
+
+        .socials a:hover {
+            color: white;
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 { transition-delay: 0.2s; }
+        .delay-2 { transition-delay: 0.4s; }
+        .delay-3 { transition-delay: 0.6s; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none; /* Mobile menu simplification for now */
+            }
+
+            .logo span {
+                display: block;
+            }
+            
+            .step-connector {
+                display: none;
+            }
+        }
+    </style>
+</body>
+</html>

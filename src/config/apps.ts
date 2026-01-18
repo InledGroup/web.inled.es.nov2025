@@ -9,10 +9,10 @@ export interface App {
 export const apps: App[] = [
   {
     id: 'swiftinstall',
-    name: 'Swiftinstall',
+    name: 'AppInstall',
     description: 'Instala, desinstala y gestiona paquetes .deb y .appimage fácilmente.',
     icon: 'https://hosted.inled.es/swiftinstall-logo.png',
-    link: '/apps/swiftinstall'
+    link: '/apps/appinstall'
   },
   {
     id: 'warp-vpn',
