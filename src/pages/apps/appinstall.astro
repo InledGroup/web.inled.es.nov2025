@@ -1,7 +1,6 @@
 ---
 import { apps } from '../../config/apps';
 
-const app = apps.find(a => a.id === 'swiftinstall');
 const title = "AppInstall - Gesti√≥n de paquetes simplificada";
 const description = "Instala, desinstala y gestiona paquetes .deb y .appimage f√°cilmente en Linux.";
 ---
@@ -225,7 +224,7 @@ const description = "Instala, desinstala y gestiona paquetes .deb y .appimage f√
     </footer>
 
     <script>
-        const translations = {
+        const translations: Record<string, Record<string, string>> = {
             "es": {
                 "notice_text": "SwiftInstall ahora es AppInstall",
                 "nav_features": "Caracter√≠sticas",
@@ -332,15 +331,16 @@ const description = "Instala, desinstala y gestiona paquetes .deb y .appimage f√
             }
         };
 
-        function updateLanguage(lang) {
+        function updateLanguage(lang: string) {
             const elements = document.querySelectorAll('[data-i18n]');
             elements.forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[lang] && translations[lang][key]) {
-                    if (el.getAttribute('data-i18n-html') === 'true') {
-                        el.innerHTML = translations[lang][key];
+                const element = el as HTMLElement;
+                const key = element.getAttribute('data-i18n');
+                if (key && translations[lang] && translations[lang][key]) {
+                    if (element.getAttribute('data-i18n-html') === 'true') {
+                        element.innerHTML = translations[lang][key];
                     } else {
-                        el.innerText = translations[lang][key];
+                        element.innerText = translations[lang][key];
                     }
                 }
             });
@@ -350,7 +350,7 @@ const description = "Instala, desinstala y gestiona paquetes .deb y .appimage f√
         // Close notice logic
         const notice = document.getElementById('name-notice');
         const closeBtn = document.getElementById('close-notice');
-        const navbar = document.querySelector('.navbar');
+        const navbar = document.querySelector('.navbar') as HTMLElement;
         
         if (notice && closeBtn) {
             // Check if already closed in this session
@@ -393,7 +393,8 @@ const description = "Instala, desinstala y gestiona paquetes .deb y .appimage f√
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const targetId = (e.currentTarget as HTMLAnchorElement).getAttribute('href');
+                const target = e.currentTarget as HTMLAnchorElement;
+                const targetId = target.getAttribute('href');
                 if (targetId) {
                     document.querySelector(targetId)?.scrollIntoView({
                         behavior: 'smooth'
@@ -437,7 +438,7 @@ const description = "Instala, desinstala y gestiona paquetes .deb y .appimage f√
         // Hero Fade Out on Scroll
         window.addEventListener('scroll', () => {
             const scrollPosition = window.scrollY;
-            const heroText = document.querySelector('.hero-text');
+            const heroText = document.querySelector('.hero-text') as HTMLElement;
             
             if (heroText) {
                 // Disable transition during scroll to prevent lag
