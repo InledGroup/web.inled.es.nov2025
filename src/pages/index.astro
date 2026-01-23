@@ -53,6 +53,14 @@ const saasProducts = saas.map(s => ({
     primaryButtonHref="/proyectos"
     secondaryButtonHref="#apps"
   />
+  <FeatureSection
+    title="Edge AI ya accesible!"
+    description="La mejor alternativa local, privada y gratuita a ChatGPT, Perplexity y NotebookLM"
+    imageSrc="https://hosted.inled.es/edgeai.png"
+    buttonText="¡Quiero acceder!"
+    buttonHref="https://edge.inled.es/landing"
+    reversed={true}
+  />
 
   <FeatureSection
     title="Inteligencia Artificial libre, local y privada"
@@ -62,14 +70,7 @@ const saasProducts = saas.map(s => ({
     buttonHref="https://ai.inled.es"
   />
 
-  <FeatureSection
-    title="Accede a la beta! AiCloud"
-    description="Y escríbenos para cualquier problema o sugerencia."
-    imageSrc="https://hosted.inled.es/better.inled.png"
-    buttonText="¡Quiero acceder!"
-    buttonHref="https://aicloud.inled.es"
-    reversed={true}
-  />
+  
 
   <div id="saas">
     <ProductsGrid title="Servicios en Línea (SaaS)" products={saasProducts} />
