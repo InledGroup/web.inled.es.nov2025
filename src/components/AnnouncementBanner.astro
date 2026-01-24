@@ -1,0 +1,195 @@
+---
+---
+
+<div id="announcement-banner" class="announcement-banner">
+  <div class="banner-content">
+    <div class="banner-text">
+      <span class="emoji">✨</span>
+      <span>¡Edge AI ya está en Product Hunt! Por favor, apóyanos con tu voto.</span>
+    </div>
+    <div class="ph-badge">
+      <a href="https://www.producthunt.com/products/edge-ai-2?embed=true&utm_source=badge-featured&utm_medium=badge&utm_campaign=badge-edge-ai-2" target="_blank" rel="noopener noreferrer">
+        <img alt="Edge AI - Free, private, local AI — running in your browser | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1067479&theme=neutral&t=1769254236694">
+      </a>
+    </div>
+    <button id="close-banner" class="close-banner" aria-label="Cerrar anuncio">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .announcement-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000; /* Higher than header (1000) */
+    background: linear-gradient(90deg, #ff6154 0%, #ff826c 100%);
+    color: white;
+    padding: 0.75rem 1rem;
+    display: none; /* Hidden by default, shown by JS */
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+  }
+
+  .banner-text {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .emoji {
+    font-size: 1.4rem;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-5px);}
+    60% {transform: translateY(-3px);}
+  }
+
+  .ph-badge {
+    display: flex;
+    align-items: center;
+    min-width: 250px;
+  }
+
+  .ph-badge img {
+    height: 48px;
+    width: auto;
+    border-radius: 8px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: white;
+    padding: 2px;
+  }
+
+  .ph-badge img:hover {
+    transform: scale(1.08) rotate(1deg);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .close-banner {
+    position: absolute;
+    right: -1rem;
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .close-banner:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+  }
+
+  @media (max-width: 1024px) {
+    .banner-content {
+      gap: 1rem;
+    }
+    .banner-text {
+      font-size: 0.9rem;
+    }
+    .ph-badge {
+      min-width: 200px;
+    }
+    .ph-badge img {
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .announcement-banner {
+        padding: 0.5rem 1rem;
+    }
+    .banner-content {
+      flex-direction: column;
+      gap: 0.5rem;
+      padding-right: 2rem;
+    }
+    .banner-text {
+      font-size: 0.85rem;
+    }
+    .ph-badge {
+        min-width: auto;
+    }
+    .ph-badge img {
+      height: 38px;
+    }
+    .close-banner {
+      right: -0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .close-banner:hover {
+        transform: translateY(-50%) rotate(90deg);
+    }
+  }
+</style>
+
+<script>
+  function initBanner() {
+    const banner = document.getElementById('announcement-banner');
+    const closeButton = document.getElementById('close-banner');
+    const header = document.querySelector('header');
+
+    const BANNER_ID = 'ph-edge-ai-banner-closed';
+
+    if (banner && !localStorage.getItem(BANNER_ID)) {
+      banner.style.display = 'flex';
+      
+      const adjustHeader = () => {
+        if (header && banner.style.display !== 'none') {
+          const bannerHeight = banner.offsetHeight;
+          header.style.transition = 'top 0.3s ease';
+          header.style.top = `${bannerHeight}px`;
+        }
+      };
+
+      // Initial adjustment
+      setTimeout(adjustHeader, 100);
+
+      closeButton?.addEventListener('click', () => {
+        banner.style.display = 'none';
+        localStorage.setItem(BANNER_ID, 'true');
+        
+        if (header) {
+          header.style.top = '0';
+        }
+      });
+
+      window.addEventListener('resize', adjustHeader);
+    }
+  }
+
+  // Run on load
+  window.addEventListener('load', initBanner);
+  
+  // Also run on DOMContentLoaded for faster response
+  document.addEventListener('DOMContentLoaded', initBanner);
+</script>
