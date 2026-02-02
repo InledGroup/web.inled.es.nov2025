@@ -12,6 +12,10 @@ export interface AppData {
     sourceforge: string;
     sourceCode: string;
   };
+  notice?: {
+    type: 'warning' | 'info';
+    message: string;
+  };
 }
 
 export const appsData: AppData[] = [
@@ -53,6 +57,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/InledGroup/warpvpn-gui/releases/download/v1.0/warp-exec-v1.deb",
       "sourceforge": "https://sourceforge.net/projects/warpvpn-gui/files/latest/download",
       "sourceCode": "https://github.com/InledGroup/warpvpn-gui"
+    },
+    "notice": {
+      "type": "warning",
+      "message": "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto y tenemos proyectos mejores que estamos deseosos de que descubras."
     }
   },
   {
@@ -73,6 +81,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/InledGroup/start-omnibox/archive/refs/heads/main.zip",
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/start-omnibox"
+    },
+    "notice": {
+      "type": "warning",
+      "message": "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto y tenemos proyectos mejores que estamos deseosos de que descubras."
     }
   },
   {
@@ -132,6 +144,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/InledGroup/start.newtab.chrome/archive/refs/heads/main.zip",
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/start.newtab.chrome"
+    },
+    "notice": {
+      "type": "warning",
+      "message": "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto y tenemos proyectos mejores que estamos deseosos de que descubras."
     }
   },
   {
@@ -152,6 +168,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/InledGroup/windowserror/releases/download/v2.0/WindowsError2.zip",
       "sourceforge": "https://sourceforge.net/projects/windowserror/files/latest/download",
       "sourceCode": "https://github.com/InledGroup/windowserror"
+    },
+    "notice": {
+      "type": "warning",
+      "message": "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto y tenemos proyectos mejores que estamos deseosos de que descubras."
     }
   },
   {
@@ -171,6 +191,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/Inled-Group/winbsod/releases/download/v1.0/BSOD.app.zip",
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/winbsod"
+    },
+    "notice": {
+      "type": "warning",
+      "message": "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto y tenemos proyectos mejores que estamos deseosos de que descubras."
     }
   },
   {
@@ -182,13 +206,17 @@ export const appsData: AppData[] = [
       "Edge"
     ],
     "shortDescription": "Guarda pestañas, envíalas y haz de todo con ellas fácilmente",
-    "description": "# Redescubre la potencia de las pestañas\n\n---\n\nCon Tabstacker, guardar pestañas, enviarlas por mensajería instantánea o por mail y abrirlas de nuevo agrupadas ya no es difícil y engorroso como con los marcadores.\n\nLa potencia en sí, de forma privada (a diferencia de otras).\n\n## Instalación\n\nHabilita el modo desarrollador en Chrome o derivados y sube el .zip descomprimido.\n\n## En actualización\n\nEstamos trabajando para mejorar Tabstacker y otras extensiones para proveerles de un sistema automático de comprobación de actualizaciones.",
+    "description": "# Redescubre la potencia de las pestañas\n\n---\n\nCon Tabstacker, guardar pestañas, enviarlas por mensajería instantánea o por mail y abrirlas de nuevo agrupadas ya no es difícil y engorroso como con los marcadores.\n\nLa potencia en sí, de forma privada (a diferencia de otras).\n\n## Instalación\n\nHabilita el modo desarrollador en Chrome o derivados y sube el .zip descomprimido.",
     "screenshots": [],
     "video": "",
     "downloads": {
       "github": "https://github.com/InledGroup/tabstacker/archive/refs/heads/main.zip",
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/tabstacker"
+    },
+    "notice": {
+      "type": "warning",
+      "message": "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto y tenemos proyectos mejores que estamos deseosos de que descubras."
     }
   },
   {
@@ -225,6 +253,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/InledGroup/open-url-archive.is/archive/refs/heads/main.zip",
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/open-url-archive.is"
+    },
+    "notice": {
+      "type": "warning",
+      "message": "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto y tenemos proyectos mejores que estamos deseosos de que descubras."
     }
   },
   {
@@ -237,7 +269,7 @@ export const appsData: AppData[] = [
       "Linux"
     ],
     "shortDescription": "Chat en la misma red wifi, sin servidores externos",
-    "description": "# Chatea en la misma Wifi\n\n¿Te imaginas montarte tu propio Whatsapp en la red local? Con Startchat puedes, a dos comandos.\n\nStartchat es, a la vez, servidor de sala de chat y de la página de conversación.\n\nDispones de varios servidores predefinidos para puertos 8080, 8081 y 8082.\n\nEl servidor predeterminado ya levanta la UI también.\n\n## Ejecución\n\nSimplemente debes instalar NodeJS en tu ordenador y navegar desde la terminal hasta la carpeta donde se encuentra Startchat.\n\nDentro de ella ejecutas\n\n<pre>npm install</pre> y luego <pre>node server.js</pre>",
+    "description": "# Chatea en la misma Wifi\n\n¿Te imaginas montarte tu propio Whatsapp en la red local? Con Startchat puedes, a dos comandos.\n\nStartchat es, a la vez, servidor de sala de chat y de la página de conversation.\n\nDispones de varios servidores predefinidos para puertos 8080, 8081 y 8082.\n\nEl servidor predeterminado ya levanta la UI también.\n\n## Ejecución\n\nSimplemente debes instalar NodeJS en tu ordenador y navegar desde la terminal hasta la carpeta donde se encuentra Startchat.\n\nDentro de ella ejecutas\n\n<pre>npm install</pre> y luego <pre>node server.js</pre>",
     "screenshots": [
       "https://hosted.inled.es/uistartchat.png"
     ],
@@ -246,6 +278,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/InledGroup/startchat/archive/refs/heads/main.zip",
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/startchat"
+    },
+    "notice": {
+      "type": "info",
+      "message": "Próximamente disponible una actualización con traducción de la interfaz al inglés y transformación en PWA."
     }
   },
   {
@@ -268,6 +304,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/InledGroup/inshare/archive/refs/heads/main.zip",
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/inshare"
+    },
+    "notice": {
+      "type": "info",
+      "message": "Estamos trabajando para mejorar esta aplicación."
     }
   },
   {
@@ -288,6 +328,10 @@ export const appsData: AppData[] = [
       "github": "https://github.com/InledGroup/moodlenotifier/archive/refs/heads/main.zip",
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/moodlenotifier"
+    },
+    "notice": {
+      "type": "info",
+      "message": "Próximamente disponible una actualización con traducción de la interfaz al inglés."
     }
   }
 ];

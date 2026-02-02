@@ -27,6 +27,20 @@ const content = await marked.parse(app.description);
         <div class="app-info">
           <h1>{app.title}</h1>
           <p class="short-desc">{app.shortDescription}</p>
+          
+          {app.notice && (
+            <div class={`notice-banner ${app.notice.type}`}>
+              <div class="notice-icon">
+                {app.notice.type === 'warning' ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                )}
+              </div>
+              <p>{app.notice.message}</p>
+            </div>
+          )}
+
           <div class="platforms">
             {app.platform.map(p => <span class="badge">{p}</span>)}
           </div>
@@ -155,6 +169,35 @@ const content = await marked.parse(app.description);
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 1.5rem;
     max-width: 600px;
+  }
+
+  .notice-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    max-width: 800px;
+  }
+
+  .notice-banner.warning {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    color: #ffc107;
+  }
+
+  .notice-banner.info {
+    background: rgba(33, 150, 243, 0.1);
+    border: 1px solid rgba(33, 150, 243, 0.3);
+    color: #2196f3;
+  }
+
+  .notice-icon {
+    flex-shrink: 0;
+    margin-top: 0.1rem;
   }
 
   .platforms {
