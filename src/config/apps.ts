@@ -11,6 +11,13 @@ export interface App {
 }
 
 export const apps: App[] = [
+  {
+    id: 'bastion',
+    name: 'Bastion Browser',
+    description: 'Navegación ultra-segura mediante aislamiento remoto y endurecimiento de red.',
+    icon: 'https://hosted.inled.es/bastion.png',
+    link: '/bastion'
+  },
     {
     id: 'swiftinstall',
     name: 'AppInstall',

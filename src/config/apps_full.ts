@@ -20,6 +20,24 @@ export interface AppData {
 
 export const appsData: AppData[] = [
   {
+    "id": "bastion",
+    "title": "Bastion Browser",
+    "icon": "https://hosted.inled.es/bastion.png",
+    "platform": [
+      "Linux",
+      "Docker"
+    ],
+    "shortDescription": "Navegación ultra-segura mediante aislamiento remoto y endurecimiento de red.",
+    "description": "# Bastion Browser\n\nBastion es un navegador remoto diseñado para ofrecer la máxima seguridad mediante el aislamiento total de la sesión de navegación del usuario del sistema local.\n\n### Características Principales\n\n- **Aislamiento por Sesión (UUID)**: Cada conexión genera un entorno de ejecución único y estanco.\n- **Acceso Restringido**: Capa de autenticación mediante API Key obligatoria.\n- **Protección Anti-SSRF**: Bloqueo dinámico de acceso a redes internas.\n- **Control de Recursos**: Gestión activa de sesiones y límites de memoria.\n- **Cifrado E2E**: Tráfico HTTPS/WSS cifrado con TLS.\n- **Descargas Seguras**: Staging aislado para archivos antes de la transferencia local.\n\n### Instalación Rápida\n\n```bash\ngit clone https://github.com/InledGroup/bastion.browser.git && cd bastion.browser && docker compose up -d --build\n```",
+    "screenshots": [],
+    "video": "",
+    "downloads": {
+      "github": "https://github.com/InledGroup/bastion.browser",
+      "sourceforge": "",
+      "sourceCode": "https://github.com/InledGroup/bastion.browser"
+    }
+  },
+  {
     "id": "swiftinstall",
     "title": "Swiftinstall",
     "icon": "https://hosted.inled.es/swiftinstall-logo.png",

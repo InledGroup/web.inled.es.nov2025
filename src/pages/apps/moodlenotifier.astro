@@ -1,0 +1,557 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+
+const app = {
+  id: "moodlenotifier",
+  title: "Moodle Notifier",
+  icon: "https://hosted.inled.es/moodlenotifier.png",
+  screenshot: "https://hosted.inled.es/moodlenotifier-screenshot1.png",
+  downloadUrl: "https://github.com/InledGroup/moodlenotifier/archive/refs/heads/main.zip"
+};
+
+const i18n = {
+  es: {
+    hero: {
+      title: "Moodle Notifier",
+      subtitle: "Tus tareas de Moodle, siempre a la vista. No pierdas ni un solo plazo.",
+      download: "Descargar ahora",
+      viewGithub: "Ver en GitHub"
+    },
+    features: {
+      title: "Todo lo que necesitas",
+      items: [
+        { title: "Notificaciones en tiempo real", description: "Recibe alertas instantáneas de nuevas tareas y plazos próximos." },
+        { title: "Sincronización automática", description: "Tus actividades se actualizan cada 5 minutos automáticamente." },
+        { title: "Gestión inteligente", description: "Marca tareas como vistas o pospónlas si necesitas más tiempo." }
+      ]
+    },
+    cta: {
+      title: "¿Listo para mejorar tu productividad?",
+      description: "Descarga Moodle Notifier hoy mismo y empieza a gestionar tus estudios como un profesional.",
+      button: "Descargar Extensión"
+    },
+    install: {
+      title: "Instrucciones de Instalación",
+      steps: [
+        { title: "Descargar", description: "Descarga el archivo ZIP desde el botón de arriba o GitHub." },
+        { title: "Descomprimir", description: "Descomprime el archivo en una carpeta de tu ordenador." },
+        { title: "Extensiones", description: "Abre tu navegador y ve a la página de extensiones (chrome://extensions)." },
+        { title: "Modo Desarrollador", description: "Activa el \"Modo de desarrollador\" en la esquina superior derecha." },
+        { title: "Cargar", description: "Haz clic en \"Cargar descomprimida\" y selecciona la carpeta de la extensión." }
+      ]
+    }
+  },
+  en: {
+    hero: {
+      title: "Moodle Notifier",
+      subtitle: "Your Moodle tasks, always in sight. Never miss a single deadline again.",
+      download: "Download now",
+      viewGithub: "View on GitHub"
+    },
+    features: {
+      title: "Everything you need",
+      items: [
+        { title: "Real-time notifications", description: "Get instant alerts for new tasks and upcoming deadlines." },
+        { title: "Automatic sync", description: "Your activities are automatically updated every 5 minutes." },
+        { title: "Smart management", description: "Mark tasks as seen or snooze them if you need more time." }
+      ]
+    },
+    cta: {
+      title: "Ready to boost your productivity?",
+      description: "Download Moodle Notifier today and start managing your studies like a pro.",
+      button: "Download Extension"
+    },
+    install: {
+      title: "Installation Instructions",
+      steps: [
+        { title: "Download", description: "Download the ZIP file from the button above or GitHub." },
+        { title: "Unzip", description: "Unzip the file into a folder on your computer." },
+        { title: "Extensions", description: "Open your browser and go to the extensions page (chrome://extensions)." },
+        { title: "Developer Mode", description: "Activate \"Developer mode\" in the upper right corner." },
+        { title: "Load", description: "Click on \"Load unpacked\" and select the extension folder." }
+      ]
+    }
+  }
+};
+---
+
+<Layout title="Moodle Notifier - Inled Apps" description="Gestiona tus tareas de Moodle eficientemente con nuestra extensión de Chrome.">
+  <div class="page-wrapper">
+    <Header />
+    
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content">
+              <div class="app-logo">
+                <img src={app.icon} alt="Moodle Notifier Logo" />
+              </div>
+              <h1 id="hero-title" class="text-balance">{i18n.es.hero.title}</h1>
+              <p id="hero-subtitle" class="text-muted">{i18n.es.hero.subtitle}</p>
+              
+              <div class="hero-actions">
+                <a href={app.downloadUrl} class="btn btn-primary" id="hero-download">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                  {i18n.es.hero.download}
+                </a>
+                <a href="https://github.com/InledGroup/moodlenotifier" class="btn btn-outline" id="hero-github">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                  {i18n.es.hero.viewGithub}
+                </a>
+              </div>
+            </div>
+            
+            <div class="hero-image">
+              <div class="screenshot-wrapper">
+                <img src={app.screenshot} alt="Moodle Notifier Screenshot" class="screenshot" />
+                <div class="screenshot-shadow"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features-section">
+        <div class="container">
+          <h2 id="features-title" class="section-title">{i18n.es.features.title}</h2>
+          <div class="features-grid">
+            {i18n.es.features.items.map((item, index) => (
+              <div class="feature-card">
+                <div class="feature-icon">
+                  {index === 0 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>}
+                  {index === 1 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg>}
+                  {index === 2 && <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check-circle"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>}
+                </div>
+                <h3 id={`feature-title-${index}`}>{item.title}</h3>
+                <p id={`feature-desc-${index}`} class="text-muted">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- Installation Section -->
+      <section class="install-section">
+        <div class="container">
+          <h2 id="install-title" class="section-title">{i18n.es.install.title}</h2>
+          <div class="install-steps">
+            {i18n.es.install.steps.map((step, index) => (
+              <div class="step-card">
+                <div class="step-number">{index + 1}</div>
+                <div class="step-content">
+                  <h3 id={`step-title-${index}`}>{step.title}</h3>
+                  <p id={`step-desc-${index}`} class="text-muted-small">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-card">
+            <h2 id="cta-title">{i18n.es.cta.title}</h2>
+            <p id="cta-description" class="text-muted">{i18n.es.cta.description}</p>
+            <a href={app.downloadUrl} class="btn btn-primary btn-lg" id="cta-button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chrome"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+              {i18n.es.cta.button}
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style is:global>
+  /* Override global black background for this page */
+  body {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  .page-wrapper {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    min-height: 100vh;
+  }
+  
+  .page-wrapper :global(header) {
+    background: rgba(255, 255, 255, 0.8) !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  .page-wrapper :global(header a), 
+  .page-wrapper :global(header button) {
+    color: #0f172a !important;
+  }
+
+  /* Footer override */
+  :global(footer) {
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+
+  :global(footer a), 
+  :global(footer p) {
+    color: #64748b !important;
+  }
+
+  :global(footer .footer-social a) {
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+</style>
+
+<style>
+  .page-wrapper {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Sections */
+  .hero-section {
+    padding: 8rem 0 4rem;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .app-logo {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.5rem;
+  }
+
+  .app-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .text-muted {
+    color: #64748b;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons Shadcn-like */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background-color: #0f172a;
+    color: #ffffff;
+    border: 1px solid #0f172a;
+  }
+
+  .btn-primary:hover {
+    background-color: #1e293b;
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+  }
+
+  .btn-outline:hover {
+    background-color: #f8fafc;
+  }
+
+  .btn-lg {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+
+  /* Hero Image / Screenshot */
+  .hero-image {
+    position: relative;
+  }
+
+  .screenshot-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid #e2e8f0;
+    background: #fff;
+  }
+
+  .screenshot {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  /* Features */
+  .features-section {
+    padding: 6rem 0;
+    background: #f8fafc;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 4rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .feature-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    background: #f1f5f9;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .feature-card p {
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  /* Installation */
+  .install-section {
+    padding: 6rem 0;
+    background: #ffffff;
+  }
+
+  .install-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .step-card {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+  }
+
+  .step-number {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: #0f172a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 0.875rem;
+  }
+
+  .step-content h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .text-muted-small {
+    color: #64748b;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 8rem 0;
+  }
+
+  .cta-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 24px;
+    padding: 4rem 2rem;
+    text-align: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta-card h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+  }
+
+  .cta-card p {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2.5rem;
+  }
+
+  @media (max-width: 968px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-actions {
+      justify-content: center;
+    }
+
+    .hero-section {
+      padding: 6rem 0 3rem;
+    }
+  }
+</style>
+
+<script define:vars={{ i18n }}>
+  const elements = {
+    heroTitle: document.getElementById('hero-title'),
+    heroSubtitle: document.getElementById('hero-subtitle'),
+    heroDownload: document.getElementById('hero-download'),
+    heroGithub: document.getElementById('hero-github'),
+    featuresTitle: document.getElementById('features-title'),
+    installTitle: document.getElementById('install-title'),
+    ctaTitle: document.getElementById('cta-title'),
+    ctaDescription: document.getElementById('cta-description'),
+    ctaButton: document.getElementById('cta-button')
+  };
+
+  function updateLang(lang) {
+    const data = i18n[lang];
+    if (!data) return;
+    
+    // Update text content
+    if (elements.heroTitle) elements.heroTitle.textContent = data.hero.title;
+    if (elements.heroSubtitle) elements.heroSubtitle.textContent = data.hero.subtitle;
+    
+    // Update buttons with icons
+    if (elements.heroDownload) {
+      elements.heroDownload.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        ${data.hero.download}
+      `;
+    }
+    
+    if (elements.heroGithub) {
+      elements.heroGithub.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        ${data.hero.viewGithub}
+      `;
+    }
+
+    if (elements.featuresTitle) elements.featuresTitle.textContent = data.features.title;
+    
+    // Update features
+    data.features.items.forEach((item, index) => {
+      const titleEl = document.getElementById(`feature-title-${index}`);
+      const descEl = document.getElementById(`feature-desc-${index}`);
+      if (titleEl) titleEl.textContent = item.title;
+      if (descEl) descEl.textContent = item.description;
+    });
+
+    if (elements.installTitle) elements.installTitle.textContent = data.install.title;
+
+    // Update install steps
+    data.install.steps.forEach((step, index) => {
+      const titleEl = document.getElementById(`step-title-${index}`);
+      const descEl = document.getElementById(`step-desc-${index}`);
+      if (titleEl) titleEl.textContent = step.title;
+      if (descEl) descEl.textContent = step.description;
+    });
+
+    if (elements.ctaTitle) elements.ctaTitle.textContent = data.cta.title;
+    if (elements.ctaDescription) elements.ctaDescription.textContent = data.cta.description;
+    if (elements.ctaButton) {
+      elements.ctaButton.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><line x1="21.17" y1="8" x2="12" y2="8"/><line x1="3.95" y1="6.06" x2="8.54" y2="14"/><line x1="10.88" y1="21.94" x2="15.46" y2="14"/></svg>
+        ${data.cta.button}
+      `;
+    }
+  }
+
+  // Listen for language change events
+  window.addEventListener('langChanged', (e) => {
+    updateLang(e.detail.lang);
+  });
+
+  // Check for initial language
+  const currentLang = localStorage.getItem('preferred-lang') || 'es';
+  updateLang(currentLang);
+</script>
