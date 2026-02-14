@@ -3,13 +3,7 @@ import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/u
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
-
-interface Props {
-  title: string;
-}
-
-const { title } = Astro.props;
+const translatePath = useTranslatedPath();
 
 const slides = [
   {
