@@ -15,70 +15,79 @@ import NewsletterSection from '../components/NewsletterSection.astro';
 import BlogSection from '../components/BlogSection.astro';
 import NewsletterNotification from '../components/NewsletterNotification.astro';
 
+import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath();
+
 const stats = [
-  { value: 60, label: 'Aplicaciones y Herramientas', suffix: '+' },
-  { value: 100, label: 'Usuarios Satisfechos', suffix: '%' },
+  { value: 60, label: t('stats.apps'), suffix: '+' },
+  { value: 100, label: t('stats.users'), suffix: '%' },
 ];
 
 const appProducts = apps.map(a => ({
   icon: a.icon,
   name: a.name,
-  description: a.description,
+  description: a.description[lang],
   link: a.link,
-  notice: a.notice
+  notice: a.notice ? {
+    type: a.notice.type,
+    message: a.notice.message[lang]
+  } : undefined
 }));
 
 const saasProducts = saas.map(s => ({
   icon: s.icon,
   name: s.name,
-  description: s.description,
+  description: s.description[lang],
   link: s.link
 }));
 ---
 
-<Layout title="Inled Group - Dream, build" description="Inled Group es una marca de software pionera en el desarrollo con agentes de inteligencia artificial y tecnologías libres. En Inled construimos el software que todos han soñado, por ello nuestro lema es Dream, build.">
+<Layout title="Inled Group - Dream, build" description={t('scroll.description')}>
   <AudioModal />
   <Header />
-  <Hero title="Dream, build" />
+  <Hero title={t('hero.title')} />
   <ScrollSection
-    title="Hacemos el software de tus sueños"
-    description="Inled Group es una marca de software pionera en el desarrollo con agentes de inteligencia artificial y tecnologías libres. En Inled construimos el software que todos han soñado, por ello nuestro lema es Dream, build.">
+    title={t('scroll.title')}
+    description={t('scroll.description')}>
     <StatsCounter stats={stats} />
   </ScrollSection>
 
   <HeroCTA
-    title="¿Listo para descubrir un mundo de posibilidades?"
-    description="Explora nuestros servicios gratuitos en línea o nuestras apps de escritorio."
-    primaryButtonText="Ver Proyectos Online"
-    secondaryButtonText="Descubrir Apps"
+    title={t('cta.title')}
+    description={t('cta.description')}
+    primaryButtonText={t('cta.primary')}
+    secondaryButtonText={t('cta.secondary')}
     primaryButtonHref="/proyectos"
     secondaryButtonHref="#apps"
   />
   <FeatureSection
-    title="Edge AI ya accesible!"
-    description="La mejor alternativa local, privada y gratuita a ChatGPT, Perplexity y NotebookLM"
+    title={t('feature.edge.title')}
+    description={t('feature.edge.description')}
     imageSrc="https://hosted.inled.es/edgeai.png"
-    buttonText="¡Quiero acceder!"
+    buttonText={t('feature.edge.button')}
     buttonHref="https://edge.inled.es/landing"
     reversed={true}
   />
 
   <FeatureSection
-    title="Inteligencia Artificial libre, local y privada"
-    description="Somos pioneros en desarrollar servicios de IA local, agéntica y privada que funciona en tu ordenador y cuyas conversaciones permanecen en él.."
+    title={t('feature.ai.title')}
+    description={t('feature.ai.description')}
     imageSrc="https://hosted.inled.es/ainclouddeco.png"
-    buttonText="Conocer InledAI"
+    buttonText={t('feature.ai.button')}
     buttonHref="https://ai.inled.es"
   />
 
   
 
   <div id="saas">
-    <ProductsGrid title="Servicios en Línea (SaaS)" products={saasProducts} />
+    <ProductsGrid title={t('grid.saas')} products={saasProducts} />
   </div>
 
   <div id="apps">
-    <ProductsGrid title="Nuestras Aplicaciones" products={appProducts} />
+    <ProductsGrid title={t('grid.apps')} products={appProducts} />
   </div>
 
   <BlogSection />

@@ -2,6 +2,9 @@
 import PageTransition from '../components/PageTransition.astro';
 import Footer from '../components/Footer.astro';
 import AnnouncementBanner from '../components/AnnouncementBanner.astro';
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
 
 interface Props {
   title: string;
@@ -12,7 +15,7 @@ const { title, description = "Inled Group" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <link rel="icon" href="https://hosted.inled.es/cropped-INLED_simple-removebg-preview.png" type="image/x-icon">
     <meta charset="UTF-8" />

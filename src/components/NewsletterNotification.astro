@@ -1,4 +1,8 @@
 ---
+import { getLangFromLocals, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <div id="newsletter-notification" class="notification-container">
@@ -9,7 +13,7 @@
     </svg>
   </button>
   <div class="iframe-container">
-    <iframe src="/newsletter-frame" title="Newsletter Subscription" frameborder="0" scrolling="no"></iframe>
+    <iframe src={translatePath('/newsletter-frame')} title="Newsletter Subscription" frameborder="0" scrolling="no"></iframe>
   </div>
 </div>
 

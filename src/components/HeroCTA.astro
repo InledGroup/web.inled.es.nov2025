@@ -1,4 +1,9 @@
 ---
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+
 interface Props {
   title: string;
   description: string;
@@ -11,8 +16,8 @@ interface Props {
 const {
   title,
   description,
-  primaryButtonText = 'Comenzar',
-  secondaryButtonText = 'Contactar',
+  primaryButtonText = t('cta.defaultPrimary'),
+  secondaryButtonText = t('cta.defaultSecondary'),
   primaryButtonHref = '#',
   secondaryButtonHref = '#'
 } = Astro.props;

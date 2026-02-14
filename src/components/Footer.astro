@@ -1,4 +1,9 @@
 ---
+import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <footer>
@@ -8,8 +13,8 @@
     </div>
 
     <nav class="footer-links">
-      <a href="/privacy-policy">Política de Privacidad</a>
-      <a href="/cookie-policy">Política de Cookies</a>
+      <a href={translatePath('/privacy-policy')}>{t('footer.privacy')}</a>
+      <a href={translatePath('/cookie-policy')}>{t('footer.cookies')}</a>
     </nav>
     <div class="footer-social">
       <a href="https://github.com/InledGroup" target="_blank" rel="noopener" aria-label="GitHub">
@@ -27,7 +32,7 @@
       </div>
 
     <div class="footer-copyright">
-      <p>Inled Group es una marca registrada (R)  {new Date().getFullYear()}. Esta web está licenciada bajo GNU GPLv3.0</p>
+      <p>{t('footer.copy').replace('{year}', new Date().getFullYear().toString())}</p>
     </div>
     </div>
   </footer>

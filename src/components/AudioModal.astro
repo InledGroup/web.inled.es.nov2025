@@ -1,13 +1,17 @@
 ---
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
 ---
 
 <div id="audio-modal" class="modal-overlay">
   <div class="modal-content">
-    <h2>Bienvenido a Inled Group</h2>
-    <p>Le presentamos nuestro nuevo sitio web.</p>
-    <p>Estamos haciendo trabajos de migración por lo que puede que no encuentre algunas páginas.</p>
-    <p>Le recordamos que utilizamos cookies y herramientas de analítica. Respetamos su privacidad y no recopilamos datos relacionados con usted.</p>
-    <button id="activate-audio" class="activate-btn">Continuar</button>
+    <h2>{t('audioModal.title')}</h2>
+    <p>{t('audioModal.subtitle')}</p>
+    <p>{t('audioModal.migration')}</p>
+    <p>{t('audioModal.privacy')}</p>
+    <button id="activate-audio" class="activate-btn">{t('audioModal.button')}</button>
   </div>
 </div>
 

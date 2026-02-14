@@ -1,4 +1,10 @@
 ---
+import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
 interface Props {
   title: string;
 }
@@ -8,10 +14,10 @@ const { title } = Astro.props;
 const slides = [
   {
     id: 1,
-    title: "Edge AI",
-    subtitle: "La mejor alternativa privada, de ejecución en local y gratuita a ChatGPT, Perplexity y NotebookLM",
+    title: t('hero.slide1.title'),
+    subtitle: t('hero.slide1.subtitle'),
     link: "https://edge.inled.es/landing",
-    linkText: "Úsalo ahora gratis",
+    linkText: t('hero.slide1.linkText'),
     background: {
       type: "image",
       src: "https://hosted.inled.es/ainclouddeco.png",
@@ -19,27 +25,15 @@ const slides = [
   },
   {
     id: 2,
-    title: "Dream, Build",
-    subtitle: "Construimos el software de tus sueños",
-    link: "/proyectos",
-    linkText: "Descubre",
+    title: t('hero.slide2.title'),
+    subtitle: t('hero.slide2.subtitle'),
+    link: translatePath("/proyectos"),
+    linkText: t('hero.slide2.linkText'),
     background: {
       type: "image", // "image" o "video"
       src: "https://hosted.inled.es/better.inled.svg",
     },
   },
-  /*{
-    id: 2,
-    title: "Nuevo Swiftinstall",
-    subtitle: "Instala, desinstala, corrige errores, busca virus",
-    link: "https://inled.es/apps/swiftinstall",
-    linkText: "Descarga",
-    background: {
-      type: "video",
-      src: "/hero-video.mp4" // Cambia esta ruta por tu video
-    }
-  },*/
-  
 ];
 ---
 
@@ -102,7 +96,7 @@ const slides = [
   </div>
 
   <div class="custom-cursor" id="customCursor">
-    <span class="cursor-text">Descubrir</span>
+    <span class="cursor-text">{t('hero.cursor')}</span>
   </div>
 </section>
 

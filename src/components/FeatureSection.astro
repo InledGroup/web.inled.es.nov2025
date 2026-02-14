@@ -1,4 +1,9 @@
 ---
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+
 interface Props {
   title: string;
   description: string;
@@ -13,8 +18,8 @@ const {
   title, 
   description, 
   imageSrc, 
-  imageAlt = "Feature image", 
-  buttonText = "Más información", 
+  imageAlt = t('feature.imageAlt'), 
+  buttonText = t('feature.moreInfo'), 
   buttonHref = "#", 
   reversed = false 
 } = Astro.props;

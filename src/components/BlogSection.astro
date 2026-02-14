@@ -1,5 +1,10 @@
 ---
 import { getPosts, formatDate } from '../lib/blogger';
+import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 
 const posts = await getPosts();
 const latestPosts = posts.slice(0, 3);
@@ -8,8 +13,8 @@ const latestPosts = posts.slice(0, 3);
 <section class="blog-section">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Últimas Novedades</h2>
-      <a href="/blog" class="view-all">Ver todo el blog →</a>
+      <h2 class="section-title">{t('blog.title')}</h2>
+      <a href={translatePath('/blog')} class="view-all">{t('blog.viewAll')}</a>
     </div>
 
     <div class="posts-grid">

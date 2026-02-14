@@ -1,4 +1,9 @@
 ---
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+
 interface Product {
   icon: string;
   name: string;
@@ -47,7 +52,7 @@ const { title, subtitle, products } = Astro.props;
           </div>
           <p class="product-description">{product.description}</p>
           <div class="product-link-hover">
-            Explorar →
+            {t('grid.explore')} →
           </div>
         </a>
       ))}

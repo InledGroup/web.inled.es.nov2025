@@ -1,438 +1,377 @@
 ---
 import { apps } from '../config/apps';
 import { saas } from '../config/saas';
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
 ---
 
-<header>
-  <a href="/"> <img class="logo"  src="https://hosted.inled.es/inled-logo-full.png"></a> 
+<div class="floating-header-container">
+  <header class="taskbar">
+    <a href="/" class="taskbar-item logo-item" aria-label="Home">
+      <img src="https://hosted.inled.es/INLED_simple-removebg-preview.png" alt="Inled Logo">
+    </a>
 
-  <nav class="nav-links">
-    <div class="dropdown">
-      <button class="dropdown-toggle">
-        SaaS
-        <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+    <div class="taskbar-divider"></div>
+
+    <div class="apps-grid-container">
+      <button class="taskbar-item apps-grid-toggle" aria-label="Apps Menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
       </button>
-      <div class="dropdown-menu">
-        {saas.map((item) => (
-          <a href={item.link} class="dropdown-item">
-            <span class="item-name">{item.name}</span>
-            <span class="item-description">{item.description}</span>
-          </a>
-        ))}
+      
+      <div class="apps-grid-overlay" data-lenis-prevent>
+        <div class="apps-grid-content">
+          <div class="grid-section">
+            <h3>{t('grid.saas')}</h3>
+            <div class="grid-items">
+              {saas.map((item) => (
+                <a href={item.link} class="grid-item">
+                  <div class="grid-item-icon">
+                    <img src={item.icon} alt={item.name} loading="lazy" />
+                  </div>
+                  <span class="grid-item-name">{item.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div class="grid-divider"></div>
+
+          <div class="grid-section">
+            <h3>{t('grid.apps')}</h3>
+            <div class="grid-items">
+              {apps.map((app) => (
+                <a href={app.link} class="grid-item">
+                  <div class="grid-item-icon">
+                    <img src={app.icon} alt={app.name} loading="lazy" />
+                  </div>
+                  <span class="grid-item-name">{app.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="dropdown">
-      <button class="dropdown-toggle">
-        Apps
-        <svg class="dropdown-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </button>
-      <div class="dropdown-menu">
-        {apps.map((app) => (
-          <a href={app.link} class="dropdown-item">
-            <span class="item-name">{app.name}</span>
-            <span class="item-description">{app.description}</span>
-          </a>
-        ))}
-      </div>
+    <div class="taskbar-divider"></div>
+
+    <div class="lang-selector-container">
+        <button class="taskbar-item lang-toggle" aria-label="Change Language">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+        </button>
+        <div class="lang-menu">
+            <button class={`lang-btn ${lang === 'es' ? 'active' : ''}`} data-lang="es">Español</button>
+            <button class={`lang-btn ${lang === 'en' ? 'active' : ''}`} data-lang="en">English</button>
+        </div>
     </div>
 
-  </nav>
-
-  <div class="header-actions">
-    <div class="lang-selector">
-      <button class="lang-btn active" data-lang="es">ES</button>
-      <button class="lang-btn" data-lang="en">EN</button>
-    </div>
-    <a class="cta-button" href="/contacto" style="text-decoration: none;">Contacto</a>
-  </div>
-
-  <button class="mobile-menu-toggle" aria-label="Toggle menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-</header>
+    <a href="/contacto" class="taskbar-item contact-item" aria-label={t('nav.contact')}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    </a>
+  </header>
+</div>
 
 <style>
-  header {
+  .floating-header-container {
     position: fixed;
-    top: 0;
+    top: 1.5rem;
     left: 0;
     right: 0;
-    z-index: 1000;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 3rem;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+    justify-content: center;
+    z-index: 2000;
+    pointer-events: none;
   }
 
-  .logo {
-    display: inline-flex;
+  .taskbar {
+    display: flex;
     align-items: center;
     gap: 0.5rem;
-    height: var(--logo-height, 48px); /* ajusta aquí la altura deseada */
-    font-weight: 700;
-    color: white;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    line-height: 0; /* para que una <img> dentro escale sin espacio extra */
+    padding: 0.5rem;
+    background: rgba(20, 20, 25, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    pointer-events: auto;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  .nav-links {
+  .taskbar:hover {
+    background: rgba(25, 25, 30, 0.85);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.02);
+  }
+
+  .taskbar-item {
     display: flex;
     align-items: center;
-    gap: 2rem;
-  }
-
-  .nav-links a {
-    color: white;
-    transition: color 0.3s ease;
-  }
-
-  .nav-links a:hover {
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  /* Dropdown */
-  .dropdown {
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.85);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
     position: relative;
   }
 
-  .dropdown-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 0.5rem;
-    transition: color 0.3s ease;
+  .taskbar-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    transform: translateY(-4px);
   }
 
-  .dropdown-toggle:hover {
-    color: rgba(255, 255, 255, 0.7);
+  .taskbar-item svg {
+    transition: transform 0.2s ease;
   }
 
-  .dropdown-icon {
-    transition: transform 0.3s ease;
+  .taskbar-item:hover svg {
+    transform: scale(1.1);
   }
 
-  .dropdown:hover .dropdown-icon {
-    transform: rotate(180deg);
+  .logo-item {
+    padding: 6px;
   }
 
-  .dropdown-menu {
+  .logo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .taskbar-divider {
+    width: 1px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 4px;
+  }
+
+  /* Apps Grid Overlay */
+  .apps-grid-container {
+    position: relative;
+  }
+
+  .apps-grid-overlay {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 1rem);
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 1rem;
-    background: rgba(10, 10, 20, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 0.75rem;
-    min-width: 320px;
+    background: rgba(20, 20, 25, 0.98);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    width: 380px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, margin-top 0.3s ease;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    z-index: 2001;
+    scrollbar-width: none;
   }
 
-  .dropdown:hover .dropdown-menu {
+  .apps-grid-overlay::-webkit-scrollbar {
+    display: none;
+  }
+
+  .apps-grid-container.open .apps-grid-overlay {
     opacity: 1;
     visibility: visible;
-    margin-top: 0.5rem;
+    transform: translateX(-50%) translateY(0);
   }
 
-  .dropdown-item {
+  .apps-grid-content {
+    padding: 1.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .grid-section h3 {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .grid-items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+
+  .grid-item {
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
-    padding: 1rem;
-    border-radius: 8px;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.25rem;
+    border-radius: 16px;
     text-decoration: none;
-    transition: background 0.3s ease;
+    transition: all 0.2s ease;
+    text-align: center;
   }
 
-  .dropdown-item:hover {
-    background: rgba(255, 255, 255, 0.05);
+  .grid-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-2px);
   }
 
-  .item-name {
-    color: white;
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .item-description {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 0.875rem;
-  }
-
-  .header-actions {
+  .grid-item-icon {
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
   }
 
-  .lang-selector {
-    display: flex;
-    gap: 0.5rem;
+  .grid-item-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .grid-item-name {
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 500;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .grid-divider {
+    height: 1px;
     background: rgba(255, 255, 255, 0.1);
-    padding: 0.25rem;
-    border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin: 1.25rem 0;
+  }
+
+  /* Lang Selector */
+  .lang-selector-container {
+    position: relative;
+  }
+
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(25, 25, 30, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    padding: 0.5rem;
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .lang-selector-container.open .lang-menu {
+    opacity: 1;
+    visibility: visible;
   }
 
   .lang-btn {
     background: transparent;
     border: none;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
+    color: rgba(255, 255, 255, 0.7);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
     cursor: pointer;
-    padding: 0.4rem 0.8rem;
-    border-radius: 50px;
-    transition: all 0.3s ease;
+    text-align: left;
+    transition: all 0.2s ease;
+  }
+
+  .lang-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
   }
 
   .lang-btn.active {
-    background: white;
-    color: black;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-weight: 600;
   }
 
-  .cta-button {
-    position: relative;
-    padding: 0.75rem 2rem;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 50px;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    overflow: hidden;
-    transition: color 0.4s ease;
-    z-index: 1;
-  }
-
-  .cta-button::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
-    z-index: -1;
-  }
-
-  .cta-button:hover::before {
-    width: 300px;
-    height: 300px;
-  }
-
-  .cta-button:hover {
-    color: white;
-    border-color: white;
-  }
-
-  .mobile-menu-toggle {
-    display: none;
-    flex-direction: column;
-    gap: 0.35rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-  }
-
-  .mobile-menu-toggle span {
-    width: 24px;
-    height: 2px;
-    background: white;
-    transition: all 0.3s ease;
-  }
-
-  @media (max-width: 1024px) {
-    .nav-links {
-      gap: 1.5rem;
+  @media (max-width: 480px) {
+    .taskbar {
+        gap: 0.25rem;
     }
-
-    .dropdown-menu {
-      min-width: 280px;
+    .apps-grid-overlay {
+        width: 300px;
+        grid-template-columns: repeat(2, 1fr);
     }
-  }
-
-  @media (max-width: 768px) {
-    header {
-      padding: 1rem 1.5rem;
-    }
-
-    .logo {
-      font-size: 1.2rem;
-    }
-
-    .nav-links {
-      position: fixed;
-      top: 70px;
-      left: 0;
-      right: 0;
-      flex-direction: column;
-      gap: 0;
-      background: rgba(10, 10, 20, 0.98);
-      backdrop-filter: blur(20px);
-      padding: 1.5rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      max-height: calc(100vh - 70px);
-      overflow-y: auto;
-    }
-
-    .nav-links.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .nav-links a {
-      padding: 1rem;
-      width: 100%;
-      text-align: center;
-    }
-
-    .dropdown {
-      width: 100%;
-    }
-
-    .dropdown-toggle {
-      width: 100%;
-      justify-content: center;
-      padding: 1rem;
-    }
-
-    .dropdown-menu {
-      position: static;
-      transform: none;
-      display: none;
-      opacity: 1;
-      visibility: visible;
-      margin-top: 0;
-      width: 100%;
-      padding: 0;
-      border: none;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    .dropdown.open .dropdown-menu {
-      display: block;
-      padding: 0.75rem;
-      margin-top: 0.5rem;
-    }
-
-    .dropdown:hover .dropdown-menu {
-      /* Disable hover effect on mobile */
-      display: none;
-    }
-    
-    .dropdown.open:hover .dropdown-menu {
-       display: block;
-    }
-    
-    /* Re-enable hover for desktop if needed, or keep click-only for consistency across touch devices */
-    
-    .dropdown.open .dropdown-icon {
-      transform: rotate(180deg);
-    }
-
-    .mobile-menu-toggle {
-      display: flex;
-    }
-
-    .cta-button {
-      padding: 0.6rem 1.5rem;
-      font-size: 0.9rem;
+    .grid-items {
+        grid-template-columns: repeat(3, 1fr);
     }
   }
 </style>
 
 <script>
-  // Toggle mobile menu
-  const mobileToggle = document.querySelector('.mobile-menu-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+  const appsGridContainer = document.querySelector('.apps-grid-container');
+  const appsGridToggle = document.querySelector('.apps-grid-toggle');
+  const langSelectorContainer = document.querySelector('.lang-selector-container');
+  const langToggle = document.querySelector('.lang-toggle');
+  const langBtns = document.querySelectorAll('.lang-btn');
 
-  mobileToggle?.addEventListener('click', () => {
-    navLinks?.classList.toggle('active');
+  // Apps Menu Toggle
+  appsGridToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langSelectorContainer?.classList.remove('open');
+    appsGridContainer?.classList.toggle('open');
   });
 
-  // Toggle dropdowns on click (especially for mobile)
-  dropdownToggles.forEach(toggle => {
-    toggle.addEventListener('click', (e) => {
-      // Prevent event bubbling if necessary, though mostly we want to stop immediate closing
-      e.stopPropagation();
-      
-      const parent = toggle.closest('.dropdown');
-      if (parent) {
-        // Close other dropdowns if needed (optional behavior)
-        document.querySelectorAll('.dropdown.open').forEach(d => {
-          if (d !== parent) d.classList.remove('open');
-        });
-        
-        parent.classList.toggle('open');
-      }
-    });
+  // Lang Menu Toggle
+  langToggle?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    appsGridContainer?.classList.remove('open');
+    langSelectorContainer?.classList.toggle('open');
   });
 
   // Language selector logic
-  const langBtns = document.querySelectorAll('.lang-btn');
-  
   function setLanguage(lang: string) {
-    langBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-    });
+    document.cookie = `preferred-lang=${lang}; path=/; max-age=${60*60*24*365}; SameSite=Lax`;
     localStorage.setItem('preferred-lang', lang);
-    window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang } }));
+    window.location.reload();
   }
 
   langBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const lang = btn.getAttribute('data-lang');
+    btn.addEventListener('click', (e) => {
+      const target = e.currentTarget as HTMLElement;
+      const lang = target.getAttribute('data-lang');
       if (lang) setLanguage(lang);
     });
   });
 
-  // Init language
-  const savedLang = localStorage.getItem('preferred-lang') || 'es';
-  setLanguage(savedLang);
-
-  // Close mobile menu when clicking outside
+  // Close when clicking outside
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     
-    // Close dropdowns if clicking outside
-    if (!target.closest('.dropdown')) {
-        document.querySelectorAll('.dropdown.open').forEach(d => {
-            d.classList.remove('open');
-        });
+    if (!target.closest('.apps-grid-container')) {
+      appsGridContainer?.classList.remove('open');
     }
-
-    if (!target.closest('header')) {
-      navLinks?.classList.remove('active');
+    if (!target.closest('.lang-selector-container')) {
+      langSelectorContainer?.classList.remove('open');
     }
   });
 </script>
