@@ -351,5 +351,24 @@ export const appsData: AppData[] = [
       "type": "info",
       "message": "Próximamente disponible una actualización con traducción de la interfaz al inglés."
     }
+  },
+  {
+    "id": "tabnest",
+    "title": "TabNest",
+    "icon": "https://hosted.inled.es/tabnest.png",
+    "platform": [
+      "Chrome",
+      "Edge",
+      "Firefox"
+    ],
+    "shortDescription": "Tu centro de control personal en cada nueva pestaña: TV, radio y noticias.",
+    "description": "# TabNest\n\nTabNest no es solo un inicio; es tu centro de control personal. TV en vivo, radio, noticias en tiempo real y todos tus marcadores bajo una estética de cristal profesional.\n\n### Características Principales\n\n- **TV en Directo**: Accede a cientos de canales de TDT directamente desde tu pestaña.\n- **Radio Online**: Tus emisoras favoritas siempre a un clic.\n- **Feed de Noticias**: Scroll infinito con las últimas noticias de los principales medios.\n- **Super Marcadores**: Organiza tu web con carpetas de colores y emojis.\n- **Diseño Fluent**: Fondos dinámicos, rotación automática y efectos de transparencia.\n- **100% Privado**: Sin servidores externos. Tus datos se guardan localmente.",
+    "screenshots": [],
+    "video": "",
+    "downloads": {
+      "github": "https://github.com/InledGroup/tabnest",
+      "sourceforge": "",
+      "sourceCode": "https://github.com/InledGroup/tabnest"
+    }
   }
 ];

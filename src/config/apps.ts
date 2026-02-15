@@ -17,6 +17,16 @@ export interface App {
 }
 
 export const apps: App[] = [
+    {
+    id: 'tabnest',
+    name: 'TabNest',
+    description: {
+      es: 'Tu centro de control personal en cada nueva pestaña: TV, radio y noticias.',
+      en: 'Your personal control center in every new tab: TV, radio, and news.'
+    },
+    icon: 'https://hosted.inled.es/tabnest.png',
+    link: '/apps/tabnest'
+  },
   {
     id: 'bastion',
     name: 'Bastion Browser',
@@ -237,4 +247,5 @@ export const apps: App[] = [
     icon: 'https://hosted.inled.es/memory-warn-logo.png',
     link: '/apps/memorywarn'
   },
+
 ];
