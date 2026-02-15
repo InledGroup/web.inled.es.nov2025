@@ -7,7 +7,9 @@ import { marked } from 'marked';
 export const prerender = true;
 
 export async function getStaticPaths() {
-  return appsData.map(app => ({
+  return appsData
+    .filter(app => app.id !== 'tabnest' && app.id !== 'demo')
+    .map(app => ({
     params: { id: app.id },
     props: { app },
   }));
