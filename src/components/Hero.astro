@@ -17,7 +17,7 @@ const slides = [
       src: "https://hosted.inled.es/ainclouddeco.png",
     },
   },
-  {
+  /*{
     id: 2,
     title: t('hero.slide2.title'),
     subtitle: t('hero.slide2.subtitle'),
@@ -26,6 +26,17 @@ const slides = [
     background: {
       type: "image", // "image" o "video"
       src: "https://hosted.inled.es/better.inled.svg",
+    },
+  },*/
+  {
+    id: 3,
+    title: t('hero.slide3.title'),
+    subtitle: t('hero.slide3.subtitle'),
+    link: translatePath("/apps/tabnest"),
+    linkText: t('hero.slide3.linkText'),
+    background: {
+      type: "video", // "image" o "video"
+      src: "https://hosted.inled.es/tabnestbgdemo.mp4",
     },
   },
 ];
@@ -834,9 +845,10 @@ const slides = [
   ) as NodeListOf<HTMLVideoElement>;
 
   playCurrentSlideVideo = () => {
-    videos.forEach((video, index) => {
-      if (index === currentSlide) {
-        video.currentTime = 0; // Reiniciar desde el inicio
+    videos.forEach((video) => {
+      const slideIndex = parseInt(video.getAttribute("data-slide-index") || "0");
+      if (slideIndex === currentSlide) {
+        video.muted = true; // Asegurar que esté silenciado para el autoplay
         video.play().catch((error) => {
           console.log("Video autoplay prevented:", error);
         });
