@@ -1,18 +1,27 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Header from '../../components/Header.astro';
-import { appsData } from '../../config/apps_full';
-import { marked } from 'marked';
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import { appsData } from "../../config/apps_full";
+import { marked } from "marked";
 
 export const prerender = true;
 
 export async function getStaticPaths() {
+  const excludedIds = [
+    "tabnest",
+    "demo",
+    "cleany",
+    "moodlenotifier",
+    "swiftinstall",
+    "appinstall",
+  ];
+
   return appsData
-    .filter(app => app.id !== 'tabnest' && app.id !== 'demo')
-    .map(app => ({
-    params: { id: app.id },
-    props: { app },
-  }));
+    .filter((app) => !excludedIds.includes(app.id))
+    .map((app) => ({
+      params: { id: app.id },
+      props: { app },
+    }));
 }
 
 const { app } = Astro.props;
@@ -21,7 +30,7 @@ const content = await marked.parse(app.description);
 
 <Layout title={`${app.title} - Inled Apps`} description={app.shortDescription}>
   <Header />
-  
+
   <div class="app-page">
     <div class="app-header">
       <div class="container header-content">
@@ -31,39 +40,75 @@ const content = await marked.parse(app.description);
         <div class="app-info">
           <h1>{app.title}</h1>
           <p class="short-desc">{app.shortDescription}</p>
-          
-          {app.notice && (
-            <div class={`notice-banner ${app.notice.type}`}>
-              <div class="notice-icon">
-                {app.notice.type === 'warning' ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-                )}
+
+          {
+            app.notice && (
+              <div class={`notice-banner ${app.notice.type}`}>
+                <div class="notice-icon">
+                  {app.notice.type === "warning" ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
+                      <line x1="12" y1="9" x2="12" y2="13" />
+                      <line x1="12" y1="17" x2="12.01" y2="17" />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="12" y1="16" x2="12" y2="12" />
+                      <line x1="12" y1="8" x2="12.01" y2="8" />
+                    </svg>
+                  )}
+                </div>
+                <p>{app.notice.message}</p>
               </div>
-              <p>{app.notice.message}</p>
-            </div>
-          )}
+            )
+          }
 
           <div class="platforms">
-            {app.platform.map(p => <span class="badge">{p}</span>)}
+            {app.platform.map((p) => <span class="badge">{p}</span>)}
           </div>
           <div class="download-buttons">
-            {app.downloads.github && (
-              <a href={app.downloads.github} class="btn primary">
-                Descargar (GitHub)
-              </a>
-            )}
-             {app.downloads.sourceforge && (
-              <a href={app.downloads.sourceforge} class="btn secondary">
-                Descargar (SourceForge)
-              </a>
-            )}
-             {app.downloads.sourceCode && (
-              <a href={app.downloads.sourceCode} class="btn text">
-                Ver Código Fuente
-              </a>
-            )}
+            {
+              app.downloads.github && (
+                <a href={app.downloads.github} class="btn primary">
+                  Descargar (GitHub)
+                </a>
+              )
+            }
+            {
+              app.downloads.sourceforge && (
+                <a href={app.downloads.sourceforge} class="btn secondary">
+                  Descargar (SourceForge)
+                </a>
+              )
+            }
+            {
+              app.downloads.sourceCode && (
+                <a href={app.downloads.sourceCode} class="btn text">
+                  Ver Código Fuente
+                </a>
+              )
+            }
           </div>
         </div>
       </div>
@@ -72,32 +117,40 @@ const content = await marked.parse(app.description);
     <div class="container main-content">
       <div class="content-grid">
         <div class="description-column">
-             <div class="markdown-body" set:html={content} />
+          <div class="markdown-body" set:html={content} />
         </div>
-        
-        <div class="media-column">
-            {app.video && (
-                <div class="video-container">
-                    <iframe 
-                        src={app.video} 
-                        title="YouTube video player" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            )}
 
-            {app.screenshots && app.screenshots.length > 0 && (
-                <div class="screenshots">
-                    <h3>Capturas</h3>
-                    <div class="screenshot-grid">
-                        {app.screenshots.map(src => (
-                            <img src={src} alt={`Screenshot of ${app.title}`} loading="lazy" />
-                        ))}
-                    </div>
+        <div class="media-column">
+          {
+            app.video && (
+              <div class="video-container">
+                <iframe
+                  src={app.video}
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
+            )
+          }
+
+          {
+            app.screenshots && app.screenshots.length > 0 && (
+              <div class="screenshots">
+                <h3>Capturas</h3>
+                <div class="screenshot-grid">
+                  {app.screenshots.map((src) => (
+                    <img
+                      src={src}
+                      alt={`Screenshot of ${app.title}`}
+                      loading="lazy"
+                    />
+                  ))}
                 </div>
-            )}
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
@@ -115,13 +168,13 @@ const content = await marked.parse(app.description);
   }
 
   .app-page::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('https://hosted.inled.es/better.inled.svg');
+    background-image: url("https://hosted.inled.es/better.inled.svg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -159,7 +212,7 @@ const content = await marked.parse(app.description);
     width: 128px;
     height: 128px;
     border-radius: 24px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   }
 
   .app-info h1 {
@@ -257,7 +310,7 @@ const content = await marked.parse(app.description);
     color: rgba(255, 255, 255, 0.7);
     padding-left: 0;
   }
-  
+
   .btn.text:hover {
     color: white;
     text-decoration: underline;
@@ -295,11 +348,11 @@ const content = await marked.parse(app.description);
   }
 
   .markdown-body :global(pre) {
-    background: rgba(0,0,0,0.3);
+    background: rgba(0, 0, 0, 0.3);
     padding: 1rem;
     border-radius: 8px;
     overflow-x: auto;
-    border: 1px solid rgba(255,255,255,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .media-column {
@@ -314,7 +367,7 @@ const content = await marked.parse(app.description);
     height: 0;
     overflow: hidden;
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     background: black;
   }
 
@@ -341,7 +394,7 @@ const content = await marked.parse(app.description);
     width: 100%;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
   }
 
@@ -355,12 +408,13 @@ const content = await marked.parse(app.description);
       text-align: center;
       gap: 2rem;
     }
-    
+
     .short-desc {
       margin: 0 auto 1.5rem auto;
     }
 
-    .platforms, .download-buttons {
+    .platforms,
+    .download-buttons {
       justify-content: center;
     }
 
