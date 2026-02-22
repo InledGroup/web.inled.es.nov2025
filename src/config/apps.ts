@@ -17,6 +17,16 @@ export interface App {
 }
 
 export const apps: App[] = [
+   {
+    id: 'bautilus',
+    name: 'Bautilus',
+    description: {
+      es: 'Convierte tu navegador en un explorador de archivos estilo Nautilus (GNOME). Privado y todopoderoso.',
+      en: 'Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.'
+    },
+    icon: 'https://hosted.inled.es/bautilus.png',
+    link: '/apps/bautilus'
+  },
         {
         id: 'darkreaderpdf',
         name: 'Dark Reader PDF',
@@ -264,8 +274,24 @@ export const apps: App[] = [
       es: 'Advierte cuando el uso de memoria de su ordenador supera un umbral establecido.',
       en: 'Warns when your computer\'s memory usage exceeds a set threshold.'
     },
-        icon: 'https://hosted.inled.es/memory-warn-logo.png',
-        link: '/apps/memorywarn'
-      },
-
-    ];
+    icon: 'https://hosted.inled.es/memory-warn-logo.png',
+    link: '/apps/memorywarn'
+  },
+  {
+    id: 'bautilus',
+    name: 'Bautilus',
+    description: {
+      es: 'Convierte tu navegador en un explorador de archivos similar al Nautilus de GNOME. Privado y todopoderoso.',
+      en: 'Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.'
+    },
+    icon: 'https://hosted.inled.es/bautilus.png',
+    link: '/apps/bautilus',
+    notice: {
+      type: 'info',
+      message: {
+        es: 'Esta extensión se encuentra actualmente en fase Beta pública.',
+        en: 'This extension is currently in public Beta.'
+      }
+    }
+  },
+];

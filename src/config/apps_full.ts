@@ -20,6 +20,27 @@ export interface AppData {
 
 export const appsData: AppData[] = [
     {
+    "id": "bautilus",
+    "title": "Bautilus",
+    "icon": "https://hosted.inled.es/bautilus.png",
+    "platform": [
+      "Chrome",
+      "Edge",
+      "Brave"
+    ],
+    "shortDescription": "Convierte tu navegador en un explorador de archivos similar al Nautilus de GNOME.",
+    "description": "# Bautilus: El Explorador Todopoderoso\n\nBautilus es una extensión diseñada para aquellos que necesitan gestionar archivos locales y remotos con la misma comodidad que en su sistema operativo. Inspirado en Nautilus (GNOME), trae la potencia de un gestor de archivos nativo directamente a tu navegador.\n\n### Características Principales\n\n- **Visores Integrados**: Previsualiza imágenes, vídeos, PDFs, archivos ZIP, texto y código fuente sin salir de la extensión.\n- **Interfaz GNOME-like**: Una experiencia de usuario limpia, intuitiva y profesional basada en el diseño de GNOME.\n- **Privacidad Absoluta**: Todo el procesamiento se realiza localmente. Tus archivos no se suben a ningún servidor.\n- **Multiformato**: Soporte para los formatos más comunes de la web y el desarrollo.\n- **Navegador Todopoderoso**: Transforma una herramienta de navegación en una estación de trabajo completa.",
+    "screenshots": [
+      "https://hosted.inled.es/bautilus.png"
+    ],
+    "video": "",
+    "downloads": {
+      "github": "https://github.com/InledGroup/bautilus/releases/latest/",
+      "sourceforge": "",
+      "sourceCode": "https://github.com/InledGroup/bautilus"
+    }
+  },
+    {
     "id": "darkreaderpdf",
     "title": "Dark Reader PDF",
     "icon": "https://hosted.inled.es/darkreaderpdf.png",
@@ -392,5 +413,6 @@ export const appsData: AppData[] = [
       "sourceCode": "https://github.com/InledGroup/tabnest"
     }
   },
+
 
 ];
