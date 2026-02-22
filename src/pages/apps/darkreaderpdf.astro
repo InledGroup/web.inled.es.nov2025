@@ -1,0 +1,893 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+
+const app = {
+  id: "darkreaderpdf",
+  title: "Dark Reader PDF",
+  logo: "https://hosted.inled.es/darkreaderpdf.png",
+  demo: "https://hosted.inled.es/demo-dark-reader.png",
+  downloadUrl: "https://github.com/InledGroup/dark-reader-PDF/archive/refs/heads/main.zip",
+  githubUrl: "https://github.com/InledGroup/dark-reader-PDF"
+};
+
+const i18n = {
+  es: {
+    hero: {
+      title: "Lectura sin fatiga.",
+      subtitle: "Transforma cualquier PDF en Chrome al modo oscuro con un solo clic. Sin configuraciones complejas, solo comodidad visual.",
+      badge: "Extensión para Chrome"
+    },
+    privacy: {
+      title: "Tu privacidad es lo primero",
+      description: "Dark Reader PDF es una extensión privada. No recopilamos datos, no rastreamos tu actividad y funciona localmente en tu navegador."
+    },
+    steps: {
+      title: "Instalación y Uso",
+      use: {
+        title: "Cómo usarlo",
+        step1: "Abre cualquier archivo PDF directamente en tu navegador Chrome.",
+        step2: "Haz clic en el icono de Dark Reader PDF en tu barra de extensiones."
+      },
+      install: {
+        title: "Instalación (Modo Desarrollador)",
+        step1: "Descarga el archivo ZIP y descomprímelo en una carpeta local.",
+        step2: "Ve a chrome://extensions y activa el 'Modo de desarrollador' (arriba a la derecha).",
+        step3: "Haz clic en 'Cargar descomprimida' y selecciona la carpeta de la extensión."
+      }
+    },
+    cta: {
+      title: "Empieza a leer mejor hoy",
+      button: "Descargar Extensión",
+      github: "Ver Código Fuente"
+    }
+  },
+  en: {
+    hero: {
+      title: "Reading without fatigue.",
+      subtitle: "Transform any PDF in Chrome to dark mode with a single click. No complex settings, just visual comfort.",
+      badge: "Chrome Extension"
+    },
+    privacy: {
+      title: "Your privacy comes first",
+      description: "Dark Reader PDF is a private extension. We do not collect data, we do not track your activity, and it works locally in your browser."
+    },
+    steps: {
+      title: "Installation & Usage",
+      use: {
+        title: "How to use",
+        step1: "Open any PDF file directly in your Chrome browser.",
+        step2: "Click the Dark Reader PDF icon in your extensions bar."
+      },
+      install: {
+        title: "Installation (Developer Mode)",
+        step1: "Download the ZIP file and unzip it into a local folder.",
+        step2: "Go to chrome://extensions and enable 'Developer mode' (top right).",
+        step3: "Click on 'Load unpacked' and select the extension folder."
+      }
+    },
+    cta: {
+      title: "Start reading better today",
+      button: "Download Extension",
+      github: "View Source Code"
+    }
+  }
+};
+---
+
+<Layout title="Dark Reader PDF - Inled Apps" description="El modo oscuro definitivo para tus PDFs en el navegador.">
+  <div id="page-content" class="theme-light">
+    <Header />
+    
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container">
+          <div class="hero-content">
+            <div class="badge fade-in">{i18n.es.hero.badge}</div>
+            <h1 class="fade-in" id="hero-title">{i18n.es.hero.title}</h1>
+            <p class="fade-in delay-1" id="hero-subtitle">{i18n.es.hero.subtitle}</p>
+            
+            <div class="app-icon-wrapper fade-in delay-2">
+              <img src={app.logo} alt="Dark Reader PDF Logo" class="app-logo" />
+            </div>
+          </div>
+        </div>
+        
+        <div class="scroll-indicator">
+          <div class="mouse"></div>
+          <p>Scroll</p>
+        </div>
+      </section>
+
+      <!-- Mockup Section -->
+      <section class="mockup-section" id="mockup-trigger">
+        <div class="container">
+          <div class="mockup-wrapper">
+            <div class="macbook">
+              <div class="mac-lid" id="laptop-lid">
+                <div class="mac-screen">
+                  <img src={app.demo} alt="Dark Reader PDF Demo" />
+                </div>
+              </div>
+              <div class="mac-base"></div>
+            </div>
+          </div>
+          
+          <div class="privacy-box fade-up">
+            <div class="privacy-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h2 id="privacy-title">{i18n.es.privacy.title}</h2>
+            <p id="privacy-description">{i18n.es.privacy.description}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Steps Section -->
+      <section class="steps-section">
+        <div class="container">
+          <h2 class="section-title fade-up" id="steps-title">{i18n.es.steps.title}</h2>
+          
+          <div class="steps-grid">
+            <!-- How to use -->
+            <div class="steps-column fade-up">
+              <h3 id="use-title">{i18n.es.steps.use.title}</h3>
+              <div class="step-card">
+                <div class="step-num">1</div>
+                <p id="use-step1">{i18n.es.steps.use.step1}</p>
+              </div>
+              <div class="step-card">
+                <div class="step-num">2</div>
+                <p id="use-step2">{i18n.es.steps.use.step2}</p>
+              </div>
+            </div>
+
+            <!-- How to install -->
+            <div class="steps-column fade-up">
+              <h3 id="install-title">{i18n.es.steps.install.title}</h3>
+              <div class="step-card">
+                <div class="step-num">1</div>
+                <p id="install-step1">{i18n.es.steps.install.step1}</p>
+              </div>
+              <div class="step-card">
+                <div class="step-num">2</div>
+                <p id="install-step2">{i18n.es.steps.install.step2}</p>
+              </div>
+              <div class="step-card">
+                <div class="step-num">3</div>
+                <p id="install-step3">{i18n.es.steps.install.step3}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-content fade-up">
+            <h2 id="cta-title">{i18n.es.cta.title}</h2>
+            <div class="cta-buttons">
+              <a href={app.downloadUrl} class="btn-primary" id="cta-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                {i18n.es.cta.button}
+              </a>
+              <a href={app.githubUrl} class="btn-outline" id="github-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                {i18n.es.cta.github}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Background Gradient Overlay -->
+    <div class="scroll-gradient"></div>
+    <div class="scroll-aberration" id="global-aberration"></div>
+  </div>
+</Layout>
+
+<style is:global>
+  /* Base Reset & Theme handling */
+  #page-content {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --accent-color: #3b82f6;
+    --muted-color: #666666;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.8s cubic-bezier(0.4, 0, 0.2, 1), color 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+  }
+
+  body {
+    background-color: #ffffff !important;
+    transition: background-color 0.8s ease;
+  }
+
+  #page-content.theme-dark {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --muted-color: #a1a1a1;
+    --card-bg: rgba(20, 20, 20, 0.8);
+  }
+
+  .theme-dark-body {
+    background-color: #000000 !important;
+  }
+
+  #page-content :global(header) {
+    background: transparent !important;
+    backdrop-filter: blur(10px);
+    transition: color 0.8s ease;
+  }
+
+  #page-content.theme-light :global(header a),
+  #page-content.theme-light :global(header button) {
+    color: #000000 !important;
+  }
+
+  #page-content.theme-dark :global(header a),
+  #page-content.theme-dark :global(header button) {
+    color: #ffffff !important;
+  }
+
+  /* Lenis smooth scroll adjustments */
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+</style>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    padding-top: 80px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .theme-dark .badge {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  h1 {
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.04em;
+    position: relative;
+    color: var(--text-color);
+    transition: text-shadow 0.1s ease-out;
+  }
+
+  /* Aberración cromática mediante sombras */
+  .theme-light h1.aberration {
+    text-shadow: 
+      -2px 0 0 rgba(255, 0, 0, 0.4),
+      2px 0 0 rgba(0, 255, 255, 0.4);
+  }
+
+  .theme-dark h1.aberration {
+    text-shadow: 
+      -3px 0 0 rgba(255, 0, 255, 0.6),
+      3px 0 0 rgba(0, 255, 0, 0.6);
+  }
+
+  h1:hover {
+    text-shadow: 
+      -4px 0 0 rgba(255, 0, 0, 0.5),
+      4px 0 0 rgba(0, 255, 255, 0.5) !important;
+  }
+
+  .theme-dark h1:hover {
+    text-shadow: 
+      -5px 0 0 rgba(255, 0, 255, 0.7),
+      5px 0 0 rgba(0, 255, 0, 0.7) !important;
+  }
+
+  p {
+    font-size: clamp(1.125rem, 2vw, 1.5rem);
+    color: var(--muted-color);
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    line-height: 1.5;
+  }
+
+  .app-icon-wrapper {
+    position: relative;
+  }
+
+  .app-logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .app-logo:hover {
+    transform: scale(1.05) rotate(5deg);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.6;
+  }
+
+  .mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid var(--text-color);
+    border-radius: 14px;
+    position: relative;
+  }
+
+  .mouse::after {
+    content: "";
+    width: 4px;
+    height: 8px;
+    background: var(--text-color);
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: scroll 2s infinite;
+  }
+
+  @keyframes scroll {
+    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(15px); }
+  }
+
+  /* Mockup Section - Macbook Pro High Fidelity */
+  .mockup-section {
+    padding: 15rem 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .mockup-wrapper {
+    perspective: 2500px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto 10rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Macbook Pro Container */
+  .macbook {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    transform-style: preserve-3d;
+  }
+
+  /* Lid (Tapa) */
+  .mac-lid {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #1d1d1f; /* Space Grey */
+    border-radius: 12px 12px 0 0;
+    transform-origin: bottom;
+    transform: rotateX(-90deg);
+    transition: transform 0.1s linear;
+    z-index: 2;
+    padding: 1% 1% 0 1%;
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Screen Frame */
+  .mac-screen {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    border-radius: 8px 8px 0 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.05);
+  }
+
+  /* The Notch */
+  .mac-screen::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 18px;
+    background: #000;
+    border-radius: 0 0 8px 8px;
+    z-index: 10;
+  }
+
+  .mac-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.9;
+  }
+
+  /* Base */
+  .mac-base {
+    position: absolute;
+    bottom: -5%;
+    width: 110%;
+    height: 6%;
+    left: -5%;
+    background: linear-gradient(to bottom, #2d2d2f 0%, #1d1d1f 100%);
+    border-radius: 2px 2px 15px 15px;
+    z-index: 1;
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.5),
+      inset 0 2px 5px rgba(255, 255, 255, 0.1);
+  }
+
+  /* Trackpad Indentation */
+  .mac-base::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 0 0 10px 10px;
+  }
+
+  /* Global Scroll Aberration Layer */
+  .scroll-aberration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .scroll-aberration::before,
+  .scroll-aberration::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    background-image: inherit;
+  }
+
+  .theme-dark .scroll-aberration.active {
+    opacity: 0.15;
+  }
+
+  /* Privacy Box */
+  .privacy-box {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    padding: 4rem;
+    border-radius: 32px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.2);
+  }
+
+  .privacy-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--accent-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    margin: 0 auto 2rem;
+  }
+
+  .privacy-box h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .privacy-box p {
+    margin-bottom: 0;
+    font-size: 1.25rem;
+  }
+
+  /* Steps Section */
+  .steps-section {
+    padding: 10rem 0;
+    background: transparent;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .steps-column h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: var(--text-color);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.8;
+  }
+
+  .step-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .step-card:hover {
+    transform: translateX(10px);
+    border-color: var(--accent-color);
+  }
+
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-color);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 800;
+    flex-shrink: 0;
+    font-size: 1.125rem;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  }
+
+  .step-card p {
+    margin: 0;
+    font-size: 1.125rem;
+    color: var(--text-color);
+    text-align: left;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 10rem 0;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary, .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 2.5rem;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #ffffff;
+  }
+
+  .theme-light .btn-primary {
+    background: #000000;
+    color: #ffffff;
+    border-color: #000000;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(255, 255, 255, 0.2);
+  }
+
+  .theme-light .btn-primary:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+  }
+
+  .btn-outline:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+    transform: translateY(-5px);
+  }
+
+  /* Effects */
+  .scroll-gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.1), transparent 80%);
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .theme-dark .scroll-gradient {
+    opacity: 1;
+  }
+
+  /* Animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s forwards cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.2s; }
+  .delay-2 { animation-delay: 0.4s; }
+
+  @media (max-width: 768px) {
+    .laptop-base {
+      width: 105%;
+      left: -2.5%;
+    }
+    
+    .privacy-box {
+      padding: 2rem;
+    }
+    
+    .btn-primary, .btn-outline {
+      width: 100%;
+      justify-content: center;
+    }
+
+    .steps-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      margin-bottom: 3rem;
+    }
+  }
+</style>
+
+<script define:vars={{ app, i18n }}>
+  const pageContent = document.getElementById('page-content');
+  const laptopLid = document.getElementById('laptop-lid');
+  const mockupTrigger = document.getElementById('mockup-trigger');
+  const globalAberration = document.getElementById('global-aberration');
+  
+  // Elements for translation
+  const elements = {
+    heroTitle: document.getElementById('hero-title'),
+    heroSubtitle: document.getElementById('hero-subtitle'),
+    privacyTitle: document.getElementById('privacy-title'),
+    privacyDescription: document.getElementById('privacy-description'),
+    stepsTitle: document.getElementById('steps-title'),
+    useTitle: document.getElementById('use-title'),
+    useStep1: document.getElementById('use-step1'),
+    useStep2: document.getElementById('use-step2'),
+    installTitle: document.getElementById('install-title'),
+    installStep1: document.getElementById('install-step1'),
+    installStep2: document.getElementById('install-step2'),
+    installStep3: document.getElementById('install-step3'),
+    ctaTitle: document.getElementById('cta-title'),
+    ctaBtn: document.getElementById('cta-btn'),
+    githubBtn: document.getElementById('github-btn')
+  };
+
+  function updateLang(lang) {
+    const data = i18n[lang];
+    if (!data) return;
+
+    if (elements.heroTitle) elements.heroTitle.textContent = data.hero.title;
+    if (elements.heroSubtitle) elements.heroSubtitle.textContent = data.hero.subtitle;
+    if (elements.privacyTitle) elements.privacyTitle.textContent = data.privacy.title;
+    if (elements.privacyDescription) elements.privacyDescription.textContent = data.privacy.description;
+    if (elements.stepsTitle) elements.stepsTitle.textContent = data.steps.title;
+    if (elements.useTitle) elements.useTitle.textContent = data.steps.use.title;
+    if (elements.useStep1) elements.useStep1.textContent = data.steps.use.step1;
+    if (elements.useStep2) elements.useStep2.textContent = data.steps.use.step2;
+    if (elements.installTitle) elements.installTitle.textContent = data.steps.install.title;
+    if (elements.installStep1) elements.installStep1.textContent = data.steps.install.step1;
+    if (elements.installStep2) elements.installStep2.textContent = data.steps.install.step2;
+    if (elements.installStep3) elements.installStep3.textContent = data.steps.install.step3;
+    if (elements.ctaTitle) elements.ctaTitle.textContent = data.cta.title;
+    
+    if (elements.ctaBtn) {
+      elements.ctaBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        ${data.cta.button}
+      `;
+    }
+    
+    if (elements.githubBtn) {
+      elements.githubBtn.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+        ${data.cta.github}
+      `;
+    }
+  }
+
+  // Aberration state handling
+  let scrollTimeout;
+  let isScrolling = false;
+
+  // Scroll Handling
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const windowHeight = window.innerHeight;
+    
+    // Global Scroll Aberration effect
+    if (globalAberration) {
+      if (!isScrolling) {
+        globalAberration.classList.add('active');
+        isScrolling = true;
+      }
+      
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        globalAberration.classList.remove('active');
+        isScrolling = false;
+      }, 150);
+    }
+
+    // 1. Aberration scroll effect on Title
+    if (elements.heroTitle) {
+      elements.heroTitle.classList.add('aberration');
+      setTimeout(() => {
+        elements.heroTitle.classList.remove('aberration');
+      }, 150);
+    }
+    
+    // 2. Background Theme Transition
+    // Trigger theme change when the user has scrolled past 1/3 of the hero
+    if (scrollY > windowHeight * 0.3) {
+      pageContent.classList.add('theme-dark');
+      pageContent.classList.remove('theme-light');
+      document.body.classList.add('theme-dark-body');
+    } else {
+      pageContent.classList.add('theme-light');
+      pageContent.classList.remove('theme-dark');
+      document.body.classList.remove('theme-dark-body');
+    }
+
+    // 2. Laptop Lid Animation
+    // Map scroll to lid rotation
+    // Calculate progress based on mockup section visibility
+    const triggerStart = mockupTrigger.offsetTop - windowHeight;
+    const triggerEnd = mockupTrigger.offsetTop + mockupTrigger.offsetHeight;
+    
+    if (scrollY > triggerStart && scrollY < triggerEnd) {
+      const progress = (scrollY - triggerStart) / (windowHeight + mockupTrigger.offsetHeight / 2);
+      // Rotate from -90deg (closed) to 0deg (open)
+      const rotation = Math.min(0, -90 + (progress * 150)); 
+      laptopLid.style.transform = `rotateX(${rotation}deg)`;
+    }
+
+    // 3. Dynamic Gradient
+    const gradient = document.querySelector('.scroll-gradient');
+    if (gradient) {
+      const moveX = (scrollY % windowHeight) / 10;
+      gradient.style.transform = `translateY(${moveX}px)`;
+    }
+  });
+
+  // Intersection Observer for Fade-up elements
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Language management
+  window.addEventListener('langChanged', (e) => updateLang(e.detail.lang));
+  const currentLang = localStorage.getItem('preferred-lang') || 'es';
+  updateLang(currentLang);
+</script>

@@ -17,6 +17,26 @@ export interface App {
 }
 
 export const apps: App[] = [
+        {
+        id: 'darkreaderpdf',
+        name: 'Dark Reader PDF',
+        description: {
+          es: 'Abre tus archivos PDF en un modo oscuro real y personalizable.',
+          en: 'Open your PDF files in a true, customizable dark mode.'
+        },
+        icon: 'https://hosted.inled.es/darkreaderpdf.png',
+        link: '/apps/darkreaderpdf'
+      },
+  {
+    id: 'oap',
+    name: 'OAP',
+    description: {
+      es: 'Marca tus objetivos e ir completándolos. Ideal para organizarse, autismo y TDAH.',
+      en: 'Set your goals and mark them as completed. Ideal for organization, autism, and ADHD.'
+    },
+    icon: 'https://hosted.inled.es/oap.png',
+    link: 'https://oap.inled.es'
+  },
     {
     id: 'tabnest',
     name: 'TabNest',
@@ -244,8 +264,8 @@ export const apps: App[] = [
       es: 'Advierte cuando el uso de memoria de su ordenador supera un umbral establecido.',
       en: 'Warns when your computer\'s memory usage exceeds a set threshold.'
     },
-    icon: 'https://hosted.inled.es/memory-warn-logo.png',
-    link: '/apps/memorywarn'
-  },
+        icon: 'https://hosted.inled.es/memory-warn-logo.png',
+        link: '/apps/memorywarn'
+      },
 
-];
+    ];

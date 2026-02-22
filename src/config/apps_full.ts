@@ -19,6 +19,27 @@ export interface AppData {
 }
 
 export const appsData: AppData[] = [
+    {
+    "id": "darkreaderpdf",
+    "title": "Dark Reader PDF",
+    "icon": "https://hosted.inled.es/darkreaderpdf.png",
+    "platform": [
+      "Chrome",
+      "Edge",
+      "Brave"
+    ],
+    "shortDescription": "Abre tus archivos PDF en un modo oscuro real y personalizable.",
+    "description": "# Dark Reader PDF\n\nProtege tu vista con el modo oscuro definitivo para PDFs en el navegador. No es solo un filtro; es una transformación inteligente de tus documentos.\n\n### Características Principales\n\n- **Modo Oscuro Real**: Algoritmos avanzados para invertir colores manteniendo la legibilidad.\n- **Control de Brillo y Contraste**: Personaliza la intensidad según la luz de tu entorno.\n- **Visor Mejorado**: Funciones de visualización superiores al visor nativo de los navegadores.\n- **Ligero y Rápido**: Sin impacto en el rendimiento del sistema.\n- **Privacidad Total**: Procesamiento local, tus PDFs nunca salen de tu ordenador.",
+    "screenshots": [
+      "https://hosted.inled.es/demo-dark-reader.png"
+    ],
+    "video": "",
+    "downloads": {
+      "github": "https://github.com/InledGroup/dark-reader-PDF/archive/refs/heads/main.zip",
+      "sourceforge": "",
+      "sourceCode": "https://github.com/InledGroup/dark-reader-PDF"
+    }
+  },
   {
     "id": "bastion",
     "title": "Bastion Browser",
@@ -370,5 +391,6 @@ export const appsData: AppData[] = [
       "sourceforge": "",
       "sourceCode": "https://github.com/InledGroup/tabnest"
     }
-  }
+  },
+
 ];
