@@ -21,28 +21,11 @@ const i18n = {
       title: "Soporte Universal",
       subtitle: "Visores nativos integrados para una gestión de archivos sin interrupciones.",
       items: [
-        { name: "Imágenes", ext: ".jpg, .png, .svg", theme: "blue" },
-        { name: "Vídeo", ext: ".mp4, .webm", theme: "purple" },
-        { name: "PDF", ext: ".pdf, .doc", theme: "red" },
-        { name: "Archivos", ext: ".zip, .tar.gz", theme: "orange" },
-        { name: "Código", ext: ".js, .py, .cpp", theme: "dark" }
-      ]
-    },
-    roadmap: {
-      title: "Roadmap 2026",
-      items: [
-        { 
-          title: "Integración Microsoft Office", 
-          description: "Edición y previsualización nativa de archivos .docx, .xlsx y .pptx sin salir del navegador.",
-          status: "En Desarrollo",
-          progress: 65
-        },
-        { 
-          title: "IA Generativa Local", 
-          description: "Análisis semántico de archivos, resúmenes automáticos y organización inteligente mediante LLMs locales.",
-          status: "Planeado",
-          progress: 15
-        }
+        { name: "Imágenes", ext: ".jpg, .png, .svg", theme: "blue", icon: "https://raw.githubusercontent.com/ubuntu/yaru/refs/heads/master/icons/Yaru/256x256/mimetypes/image-x-generic.png" },
+        { name: "Vídeo", ext: ".mp4, .webm", theme: "purple", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256@2x/mimetypes/video-x-generic.png?raw=true" },
+        { name: "PDF", ext: ".pdf, .doc", theme: "red", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/application-pdf.png?raw=true" },
+        { name: "Archivos", ext: ".zip, .tar.gz", theme: "orange", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/application-x-zip.png?raw=true" },
+        { name: "Web/Código", ext: ".html, .js, .css", theme: "dark", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/text-html.png?raw=true" }
       ]
     },
     cta: {
@@ -61,28 +44,11 @@ const i18n = {
       title: "Universal Support",
       subtitle: "Built-in native viewers for seamless file management.",
       items: [
-        { name: "Images", ext: ".jpg, .png, .svg", theme: "blue" },
-        { name: "Video", ext: ".mp4, .webm", theme: "purple" },
-        { name: "PDF", ext: ".pdf, .doc", theme: "red" },
-        { name: "Archives", ext: ".zip, .tar.gz", theme: "orange" },
-        { name: "Code", ext: ".js, .py, .cpp", theme: "dark" }
-      ]
-    },
-    roadmap: {
-      title: "2026 Roadmap",
-      items: [
-        { 
-          title: "Microsoft Office Integration", 
-          description: "Native editing and previewing of .docx, .xlsx, and .pptx files without leaving the browser.",
-          status: "In Progress",
-          progress: 65
-        },
-        { 
-          title: "Local Generative AI", 
-          description: "Semantic file analysis, automatic summaries, and intelligent organization using local LLMs.",
-          status: "Planned",
-          progress: 15
-        }
+        { name: "Images", ext: ".jpg, .png, .svg", theme: "blue", icon: "https://raw.githubusercontent.com/ubuntu/yaru/refs/heads/master/icons/Yaru/256x256/mimetypes/image-x-generic.png" },
+        { name: "Video", ext: ".mp4, .webm", theme: "purple", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256@2x/mimetypes/video-x-generic.png?raw=true" },
+        { name: "PDF", ext: ".pdf, .doc", theme: "red", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/application-pdf.png?raw=true" },
+        { name: "Archives", ext: ".zip, .tar.gz", theme: "orange", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/application-x-zip.png?raw=true" },
+        { name: "Web/Code", ext: ".html, .js, .css", theme: "dark", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/text-html.png?raw=true" }
       ]
     },
     cta: {
@@ -99,23 +65,44 @@ const i18n = {
     <Header />
     
     <main>
-      <!-- Hero Section (DarkPDF Style) -->
+      <!-- Hero Section -->
       <section class="hero-section">
         <div class="container">
           <div class="hero-content">
             <div class="badge fade-in">{i18n.es.hero.badge}</div>
             <h1 class="fade-in" id="hero-title">{i18n.es.hero.title}</h1>
             <p class="fade-in delay-1" id="hero-subtitle">{i18n.es.hero.subtitle}</p>
-            
             <div class="app-icon-wrapper fade-in delay-2">
               <img src={app.logo} alt="Bautilus Logo" class="app-logo" />
             </div>
           </div>
         </div>
-        
-        <div class="scroll-indicator">
-          <div class="mouse"></div>
-          <p>Scroll</p>
+      </section>
+
+      <!-- Scroll Animation Section -->
+      <section class="scroll-anim-section" id="scroll-trigger">
+        <div class="sticky-container">
+          <!-- Laptop Mockup -->
+          <div class="laptop-container" id="laptop-container">
+            <div class="laptop-mockup">
+              <div class="laptop-screen" id="laptop-screen">
+                <div class="screen-content">
+                  <div class="video-overlay" id="video-overlay"></div>
+                  <iframe 
+                    id="yt-player"
+                    src="https://www.youtube.com/embed/QCUmerBLHIc?enablejsapi=1&mute=1&controls=0&rel=0&showinfo=0&autoplay=1&loop=1&playlist=QCUmerBLHIc" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+              <div class="laptop-base">
+                <div class="trackpad"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -129,41 +116,9 @@ const i18n = {
             {i18n.es.formats.items.map((item, index) => (
               <div class="format-card fade-up" style={`--delay: ${index * 0.1}s`}>
                 <div class={`ubuntu-icon icon-${item.theme}`}>
-                  {/* Imagen - Yaru Blue */}
-                  {item.theme === 'blue' && <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="4" fill="#3584e4"/><path d="M4 32L16 20L28 32M24 28L36 16L44 24" stroke="white" stroke-width="2" stroke-linejoin="round"/><circle cx="34" cy="14" r="3" fill="white"/></svg>}
-                  {/* Video - Yaru Purple */}
-                  {item.theme === 'purple' && <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="4" fill="#9141ac"/><path d="M18 16V32L34 24L18 16Z" fill="white"/></svg>}
-                  {/* PDF - Yaru Red */}
-                  {item.theme === 'red' && <svg viewBox="0 0 48 48"><path d="M10 4H30L40 14V44H10V4Z" fill="#e01b24"/><path d="M30 4L40 14H30V4Z" fill="#a51d2d"/><rect x="16" y="24" width="16" height="2" fill="white" opacity="0.8"/><rect x="16" y="32" width="16" height="2" fill="white" opacity="0.8"/></svg>}
-                  {/* Archives - Yaru Orange */}
-                  {item.theme === 'orange' && <svg viewBox="0 0 48 48"><path d="M10 10H38V42H10V10Z" fill="#e66100"/><path d="M10 10L24 4L38 10V10Z" fill="#c05100"/><rect x="22" y="16" width="4" height="12" fill="white" opacity="0.5"/><circle cx="24" cy="34" r="4" fill="white"/></svg>}
-                  {/* Code - Yaru Dark */}
-                  {item.theme === 'dark' && <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="4" fill="#241f31"/><path d="M14 18L6 24L14 30M34 18L42 24L34 30" stroke="#3584e4" stroke-width="3" stroke-linecap="round"/></svg>}
+                  <img src={item.icon} alt={item.name} class="yaru-icon" />
                 </div>
                 <h3>{item.name}</h3>
-                <p class="ext-tag">{item.ext}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <!-- Roadmap Section (Properly Styled) -->
-      <section class="roadmap-section">
-        <div class="container">
-          <h2 class="section-title fade-up" id="roadmap-title">{i18n.es.roadmap.title}</h2>
-          <div class="roadmap-grid">
-            {i18n.es.roadmap.items.map((item, index) => (
-              <div class="roadmap-card fade-up">
-                <div class="roadmap-header">
-                  <span class="status-badge">{item.status}</span>
-                  <span class="progress-pct">{item.progress}%</span>
-                </div>
-                <h3 id={`roadmap-title-${index}`}>{item.title}</h3>
-                <p id={`roadmap-desc-${index}`}>{item.description}</p>
-                <div class="progress-container">
-                  <div class="progress-bar" style={`width: ${item.progress}%`}></div>
-                </div>
               </div>
             ))}
           </div>
@@ -189,8 +144,6 @@ const i18n = {
         </div>
       </section>
     </main>
-
-    <div class="scroll-aberration" id="global-aberration"></div>
   </div>
 </Layout>
 
@@ -209,7 +162,7 @@ const i18n = {
     font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   }
 
-  body { background-color: #ffffff !important; }
+  body { background-color: #ffffff !important; overflow-x: hidden; }
 
   #page-content.theme-dark {
     --bg-color: #0a0a0a;
@@ -233,7 +186,7 @@ const i18n = {
 <style>
   .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
 
-  /* Hero Section (Centred) */
+  /* Hero Section */
   .hero-section {
     height: 100vh;
     display: flex;
@@ -242,13 +195,14 @@ const i18n = {
     align-items: center;
     text-align: center;
     position: relative;
+    z-index: 10;
   }
 
   .badge {
     padding: 0.5rem 1rem;
-    background: #fef2f2;
-    color: #ef4444;
-    border: 1px solid #fee2e2;
+    background: rgba(53, 132, 228, 0.1);
+    color: var(--accent-color);
+    border: 1px solid rgba(53, 132, 228, 0.2);
     border-radius: 100px;
     font-size: 0.75rem;
     font-weight: 700;
@@ -269,55 +223,107 @@ const i18n = {
     font-size: 1.25rem;
     color: var(--muted-color);
     max-width: 650px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 2rem;
     line-height: 1.6;
   }
 
   .app-logo {
-    width: 140px;
-    height: 140px;
-    border-radius: 32px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    width: 120px;
+    height: 120px;
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
 
-  .app-logo:hover { transform: scale(1.05); }
-
-  /* Scroll Indicator */
-  .scroll-indicator {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0.5;
-    text-align: center;
-  }
-
-  .mouse {
-    width: 24px;
-    height: 38px;
-    border: 2px solid var(--text-color);
-    border-radius: 12px;
-    margin: 0 auto 0.5rem;
+  /* Scroll Animation Section */
+  .scroll-anim-section {
+    height: 250vh; /* Scroll area */
     position: relative;
   }
 
-  .mouse::after {
-    content: "";
-    width: 4px;
-    height: 8px;
-    background: var(--text-color);
-    position: absolute;
-    top: 6px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-    animation: scroll 2s infinite;
+  .sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
 
-  @keyframes scroll {
-    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  /* Laptop Mockup */
+  .laptop-container {
+    opacity: 0;
+    transform: scale(0.8) translateY(100px);
+    z-index: 1;
+    perspective: 2000px;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .laptop-mockup {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .laptop-screen {
+    width: 100%;
+    height: 95%;
+    background: #1a1a1a;
+    border: 12px solid #2a2a2a;
+    border-bottom-width: 20px;
+    border-radius: 20px 20px 0 0;
+    position: relative;
+    transform-origin: bottom;
+    transform: rotateX(-90deg); /* Start closed */
+    box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+    overflow: hidden;
+    transition: transform 0.1s linear;
+  }
+
+  .screen-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #000;
+  }
+
+  .screen-content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+  }
+
+  .laptop-base {
+    width: 110%;
+    height: 15px;
+    background: #3a3a3a;
+    border-radius: 0 0 20px 20px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+
+  .trackpad {
+    width: 30%;
+    height: 80%;
+    background: #2a2a2a;
+    margin: 0 auto;
+    border-radius: 5px;
+    opacity: 0.5;
   }
 
   /* Formats Section */
@@ -342,60 +348,23 @@ const i18n = {
   .theme-dark .format-card { border-color: rgba(255,255,255,0.05); }
 
   .ubuntu-icon {
-    width: 64px;
-    height: 64px;
+    width: 96px;
+    height: 96px;
     margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .yaru-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     filter: drop-shadow(0 8px 12px rgba(0,0,0,0.1));
   }
 
   .format-card h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem; }
   .ext-tag { font-size: 0.8rem; font-family: monospace; color: var(--accent-color); font-weight: 600; }
-
-  /* Roadmap Section */
-  .roadmap-section { padding: 8rem 0; }
-  .roadmap-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 2rem;
-  }
-
-  .roadmap-card {
-    background: var(--card-bg);
-    padding: 2.5rem;
-    border-radius: 28px;
-    border: 1px solid rgba(0,0,0,0.03);
-  }
-
-  .roadmap-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-
-  .status-badge {
-    font-size: 0.7rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: var(--accent-color);
-    background: rgba(53, 132, 228, 0.1);
-    padding: 0.3rem 0.8rem;
-    border-radius: 100px;
-  }
-
-  .progress-pct { font-weight: 800; color: var(--accent-color); }
-
-  .roadmap-card h3 { font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
-  .roadmap-card p { font-size: 1rem; margin-bottom: 2rem; text-align: left; max-width: 100%; }
-
-  .progress-container {
-    height: 8px;
-    background: rgba(0,0,0,0.05);
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .theme-dark .progress-container { background: rgba(255,255,255,0.1); }
-  .progress-bar { height: 100%; background: var(--accent-color); border-radius: 10px; }
 
   /* CTA Section */
   .cta-section { padding: 8rem 0; }
@@ -427,17 +396,6 @@ const i18n = {
   .btn-outline { border: 2px solid white; color: white; }
   .btn-outline:hover { background: white; color: var(--accent-color); transform: translateY(-3px); }
 
-  /* Aberration effect */
-  .scroll-aberration {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 99;
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  .scroll-aberration.active { opacity: 0.1; }
-
   /* Animations */
   .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
   .fade-up { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
@@ -448,14 +406,34 @@ const i18n = {
 
   @media (max-width: 768px) {
     .cta-card { padding: 3rem 1.5rem; }
-    .roadmap-grid { grid-template-columns: 1fr; }
+    .laptop-container { max-width: 90%; }
   }
 </style>
 
 <script define:vars={{ app, i18n }}>
   const pageContent = document.getElementById('page-content');
-  const globalAberration = document.getElementById('global-aberration');
-  const heroTitle = document.getElementById('hero-title');
+  const scrollTrigger = document.getElementById('scroll-trigger');
+  const laptopContainer = document.getElementById('laptop-container');
+  const laptopScreen = document.getElementById('laptop-screen');
+  const videoOverlay = document.getElementById('video-overlay');
+  const ytPlayer = document.getElementById('yt-player');
+
+  let player;
+  // Load YouTube API
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  window.onYouTubeIframeAPIReady = () => {
+    player = new YT.Player('yt-player', {
+      events: {
+        'onReady': (event) => {
+          event.target.mute();
+        }
+      }
+    });
+  };
 
   function updateLang(lang) {
     const data = i18n[lang];
@@ -465,11 +443,6 @@ const i18n = {
     document.querySelector('.badge').textContent = data.hero.badge;
     document.getElementById('formats-title').textContent = data.formats.title;
     document.getElementById('formats-subtitle').textContent = data.formats.subtitle;
-    document.getElementById('roadmap-title').textContent = data.roadmap.title;
-    data.roadmap.items.forEach((item, i) => {
-      document.getElementById(`roadmap-title-${i}`).textContent = item.title;
-      document.getElementById(`roadmap-desc-${i}`).textContent = item.description;
-    });
     document.getElementById('cta-title').textContent = data.cta.title;
     document.getElementById('cta-btn').innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -481,11 +454,40 @@ const i18n = {
     `;
   }
 
-  let scrollTimeout;
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
     const windowHeight = window.innerHeight;
+    const triggerTop = scrollTrigger.offsetTop;
+    const triggerHeight = scrollTrigger.offsetHeight;
     
+    // Progress within the scroll-anim-section (0 to 1)
+    let progress = (scrollY - triggerTop) / (triggerHeight - windowHeight);
+    progress = Math.max(0, Math.min(1, progress));
+
+    // Laptop Appearance & Opening
+    if (progress >= 0 && progress <= 1) {
+      // Appearance (faster at start)
+      const laptopOpacity = Math.min(1, progress * 4);
+      const laptopScale = 0.8 + Math.min(0.2, progress * 0.5);
+      const laptopY = 100 * (1 - Math.min(1, progress * 2));
+      
+      laptopContainer.style.opacity = laptopOpacity;
+      laptopContainer.style.transform = `scale(${laptopScale}) translateY(${laptopY}px)`;
+
+      // Opening the screen (rotate from -90 to 0)
+      const rotation = -90 + Math.min(90, progress * 150);
+      laptopScreen.style.transform = `rotateX(${Math.min(0, rotation)}deg)`;
+
+      // Video focus logic
+      if (rotation >= -10) {
+        videoOverlay.style.opacity = 0;
+        if (player && player.playVideo) player.playVideo();
+      } else {
+        videoOverlay.style.opacity = 1;
+        if (player && player.pauseVideo) player.pauseVideo();
+      }
+    }
+
     // Theme Switch
     if (scrollY > windowHeight * 0.4) {
       pageContent.classList.add('theme-dark');
@@ -494,11 +496,6 @@ const i18n = {
       pageContent.classList.add('theme-light');
       pageContent.classList.remove('theme-dark');
     }
-
-    // Aberration
-    globalAberration.classList.add('active');
-    clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => globalAberration.classList.remove('active'), 150);
   });
 
   const observer = new IntersectionObserver((entries) => {
