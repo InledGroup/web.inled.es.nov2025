@@ -20,6 +20,27 @@ export interface AppData {
 
 export const appsData: AppData[] = [
     {
+    "id": "weby",
+    "title": "Weby",
+    "icon": "https://hosted.inled.es/weby.gif",
+    "platform": [
+      "Chrome",
+      "Edge",
+      "Brave"
+    ],
+    "shortDescription": "Tu copiloto de IA local y privado que resuelve dudas sobre la web que visitas.",
+    "description": "# Weby: IA Local y Privada\n\nWeby es una barra lateral inteligente que utiliza IA local pionera para resolver tus dudas acerca del sitio web que estás visitando. \n\n### Características Principales\n\n- **IA Local Pionera**: Procesamiento de lenguaje natural directamente en tu navegador.\n- **Privacidad Total**: Tus conversaciones y datos confidenciales nunca salen del dispositivo.\n- **Análisis de Contenido**: Pregunta cualquier cosa sobre la página que estás viendo.\n- **Inled AI Technology**: Impulsado por la tecnología de vanguardia de Inled Group.\n- **Rendimiento Máximo**: Sin latencia de red, respuestas instantáneas y seguras.",
+    "screenshots": [
+      "https://hosted.inled.es/weby.gif"
+    ],
+    "video": "https://hosted.inled.es/demoweby.mp4",
+    "downloads": {
+      "github": "https://github.com/InledGroup/Weby-edgeai/releases/latest",
+      "sourceforge": "",
+      "sourceCode": "https://github.com/InledGroup/Weby-edgeai"
+    }
+  },
+    {
     "id": "bautilus",
     "title": "Bautilus",
     "icon": "https://hosted.inled.es/bautilus.png",

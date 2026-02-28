@@ -17,6 +17,16 @@ export interface App {
 }
 
 export const apps: App[] = [
+  {
+    id: 'weby',
+    name: 'Weby',
+    description: {
+      es: 'Tu copiloto de IA local y privado que resuelve dudas sobre la web que visitas.',
+      en: 'Your local and private AI copilot that solves doubts about the web you visit.'
+    },
+    icon: 'https://hosted.inled.es/weby.gif',
+    link: '/apps/weby'
+  },
    {
     id: 'bautilus',
     name: 'Bautilus',
