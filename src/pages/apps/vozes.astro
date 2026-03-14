@@ -1,0 +1,897 @@
+---
+import { getLangFromLocals } from "../../i18n/utils";
+
+const lang = getLangFromLocals(Astro.locals);
+
+const translations = {
+    "es": {
+        "title": "Vozes - Escritura por voz local y privada para Linux",
+        "description": "Convierte tu voz en texto de forma 100% local, privada e instantánea. Funciona en cualquier aplicación de Linux.",
+        "nav_features": "Características",
+        "nav_how": "Funcionamiento",
+        "nav_download": "Descargar",
+        "hero_badge": "100% Local & Privado",
+        "hero_title": "Tu voz, <br><span class=\"gradient-text\">convertida en texto</span>",
+        "hero_desc": "La forma más natural de escribir en Linux. Sin internet, sin suscripciones y con total privacidad. Tan rápido como hablas.",
+        "hero_btn_start": "Empezar ahora",
+        "hero_btn_more": "Descubrir más",
+        "feat_section_title": "Diseñado para tu tranquilidad",
+        "feat_1_title": "Privacidad Absoluta",
+        "feat_1_desc": "Todo el procesamiento se realiza en tu ordenador. Tus palabras nunca salen de tu dispositivo.",
+        "feat_2_title": "Instantáneo e Ilimitado",
+        "feat_2_desc": "Sin esperas, sin límites de tiempo y sin necesidad de conexión a internet. Siempre listo.",
+        "feat_3_title": "Emulación Real",
+        "feat_3_desc": "Escribe letra por letra emulando un teclado real, lo que garantiza compatibilidad con cualquier aplicación.",
+        "feat_4_title": "Funciona en todo el sistema",
+        "feat_4_desc": "Desde el navegador hasta tu editor de código favorito o la terminal. Si puedes escribir, puedes usar Vozes.",
+        "how_title": "Tan simple como hablar",
+        "step_1_title": "Activa con una tecla",
+        "step_1_desc": "Pulsa F12 (o tu tecla preferida) para empezar a escuchar. Sin menús, sin distracciones.",
+        "step_2_title": "O usa tu voz",
+        "step_2_desc": "Simplemente di <strong>\"Hey Jarvis\"</strong> y Vozes empezará a transcribir tus palabras al instante.",
+        "step_3_title": "Finaliza y listo",
+        "step_3_desc": "Vuelve a pulsar la tecla de activación y Vozes terminará de escribir por ti.",
+        "visual_listening": "Vozes está escuchando...",
+        "visual_typing": "Escribiendo tus pensamientos letra por letra...",
+        "cta_title": "Empieza a escribir con tu voz",
+        "cta_desc": "Descarga Vozes para Linux y descubre la libertad de la escritura por voz privada.",
+        "cta_btn": "Descargar de GitHub",
+        "cta_meta": "Disponible para Ubuntu, Debian, Fedora y Arch Linux.",
+        "footer_by": "Vozes por Inled Group",
+        "footer_love": "© " + new Date().getFullYear() + " Inled Group. Creado con ❤️ para la comunidad de Linux."
+    },
+    "en": {
+        "title": "Vozes - Local and private voice typing for Linux",
+        "description": "Convert your voice to text 100% locally, privately, and instantly. Works in any Linux application.",
+        "nav_features": "Features",
+        "nav_how": "How it works",
+        "nav_download": "Download",
+        "hero_badge": "100% Local & Private",
+        "hero_title": "Your voice, <br><span class=\"gradient-text\">converted to text</span>",
+        "hero_desc": "The most natural way to write on Linux. No internet, no subscriptions, and total privacy. As fast as you speak.",
+        "hero_btn_start": "Start now",
+        "hero_btn_more": "Discover more",
+        "feat_section_title": "Designed for your peace of mind",
+        "feat_1_title": "Absolute Privacy",
+        "feat_1_desc": "All processing is done on your computer. Your words never leave your device.",
+        "feat_2_title": "Instant and Unlimited",
+        "feat_2_desc": "No waiting, no time limits, and no internet connection required. Always ready.",
+        "feat_3_title": "Real Emulation",
+        "feat_3_desc": "Writes letter by letter emulating a real keyboard, ensuring compatibility with any application.",
+        "feat_4_title": "Works System-wide",
+        "feat_4_desc": "From the browser to your favorite code editor or the terminal. If you can type, you can use Vozes.",
+        "how_title": "As simple as speaking",
+        "step_1_title": "Activate with a key",
+        "step_1_desc": "Press F12 (or your preferred key) to start listening. No menus, no distractions.",
+        "step_2_title": "Or use your voice",
+        "step_2_desc": "Simply say \"Hey Jarvis\" and Vozes will start transcribing your words instantly.",
+        "step_3_title": "Finish and done",
+        "step_3_desc": "Press the activation key again and Vozes will finish typing for you.",
+        "visual_listening": "Vozes is listening...",
+        "visual_typing": "Writing your thoughts letter by letter...",
+        "cta_title": "Start writing with your voice",
+        "cta_desc": "Download Vozes for Linux and discover the freedom of private voice typing.",
+        "cta_btn": "Download from GitHub",
+        "cta_meta": "Available for Ubuntu, Debian, Fedora, and Arch Linux.",
+        "footer_by": "Vozes by Inled Group",
+        "footer_love": "© " + new Date().getFullYear() + " Inled Group. Created with ❤️ for the Linux community."
+    }
+};
+
+const t = translations[lang];
+
+const logo = "https://hosted.inled.es/vozes.png";
+const video = "https://hosted.inled.es/vozesdemo.mp4";
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">{t.title}</title>
+    <meta name="description" id="page-description" content={t.description}>
+    <link rel="icon" href={logo} type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="/" class="logo">
+                <img src={logo} alt="Vozes Logo">
+                <span>Vozes</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">{t.nav_features}</a>
+                <a href="#how-it-works">{t.nav_how}</a>
+                <button id="lang-switch" class="btn-icon" aria-label="Cambiar idioma" data-current-lang={lang}>
+                    <i class="fa-solid fa-globe"></i>
+                    <span>{lang === 'es' ? 'ES' : 'EN'}</span>
+                </button>
+                <a href="#download" class="btn-primary small">{t.nav_download}</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="container hero-content">
+                <div class="hero-text fade-up">
+                    <div class="app-badge">{t.hero_badge}</div>
+                    <h1 data-i18n-html="true" set:html={t.hero_title}></h1>
+                    <p>{t.hero_desc}</p>
+                    <div class="hero-buttons">
+                        <a href="#download" class="btn-primary">{t.hero_btn_start}</a>
+                        <a href="#features" class="btn-secondary">{t.hero_btn_more}</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Section -->
+        <section class="video-section">
+            <div class="container">
+                <div class="video-container fade-up">
+                    <video 
+                        src={video} 
+                        controls 
+                        autoplay 
+                        muted 
+                        loop 
+                        poster={logo}
+                    ></video>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title fade-up">{t.feat_section_title}</h2>
+                <div class="features-grid">
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-shield-heart"></i>
+                        </div>
+                        <h3>{t.feat_1_title}</h3>
+                        <p>{t.feat_1_desc}</p>
+                    </div>
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3>{t.feat_2_title}</h3>
+                        <p>{t.feat_2_desc}</p>
+                    </div>
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-keyboard"></i>
+                        </div>
+                        <h3>{t.feat_3_title}</h3>
+                        <p>{t.feat_3_desc}</p>
+                    </div>
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-universal-access"></i>
+                        </div>
+                        <h3>{t.feat_4_title}</h3>
+                        <p>{t.feat_4_desc}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section id="how-it-works" class="how-it-works">
+            <div class="container">
+                <div class="content-split">
+                    <div class="text-side fade-up">
+                        <h2 class="section-title align-left">{t.how_title}</h2>
+                        <div class="steps-list">
+                            <div class="step-item">
+                                <div class="step-icon">F12</div>
+                                <div class="step-info">
+                                    <h3>{t.step_1_title}</h3>
+                                    <p>{t.step_1_desc}</p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-icon"><i class="fa-solid fa-microphone"></i></div>
+                                <div class="step-info">
+                                    <h3>{t.step_2_title}</h3>
+                                    <p set:html={t.step_2_desc}></p>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-icon"><i class="fa-solid fa-check"></i></div>
+                                <div class="step-info">
+                                    <h3>{t.step_3_title}</h3>
+                                    <p>{t.step_3_desc}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-side fade-up">
+                        <div class="glass-card">
+                            <div class="card-header">
+                                <div class="dots">
+                                    <span class="dot red"></span>
+                                    <span class="dot yellow"></span>
+                                    <span class="dot green"></span>
+                                </div>
+                                <div class="title-bar">{t.visual_listening}</div>
+                            </div>
+                            <div class="card-content">
+                                <div class="voice-waves">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <p class="typing-text">{t.visual_typing}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Download -->
+        <section id="download" class="cta-section">
+            <div class="container">
+                <div class="cta-box fade-up">
+                    <h2>{t.cta_title}</h2>
+                    <p>{t.cta_desc}</p>
+                    <div class="cta-buttons">
+                        <a href="https://github.com/InledGroup/vozes/releases/latest" class="btn-primary big">
+                            <i class="fa-brands fa-github"></i> <span>{t.cta_btn}</span>
+                        </a>
+                        <p class="meta-info">{t.cta_meta}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <img src={logo} alt="Vozes Logo">
+                <span>{t.footer_by}</span>
+            </div>
+            <p>{t.footer_love}</p>
+            <div class="socials">
+                <a href="https://github.com/InledGroup/vozes"><i class="fa-brands fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script is:inline>
+        // Language selector logic (sets cookie globally)
+        const langSwitch = document.getElementById('lang-switch');
+        if (langSwitch) {
+            langSwitch.addEventListener('click', () => {
+                const currentLang = langSwitch.getAttribute('data-current-lang');
+                const newLang = currentLang === 'es' ? 'en' : 'es';
+                
+                // Set cookie for the whole site
+                document.cookie = `preferred-lang=${newLang}; path=/; max-age=${60*60*24*365}; SameSite=Lax`;
+                localStorage.setItem('preferred-lang', newLang);
+                
+                // Reload to apply changes server-side
+                window.location.reload();
+            });
+        }
+
+        // Scroll Animation Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-up').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId) {
+                    document.querySelector(targetId)?.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar?.classList.add('scrolled');
+            } else {
+                navbar?.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+    <style>
+        :root {
+            --warm-primary: #ff8a65;
+            --warm-secondary: #ff7043;
+            --warm-accent: #f4511e;
+            --warm-bg: #fffbf9;
+            --warm-card: #ffffff;
+            --text-main: #3e2723;
+            --text-muted: #5d4037;
+            --gradient: linear-gradient(135deg, #ff8a65 0%, #f4511e 100%);
+            --shadow-soft: 0 10px 30px rgba(244, 81, 30, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--warm-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 251, 249, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:not(.btn-primary):hover {
+            color: var(--warm-accent);
+        }
+
+        .btn-icon {
+            background: rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .btn-icon:hover {
+            background: rgba(0,0,0,0.06);
+            color: var(--warm-accent);
+            border-color: var(--warm-accent);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 160px 0 80px;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 70% 20%, rgba(255, 138, 101, 0.1), transparent 50%),
+                        radial-gradient(circle at 10% 80%, rgba(244, 81, 30, 0.05), transparent 40%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+        }
+
+        .app-badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: rgba(255, 138, 101, 0.1);
+            color: var(--warm-accent);
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255, 138, 101, 0.2);
+        }
+
+        .hero-text h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .gradient-text {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.4rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(244, 81, 30, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(244, 81, 30, 0.3);
+        }
+
+        .btn-primary.small {
+            padding: 0.6rem 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary.big {
+            font-size: 1.2rem;
+            padding: 1.2rem 3rem;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-main);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+
+        .btn-secondary:hover {
+            background: #fffcfb;
+            border-color: var(--warm-primary);
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 40px 0 100px;
+        }
+
+        .video-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 1rem;
+            border-radius: 30px;
+            box-shadow: 0 30px 60px rgba(244, 81, 30, 0.1);
+            border: 1px solid rgba(255, 138, 101, 0.1);
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 20px;
+            display: block;
+        }
+
+        /* Features */
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            padding: 2.5rem;
+            background: var(--warm-bg);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 138, 101, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: white;
+            box-shadow: var(--shadow-soft);
+            border-color: rgba(255, 138, 101, 0.2);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* How it works */
+        .how-it-works {
+            padding: 100px 0;
+        }
+
+        .content-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .align-left {
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: white;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--warm-accent);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 138, 101, 0.1);
+        }
+
+        .step-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .step-info p {
+            color: var(--text-muted);
+        }
+
+        /* Glass Card Visual */
+        .glass-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 138, 101, 0.1);
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1rem 1.5rem;
+            background: #fdfaf9;
+            border-bottom: 1px solid #f0e6e2;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27c93f; }
+
+        .title-bar {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .card-content {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .voice-waves {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            height: 40px;
+            margin-bottom: 2rem;
+        }
+
+        .voice-waves span {
+            width: 4px;
+            height: 10px;
+            background: var(--warm-primary);
+            border-radius: 50px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .voice-waves span:nth-child(2) { height: 20px; animation-delay: 0.1s; }
+        .voice-waves span:nth-child(3) { height: 30px; animation-delay: 0.2s; }
+        .voice-waves span:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+        .voice-waves span:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(1.5); }
+        }
+
+        .typing-text {
+            font-weight: 500;
+            color: var(--warm-accent);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 0;
+        }
+
+        .cta-box {
+            background: var(--gradient);
+            border-radius: 40px;
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            box-shadow: 0 30px 60px rgba(244, 81, 30, 0.2);
+        }
+
+        .cta-box h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-box p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .meta-info {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0;
+            background: #fdfaf9;
+            border-top: 1px solid #f0e6e2;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .footer-logo img {
+            height: 30px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .socials {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .socials a {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .socials a:hover {
+            color: var(--warm-accent);
+        }
+
+        /* Animations */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-text h1 {
+                font-size: 3.2rem;
+            }
+
+            .content-split {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+                text-align: center;
+            }
+
+            .align-left {
+                text-align: center;
+            }
+
+            .step-item {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .cta-box h2 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</body>
+</html>

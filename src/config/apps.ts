@@ -17,6 +17,16 @@ export interface App {
 }
 
 export const apps: App[] = [
+    {
+    id: 'vozes',
+    name: 'Vozes',
+    description: {
+      es: 'Escritura por voz para Linux, 100% local, privada e instantánea.',
+      en: 'Voice typing for Linux, 100% local, private and instant.'
+    },
+    icon: 'https://hosted.inled.es/vozes.png',
+    link: '/apps/vozes'
+  },
   {
     id: 'weby',
     name: 'Weby',
@@ -304,4 +314,5 @@ export const apps: App[] = [
       }
     }
   },
+
 ];

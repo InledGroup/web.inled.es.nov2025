@@ -20,6 +20,23 @@ export interface AppData {
 
 export const appsData: AppData[] = [
     {
+    "id": "vozes",
+    "title": "Vozes",
+    "icon": "https://hosted.inled.es/vozes.png",
+    "platform": [
+      "Linux"
+    ],
+    "shortDescription": "Escritura por voz para Linux, 100% local, privada e instantánea.",
+    "description": "# Vozes: Tu voz, convertida en texto\n\nVozes es una herramienta de escritura por voz diseñada para usuarios de Linux que valoran su privacidad y buscan una forma más natural de interactuar con su ordenador. \n\n### Características Principales\n\n- **100% Local**: No requiere conexión a internet. Todo el procesamiento se realiza en tu dispositivo.\n- **Privacidad Total**: Tus palabras son tuyas. Nada se envía a la nube.\n- **Activación Rápida**: Pulsa F12 o simplemente di \"Hey Jarvis\" para empezar a escribir.\n- **Compatibilidad Universal**: Al emular un teclado a nivel de sistema, funciona en cualquier aplicación.\n- **Escritura Real**: Simula la pulsación de teclas letra por letra para una integración perfecta.\n- **Sin Límites**: Sin suscripciones ni restricciones de tiempo. Úsalo tanto como quieras.",
+    "screenshots": [],
+    "video": "https://hosted.inled.es/vozesdemo.mp4",
+    "downloads": {
+      "github": "https://github.com/InledGroup/vozes/releases/latest",
+      "sourceforge": "",
+      "sourceCode": "https://github.com/InledGroup/vozes"
+    }
+  },
+    {
     "id": "weby",
     "title": "Weby",
     "icon": "https://hosted.inled.es/weby.gif",
@@ -434,6 +451,7 @@ export const appsData: AppData[] = [
       "sourceCode": "https://github.com/InledGroup/tabnest"
     }
   },
+
 
 
 ];
