@@ -13,19 +13,30 @@ const app = {
 const i18n = {
   es: {
     hero: {
-      title: "Tu navegador, ahora todopoderoso.",
-      subtitle: "Transforma Chrome en el explorador de archivos definitivo. Inspirado en Nautilus, diseñado para la web moderna.",
-      badge: "Extensión Beta Pública"
+      title: "el {word} en el navegador",
+      rotatingWords: ["Nautilus", "Finder", "Dolphin", "Explorador de archivos"],
+      subtitle: "Una experiencia unificada en todos los sistemas operativos.",
+      badge: "Extensión Beta Pública",
+      windowsBadge: "Ahora también para Windows! Reemplaza el explorador de archivos del sistema por Bautilus y disfruta de 100 veces más velocidad con las mismas funcionalidades"
+    },
+    os: {
+      title: "Sistemas Operativos Soportados",
+      description: "Cualquier sistema que pueda correr un navegador y NodeJS puede disfrutar de bautilus, agnóstico al sistema.",
+      platforms: [
+        { name: "Linux", icon: "https://hosted.inled.es/Tux.svg" },
+        { name: "MacOS", icon: "https://hosted.inled.es/Finder_icon_macOS_Yosemite.png" },
+        { name: "Windows", icon: "https://hosted.inled.es/Windows_logo_-_2021.svg" }
+      ]
     },
     formats: {
-      title: "Soporte Universal",
+      title: "Formatos Soportados",
       subtitle: "Visores nativos integrados para una gestión de archivos sin interrupciones.",
       items: [
-        { name: "Imágenes", ext: ".jpg, .png, .svg", theme: "blue", icon: "https://raw.githubusercontent.com/ubuntu/yaru/refs/heads/master/icons/Yaru/256x256/mimetypes/image-x-generic.png" },
-        { name: "Vídeo", ext: ".mp4, .webm", theme: "purple", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256@2x/mimetypes/video-x-generic.png?raw=true" },
-        { name: "PDF", ext: ".pdf, .doc", theme: "red", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/application-pdf.png?raw=true" },
-        { name: "Archivos", ext: ".zip, .tar.gz", theme: "orange", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/application-x-zip.png?raw=true" },
-        { name: "Web/Código", ext: ".html, .js, .css", theme: "dark", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/text-html.png?raw=true" }
+        { name: "Imágenes", ext: ".jpg, .png, .svg", theme: "blue", icon: "https://hosted.inled.es/image-x-generic.png" },
+        { name: "Vídeo", ext: ".mp4, .webm", theme: "purple", icon: "https://hosted.inled.es/video-x-generic.png" },
+        { name: "PDF", ext: ".pdf, .doc", theme: "red", icon: "https://hosted.inled.es/application-pdf.png" },
+        { name: "Archivos", ext: ".zip, .tar.gz", theme: "orange", icon: "https://hosted.inled.es/application-x-zip.png" },
+        { name: "Web/Código", ext: ".html, .js, .css", theme: "dark", icon: "https://hosted.inled.es/text-html.png" }
       ]
     },
     cta: {
@@ -36,19 +47,30 @@ const i18n = {
   },
   en: {
     hero: {
-      title: "Your browser, now almighty.",
-      subtitle: "Transform Chrome into the ultimate file explorer. Inspired by Nautilus, designed for the modern web.",
-      badge: "Public Beta Extension"
+      title: "the {word} in your browser",
+      rotatingWords: ["Nautilus", "Finder", "Dolphin", "File Explorer"],
+      subtitle: "A unified experience across all operating systems.",
+      badge: "Public Beta Extension",
+      windowsBadge: "Now also for Windows! Replace your system's file explorer with Bautilus and enjoy 100x speed with the same features"
+    },
+    os: {
+      title: "Supported Operating Systems",
+      description: "Any system that can run a browser and NodeJS can enjoy Bautilus, system agnostic.",
+      platforms: [
+        { name: "Linux", icon: "https://hosted.inled.es/Tux.svg" },
+        { name: "MacOS", icon: "https://hosted.inled.es/Finder_icon_macOS_Yosemite.png" },
+        { name: "Windows", icon: "https://hosted.inled.es/Windows_logo_-_2021.svg" }
+      ]
     },
     formats: {
-      title: "Universal Support",
+      title: "Supported Formats",
       subtitle: "Built-in native viewers for seamless file management.",
       items: [
-        { name: "Images", ext: ".jpg, .png, .svg", theme: "blue", icon: "https://raw.githubusercontent.com/ubuntu/yaru/refs/heads/master/icons/Yaru/256x256/mimetypes/image-x-generic.png" },
-        { name: "Video", ext: ".mp4, .webm", theme: "purple", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256@2x/mimetypes/video-x-generic.png?raw=true" },
-        { name: "PDF", ext: ".pdf, .doc", theme: "red", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/application-pdf.png?raw=true" },
-        { name: "Archives", ext: ".zip, .tar.gz", theme: "orange", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/application-x-zip.png?raw=true" },
-        { name: "Web/Code", ext: ".html, .js, .css", theme: "dark", icon: "https://github.com/ubuntu/yaru/blob/master/icons/Yaru/256x256/mimetypes/text-html.png?raw=true" }
+        { name: "Images", ext: ".jpg, .png, .svg", theme: "blue", icon: "https://hosted.inled.es/image-x-generic.png" },
+        { name: "Video", ext: ".mp4, .webm", theme: "purple", icon: "https://hosted.inled.es/video-x-generic.png" },
+        { name: "PDF", ext: ".pdf, .doc", theme: "red", icon: "https://hosted.inled.es/application-pdf.png" },
+        { name: "Archives", ext: ".zip, .tar.gz", theme: "orange", icon: "https://hosted.inled.es/application-x-zip.png" },
+        { name: "Web/Code", ext: ".html, .js, .css", theme: "dark", icon: "https://hosted.inled.es/text-html.png" }
       ]
     },
     cta: {
@@ -69,9 +91,19 @@ const i18n = {
       <section class="hero-section">
         <div class="container">
           <div class="hero-content">
-            <div class="badge fade-in">{i18n.es.hero.badge}</div>
-            <h1 class="fade-in" id="hero-title">{i18n.es.hero.title}</h1>
-            <p class="fade-in delay-1" id="hero-subtitle">{i18n.es.hero.subtitle}</p>
+            <!-- Windows Badge -->
+            <div class="windows-promo-badge fade-in delay-1">
+              <div class="windows-logo">
+                <img src="https://hosted.inled.es/Windows_logo_-_2021.svg" alt="Windows" />
+              </div>
+              <p id="windows-badge-text">{i18n.es.hero.windowsBadge}</p>
+            </div>
+
+            <h1 class="fade-in delay-1" id="hero-title">
+              el <span id="rotating-word">Nautilus</span> en el navegador
+            </h1>
+            <div class="badge beta-badge fade-in delay-2">{i18n.es.hero.badge}</div>
+            <p class="fade-in delay-2" id="hero-subtitle">{i18n.es.hero.subtitle}</p>
             <div class="app-icon-wrapper fade-in delay-2">
               <img src={app.logo} alt="Bautilus Logo" class="app-logo" />
             </div>
@@ -119,6 +151,25 @@ const i18n = {
                   <img src={item.icon} alt={item.name} class="yaru-icon" />
                 </div>
                 <h3>{item.name}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- OS Support Section -->
+      <section class="os-section">
+        <div class="container">
+          <h2 class="section-title fade-up" id="os-title">{i18n.es.os.title}</h2>
+          <p class="section-subtitle fade-up" id="os-description">{i18n.es.os.description}</p>
+          
+          <div class="os-grid">
+            {i18n.es.os.platforms.map((platform, index) => (
+              <div class="os-card fade-up" style={`--delay: ${index * 0.1}s`}>
+                <div class="os-icon-wrapper">
+                  <img src={platform.icon} alt={platform.name} class="os-icon" />
+                </div>
+                <h3>{platform.name}</h3>
               </div>
             ))}
           </div>
@@ -206,17 +257,73 @@ const i18n = {
     border-radius: 100px;
     font-size: 0.75rem;
     font-weight: 700;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
+  .beta-badge {
+    padding: 0.25rem 0.6rem;
+    font-size: 0.65rem;
+    margin: 0.5rem auto 1.5rem;
+    display: inline-block;
+  }
+
+  .windows-promo-badge {
+    background: #00a4ef20;
+    border: 1px solid #00a4ef40;
+    border-radius: 16px;
+    padding: 0.75rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    text-align: left;
+  }
+
+  .windows-logo {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+  }
+
+  .windows-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .windows-promo-badge p {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+    line-height: 1.4;
+  }
+
   h1 {
-    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
     font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
     letter-spacing: -0.03em;
+  }
+
+  #rotating-word {
+    color: var(--accent-color);
+    display: inline-block;
+    min-width: 250px;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.6s ease, 
+                filter 0.6s ease;
+    filter: blur(0);
+  }
+
+  .word-change {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+    filter: blur(8px);
   }
 
   p {
@@ -366,6 +473,46 @@ const i18n = {
   .format-card h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 0.5rem; }
   .ext-tag { font-size: 0.8rem; font-family: monospace; color: var(--accent-color); font-weight: 600; }
 
+  /* OS Section */
+  .os-section { padding: 8rem 0; text-align: center; background: var(--card-bg); }
+  .os-grid {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .os-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .os-icon-wrapper {
+    width: 120px;
+    height: 120px;
+    background: var(--bg-color);
+    border-radius: 30px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+  }
+
+  .os-card:hover .os-icon-wrapper { transform: translateY(-5px); }
+
+  .os-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .os-card h3 { font-size: 1.25rem; font-weight: 700; }
+
   /* CTA Section */
   .cta-section { padding: 8rem 0; }
   .cta-card {
@@ -438,11 +585,22 @@ const i18n = {
   function updateLang(lang) {
     const data = i18n[lang];
     if (!data) return;
-    document.getElementById('hero-title').textContent = data.hero.title;
+    
+    // Rotating title update
+    const heroTitleBase = data.hero.title.split('{word}');
+    const titleEl = document.getElementById('hero-title');
+    titleEl.innerHTML = `${heroTitleBase[0]}<span id="rotating-word">${data.hero.rotatingWords[0]}</span>${heroTitleBase[1] || ''}`;
+    
     document.getElementById('hero-subtitle').textContent = data.hero.subtitle;
-    document.querySelector('.badge').textContent = data.hero.badge;
+    document.querySelector('.beta-badge').textContent = data.hero.badge;
+    document.getElementById('windows-badge-text').textContent = data.hero.windowsBadge;
+    
     document.getElementById('formats-title').textContent = data.formats.title;
     document.getElementById('formats-subtitle').textContent = data.formats.subtitle;
+    
+    document.getElementById('os-title').textContent = data.os.title;
+    document.getElementById('os-description').textContent = data.os.description;
+    
     document.getElementById('cta-title').textContent = data.cta.title;
     document.getElementById('cta-btn').innerHTML = `
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -452,6 +610,43 @@ const i18n = {
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
       ${data.cta.github}
     `;
+
+    // Restart rotating words logic with new language
+    startRotatingWords(data.hero.rotatingWords);
+  }
+
+  let rotatingInterval;
+  function startRotatingWords(words) {
+    if (rotatingInterval) clearInterval(rotatingInterval);
+    let currentIndex = 0;
+    
+    rotatingInterval = setInterval(() => {
+      const el = document.getElementById('rotating-word');
+      if (!el) return;
+      
+      // Phase 1: Exit animation (slide up + blur + fade out)
+      el.style.transform = 'translateY(-20px) scale(0.95)';
+      el.style.opacity = '0';
+      el.style.filter = 'blur(8px)';
+      
+      setTimeout(() => {
+        currentIndex = (currentIndex + 1) % words.length;
+        el.textContent = words[currentIndex];
+        
+        // Prepare Phase 2: Position for entry (slide from bottom)
+        el.style.transition = 'none';
+        el.style.transform = 'translateY(20px) scale(0.95)';
+        
+        // Trigger reflow
+        el.offsetHeight;
+        
+        // Phase 2: Entry animation (slide up to center + unblur + fade in)
+        el.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease, filter 0.6s ease';
+        el.style.transform = 'translateY(0) scale(1)';
+        el.style.opacity = '1';
+        el.style.filter = 'blur(0)';
+      }, 600); // Match transition duration
+    }, 3500);
   }
 
   window.addEventListener('scroll', () => {
