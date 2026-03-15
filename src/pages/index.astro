@@ -7,6 +7,7 @@ import StatsCounter from '../components/StatsCounter.astro';
 import HeroCTA from '../components/HeroCTA.astro';
 import AudioModal from '../components/AudioModal.astro';
 import ProductsGrid from '../components/ProductsGrid.astro';
+import LatestLaunches from '../components/LatestLaunches.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import { apps } from '../config/apps';
 import { saas } from '../config/saas';
@@ -49,6 +50,7 @@ const saasProducts = saas.map(s => ({
   <AudioModal />
   <Header />
   <Hero title={t('hero.title')} />
+  <LatestLaunches title={t('grid.launches')} />
   <ScrollSection
     title={t('scroll.title')}
     description={t('scroll.description')}>
@@ -81,7 +83,6 @@ const saasProducts = saas.map(s => ({
   />
 
   
-
   <div id="saas">
     <ProductsGrid title={t('grid.saas')} products={saasProducts} />
   </div>

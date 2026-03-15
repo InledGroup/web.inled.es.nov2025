@@ -1,0 +1,384 @@
+---
+import { saas } from '../config/saas';
+import { apps } from '../config/apps';
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+
+const featuredSaas = saas
+  .filter(item => item.isFeatured !== undefined && item.isFeatured !== false)
+  .map(item => ({
+    ...item,
+    type: 'saas' as const,
+    description: item.description[lang]
+  }));
+
+const featuredApps = apps
+  .filter(item => item.isFeatured !== undefined && item.isFeatured !== false)
+  .map(item => ({
+    ...item,
+    type: 'app' as const,
+    description: item.description[lang]
+  }));
+
+const allFeatured = [...featuredSaas, ...featuredApps].sort((a, b) => {
+  const posA = typeof a.isFeatured === 'number' ? a.isFeatured : 999;
+  const posB = typeof b.isFeatured === 'number' ? b.isFeatured : 999;
+  return posA - posB;
+});
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Latest Launches" } = Astro.props;
+---
+
+<section class="launches-section">
+  <div class="container">
+    <h2 class="section-title">{title}</h2>
+    <div class="launches-grid">
+      {allFeatured.map((product) => (
+        <div class="launch-item" tabindex="0">
+          <div class="launch-compact">
+            <img src={product.icon} alt={product.name} class="launch-icon" />
+            <span class="launch-name">{product.name}</span>
+          </div>
+          
+          <div class="launch-card">
+            <div class="card-content">
+              <button type="button" class="close-card" aria-label="Close">&times;</button>
+              <img src={product.icon} alt={product.name} class="card-icon" />
+              <h3 class="card-title">{product.name}</h3>
+              <p class="card-description">{product.description}</p>
+              <a href={product.link} class="card-button">
+                {t('grid.explore')}
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div class="launch-overlay"></div>
+  </div>
+</section>
+
+<style>
+  .launches-section {
+    padding: 6rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: visible;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    color: #fff;
+    text-align: center;
+    margin-bottom: 4rem;
+    font-weight: 300;
+  }
+
+  .launches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 4rem;
+    justify-items: center;
+  }
+
+  .launch-item {
+    position: relative;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .launch-compact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: transform 0.3s ease;
+  }
+
+  .launch-icon {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+  }
+
+  .launch-name {
+    color: #ccc;
+    font-size: 0.95rem;
+    font-weight: 400;
+    transition: color 0.3s ease;
+    text-align: center;
+  }
+
+  .launch-item:hover .launch-compact {
+    transform: translateY(-5px);
+  }
+
+  .launch-item:hover .launch-icon {
+    transform: scale(1.1);
+  }
+
+  .launch-item:hover .launch-name {
+    color: #fff;
+  }
+
+  /* Hover Card */
+  .launch-card {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 280px;
+    background: rgba(15, 15, 15, 0.98);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 1.5rem;
+    padding: 2rem 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1.5rem;
+    pointer-events: none; /* Prevent blocking clicks when hidden */
+  }
+
+  .launch-card::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 10px;
+    border-style: solid;
+    border-color: rgba(15, 15, 15, 0.98) transparent transparent transparent;
+  }
+
+  .launch-item:hover .launch-card,
+  .launch-item:focus .launch-card,
+  .launch-item.active .launch-card {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+  }
+
+  .close-card {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 1.25rem;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: none; /* Only flex on mobile/active */
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 10;
+    line-height: 1;
+    padding: 0;
+  }
+
+  .close-card:hover, .close-card:active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1.25rem;
+    object-fit: contain;
+  }
+
+  .card-title {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .card-description {
+    color: #bbb;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+  }
+
+  .card-button {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    background: #fff;
+    color: #000;
+    border-radius: 2rem;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+
+  .card-button:hover {
+    background: #e0e0e0;
+    transform: translateY(-2px);
+  }
+
+  .launch-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 90;
+    pointer-events: none;
+  }
+
+  .launch-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 768px) {
+    .launches-section {
+      padding: 4rem 1.5rem;
+    }
+
+    .launches-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2.5rem 1.5rem;
+    }
+
+    .launch-icon {
+      width: 44px;
+      height: 44px;
+    }
+
+    .launch-name {
+      font-size: 0.8rem;
+    }
+
+    .launch-card {
+      position: fixed;
+      bottom: 50%;
+      left: 50%;
+      transform: translate(-50%, 60%) !important;
+      width: 85vw;
+      max-width: 320px;
+      margin-bottom: 0;
+    }
+
+    .launch-item.active .launch-card {
+      transform: translate(-50%, 50%) !important;
+    }
+
+    .launch-card::after {
+      display: none;
+    }
+
+    .close-card {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .launches-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem 1rem;
+    }
+  }
+</style>
+
+<script>
+  function initLaunches() {
+    const items = document.querySelectorAll('.launch-item');
+    const overlay = document.querySelector('.launch-overlay');
+
+    if (!items.length) return;
+
+    function closeAll() {
+      items.forEach(i => i.classList.remove('active'));
+      overlay?.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    items.forEach(item => {
+      const compact = item.querySelector('.launch-compact');
+      const closeBtn = item.querySelector('.close-card');
+      const card = item.querySelector('.launch-card');
+
+      // Click on icon/name toggles the card
+      compact?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isActive = item.classList.contains('active');
+        
+        closeAll(); // Close any other open card
+        
+        if (!isActive) {
+          item.classList.add('active');
+          overlay?.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      });
+
+      // Click on close button ALWAYS closes
+      closeBtn?.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        closeAll();
+      });
+
+      // Prevent clicks inside the card (except the button or link) from closing it
+      card?.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (!target.closest('.card-button')) {
+          e.stopPropagation();
+        }
+      });
+    });
+
+    overlay?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeAll();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeAll();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', initLaunches);
+  document.addEventListener('astro:page-load', initLaunches);
+</script>

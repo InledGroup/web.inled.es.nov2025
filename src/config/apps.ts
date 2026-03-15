@@ -7,6 +7,7 @@ export interface App {
   };
   icon: string;
   link: string;
+  isFeatured?: number | false;
   notice?: {
     type: 'warning' | 'info';
     message: {
@@ -25,7 +26,8 @@ export const apps: App[] = [
       en: 'Voice typing for Linux, 100% local, private and instant.'
     },
     icon: 'https://hosted.inled.es/vozes.png',
-    link: '/apps/vozes'
+    link: '/apps/vozes',
+    isFeatured: 4
   },
   {
     id: 'weby',
@@ -35,7 +37,8 @@ export const apps: App[] = [
       en: 'Your local and private AI copilot that solves doubts about the web you visit.'
     },
     icon: 'https://hosted.inled.es/weby.gif',
-    link: '/apps/weby'
+    link: '/apps/weby',
+    isFeatured: 5
   },
    {
     id: 'bautilus',
@@ -45,7 +48,8 @@ export const apps: App[] = [
       en: 'Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.'
     },
     icon: 'https://hosted.inled.es/bautilus.png',
-    link: '/apps/bautilus'
+    link: '/apps/bautilus',
+    isFeatured: 6
   },
         {
         id: 'darkreaderpdf',

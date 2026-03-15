@@ -7,9 +7,43 @@ export interface SaasProduct {
   };
   icon: string;
   link: string;
+  isFeatured?: number | false;
 }
 
 export const saas: SaasProduct[] = [
+    {
+    id: 'mypdf',
+    name: 'MyPDF',
+    description: {
+      es: 'La alternativa privada e ilimitada a ilovePDF',
+      en: 'The private and unlimited alternative to ilovePDF'
+    },
+    icon: 'https://hosted.inled.es/MYPDF.png',
+    link: 'https://mypdf.inled.es',
+    isFeatured: 1
+  },
+      {
+    id: 'mymetadata',
+    name: 'MyMetadata',
+    description: {
+      es: 'Los eliminadores de metadatos disponibles suben su archivo a sus servidores. Nosotros no, todo se procesa en tu propio navegador.',
+      en: 'Metadata removers upload your file to their servers. We don\'t, everything is processed in your own browser.'
+    },
+    icon: 'https://hosted.inled.es/mymetadata.svg',
+    link: 'https://mymetadata.inled.es',
+    isFeatured: 2
+  },
+    {
+    id: 'edgeai',
+    name: 'Edge AI',
+    description: {
+      es: 'La alternativa 100% privada y local a los chatbots de IA de OpenAI y Google.',
+      en: 'The 100% private and local alternative to AI chatbots from OpenAI and Google.'
+    },
+    icon: 'https://hosted.inled.es/inledai.svg',
+    link: 'https://edge.inled.es/landing',
+    isFeatured: 3
+  },
   {
     id: 'start',
     name: 'Start',
@@ -120,15 +154,6 @@ export const saas: SaasProduct[] = [
     icon: 'https://hosted.inled.es/inledai.svg',
     link: 'https://aicloud.inled.es'
   },
-  {
-    id: 'edgeai',
-    name: 'Edge AI',
-    description: {
-      es: 'La alternativa 100% privada y local a los chatbots de IA de OpenAI y Google.',
-      en: 'The 100% private and local alternative to AI chatbots from OpenAI and Google.'
-    },
-    icon: 'https://hosted.inled.es/inledai.svg',
-    link: 'https://edge.inled.es/landing'
-  },
+
 ];
 
