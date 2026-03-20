@@ -1,0 +1,507 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const app = {
+  id: "geminissh",
+  title: "Gemini SSH",
+  logo: "https://hosted.inled.es/geminishh-3d.png",
+  repoUrl: "https://github.com/jaimegh-es/geminissh",
+  cloneCmd: "git clone --depth 1 git@github.com:jaimegh-es/geminissh.git"
+};
+
+const i18n = {
+  es: {
+    hero: {
+      subtitle: "Control remoto inteligente potenciado por la IA de tu Mac.",
+      description: "Ejecuta comandos en ordenadores remotos directamente desde tu terminal local, aprovechando la potencia de Gemini para automatizar tareas y gestionar sistemas sobre un directorio compartido.",
+      button: "Ver en GitHub",
+      compatibility: "Actualmente disponible para controlar Linux desde Mac. Estamos trabajando para añadir soporte a Windows próximamente.",
+      disclaimer: "Proyecto no oficial. No afiliado con Google LLC. Imagen generada con Gemini Nano Banana"
+    },
+    usage: {
+      title: "Instalación rápida",
+      steps: [
+        { title: "Clonar repositorio", cmd: app.cloneCmd },
+        { title: "Preparar ejecución", cmd: "chmod +x start-bridge.sh" },
+        { title: "Iniciar Bridge", cmd: "./start-bridge.sh" }
+      ]
+    }
+  },
+  en: {
+    hero: {
+      subtitle: "Smart remote control powered by your Mac's AI.",
+      description: "Execute commands on remote computers directly from your local terminal, leveraging Gemini's power to automate tasks and manage systems over a shared directory.",
+      button: "View on GitHub",
+      compatibility: "Currently available to control Linux from Mac. We are working to add Windows support soon.",
+      disclaimer: "Unofficial project. Not affiliated with Google LLC. Image generated with Gemini Nano Banana"
+    },
+    usage: {
+      title: "Quick Install",
+      steps: [
+        { title: "Clone repository", cmd: app.cloneCmd },
+        { title: "Prepare execution", cmd: "chmod +x start-bridge.sh" },
+        { title: "Start Bridge", cmd: "./start-bridge.sh" }
+      ]
+    }
+  }
+};
+
+const t = i18n[lang];
+
+const colors = {
+  pink: "#ee6579",
+  blue: "#1381da",
+  dark: "#3c3c48"
+};
+---
+
+<Layout title="Gemini SSH - Control Remoto Inteligente - Inled" description={t.hero.subtitle}>
+  <div class="page-container">
+    <Header />
+    
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="glow pink-glow"></div>
+        <div class="glow blue-glow"></div>
+        
+        <div class="content reveal">
+          <div class="disclaimer-badge" id="hero-disclaimer">
+            {t.hero.disclaimer}
+          </div>
+          
+          <div class="logo-wrapper">
+            <img src={app.logo} alt="Gemini SSH Logo" class="app-logo" />
+            <div class="logo-shadow"></div>
+          </div>
+          
+          <h1 class="title">Gemini <span class="accent-text">SSH</span></h1>
+          <p class="subtitle" id="hero-subtitle">
+            {t.hero.subtitle}
+          </p>
+          
+          <div class="description-box">
+            <p id="hero-description">
+              {t.hero.description}
+            </p>
+            <div class="compatibility-notice" id="hero-compatibility">
+              <i class="fa-solid fa-circle-info"></i>
+              {t.hero.compatibility}
+            </div>
+          </div>
+          
+          <div class="actions">
+            <a href={app.repoUrl} target="_blank" class="btn btn-primary" id="hero-button">
+              <i class="fa-brands fa-github"></i>
+              {t.hero.button}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Usage Section -->
+      <section class="usage reveal">
+        <div class="container">
+          <h2 class="section-title" id="usage-title">{t.usage.title}</h2>
+          
+          <div class="steps-grid">
+            {t.usage.steps.map((step, index) => (
+              <div class="step-card">
+                <div class="step-num">{index + 1}</div>
+                <h3 id={`step-title-${index}`}>{step.title}</h3>
+                <div class="code-block">
+                  <code>{step.cmd}</code>
+                  <button class="copy-btn" data-copy={step.cmd} aria-label="Copy command">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style define:vars={{ pink: colors.pink, blue: colors.blue, dark: colors.dark }}>
+  .page-container {
+    background: #000;
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  main {
+    padding-top: 80px;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Glow Effects */
+  .glow {
+    position: absolute;
+    width: 40vw;
+    height: 40vw;
+    filter: blur(120px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .pink-glow {
+    top: -10%;
+    left: -10%;
+    background: var(--pink);
+  }
+
+  .blue-glow {
+    bottom: 20%;
+    right: -10%;
+    background: var(--blue);
+  }
+
+  /* Hero Section */
+  .hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+  }
+
+  .disclaimer-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .logo-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 3rem;
+  }
+
+  .app-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .logo-wrapper:hover .app-logo {
+    transform: scale(1.1) rotate(5deg);
+  }
+
+  .logo-shadow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, var(--pink) 0%, transparent 70%);
+    opacity: 0.3;
+    filter: blur(20px);
+    z-index: 1;
+  }
+
+  .title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+  }
+
+  .accent-text {
+    color: var(--pink);
+    text-shadow: 0 0 30px rgba(238, 101, 121, 0.4);
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .description-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 24px;
+    margin-bottom: 3rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: left;
+  }
+
+  .description-box p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 1.5rem;
+  }
+
+  .compatibility-notice {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: rgba(19, 129, 218, 0.1);
+    border: 1px solid rgba(19, 129, 218, 0.2);
+    border-radius: 12px;
+    color: var(--blue);
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .compatibility-notice i {
+    font-size: 1.2rem;
+  }
+
+  /* Actions */
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: var(--pink);
+    color: white;
+    box-shadow: 0 10px 20px rgba(238, 101, 121, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(238, 101, 121, 0.5);
+    background: #f07a8b;
+  }
+
+  /* Usage Section */
+  .usage {
+    padding: 6rem 0;
+    background: linear-gradient(to bottom, transparent, rgba(19, 129, 218, 0.05));
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .step-card {
+    background: rgba(60, 60, 72, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 24px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-card:hover {
+    background: rgba(60, 60, 72, 0.5);
+    border-color: var(--blue);
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+
+  .step-num {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 8rem;
+    font-weight: 800;
+    color: rgba(255, 255, 255, 0.03);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .step-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    color: var(--blue);
+  }
+
+  .code-block {
+    background: #000;
+    padding: 1.2rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .code-block code {
+    font-family: 'Monaco', 'Consolas', monospace;
+    font-size: 0.9rem;
+    color: #aeafad;
+    overflow-x: auto;
+  }
+
+  .copy-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .copy-btn:hover {
+    color: var(--pink);
+  }
+
+  /* Animations */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .actions {
+      flex-direction: column;
+    }
+    
+    .logo-wrapper {
+      width: 140px;
+      height: 140px;
+    }
+
+    .step-card {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script define:vars={{ i18n }}>
+  // Reveal on scroll
+  function reveal() {
+    const reveals = document.querySelectorAll(".reveal");
+    reveals.forEach((element) => {
+      const windowHeight = window.innerHeight;
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+      if (elementTop < windowHeight - elementVisible) {
+        element.classList.add("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", reveal);
+  reveal(); // Initial check
+
+  // Copy to clipboard
+  const copyButtons = document.querySelectorAll(".copy-btn");
+  copyButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const text = btn.getAttribute("data-copy");
+      if (text) {
+        navigator.clipboard.writeText(text);
+        const icon = btn.querySelector("i");
+        if (icon) {
+          icon.classList.remove("fa-copy");
+          icon.classList.add("fa-check");
+          setTimeout(() => {
+            icon.classList.remove("fa-check");
+            icon.classList.add("fa-copy");
+          }, 2000);
+        }
+      }
+    });
+  });
+
+  // Language updates
+  const elements = {
+    heroSubtitle: document.getElementById('hero-subtitle'),
+    heroDescription: document.getElementById('hero-description'),
+    heroCompatibility: document.getElementById('hero-compatibility'),
+    heroButton: document.getElementById('hero-button'),
+    heroDisclaimer: document.getElementById('hero-disclaimer'),
+    usageTitle: document.getElementById('usage-title')
+  };
+
+  function updateLang(lang) {
+    const data = i18n[lang];
+    if (!data) return;
+    
+    if (elements.heroSubtitle) elements.heroSubtitle.textContent = data.hero.subtitle;
+    if (elements.heroDescription) elements.heroDescription.textContent = data.hero.description;
+    if (elements.heroDisclaimer) elements.heroDisclaimer.textContent = data.hero.disclaimer;
+    if (elements.heroCompatibility) {
+      elements.heroCompatibility.innerHTML = `<i class="fa-solid fa-circle-info"></i> ${data.hero.compatibility}`;
+    }
+    if (elements.heroButton) {
+      elements.heroButton.innerHTML = `<i class="fa-brands fa-github"></i> ${data.hero.button}`;
+    }
+    if (elements.usageTitle) elements.usageTitle.textContent = data.usage.title;
+
+    data.usage.steps.forEach((step, index) => {
+      const titleEl = document.getElementById(`step-title-${index}`);
+      if (titleEl) titleEl.textContent = step.title;
+    });
+  }
+
+  window.addEventListener('langChanged', (e) => {
+    updateLang(e.detail.lang);
+  });
+
+  // Use localStorage preferred-lang if available
+  const initialLang = localStorage.getItem('preferred-lang') || 'es';
+  updateLang(initialLang);
+</script>

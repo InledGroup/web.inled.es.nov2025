@@ -1,5 +1,6 @@
 {
   "redirects": {
+    "/geminissh": "https://inled.es/apps/geminissh",
     "/swiftinstall": "https://inled.es/apps/swiftinstall",
     "/warp": "https://inled.es/apps/warp-vpn/",
     "/startomnibox": "https://inled.es/apps/startomnibox/",
