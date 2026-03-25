@@ -27,7 +27,7 @@ export const appsData: AppData[] = [
       "Mac",
       "Linux"
     ],
-    "shortDescription": "Control remoto inteligente desde tu Mac usando la IA de Gemini.",
+    "shortDescription": "Usa el Gemini de un dispositivo en múltiples dispositivos remotos.",
     "description": "# Gemini SSH: Control Remoto Potenciado por IA\n\nGemini SSH es una herramienta revolucionaria que te permite ejecutar comandos en ordenadores remotos directamente desde tu Mac, aprovechando la inteligencia artificial de Gemini para automatizar y simplificar la gestión de sistemas.\n\n### Características Principales\n\n- **Integración con Gemini**: Usa el modelo de IA de tu Mac para ejecutar comandos complejos de forma natural.\n- **Directorio Compartido**: Trabaja sobre un sistema de archivos compartido de forma transparente entre local y remoto.\n- **Simplicidad Absoluta**: Configuración rápida mediante un simple script de bridge.\n- **Seguridad**: Ejecución de comandos bajo tu control total.\n- **Optimizado para Mac**: Diseñado específicamente para integrarse en el flujo de trabajo de macOS.",
     "screenshots": [],
     "video": "",

@@ -22,8 +22,8 @@ export const apps: App[] = [
     id: 'geminissh',
     name: 'Gemini SSH',
     description: {
-      es: 'Control remoto inteligente desde tu Mac usando la IA de Gemini.',
-      en: 'Smart remote control from your Mac using Gemini AI.'
+      es: 'Usa el Gemini de un dispositivo en múltiples dispositivos remotos.',
+      en: 'Use the Gemini of one device on multiple remote devices.'
     },
     icon: 'https://hosted.inled.es/geminishh-3d.png',
     link: '/apps/geminissh',
