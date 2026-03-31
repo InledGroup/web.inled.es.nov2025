@@ -1,0 +1,569 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const app = {
+  id: "gemini-notifier",
+  title: "Gemini Notifier",
+  logo: "https://hosted.inled.es/1/gemini-voice.png",
+  repoUrl: "https://github.com/InledGroup/gemini-notifier",
+  cloneCmd: "git clone https://github.com/InledGroup/gemini-notifier.git"
+};
+
+const i18n = {
+  es: {
+    hero: {
+      subtitle: "Nunca pierdas de vista las tareas de tu Gemini CLI.",
+      description: "Gemini Notifier instala hooks de forma sencilla para que tu Gemini CLI te avise mediante notificaciones del sistema cuando realiza tareas y requiere tu atención. Ideal para flujos de trabajo eficientes sin necesidad de 'Bypass all permissions'.",
+      button: "Ver en GitHub",
+      status: "CLI Extension"
+    },
+    usage: {
+      title: "Instalación de Hooks",
+      steps: [
+        { title: "Clonar repositorio", cmd: app.cloneCmd },
+        { title: "Permisos de ejecución", cmd: "chmod +x install.sh" },
+        { title: "Instalar hooks", cmd: "./install.sh" }
+      ],
+      notice: "El script de instalación configurará automáticamente los hooks necesarios en tu entorno de Gemini CLI."
+    }
+  },
+  en: {
+    hero: {
+      subtitle: "Never lose track of your Gemini CLI tasks.",
+      description: "Gemini Notifier easily installs hooks so your Gemini CLI alerts you via system notifications when it performs tasks and requires your attention. Ideal for efficient workflows without needing 'Bypass all permissions'.",
+      button: "View on GitHub",
+      status: "CLI Extension"
+    },
+    usage: {
+      title: "Hooks Installation",
+      steps: [
+        { title: "Clone repository", cmd: app.cloneCmd },
+        { title: "Execution permissions", cmd: "chmod +x install.sh" },
+        { title: "Install hooks", cmd: "./install.sh" }
+      ],
+      notice: "The installation script will automatically configure the necessary hooks in your Gemini CLI environment."
+    }
+  }
+};
+
+const t = i18n[lang] || i18n.es;
+
+const colors = {
+  blue: "#4285f4",
+  purple: "#9b72cb",
+  pink: "#d96570",
+  bg: "#0c0c14",
+  text: "#f0f0f5"
+};
+---
+
+<Layout title="Gemini Notifier - Get Alerts from Gemini CLI - Inled" description={t.hero.subtitle}>
+  <div class="page-wrapper" id="page-wrapper">
+    <Header />
+    
+    <!-- Aura effects -->
+    <div class="gemini-aura aura-1"></div>
+    <div class="gemini-aura aura-2"></div>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="content reveal">
+          <div class="status-badge" id="hero-status">
+            {t.hero.status}
+          </div>
+          
+          <div class="logo-wrapper">
+            <img src={app.logo} alt="Gemini Notifier Logo" class="app-logo" />
+            <div class="logo-shadow"></div>
+          </div>
+          
+          <h1 class="title">Gemini <span class="accent-text">Notifier</span></h1>
+          <p class="subtitle" id="hero-subtitle">
+            {t.hero.subtitle}
+          </p>
+          
+          <div class="description-box">
+            <p id="hero-description">{t.hero.description}</p>
+          </div>
+          
+          <div class="actions">
+            <a href={app.repoUrl} target="_blank" class="btn btn-primary" id="hero-button">
+              <i class="fa-brands fa-github"></i>
+              {t.hero.button}
+            </a>
+          </div>
+
+          <div class="scroll-indicator">
+            <p id="scroll-text">{lang === 'es' ? 'Desliza para instalar' : 'Scroll to install'}</p>
+            <div class="mouse"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Usage Section -->
+      <section class="usage reveal" id="usage-section">
+        <div class="container">
+          <h2 class="section-title" id="usage-title">{t.usage.title}</h2>
+          
+          <div class="steps-grid">
+            {t.usage.steps.map((step, index) => (
+              <div class="step-card">
+                <div class="step-num">{index + 1}</div>
+                <h3 id={`step-title-${index}`}>{step.title}</h3>
+                <div class="code-block">
+                  <code>{step.cmd}</code>
+                  <button class="copy-btn" data-copy={step.cmd} aria-label="Copy command">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div class="usage-notice">
+            <i class="fa-solid fa-circle-info"></i>
+            <p id="usage-notice-text">{t.usage.notice}</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style define:vars={{ 
+  blue: colors.blue, 
+  purple: colors.purple, 
+  pink: colors.pink,
+  bg: colors.bg, 
+  text: colors.text
+}}>
+  .page-wrapper {
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 150vh;
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  /* Gemini Auras */
+  .gemini-aura {
+    position: fixed;
+    width: 60vw;
+    height: 60vw;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 0;
+    transition: transform 0.8s ease-out;
+  }
+
+  .aura-1 {
+    top: -20%;
+    right: -10%;
+    background: radial-gradient(circle, var(--purple), var(--blue));
+    animation: pulse 10s infinite alternate;
+  }
+
+  .aura-2 {
+    bottom: -10%;
+    left: -10%;
+    background: radial-gradient(circle, var(--blue), var(--pink));
+    animation: pulse 12s infinite alternate-reverse;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1) translate(0, 0); }
+    100% { transform: scale(1.2) translate(50px, 30px); }
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 2rem 6rem;
+  }
+
+  .content {
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: rgba(147, 52, 230, 0.1);
+    border: 1px solid var(--purple);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: var(--purple);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .logo-wrapper {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .app-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    filter: drop-shadow(0 0 20px rgba(147, 52, 230, 0.3));
+  }
+
+  .logo-shadow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 130%;
+    height: 130%;
+    background: radial-gradient(circle, var(--purple) 0%, transparent 70%);
+    opacity: 0.3;
+    filter: blur(25px);
+    z-index: 1;
+  }
+
+  .title {
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .accent-text {
+    background: linear-gradient(135deg, var(--blue), var(--purple), var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(147, 52, 230, 0.2);
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .description-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2.5rem;
+    border-radius: 28px;
+    margin-bottom: 3.5rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  }
+
+  .description-box p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    color: white;
+    box-shadow: 0 10px 25px rgba(147, 52, 230, 0.3);
+  }
+
+  .btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 35px rgba(147, 52, 230, 0.5);
+  }
+
+  .scroll-indicator {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9rem;
+  }
+
+  .mouse {
+    width: 26px;
+    height: 42px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .mouse::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background: var(--purple);
+    border-radius: 2px;
+    animation: scroll-anim 2s infinite;
+  }
+
+  @keyframes scroll-anim {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 15px); opacity: 0; }
+  }
+
+  /* Usage Section */
+  .usage {
+    padding: 10rem 0;
+    background: linear-gradient(to bottom, transparent, rgba(147, 52, 230, 0.05));
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 6vw, 3.5rem);
+    text-align: center;
+    margin-bottom: 5rem;
+    font-weight: 800;
+  }
+
+  .steps-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .step-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2.5rem;
+    border-radius: 24px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .step-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
+    border-color: var(--purple);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  }
+
+  .step-num {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 8rem;
+    font-weight: 900;
+    color: var(--purple);
+    opacity: 0.05;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .step-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    color: var(--blue);
+  }
+
+  .code-block {
+    background: #000;
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .code-block code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: #e0e0e0;
+  }
+
+  .copy-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    padding: 0.6rem;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover {
+    color: var(--purple);
+    transform: scale(1.1);
+  }
+
+  .usage-notice {
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    padding: 1.5rem;
+    background: rgba(147, 52, 230, 0.05);
+    border-radius: 16px;
+    border: 1px dashed var(--purple);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .usage-notice i {
+    font-size: 1.5rem;
+    color: var(--purple);
+  }
+
+  .usage-notice p {
+    margin: 0;
+    font-weight: 500;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .title { font-size: 3rem; }
+    .hero { padding: 120px 1.5rem 4rem; }
+    .usage { padding: 6rem 1rem; }
+    .step-card { padding: 1.5rem; }
+    .step-num { font-size: 6rem; }
+  }
+</style>
+
+<script define:vars={{ i18n }}>
+  // --- Aura Movement ---
+  const auras = document.querySelectorAll('.gemini-aura');
+  
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    auras.forEach((aura, index) => {
+      const speed = (index + 1) * 0.2;
+      aura.style.transform = `translateY(${scrollY * speed}px)`;
+    });
+
+    // Handle reveals
+    const reveals = document.querySelectorAll(".reveal");
+    const viewportHeight = window.innerHeight;
+    reveals.forEach((element) => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+      if (elementTop < viewportHeight - elementVisible) {
+        element.classList.add("active");
+      }
+    });
+  });
+
+  // --- Copy to clipboard ---
+  const copyButtons = document.querySelectorAll(".copy-btn");
+  copyButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const text = btn.getAttribute("data-copy");
+      if (text) {
+        navigator.clipboard.writeText(text);
+        const icon = btn.querySelector("i");
+        if (icon) {
+          icon.classList.remove("fa-copy");
+          icon.classList.add("fa-check");
+          setTimeout(() => {
+            icon.classList.remove("fa-check");
+            icon.classList.add("fa-copy");
+          }, 2000);
+        }
+      }
+    });
+  });
+
+  // --- Language Switcher ---
+  const elements = {
+    heroStatus: document.getElementById('hero-status'),
+    heroSubtitle: document.getElementById('hero-subtitle'),
+    heroDescription: document.getElementById('hero-description'),
+    heroButton: document.getElementById('hero-button'),
+    scrollText: document.getElementById('scroll-text'),
+    usageTitle: document.getElementById('usage-title'),
+    usageNotice: document.getElementById('usage-notice-text')
+  };
+
+  function updateLang(lang) {
+    const data = i18n[lang];
+    if (!data) return;
+
+    if (elements.heroStatus) elements.heroStatus.textContent = data.hero.status;
+    if (elements.heroSubtitle) elements.heroSubtitle.textContent = data.hero.subtitle;
+    if (elements.heroDescription) elements.heroDescription.textContent = data.hero.description;
+    if (elements.heroButton) {
+      elements.heroButton.innerHTML = `<i class="fa-brands fa-github"></i> ${data.hero.button}`;
+    }
+    if (elements.scrollText) {
+      elements.scrollText.textContent = lang === 'es' ? 'Desliza para instalar' : 'Scroll to install';
+    }
+    if (elements.usageTitle) elements.usageTitle.textContent = data.usage.title;
+    if (elements.usageNotice) elements.usageNotice.textContent = data.usage.notice;
+
+    data.usage.steps.forEach((step, index) => {
+      const titleEl = document.getElementById(`step-title-${index}`);
+      if (titleEl) titleEl.textContent = step.title;
+    });
+
+    document.documentElement.lang = lang;
+  }
+
+  window.addEventListener('langChanged', (e) => {
+    updateLang(e.detail.lang);
+  });
+
+  // Initialize from preferred lang
+  const initialLang = localStorage.getItem('preferred-lang') || 'es';
+  updateLang(initialLang);
+</script>

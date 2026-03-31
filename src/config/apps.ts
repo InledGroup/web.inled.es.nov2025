@@ -19,6 +19,39 @@ export interface App {
 
 export const apps: App[] = [
   {
+    id: 'agent-tunnel',
+    name: 'Agent Tunnel',
+    description: {
+      es: 'Acceso remoto seguro para tus agentes de IA: monta carpetas y redirige comandos.',
+      en: 'Secure remote access for your AI agents: mount folders and redirect commands.'
+    },
+    icon: 'https://hosted.inled.es/1/agent-tunnel-churro.png',
+    link: '/apps/agent-tunnel',
+    isFeatured: 2
+  },
+  {
+    id: 'tuby',
+    name: 'Tuby',
+    description: {
+      es: 'Descarga vídeos y audio de YouTube con la máxima calidad a 3 clics. Aislado y seguro.',
+      en: 'Download YouTube videos and audio with maximum quality in 3 clicks. Isolated and secure.'
+    },
+    icon: 'https://hosted.inled.es/1/tuby.png',
+    link: '/apps/tuby',
+    isFeatured: 3
+  },
+  {
+    id: 'gemini-notifier',
+    name: 'Gemini Notifier',
+    description: {
+      es: 'Recibe notificaciones cuando Gemini CLI requiere tu atención. Instalación rápida mediante hooks.',
+      en: 'Get notifications when Gemini CLI requires your attention. Quick installation via hooks.'
+    },
+    icon: 'https://hosted.inled.es/1/gemini-voice.png',
+    link: '/apps/gemini-notifier',
+    isFeatured: 4
+  },
+  {
     id: 'geminissh',
     name: 'Gemini SSH',
     description: {

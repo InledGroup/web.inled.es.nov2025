@@ -1,0 +1,584 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const app = {
+  id: "tuby",
+  title: "Tuby",
+  logo: "https://hosted.inled.es/1/tuby.gif",
+  repoUrl: "https://github.com/InledGroup/tuby",
+  cloneCmd: "git clone https://github.com/InledGroup/tuby.git"
+};
+
+const i18n = {
+  es: {
+    hero: {
+      subtitle: "Descarga de YouTube aislada, segura y de máxima calidad.",
+      description: "Tuby es una aplicación Docker que te permite descargar vídeos (MP4) y audio (MP3) de YouTube en apenas 3 clics. Todo se ejecuta de forma aislada en un contenedor, garantizando tu seguridad y privacidad.",
+      button: "Ver en GitHub",
+      status: "Docker App"
+    },
+    usage: {
+      title: "Instalación Rápida",
+      steps: [
+        { title: "Clonar repositorio", cmd: app.cloneCmd },
+        { title: "Preparar ejecución", cmd: "chmod +x run.sh" },
+        { title: "Iniciar Tuby", cmd: "./run.sh" }
+      ],
+      notice: "Tuby levantará un contenedor Docker con una interfaz web sencilla para tus descargas."
+    }
+  },
+  en: {
+    hero: {
+      subtitle: "Isolated, secure, and high-quality YouTube downloads.",
+      description: "Tuby is a Docker application that allows you to download videos (MP4) and audio (MP3) from YouTube in just 3 clicks. Everything runs isolated in a container, ensuring your security and privacy.",
+      button: "View on GitHub",
+      status: "Docker App"
+    },
+    usage: {
+      title: "Quick Install",
+      steps: [
+        { title: "Clone repository", cmd: app.cloneCmd },
+        { title: "Prepare execution", cmd: "chmod +x run.sh" },
+        { title: "Start Tuby", cmd: "./run.sh" }
+      ],
+      notice: "Tuby will start a Docker container with a simple web interface for your downloads."
+    }
+  }
+};
+
+const t = i18n[lang] || i18n.es;
+
+const colors = {
+  accent: "#fe0000",
+  bg: "#09090b", // zinc-950
+  text: "#ffffff"
+};
+---
+
+<Layout title="Tuby - YT-DLP powered YT downloader in docker - Inled" description={t.hero.subtitle}>
+  <div class="page-wrapper" id="page-wrapper">
+    <Header />
+    
+    <!-- Efecto de cuadro expansivo -->
+    <div id="scroll-box-overlay">
+        <div id="expanding-box"></div>
+    </div>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero" id="hero-section">
+        <div class="content reveal">
+          <div class="status-badge" id="hero-status">
+            {t.hero.status}
+          </div>
+          
+          <div class="logo-wrapper">
+            <img src={app.logo} alt="Tuby Logo" class="app-logo" />
+            <div class="logo-glow"></div>
+          </div>
+          
+          <h1 class="title">Tu<span class="accent-text">by</span></h1>
+          <p class="subtitle" id="hero-subtitle">
+            {t.hero.subtitle}
+          </p>
+          
+          <div class="description-box">
+            <p id="hero-description">{t.hero.description}</p>
+          </div>
+          
+          <div class="actions">
+            <a href={app.repoUrl} target="_blank" class="btn btn-primary" id="hero-button">
+              <i class="fa-brands fa-github"></i>
+              {t.hero.button}
+            </a>
+          </div>
+
+          <div class="scroll-indicator">
+            <p id="scroll-text">{lang === 'es' ? 'Desliza para instalar' : 'Scroll to install'}</p>
+            <div class="mouse"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Usage Section -->
+      <section class="usage reveal" id="usage-section">
+        <div class="container">
+          <h2 class="section-title" id="usage-title">{t.usage.title}</h2>
+          
+          <div class="steps-grid">
+            {t.usage.steps.map((step, index) => (
+              <div class="step-card">
+                <div class="step-num">{index + 1}</div>
+                <h3 id={`step-title-${index}`}>{step.title}</h3>
+                <div class="code-block">
+                  <code>{step.cmd}</code>
+                  <button class="copy-btn" data-copy={step.cmd} aria-label="Copy command">
+                    <i class="fa-regular fa-copy"></i>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div class="usage-notice">
+            <i class="fa-solid fa-circle-info"></i>
+            <p id="usage-notice-text">{t.usage.notice}</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style define:vars={{ 
+  accent: colors.accent, 
+  bg: colors.bg, 
+  text: colors.text
+}}>
+  .page-wrapper {
+    background-color: var(--bg);
+    color: var(--text);
+    min-height: 200vh;
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  /* Expanding Box Effect */
+  #scroll-box-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #expanding-box {
+    width: 0vw;
+    height: 0vh;
+    background: var(--accent);
+    box-shadow: inset 0 0 100px 20px rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    transition: background-color 0.1s ease-out, box-shadow 0.1s ease-out, opacity 0.1s ease-out;
+    border-radius: 24px; /* Recuadro con esquinas redondeadas */
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 140px 2rem 6rem;
+  }
+
+  .content {
+    max-width: 800px;
+    width: 100%;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    background: rgba(254, 0, 0, 0.1);
+    border: 1px solid var(--accent);
+    border-radius: 50px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .logo-wrapper {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .app-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    border-radius: 30px;
+  }
+
+  .logo-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    height: 140%;
+    background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+    opacity: 0.3;
+    filter: blur(30px);
+    z-index: 1;
+  }
+
+  .title {
+    font-size: clamp(3.5rem, 12vw, 6rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    letter-spacing: -0.05em;
+    line-height: 1;
+  }
+
+  .accent-text {
+    color: var(--accent);
+    text-shadow: 0 0 40px rgba(254, 0, 0, 0.4);
+  }
+
+  .subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 3rem;
+    font-weight: 300;
+  }
+
+  .description-box {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5rem;
+    border-radius: 28px;
+    margin-bottom: 3.5rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .description-box p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2.8rem;
+    border-radius: 50px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 10px 30px rgba(254, 0, 0, 0.4);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(254, 0, 0, 0.6);
+  }
+
+  .scroll-indicator {
+    margin-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .mouse {
+    width: 28px;
+    height: 46px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    position: relative;
+  }
+
+  .mouse::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 10px;
+    background: var(--accent);
+    border-radius: 2px;
+    animation: scroll-anim 2s infinite;
+  }
+
+  @keyframes scroll-anim {
+    0% { transform: translate(-50%, 0); opacity: 1; }
+    100% { transform: translate(-50%, 18px); opacity: 0; }
+  }
+
+  /* Usage Section */
+  .usage {
+    padding: 15rem 0 10rem;
+    min-height: 100vh;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    text-align: center;
+    margin-bottom: 5rem;
+    font-weight: 900;
+    color: #fff;
+  }
+
+  .steps-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .step-card {
+    position: relative;
+    padding-left: 4rem;
+  }
+
+  .step-num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 6rem;
+    font-weight: 900;
+    color: #fff;
+    opacity: 0.15;
+    line-height: 0.8;
+  }
+
+  .step-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .code-block {
+    background: #000;
+    padding: 1.8rem;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+  }
+
+  .code-block code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    color: #e5e7eb;
+  }
+
+  .copy-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    padding: 0.8rem;
+    transition: all 0.3s;
+  }
+
+  .copy-btn:hover {
+    color: var(--accent);
+    transform: scale(1.2);
+  }
+
+  .usage-notice {
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(254, 0, 0, 0.05);
+    border-radius: 20px;
+    border: 1px dashed var(--accent);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .usage-notice i {
+    font-size: 1.8rem;
+    color: var(--accent);
+  }
+
+  .usage-notice p {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  /* Reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 768px) {
+    .title { font-size: 4rem; }
+    .hero { padding: 120px 1.5rem 4rem; }
+    .usage { padding-top: 10rem; }
+    .step-card { padding-left: 3rem; }
+    .step-num { font-size: 4rem; }
+    .code-block { padding: 1.2rem; }
+    .code-block code { font-size: 0.85rem; }
+  }
+</style>
+
+<script define:vars={{ i18n }}>
+  // --- Expanding Box Logic ---
+  const expandingBox = document.getElementById('expanding-box');
+  
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const viewportHeight = window.innerHeight;
+    const totalHeight = document.documentElement.scrollHeight - viewportHeight;
+    const scrollProgress = scrollY / totalHeight;
+
+    let sizeIntensity = 0;
+    let opacityIntensity = 0;
+    let isFlash = false;
+
+    if (scrollProgress < 0.5) {
+        // Crecimiento: 0 a 0.5 del scroll
+        sizeIntensity = scrollProgress * 2;
+        opacityIntensity = sizeIntensity * 0.7; // Reducida intensidad máxima a 0.7
+    } else {
+        // Disolución: 0.5 a 1.0 del scroll
+        sizeIntensity = 1;
+        opacityIntensity = 0.7 * (1 - (scrollProgress - 0.5) * 2);
+    }
+
+    // Efecto Flash alrededor del 0.5 (destello rápido)
+    if (scrollProgress > 0.49 && scrollProgress < 0.51) {
+        isFlash = true;
+    }
+    
+    if (expandingBox) {
+        const size = sizeIntensity * 180;
+        expandingBox.style.width = `${size}vw`;
+        expandingBox.style.height = `${size}vh`;
+        
+        if (isFlash) {
+            expandingBox.style.backgroundColor = '#fff';
+            expandingBox.style.boxShadow = 'inset 0 0 200px 100px #fff, 0 0 100px 50px #fff';
+            expandingBox.style.opacity = '1';
+        } else {
+            expandingBox.style.backgroundColor = 'var(--accent)';
+            expandingBox.style.boxShadow = 'inset 0 0 100px 20px rgba(255, 255, 255, 0.4)';
+            expandingBox.style.opacity = opacityIntensity.toString();
+        }
+    }
+
+    // Handle reveals
+    const reveals = document.querySelectorAll(".reveal");
+    reveals.forEach((element) => {
+      const elementTop = element.getBoundingClientRect().top;
+      const elementVisible = 150;
+      if (elementTop < viewportHeight - elementVisible) {
+        element.classList.add("active");
+      }
+    });
+  });
+
+  // --- Copy to clipboard ---
+  const copyButtons = document.querySelectorAll(".copy-btn");
+  copyButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const text = btn.getAttribute("data-copy");
+      if (text) {
+        navigator.clipboard.writeText(text);
+        const icon = btn.querySelector("i");
+        if (icon) {
+          icon.classList.remove("fa-copy");
+          icon.classList.add("fa-check");
+          setTimeout(() => {
+            icon.classList.remove("fa-check");
+            icon.classList.add("fa-copy");
+          }, 2000);
+        }
+      }
+    });
+  });
+
+  // --- Language Switcher ---
+  const elements = {
+    heroStatus: document.getElementById('hero-status'),
+    heroSubtitle: document.getElementById('hero-subtitle'),
+    heroDescription: document.getElementById('hero-description'),
+    heroButton: document.getElementById('hero-button'),
+    scrollText: document.getElementById('scroll-text'),
+    usageTitle: document.getElementById('usage-title'),
+    usageNotice: document.getElementById('usage-notice-text')
+  };
+
+  function updateLang(lang) {
+    const data = i18n[lang];
+    if (!data) return;
+
+    if (elements.heroStatus) elements.heroStatus.textContent = data.hero.status;
+    if (elements.heroSubtitle) elements.heroSubtitle.textContent = data.hero.subtitle;
+    if (elements.heroDescription) elements.heroDescription.textContent = data.hero.description;
+    if (elements.heroButton) {
+      elements.heroButton.innerHTML = `<i class="fa-brands fa-github"></i> ${data.hero.button}`;
+    }
+    if (elements.scrollText) {
+      elements.scrollText.textContent = lang === 'es' ? 'Desliza para instalar' : 'Scroll to install';
+    }
+    if (elements.usageTitle) elements.usageTitle.textContent = data.usage.title;
+    if (elements.usageNotice) elements.usageNotice.textContent = data.usage.notice;
+
+    data.usage.steps.forEach((step, index) => {
+      const titleEl = document.getElementById(`step-title-${index}`);
+      if (titleEl) titleEl.textContent = step.title;
+    });
+
+    document.documentElement.lang = lang;
+  }
+
+  window.addEventListener('langChanged', (e) => {
+    updateLang(e.detail.lang);
+  });
+
+  // Initialize from preferred lang
+  const initialLang = localStorage.getItem('preferred-lang') || 'es';
+  updateLang(initialLang);
+</script>
