@@ -30,14 +30,15 @@ const allFeatured = [...featuredSaas, ...featuredApps].sort((a, b) => {
 
 interface Props {
   title?: string;
+  isHero?: boolean;
 }
 
-const { title = "Latest Launches" } = Astro.props;
+const { title = "Latest Launches", isHero = false } = Astro.props;
 ---
 
-<section class="launches-section">
+<section class:list={["launches-section", { "is-hero": isHero }]}>
   <div class="container">
-    <h2 class="section-title">{title}</h2>
+    {!isHero && <h2 class="section-title">{title}</h2>}
     <div class="launches-grid">
       {allFeatured.map((product) => (
         <div class="launch-item" tabindex="0">
@@ -59,7 +60,18 @@ const { title = "Latest Launches" } = Astro.props;
           </div>
         </div>
       ))}
+      <a href="#saas" class="launch-item view-all">
+        <div class="launch-compact">
+          <div class="view-all-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </div>
+          <span class="launch-name">{t('grid.viewAll')}</span>
+        </div>
+      </a>
     </div>
+    {isHero && <p class="launches-notice">{t('grid.moreNotice')}</p>}
     <div class="launch-overlay"></div>
   </div>
 </section>
@@ -76,12 +88,24 @@ const { title = "Latest Launches" } = Astro.props;
     overflow: visible;
   }
 
+  .launches-section.is-hero {
+    padding: 0;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    margin-top: 3rem;
+  }
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .section-title {
+    width: 100%;
     font-size: 2.5rem;
     color: #fff;
     text-align: center;
@@ -94,12 +118,15 @@ const { title = "Latest Launches" } = Astro.props;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 4rem;
     justify-items: center;
+    width: 100%;
+    max-width: 1000px;
   }
 
   .launch-item {
     position: relative;
     cursor: pointer;
     outline: none;
+    text-decoration: none;
   }
 
   .launch-compact {
@@ -110,11 +137,26 @@ const { title = "Latest Launches" } = Astro.props;
     transition: transform 0.3s ease;
   }
 
-  .launch-icon {
+  .launch-icon, .view-all-icon {
     width: 52px;
     height: 52px;
     object-fit: contain;
     transition: all 0.3s ease;
+  }
+
+  .view-all-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: #fff;
+  }
+
+  .launch-item:hover .view-all-icon {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
   }
 
   .launch-name {
@@ -123,6 +165,14 @@ const { title = "Latest Launches" } = Astro.props;
     font-weight: 400;
     transition: color 0.3s ease;
     text-align: center;
+  }
+
+  .launches-notice {
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+    letter-spacing: 0.02em;
   }
 
   .launch-item:hover .launch-compact {
@@ -323,7 +373,7 @@ const { title = "Latest Launches" } = Astro.props;
 
 <script>
   function initLaunches() {
-    const items = document.querySelectorAll('.launch-item');
+    const items = document.querySelectorAll('.launch-item:not(.view-all)');
     const overlay = document.querySelector('.launch-overlay');
 
     if (!items.length) return;

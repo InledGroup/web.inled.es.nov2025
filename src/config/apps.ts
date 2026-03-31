@@ -33,8 +33,8 @@ export const apps: App[] = [
     id: 'tuby',
     name: 'Tuby',
     description: {
-      es: 'Descarga vídeos y audio de YouTube con la máxima calidad a 3 clics. Aislado y seguro.',
-      en: 'Download YouTube videos and audio with maximum quality in 3 clicks. Isolated and secure.'
+      es: 'Descarga vídeos y audio de YT con la máxima calidad a 3 clics. Aislado y seguro.',
+      en: 'Download YT videos and audio with maximum quality in 3 clicks. Isolated and secure.'
     },
     icon: 'https://hosted.inled.es/1/tuby.png',
     link: '/apps/tuby',

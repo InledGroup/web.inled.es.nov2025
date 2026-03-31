@@ -7,7 +7,6 @@ import StatsCounter from '../components/StatsCounter.astro';
 import HeroCTA from '../components/HeroCTA.astro';
 import AudioModal from '../components/AudioModal.astro';
 import ProductsGrid from '../components/ProductsGrid.astro';
-import LatestLaunches from '../components/LatestLaunches.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import { apps } from '../config/apps';
 import { saas } from '../config/saas';
@@ -49,8 +48,7 @@ const saasProducts = saas.map(s => ({
 <Layout title="Inled Group - Dream, build" description={t('scroll.description')}>
   <AudioModal />
   <Header />
-  <Hero title={t('hero.title')} />
-  <LatestLaunches title={t('grid.launches')} />
+  <Hero />
   <ScrollSection
     title={t('scroll.title')}
     description={t('scroll.description')}>
@@ -65,7 +63,7 @@ const saasProducts = saas.map(s => ({
     primaryButtonHref="/proyectos"
     secondaryButtonHref="#apps"
   />
-  <FeatureSection
+  <!-- <FeatureSection
     title={t('feature.edge.title')}
     description={t('feature.edge.description')}
     imageSrc="https://hosted.inled.es/edgeai.png"
@@ -80,7 +78,7 @@ const saasProducts = saas.map(s => ({
     imageSrc="https://hosted.inled.es/ainclouddeco.png"
     buttonText={t('feature.ai.button')}
     buttonHref="https://ai.inled.es"
-  />
+  />-->
 
   
   <div id="saas">
