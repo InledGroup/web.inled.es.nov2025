@@ -1,4 +1,11 @@
-# Changelog
+# Changelog 
+
+
+## 2026-04-06
+
+### Added
+- Traducción automática de Changelog y artículos de blog
+- Añadido componente Changelog al sitio web
 
 
 

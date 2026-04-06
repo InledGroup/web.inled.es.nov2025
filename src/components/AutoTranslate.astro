@@ -1,0 +1,98 @@
+---
+// AutoTranslate.astro - Sistema de traducción gratuita robusto
+---
+
+<script is:inline>
+  // Función para leer cookies en el cliente
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+    return null;
+  }
+
+  // Lógica de traducción vía Google Translate (Cliente gtx - más estable)
+  async function translateText(text, target) {
+    try {
+      // Usamos el endpoint de Google que es más fiable que las instancias de Lingva
+      const url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=es&tl=${target}&dt=t&q=${encodeURIComponent(text)}`;
+      const response = await fetch(url);
+      if (!response.ok) throw new Error('Network response was not ok');
+      const data = await response.json();
+      
+      // El formato de Google es un array anidado: [[["Texto Traducido", "Texto Original", ...]]]
+      if (data && data[0] && data[0][0] && data[0][0][0]) {
+        return data[0][0][0];
+      }
+      return text;
+    } catch (e) {
+      console.error('Translation error for:', text, e);
+      return text; // Devolver original en caso de error
+    }
+  }
+
+  async function translateContent() {
+    const preferredLang = getCookie('preferred-lang') || localStorage.getItem('preferred-lang') || 'es';
+    
+    if (preferredLang !== 'en') {
+        // Si volvemos a español, podríamos querer recargar o dejarlo (normalmente se recarga la página)
+        return;
+    }
+
+    const translatableElements = document.querySelectorAll('.translatable:not([data-translated])');
+    
+    // Procesar cada elemento translatable
+    for (const el of translatableElements) {
+      el.classList.add('translating');
+      
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      let node;
+      const textNodes = [];
+      while(node = walker.nextNode()) {
+        const trimmed = node.nodeValue?.trim();
+        if (trimmed && 
+            trimmed.length > 1 && // Evitar traducir caracteres sueltos o números solos
+            node.parentElement.tagName !== 'SCRIPT' && 
+            node.parentElement.tagName !== 'STYLE' &&
+            !node.parentElement.closest('.notranslate')) {
+          textNodes.push({node, text: trimmed});
+        }
+      }
+
+      // Traducir los nodos de este elemento
+      for (const item of textNodes) {
+        const translated = await translateText(item.text, 'en');
+        if (translated && translated !== item.text) {
+          item.node.nodeValue = item.node.nodeValue.replace(item.text, translated);
+        }
+      }
+
+      el.setAttribute('data-translated', 'true');
+      el.classList.remove('translating');
+    }
+  }
+
+  // Observador para detectar cuando el Header cambia el idioma sin recargar la página (si fuera el caso)
+  // Pero como tu Header hace window.location.reload(), con el DOMContentLoaded basta.
+  
+  window.addEventListener('DOMContentLoaded', translateContent);
+  
+  // Ejecución inmediata para elementos ya presentes
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    translateContent();
+  }
+
+  // Exponer para llamadas manuales (como el botón "Ver más")
+  window.triggerAutoTranslate = translateContent;
+</script>
+
+<style is:global>
+  .translatable {
+    transition: opacity 0.4s ease, filter 0.4s ease;
+  }
+  .translatable.translating {
+    opacity: 0.7;
+    filter: blur(1px);
+    pointer-events: none;
+  }
+</style>

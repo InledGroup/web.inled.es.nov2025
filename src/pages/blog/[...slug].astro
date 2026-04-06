@@ -3,6 +3,8 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import { getPosts, formatDate } from '../../lib/blogger';
 import type { BlogPost } from '../../lib/blogger';
+import AutoTranslate from '../../components/AutoTranslate.astro';
+import { getLangFromLocals } from '../../i18n/utils';
 
 export const prerender = true;
 
@@ -19,6 +21,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
+const lang = getLangFromLocals(Astro.locals);
 ---
 
 <Layout title={`${post.title} | Inled Blog`} description={post.title}>
@@ -29,7 +32,7 @@ const { post } = Astro.props;
       <div class="container">
         <a href="/blog" class="back-link">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-          Volver al blog
+          <span class="translatable">Volver al blog</span>
         </a>
         <div class="meta">
           <span class="date">{formatDate(post.published)}</span>
@@ -42,18 +45,19 @@ const { post } = Astro.props;
             </>
           )}
         </div>
-        <h1 class="post-title">{post.title}</h1>
+        <h1 class="post-title translatable">{post.title}</h1>
         <div class="author">
-          <span class="by">Por</span> {post.author}
+          <span class="by translatable">Por</span> {post.author}
         </div>
       </div>
     </div>
 
     <div class="post-content">
       <div class="container">
-        <div class="content-wrapper" set:html={post.content} />
+        <div class="content-wrapper translatable" set:html={post.content} />
       </div>
     </div>
+    <AutoTranslate />
   </article>
 </Layout>
 

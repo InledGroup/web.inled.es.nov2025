@@ -1,6 +1,7 @@
 ---
 import { getPosts, formatDate } from '../lib/blogger';
 import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
+import AutoTranslate from './AutoTranslate.astro';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
@@ -31,12 +32,13 @@ const latestPosts = posts.slice(0, 3);
           </div>
           <div class="card-content">
             <span class="date">{formatDate(post.published)}</span>
-            <h3 class="post-title">{post.title}</h3>
+            <h3 class="post-title translatable">{post.title}</h3>
           </div>
         </a>
       ))}
     </div>
   </div>
+  <AutoTranslate lang={lang} />
 </section>
 
 <style>

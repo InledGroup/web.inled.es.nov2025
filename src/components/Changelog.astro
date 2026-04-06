@@ -3,6 +3,7 @@ import { marked } from 'marked';
 import fs from 'node:fs';
 import path from 'node:path';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
+import AutoTranslate from './AutoTranslate.astro';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
@@ -32,10 +33,10 @@ const titleMatch = changelogContent.match(/^# (.*)/);
 const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
 ---
 
-<section class="changelog-full-width" data-lang={lang}>
+<section class="changelog-full-width">
   <div class="changelog-inner-container">
     <div class="changelog-header">
-      <h2 id="changelogTitle">{componentTitle}</h2>
+      <h2 class="translatable">{componentTitle}</h2>
       <span class="version-tag">{lang === 'es' ? 'Actualizado' : 'Updated'}: {parsedEntries[0]?.date}</span>
     </div>
 
@@ -64,6 +65,8 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
       </button>
     </div>
   </div>
+  
+  <AutoTranslate lang={lang} />
 </section>
 
 <style>
@@ -150,12 +153,6 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
   .changelog-entry {
     position: relative;
     padding-left: 3rem;
-    transition: opacity 0.5s ease;
-  }
-
-  .changelog-entry.translating {
-    opacity: 0.3;
-    pointer-events: none;
   }
 
   .entry-date {
@@ -270,10 +267,10 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
   const btnText = document.getElementById('btnText');
   const entries = document.querySelectorAll('.changelog-entry');
   const section = document.querySelector('.changelog-full-width');
-  const currentLang = section?.getAttribute('data-lang');
+  // @ts-ignore
+  const currentLang = document.documentElement.lang;
   let state = 0;
 
-  // Lógica de expansión
   if (btn) {
     btn.addEventListener('click', () => {
       state++;
@@ -285,61 +282,13 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
         entries.forEach((el) => { (el as HTMLElement).style.display = 'block'; });
         btn.style.display = 'none';
       }
-      // Re-traducir si es necesario al expandir
-      if (currentLang === 'en') translateContent();
-    });
-  }
-
-  // Lógica de traducción automática (Gratuita vía Lingva/Google)
-  async function translateText(text: string, target: string) {
-    try {
-      const response = await fetch(`https://lingva.ml/api/v1/es/${target}/${encodeURIComponent(text)}`);
-      const data = await response.json();
-      return data.translation;
-    } catch (e) {
-      console.error('Translation error:', e);
-      return text;
-    }
-  }
-
-  async function translateContent() {
-    if (currentLang !== 'en') return;
-
-    const translatableElements = document.querySelectorAll('.translatable:not([data-translated])');
-    
-    for (const el of translatableElements) {
-      el.classList.add('translating');
-      const originalHTML = el.innerHTML;
       
-      // Traducimos el contenido HTML sutilmente
-      // Nota: Para mantener el formato Markdown/HTML, traducimos los nodos de texto
-      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
-      let node;
-      const textNodes = [];
-      while(node = walker.nextNode()) {
-        if (node.nodeValue?.trim()) textNodes.push(node);
+      // Llamamos a la función global del componente AutoTranslate
+      // @ts-ignore
+      if (window.triggerAutoTranslate) {
+         // @ts-ignore
+        window.triggerAutoTranslate();
       }
-
-      for (const node of textNodes) {
-        const translated = await translateText(node.nodeValue || '', 'en');
-        node.nodeValue = translated;
-      }
-
-      el.setAttribute('data-translated', 'true');
-      el.classList.remove('translating');
-    }
-
-    // Traducir título si no está traducido
-    const title = document.getElementById('changelogTitle');
-    if (title && !title.hasAttribute('data-translated')) {
-      const translatedTitle = await translateText(title.textContent || '', 'en');
-      title.textContent = translatedTitle;
-      title.setAttribute('data-translated', 'true');
-    }
-  }
-
-  // Ejecutar traducción inicial si estamos en inglés
-  if (currentLang === 'en') {
-    translateContent();
+    });
   }
 </script>

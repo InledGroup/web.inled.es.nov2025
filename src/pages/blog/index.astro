@@ -2,7 +2,10 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import { getPosts, formatDate } from '../../lib/blogger';
+import AutoTranslate from '../../components/AutoTranslate.astro';
+import { getLangFromLocals } from '../../i18n/utils';
 
+const lang = getLangFromLocals(Astro.locals);
 const posts = await getPosts();
 const title = "Blog";
 const subtitle = "Novedades de Inled Group";
@@ -38,7 +41,7 @@ const description = "Últimas noticias y actualizaciones de Inled Group";
               </div>
               <div class="card-content">
                 <span class="post-date">{formatDate(post.published)}</span>
-                <h2 class="post-card-title">{post.title}</h2>
+                <h2 class="post-card-title translatable">{post.title}</h2>
                 {post.tags.length > 0 && (
                   <div class="post-tags">
                     {post.tags.slice(0, 2).map(tag => (
@@ -53,6 +56,7 @@ const description = "Últimas noticias y actualizaciones de Inled Group";
         </div>
       </div>
     </section>
+    <AutoTranslate lang={lang} />
   </main>
 </Layout>
 
