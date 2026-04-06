@@ -3,29 +3,17 @@ import { marked } from 'marked';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
 import AutoTranslate from './AutoTranslate.astro';
 
+// Usamos el import con ?raw de Vite: Esto es infalible para Cloudflare/SSR/SSG
+// porque el contenido se inyecta en el build. No requiere fs ni fetch.
+// @ts-ignore
+import changelogRaw from '../data/changelog.md?raw';
+
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 
-// En entornos Cloudflare/SSR, no podemos usar fs. 
-// Como el archivo está en /public, podemos obtenerlo vía fetch durante el build o renderizado
-// O mejor aún, para asegurar que funcione en SSG, lo intentamos cargar dinámicamente.
-// Nota: En Astro, lo más robusto para archivos en public es un fetch con la URL completa o relativa al sitio.
-const changelogURL = new URL('/data/changelog.md', Astro.url.origin).href;
-let changelogContent = '';
+const changelogContent = changelogRaw || '# Changelog\nNo se pudo cargar el archivo.';
 
-try {
-  const response = await fetch(changelogURL);
-  if (response.ok) {
-    changelogContent = await response.text();
-  } else {
-    // Fallback por si el fetch falla en tiempo de build
-    changelogContent = '# Changelog\nNo se pudo cargar el archivo desde ' + changelogURL;
-  }
-} catch (e) {
-  changelogContent = '# Changelog\nError al cargar el archivo.';
-}
-
-// Separar por días
+// Separar por días (usando el encabezado ## YYYY-MM-DD como separador)
 const entries = changelogContent.split(/(?=## \d{4}-\d{2}-\d{2})/).slice(1);
 
 // Convertir cada entrada a HTML
@@ -37,6 +25,7 @@ const parsedEntries = entries.map(entry => {
   };
 });
 
+// El título del componente (primer encabezado # del archivo)
 const titleMatch = changelogContent.match(/^# (.*)/);
 const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
 ---
@@ -74,7 +63,7 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
     </div>
   </div>
   
-  <AutoTranslate lang={lang} />
+  <AutoTranslate />
 </section>
 
 <style>
@@ -274,7 +263,6 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
   const btn = document.getElementById('showMoreBtn');
   const btnText = document.getElementById('btnText');
   const entries = document.querySelectorAll('.changelog-entry');
-  const section = document.querySelector('.changelog-full-width');
   // @ts-ignore
   const currentLang = document.documentElement.lang;
   let state = 0;
@@ -291,7 +279,6 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
         btn.style.display = 'none';
       }
       
-      // Llamamos a la función global del componente AutoTranslate
       // @ts-ignore
       if (window.triggerAutoTranslate) {
          // @ts-ignore
