@@ -13,6 +13,7 @@ import { saas } from '../config/saas';
 
 import NewsletterSection from '../components/NewsletterSection.astro';
 import BlogSection from '../components/BlogSection.astro';
+import Changelog from '../components/Changelog.astro';
 import NewsletterNotification from '../components/NewsletterNotification.astro';
 
 import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
@@ -88,6 +89,8 @@ const saasProducts = saas.map(s => ({
   <div id="apps">
     <ProductsGrid title={t('grid.apps')} products={appProducts} />
   </div>
+
+  <Changelog />
 
   <BlogSection />
 

@@ -1,0 +1,345 @@
+---
+import { marked } from 'marked';
+import fs from 'node:fs';
+import path from 'node:path';
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+
+// Leer el archivo de forma sincrónica durante el build
+const filePath = path.join(process.cwd(), 'public/data/changelog.md');
+let changelogContent = '';
+try {
+  changelogContent = fs.readFileSync(filePath, 'utf-8');
+} catch (e) {
+  changelogContent = '# Changelog\nNo se pudo cargar el archivo.';
+}
+
+// Separar por días
+const entries = changelogContent.split(/(?=## \d{4}-\d{2}-\d{2})/).slice(1);
+
+// Convertir cada entrada a HTML
+const parsedEntries = entries.map(entry => {
+  const [title, ...content] = entry.split('\n');
+  return {
+    date: title.replace('## ', '').trim(),
+    html: marked.parse(content.join('\n'))
+  };
+});
+
+const titleMatch = changelogContent.match(/^# (.*)/);
+const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
+---
+
+<section class="changelog-full-width" data-lang={lang}>
+  <div class="changelog-inner-container">
+    <div class="changelog-header">
+      <h2 id="changelogTitle">{componentTitle}</h2>
+      <span class="version-tag">{lang === 'es' ? 'Actualizado' : 'Updated'}: {parsedEntries[0]?.date}</span>
+    </div>
+
+    <div class="changelog-scroll-area" id="changelogContainer" data-lenis-prevent>
+      <div class="entries-wrapper">
+        {parsedEntries.map((entry, index) => (
+          <div 
+            class="changelog-entry" 
+            data-index={index}
+            style={index === 0 ? "" : "display: none;"}
+          >
+            <div class="entry-date">
+              <span class="dot"></span>
+              {entry.date}
+            </div>
+            <div class="entry-content translatable" set:html={entry.html} />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="changelog-actions">
+      <button id="showMoreBtn" class="expand-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
+        <span id="btnText">{lang === 'es' ? 'Ver más cambios' : 'View more changes'}</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .changelog-full-width {
+    width: 100%;
+    padding: 5rem 1.5rem;
+    background: rgba(15, 15, 20, 0.5);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin: 4rem 0;
+  }
+
+  .changelog-inner-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .changelog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .changelog-header h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.03em;
+  }
+
+  .version-tag {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .changelog-scroll-area {
+    max-height: 550px;
+    overflow-y: auto;
+    padding-right: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+
+  .changelog-scroll-area::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .changelog-scroll-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+  }
+
+  .entries-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    position: relative;
+  }
+
+  .entries-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 10px;
+    bottom: 10px;
+    width: 1px;
+    background: linear-gradient(to bottom, 
+      rgba(255, 255, 255, 0.3) 0%, 
+      rgba(255, 255, 255, 0.1) 50%, 
+      rgba(255, 255, 255, 0.02) 100%
+    );
+  }
+
+  .changelog-entry {
+    position: relative;
+    padding-left: 3rem;
+    transition: opacity 0.5s ease;
+  }
+
+  .changelog-entry.translating {
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .entry-date {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    letter-spacing: -0.01em;
+  }
+
+  .dot {
+    position: absolute;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    border: 3px solid #000;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+    z-index: 2;
+  }
+
+  .entry-content {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .entry-content :global(h3) {
+    font-size: 0.75rem;
+    margin: 1.8rem 0 0.6rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 800;
+  }
+
+  .entry-content :global(ul) {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .entry-content :global(li) {
+    position: relative;
+    margin-bottom: 0.6rem;
+    padding-left: 1.5rem;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .entry-content :global(li::before) {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 6px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .changelog-actions {
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .expand-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 0.9rem 2.5rem;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .expand-btn:hover {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+    transform: translateY(-3px);
+  }
+
+  .changelog-entry[style*="display: block"] {
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .changelog-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('showMoreBtn');
+  const btnText = document.getElementById('btnText');
+  const entries = document.querySelectorAll('.changelog-entry');
+  const section = document.querySelector('.changelog-full-width');
+  const currentLang = section?.getAttribute('data-lang');
+  let state = 0;
+
+  // Lógica de expansión
+  if (btn) {
+    btn.addEventListener('click', () => {
+      state++;
+      if (state === 1) {
+        entries.forEach((el, idx) => { if (idx < 5) (el as HTMLElement).style.display = 'block'; });
+        if (btnText) btnText.textContent = currentLang === 'es' ? 'Ver historial completo' : 'View full history';
+        if (entries.length <= 5) btn.style.display = 'none';
+      } else if (state === 2) {
+        entries.forEach((el) => { (el as HTMLElement).style.display = 'block'; });
+        btn.style.display = 'none';
+      }
+      // Re-traducir si es necesario al expandir
+      if (currentLang === 'en') translateContent();
+    });
+  }
+
+  // Lógica de traducción automática (Gratuita vía Lingva/Google)
+  async function translateText(text: string, target: string) {
+    try {
+      const response = await fetch(`https://lingva.ml/api/v1/es/${target}/${encodeURIComponent(text)}`);
+      const data = await response.json();
+      return data.translation;
+    } catch (e) {
+      console.error('Translation error:', e);
+      return text;
+    }
+  }
+
+  async function translateContent() {
+    if (currentLang !== 'en') return;
+
+    const translatableElements = document.querySelectorAll('.translatable:not([data-translated])');
+    
+    for (const el of translatableElements) {
+      el.classList.add('translating');
+      const originalHTML = el.innerHTML;
+      
+      // Traducimos el contenido HTML sutilmente
+      // Nota: Para mantener el formato Markdown/HTML, traducimos los nodos de texto
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+      let node;
+      const textNodes = [];
+      while(node = walker.nextNode()) {
+        if (node.nodeValue?.trim()) textNodes.push(node);
+      }
+
+      for (const node of textNodes) {
+        const translated = await translateText(node.nodeValue || '', 'en');
+        node.nodeValue = translated;
+      }
+
+      el.setAttribute('data-translated', 'true');
+      el.classList.remove('translating');
+    }
+
+    // Traducir título si no está traducido
+    const title = document.getElementById('changelogTitle');
+    if (title && !title.hasAttribute('data-translated')) {
+      const translatedTitle = await translateText(title.textContent || '', 'en');
+      title.textContent = translatedTitle;
+      title.setAttribute('data-translated', 'true');
+    }
+  }
+
+  // Ejecutar traducción inicial si estamos en inglés
+  if (currentLang === 'en') {
+    translateContent();
+  }
+</script>
