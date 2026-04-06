@@ -20,7 +20,7 @@ export const saas: SaasProduct[] = [
     },
     icon: 'https://hosted.inled.es/MYPDF.png',
     link: 'https://mypdf.inled.es',
-    isFeatured: 1
+    isFeatured: 2
   },
       {
     id: 'mymetadata',

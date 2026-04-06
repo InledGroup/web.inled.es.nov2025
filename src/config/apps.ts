@@ -27,7 +27,7 @@ export const apps: App[] = [
     },
     icon: 'https://hosted.inled.es/1/agent-tunnel-churro.png',
     link: '/apps/agent-tunnel',
-    isFeatured: 2
+    isFeatured: 1
   },
   {
     id: 'tuby',
@@ -51,17 +51,7 @@ export const apps: App[] = [
     link: '/apps/gemini-notifier',
     isFeatured: 4
   },
-  {
-    id: 'geminissh',
-    name: 'Gemini SSH',
-    description: {
-      es: 'Usa el Gemini de un dispositivo en múltiples dispositivos remotos.',
-      en: 'Use the Gemini of one device on multiple remote devices.'
-    },
-    icon: 'https://hosted.inled.es/geminishh-3d.png',
-    link: '/apps/geminissh',
-    isFeatured: 1
-  },
+
     {
     id: 'vozes',
     name: 'Vozes',
