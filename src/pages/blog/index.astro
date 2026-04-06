@@ -5,6 +5,8 @@ import { getPosts, formatDate } from '../../lib/blogger';
 import AutoTranslate from '../../components/AutoTranslate.astro';
 import { getLangFromLocals } from '../../i18n/utils';
 
+export const prerender = true;
+
 const lang = getLangFromLocals(Astro.locals);
 const posts = await getPosts();
 const title = "Blog";

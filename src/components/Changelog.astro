@@ -1,20 +1,28 @@
 ---
 import { marked } from 'marked';
-import fs from 'node:fs';
-import path from 'node:path';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
 import AutoTranslate from './AutoTranslate.astro';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 
-// Leer el archivo de forma sincrónica durante el build
-const filePath = path.join(process.cwd(), 'public/data/changelog.md');
+// En entornos Cloudflare/SSR, no podemos usar fs. 
+// Como el archivo está en /public, podemos obtenerlo vía fetch durante el build o renderizado
+// O mejor aún, para asegurar que funcione en SSG, lo intentamos cargar dinámicamente.
+// Nota: En Astro, lo más robusto para archivos en public es un fetch con la URL completa o relativa al sitio.
+const changelogURL = new URL('/data/changelog.md', Astro.url.origin).href;
 let changelogContent = '';
+
 try {
-  changelogContent = fs.readFileSync(filePath, 'utf-8');
+  const response = await fetch(changelogURL);
+  if (response.ok) {
+    changelogContent = await response.text();
+  } else {
+    // Fallback por si el fetch falla en tiempo de build
+    changelogContent = '# Changelog\nNo se pudo cargar el archivo desde ' + changelogURL;
+  }
 } catch (e) {
-  changelogContent = '# Changelog\nNo se pudo cargar el archivo.';
+  changelogContent = '# Changelog\nError al cargar el archivo.';
 }
 
 // Separar por días
