@@ -1,5 +1,17 @@
 # Changelog 
 
+## 2026-04-09
+
+### Added 
+- Pequeñas mejoras a Bautilus
+
+### Fixed
+- Solucionados errores críticos en hosted.inled.es que provocaban la ausencia de nuevos archivos y subidos por front.
+
+### Próximamente. 
+- Hostify
+- OnFocus
+
 ## 2026-04-08
 
 ### Added 
