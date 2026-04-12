@@ -18,7 +18,7 @@
 - En mente la idea de crear una especie de Pear OS pero con GNOME y basado en Debian. El único problema sería el menú de acciones, que PLasma sí que lo soporta pero Gnome no.
 - Trabajando para usar Insforge como nueva base de datos para nuevos proyectos (los antiguos no migrarán, se quedarán en Firebase)
 
-## Errores descubiertos. 
+### Errores descubiertos. 
 - Extraño error en AgentTunnel que se queda intentando usar una sesión cerrada en vez de usar la nueva. Pronto solución.
 
 
