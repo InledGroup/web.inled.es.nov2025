@@ -11,6 +11,7 @@
 
 ### Fixed
 - Encontrada posible causa del error de hosted.inled.es y solución.
+- Error en Agent Tunnel que causaba la imposibilidad de configurar dos sesiones para una misma carpeta estando una de ellas desactivada.
 
 ### Próximamente. 
 - Hostify
@@ -19,7 +20,7 @@
 - Trabajando para usar Insforge como nueva base de datos para nuevos proyectos (los antiguos no migrarán, se quedarán en Firebase)
 
 ### Errores descubiertos. 
-- Extraño error en AgentTunnel que se queda intentando usar una sesión cerrada en vez de usar la nueva. Pronto solución.
+- [SOLUCIONADO] Extraño error en AgentTunnel que se queda intentando usar una sesión cerrada en vez de usar la nueva. Pronto solución.
 
 
 ## 2026-04-09
