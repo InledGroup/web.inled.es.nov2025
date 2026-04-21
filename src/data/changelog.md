@@ -1,6 +1,27 @@
 # Changelog 
 
 
+## 2026-04-21
+
+### Added 
+- Creado Bitmeet, plataforma de mensajería P2P
+- BitID, sistema de identificación descentralizado
+- TocaToma, aplicación actualmente en alpha para registrar y avisar de cuando hay que tomarse la medicación.
+
+### Fixed
+- Error en TocaToma que impedía que se lanzaran las alarmas
+
+### Próximamente. 
+- Bitmeet con LibP2P para solucionar problemas de NAT travsersal y relays.
+- BitOffice, suite de oficina descentralizada
+- Bautilus con editor office
+
+### Errores descubiertos. 
+- APK TocaToma no funciona
+- No cambia de día TocaToma
+- Bitmeet y las limitaciones de WebRTC en el browser
+
+
 ## 2026-04-12
 
 ### Added 
