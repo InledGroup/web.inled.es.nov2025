@@ -1,0 +1,94 @@
+---
+// Esta página sirve como un "espejo" de mailform.inled.es pero con nuestros estilos.
+// Al cargarse desde inled.es/mailform-embed, el Turnstile reconocerá el dominio autorizado.
+
+let remoteHtml = '';
+try {
+  const response = await fetch('https://mailform.inled.es');
+  remoteHtml = await response.text();
+} catch (e) {
+  remoteHtml = '<p>Error cargando el formulario de contacto.</p>';
+}
+
+const styles = `
+<style>
+  :root { color-scheme: dark; }
+  body { 
+    margin: 0; 
+    padding: 20px; 
+    font-family: system-ui, -apple-system, sans-serif; 
+    background: transparent !important; 
+    color: #fff;
+    display: flex;
+    justify-content: center;
+  }
+  #contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+  }
+  #contact-form div { display: flex; flex-direction: column; gap: 0.6rem; }
+  label { 
+    font-size: 0.8rem; 
+    text-transform: uppercase; 
+    letter-spacing: 0.12em; 
+    color: rgba(255, 255, 255, 0.5); 
+    font-weight: 800;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 1.1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    outline: none;
+  }
+  input:focus, textarea:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  #submit-btn {
+    width: 100%;
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 1.2rem;
+    border-radius: 100px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 1rem;
+  }
+  #submit-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #f0f0f0;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+  }
+  #submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  #response-message { text-align: center; margin-top: 1rem; font-weight: 600; font-size: 0.9rem; }
+  .cf-turnstile { margin: 1rem 0; display: flex; justify-content: center; }
+</style>
+`;
+
+// Inyectamos estilos y corregimos el fetch
+let finalHtml = remoteHtml
+  .replace('</head>', `${styles}</head>`)
+  .replace("fetch('/',", "fetch('https://mailform.inled.es/',");
+
+---
+<Fragment set:html={finalHtml} />
