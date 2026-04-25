@@ -17,6 +17,7 @@ import NewsletterSection from '../components/NewsletterSection.astro';
 import BlogSection from '../components/BlogSection.astro';
 import Changelog from '../components/Changelog.astro';
 import NewsletterNotification from '../components/NewsletterNotification.astro';
+import ContactForm from '../components/ContactForm.astro';
 
 import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
 
@@ -97,6 +98,7 @@ const saasProducts = saas.map(s => ({
   <BlogSection />
 
   <NewsletterSection />
+  <ContactForm />
   <NewsletterNotification />
   
 </Layout>
