@@ -48,6 +48,22 @@ const t = {
     compatibility: {
       title: "Compatibilidad Universal",
       desc: "Simplemente tienes que escoger el nombre del archivo de instrucciones .md."
+    },
+    desktop: {
+      title: "App de Escritorio",
+      beta: "BETA",
+      subtitle: "Instalar y usar. Sin terminal.",
+      macos: "macOS",
+      windows: "Windows",
+      linuxDeb: "Linux (.deb)",
+      linuxRpm: "Linux (.rpm)",
+      latest: "Ver última versión en GitHub",
+      amd64: "AMD64",
+      arm64: "ARM64",
+      macosInstruction: "Instrucciones para macOS",
+      macosNote: "Si macOS bloquea la aplicación por no estar firmada, abre la terminal en tu carpeta de Aplicaciones y ejecuta:",
+      macosCmd: "xattr -r -d com.apple.quarantine Agent\\ Tunnel.app",
+      devNote: "Nota del desarrollador: Esta aplicación es gratuita y de código abierto. No se dispone de firma oficial de Apple ya que no voy a pagar una cuenta de desarrollador para un proyecto que no me reporta beneficio económico alguno."
     }
   },
   en: {
@@ -92,6 +108,22 @@ const t = {
     compatibility: {
       title: "Universal Compatibility",
       desc: "You simply have to choose the name of the instruction file .md."
+    },
+    desktop: {
+      title: "Desktop App",
+      beta: "BETA",
+      subtitle: "Install and use. No terminal required.",
+      macos: "macOS",
+      windows: "Windows",
+      linuxDeb: "Linux (.deb)",
+      linuxRpm: "Linux (.rpm)",
+      latest: "View latest release on GitHub",
+      amd64: "AMD64",
+      arm64: "ARM64",
+      macosInstruction: "macOS Instructions",
+      macosNote: "If macOS blocks the app because it's unsigned, open the terminal in your Applications folder and run:",
+      macosCmd: "xattr -r -d com.apple.quarantine Agent\\ Tunnel.app",
+      devNote: "Developer Note: This app is free and open source. It is not officially signed by Apple as I will not pay for a developer account for a project that provides no financial benefit."
     }
   }
 }[lang] || t.es;
@@ -125,6 +157,90 @@ const installCmd = "curl -sSL https://s.inled.es/agentunnel.sh | bash";
                 <i class="fa-brands fa-github"></i>
                 {t.hero.cta}
               </a>
+              <a href="#desktop-app" class="btn btn-outline">
+                <i class="fa-solid fa-desktop"></i>
+                {t.desktop.title}
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Desktop App Section -->
+      <section id="desktop-app" class="desktop-app-section">
+        <div class="container">
+          <div class="desktop-card">
+            <div class="desktop-header">
+              <div class="title-with-badge">
+                <h2 class="section-title">{t.desktop.title}</h2>
+                <span class="beta-badge">{t.desktop.beta}</span>
+              </div>
+              <p class="body-standard">{t.desktop.subtitle}</p>
+            </div>
+            
+            <div class="download-grid-main">
+              <!-- macOS -->
+              <div class="os-group">
+                <div class="os-header">
+                  <i class="fa-brands fa-apple"></i>
+                  <span>{t.desktop.macos}</span>
+                </div>
+                <div class="arch-btns">
+                  <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="btn-arch">{t.desktop.amd64}</a>
+                  <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="btn-arch">{t.desktop.arm64}</a>
+                </div>
+                <div class="macos-notice">
+                  <p>{t.desktop.macosNote}</p>
+                  <div class="mini-cmd">
+                    <code>{t.desktop.macosCmd}</code>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Windows -->
+              <div class="os-group">
+                <div class="os-header">
+                  <i class="fa-brands fa-windows"></i>
+                  <span>{t.desktop.windows}</span>
+                </div>
+                <div class="arch-btns">
+                  <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="btn-arch">{t.desktop.amd64}</a>
+                  <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="btn-arch">{t.desktop.arm64}</a>
+                </div>
+              </div>
+
+              <!-- Linux DEB -->
+              <div class="os-group">
+                <div class="os-header">
+                  <i class="fa-brands fa-linux"></i>
+                  <span>{t.desktop.linuxDeb}</span>
+                </div>
+                <div class="arch-btns">
+                  <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="btn-arch">{t.desktop.amd64}</a>
+                  <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="btn-arch">{t.desktop.arm64}</a>
+                </div>
+              </div>
+
+              <!-- Linux RPM -->
+              <div class="os-group">
+                <div class="os-header">
+                  <i class="fa-brands fa-linux"></i>
+                  <span>{t.desktop.linuxRpm}</span>
+                </div>
+                <div class="arch-btns">
+                  <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="btn-arch">{t.desktop.amd64}</a>
+                  <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="btn-arch">{t.desktop.arm64}</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="desktop-footer">
+              <a href="https://github.com/InledGroup/agent-tunnel/releases/latest" class="latest-release-link">
+                {t.desktop.latest} <i class="fa-solid fa-arrow-right"></i>
+              </a>
+              <div class="dev-explanation">
+                <p>{t.desktop.devNote}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -323,6 +439,179 @@ const installCmd = "curl -sSL https://s.inled.es/agentunnel.sh | bash";
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(201, 100, 66, 0.2);
     filter: brightness(1.1);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--border-cream);
+    color: var(--olive-gray);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--ivory);
+    border-color: var(--stone-gray);
+    color: var(--near-black);
+  }
+
+  /* Desktop App Section */
+  .desktop-app-section {
+    padding: 60px 0 100px;
+    background-color: var(--parchment);
+  }
+
+  .desktop-card {
+    background: var(--ivory);
+    border: 1px solid var(--border-cream);
+    border-radius: 24px;
+    padding: 3.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  }
+
+  .desktop-header {
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .title-with-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .title-with-badge .section-title {
+    margin-bottom: 0;
+  }
+
+  .beta-badge {
+    background: var(--terracotta);
+    color: var(--ivory);
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+
+  .download-grid-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .os-group {
+    background: var(--parchment);
+    padding: 2rem;
+    border-radius: 16px;
+    border: 1px solid var(--border-cream);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.2s ease;
+  }
+
+  .os-group:hover {
+    border-color: var(--warm-sand);
+    transform: translateY(-2px);
+  }
+
+  .os-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--near-black);
+  }
+
+  .os-header i {
+    font-size: 2rem;
+    color: var(--terracotta);
+  }
+
+  .arch-btns {
+    display: flex;
+    gap: 0.75rem;
+    width: 100%;
+  }
+
+  .btn-arch {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem;
+    background: var(--ivory);
+    border: 1px solid var(--border-cream);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--olive-gray);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-arch:hover {
+    border-color: var(--terracotta);
+    color: var(--terracotta);
+    background: var(--ivory);
+  }
+
+  .desktop-footer {
+    text-align: center;
+    border-top: 1px solid var(--border-cream);
+    padding-top: 2rem;
+  }
+
+  .latest-release-link {
+    color: var(--stone-gray);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .latest-release-link:hover {
+    color: var(--terracotta);
+  }
+
+  .macos-notice {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-cream);
+    font-size: 0.75rem;
+    color: var(--stone-gray);
+    text-align: left;
+    width: 100%;
+  }
+
+  .mini-cmd {
+    background: var(--ivory);
+    padding: 0.5rem;
+    border-radius: 6px;
+    margin-top: 0.5rem;
+    font-family: var(--mono);
+    word-break: break-all;
+    border: 1px solid var(--border-cream);
+    color: var(--near-black);
+  }
+
+  .dev-explanation {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--stone-gray);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.4;
+    font-style: italic;
+    text-align: center;
   }
 
   /* Sections */

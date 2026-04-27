@@ -25,7 +25,7 @@ export const apps: App[] = [
       es: 'Acceso remoto seguro para tus agentes de IA: monta carpetas y redirige comandos.',
       en: 'Secure remote access for your AI agents: mount folders and redirect commands.'
     },
-    icon: 'https://hosted.inled.es/1/agent-tunnel-churro.png',
+    icon: 'https://hosted.inled.es/new-agent-tunnel.png',
     link: '/apps/agent-tunnel',
     isFeatured: 1
   },
