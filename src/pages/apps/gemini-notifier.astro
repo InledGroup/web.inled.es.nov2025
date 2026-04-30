@@ -13,8 +13,12 @@ const app = {
   cloneCmd: "git clone https://github.com/InledGroup/gemini-notifier.git"
 };
 
-const i18n = {
+const translations = {
   es: {
+    meta: {
+      title: "Gemini Notifier | Notificaciones para tu Gemini CLI",
+      description: "Recibe notificaciones del sistema cuando tu Gemini CLI requiera atención o complete tareas. Instalación sencilla mediante hooks."
+    },
     hero: {
       subtitle: "Nunca pierdas de vista las tareas de tu Gemini CLI.",
       description: "Gemini Notifier instala hooks de forma sencilla para que tu Gemini CLI te avise mediante notificaciones del sistema cuando realiza tareas y requiere tu atención. Ideal para flujos de trabajo eficientes sin necesidad de 'Bypass all permissions'.",
@@ -32,6 +36,10 @@ const i18n = {
     }
   },
   en: {
+    meta: {
+      title: "Gemini Notifier | Notifications for your Gemini CLI",
+      description: "Get system notifications when your Gemini CLI requires attention or completes tasks. Simple installation via hooks."
+    },
     hero: {
       subtitle: "Never lose track of your Gemini CLI tasks.",
       description: "Gemini Notifier easily installs hooks so your Gemini CLI alerts you via system notifications when it performs tasks and requires your attention. Ideal for efficient workflows without needing 'Bypass all permissions'.",
@@ -50,7 +58,7 @@ const i18n = {
   }
 };
 
-const t = i18n[lang] || i18n.es;
+const t = translations[lang] || translations.es;
 
 const colors = {
   blue: "#4285f4",
@@ -59,9 +67,29 @@ const colors = {
   bg: "#0c0c14",
   text: "#f0f0f5"
 };
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Gemini Notifier",
+  "operatingSystem": "macOS, Linux",
+  "applicationCategory": "DeveloperApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": t.meta.description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Inled Group",
+    "url": "https://inled.es"
+  }
+};
 ---
 
-<Layout title="Gemini Notifier - Get Alerts from Gemini CLI - Inled" description={t.hero.subtitle}>
+<Layout title={t.meta.title} description={t.meta.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div class="page-wrapper" id="page-wrapper">
     <Header />
     
@@ -481,7 +509,7 @@ const colors = {
   }
 </style>
 
-<script define:vars={{ i18n }}>
+<script define:vars={{ translations }}>
   // --- Aura Movement ---
   const auras = document.querySelectorAll('.gemini-aura');
   
@@ -536,7 +564,7 @@ const colors = {
   };
 
   function updateLang(lang) {
-    const data = i18n[lang];
+    const data = translations[lang] || translations.es;
     if (!data) return;
 
     if (elements.heroStatus) elements.heroStatus.textContent = data.hero.status;

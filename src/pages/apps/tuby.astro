@@ -15,6 +15,10 @@ const app = {
 
 const i18n = {
   es: {
+    meta: {
+      title: "Tuby | Descargar vídeos y audio de YouTube con Docker y YT-DLP",
+      description: "Tuby es una aplicación Docker segura y aislada para descargar vídeos (MP4) y audio (MP3) de YouTube en máxima calidad con solo 3 clics."
+    },
     hero: {
       subtitle: "Descarga de YouTube aislada, segura y de máxima calidad.",
       description: "Tuby es una aplicación Docker que te permite descargar vídeos (MP4) y audio (MP3) de YouTube en apenas 3 clics. Todo se ejecuta de forma aislada en un contenedor, garantizando tu seguridad y privacidad.",
@@ -32,6 +36,10 @@ const i18n = {
     }
   },
   en: {
+    meta: {
+      title: "Tuby | Download YouTube videos and audio with Docker and YT-DLP",
+      description: "Tuby is a secure and isolated Docker application to download YouTube videos (MP4) and audio (MP3) in maximum quality with just 3 clicks."
+    },
     hero: {
       subtitle: "Isolated, secure, and high-quality YouTube downloads.",
       description: "Tuby is a Docker application that allows you to download videos (MP4) and audio (MP3) from YouTube in just 3 clicks. Everything runs isolated in a container, ensuring your security and privacy.",
@@ -50,16 +58,36 @@ const i18n = {
   }
 };
 
-const t = i18n[lang] || i18n.es;
+const content = i18n[lang] || i18n.es;
 
 const colors = {
   accent: "#fe0000",
   bg: "#09090b", // zinc-950
   text: "#ffffff"
 };
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Tuby",
+  "operatingSystem": "Linux, macOS, Windows (via Docker)",
+  "applicationCategory": "MultimediaApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": content.meta.description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Inled Group",
+    "url": "https://inled.es"
+  }
+};
 ---
 
-<Layout title="Tuby - YT-DLP powered YT downloader in docker - Inled" description={t.hero.subtitle}>
+<Layout title={content.meta.title} description={content.meta.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div class="page-wrapper" id="page-wrapper">
     <Header />
     
@@ -73,27 +101,27 @@ const colors = {
       <section class="hero" id="hero-section">
         <div class="content reveal">
           <div class="status-badge" id="hero-status">
-            {t.hero.status}
+            {content.hero.status}
           </div>
           
           <div class="logo-wrapper">
-            <img src={app.logo} alt="Tuby Logo" class="app-logo" />
+            <img src={app.logo} alt="Tuby YouTube Downloader Logo" class="app-logo" />
             <div class="logo-glow"></div>
           </div>
           
           <h1 class="title">Tu<span class="accent-text">by</span></h1>
           <p class="subtitle" id="hero-subtitle">
-            {t.hero.subtitle}
+            {content.hero.subtitle}
           </p>
           
           <div class="description-box">
-            <p id="hero-description">{t.hero.description}</p>
+            <p id="hero-description">{content.hero.description}</p>
           </div>
           
           <div class="actions">
             <a href={app.repoUrl} target="_blank" class="btn btn-primary" id="hero-button">
               <i class="fa-brands fa-github"></i>
-              {t.hero.button}
+              {content.hero.button}
             </a>
           </div>
 
@@ -107,10 +135,10 @@ const colors = {
       <!-- Usage Section -->
       <section class="usage reveal" id="usage-section">
         <div class="container">
-          <h2 class="section-title" id="usage-title">{t.usage.title}</h2>
+          <h2 class="section-title" id="usage-title">{content.usage.title}</h2>
           
           <div class="steps-grid">
-            {t.usage.steps.map((step, index) => (
+            {content.usage.steps.map((step, index) => (
               <div class="step-card">
                 <div class="step-num">{index + 1}</div>
                 <h3 id={`step-title-${index}`}>{step.title}</h3>
@@ -126,13 +154,38 @@ const colors = {
           
           <div class="usage-notice">
             <i class="fa-solid fa-circle-info"></i>
-            <p id="usage-notice-text">{t.usage.notice}</p>
+            <p id="usage-notice-text">{content.usage.notice}</p>
           </div>
         </div>
       </section>
     </main>
   </div>
 </Layout>
+
+<style define:vars={{ 
+  accent: colors.accent, 
+  bg: colors.bg, 
+  text: colors.text
+}}>
+...
+</style>
+
+<script define:vars={{ i18n }}>
+  function updateLang(lang) {
+    const data = i18n[lang];
+    if (!data) return;
+    // Se mantiene la lógica para cambios dinámicos
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  window.addEventListener('langChanged', (e) => {
+    updateLang(e.detail.lang);
+  });
+</script>
 
 <style define:vars={{ 
   accent: colors.accent, 

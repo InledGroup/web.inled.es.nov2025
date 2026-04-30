@@ -5,8 +5,12 @@ import { getLangFromLocals } from '../../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
 
-const t = {
+const translations = {
   es: {
+    meta: {
+      title: "Agent Tunnel | Control remoto seguro para Agentes de IA",
+      description: "Conecta tus agentes de IA (Claude Code, Gemini CLI) a servidores remotos de forma segura con Agent Tunnel. Sincronización en tiempo real y túnel SSH."
+    },
     hero: {
       title: "Agent Tunnel",
       subtitle: "La pasarela de tus agentes a cualquier dispositivo.",
@@ -67,6 +71,10 @@ const t = {
     }
   },
   en: {
+    meta: {
+      title: "Agent Tunnel | Secure remote control for AI Agents",
+      description: "Connect your AI agents (Claude Code, Gemini CLI) to remote servers securely with Agent Tunnel. Real-time synchronization and SSH tunneling."
+    },
     hero: {
       title: "Agent Tunnel",
       subtitle: "The gateway of your agents to any device.",
@@ -126,12 +134,34 @@ const t = {
       devNote: "Developer Note: This app is free and open source. It is not officially signed by Apple as I will not pay for a developer account for a project that provides no financial benefit."
     }
   }
-}[lang] || t.es;
+};
+
+const t = translations[lang] || translations.es;
 
 const installCmd = "curl -sSL https://s.inled.es/agentunnel.sh | bash";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Agent Tunnel",
+  "operatingSystem": "macOS, Windows, Linux",
+  "applicationCategory": "DeveloperApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": t.meta.description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Inled Group",
+    "url": "https://inled.es"
+  }
+};
 ---
 
-<Layout title="Agent Tunnel - Remote control for AI Agents" description={t.hero.subtitle}>
+<Layout title={t.meta.title} description={t.meta.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div class="claude-theme">
     <Header />
     
@@ -144,6 +174,7 @@ const installCmd = "curl -sSL https://s.inled.es/agentunnel.sh | bash";
             <h1 class="display-title">{t.hero.title}</h1>
             <p class="body-large">{t.hero.subtitle}</p>
             <p class="hero-description">{t.hero.description}</p>
+...
             
             <div class="install-block">
               <code class="mono-text">{installCmd}</code>

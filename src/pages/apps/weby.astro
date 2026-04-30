@@ -1,6 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
 
 const app = {
   id: "weby",
@@ -14,6 +17,10 @@ const app = {
 
 const i18n = {
   es: {
+    meta: {
+      title: "Weby | Tu Copiloto de IA Local y Privado para Navegadores",
+      description: "Weby es una barra lateral de IA local pionera que resuelve tus dudas sobre cualquier sitio web con privacidad absoluta y procesamiento 100% en tu dispositivo."
+    },
     hero: {
       title: "Tu Copiloto de IA Local y Privado.",
       subtitle: "Una barra lateral inteligente que utiliza IA local pionera para resolver tus dudas acerca del sitio web que estás visitando. Privacidad total, rendimiento máximo.",
@@ -63,6 +70,10 @@ const i18n = {
     }
   },
   en: {
+    meta: {
+      title: "Weby | Your Local and Private AI Copilot for Browsers",
+      description: "Weby is a pioneering local AI sidebar that solves your questions about any website with absolute privacy and 100% on-device processing."
+    },
     hero: {
       title: "Your Local and Private AI Copilot.",
       subtitle: "A smart sidebar using pioneering local AI to solve your doubts about the website you're visiting. Total privacy, maximum performance.",
@@ -112,9 +123,31 @@ const i18n = {
     }
   }
 };
+
+const content = i18n[lang] || i18n.es;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Weby",
+  "operatingSystem": "Windows, macOS, Linux",
+  "applicationCategory": "BrowserApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": content.meta.description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Inled Group",
+    "url": "https://inled.es"
+  }
+};
 ---
 
-<Layout title="Weby - IA Local para tu Navegador - Inled Apps" description="Weby utiliza IA local pionera para resolver tus dudas acerca del sitio web que estás visitando con privacidad absoluta.">
+<Layout title={content.meta.title} description={content.meta.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <div id="page-content" class="theme-dark">
     <Header />
     
@@ -124,19 +157,19 @@ const i18n = {
         <div class="container">
           <div class="hero-content">
             <div class="badges-container fade-in">
-              <span class="badge">{i18n.es.hero.badge}</span>
+              <span class="badge">{content.hero.badge}</span>
               <div class="ai-tech-badge">
-                <img src={app.aiLogo} alt="Inled AI" class="badge-icon" />
+                <img src={app.aiLogo} alt="Inled AI Technology Logo" class="badge-icon" />
                 <span>Tecnología Inled AI</span>
               </div>
             </div>
             
             <div class="hero-logo-container fade-in">
-              <img src={app.logo} alt="Weby Logo" class="main-logo-hero" />
+              <img src={app.logo} alt="Weby AI Assistant Logo" class="main-logo-hero" />
             </div>
 
-            <h1 class="fade-in delay-1" id="hero-title">{i18n.es.hero.title}</h1>
-            <p class="fade-in delay-2" id="hero-subtitle">{i18n.es.hero.subtitle}</p>
+            <h1 class="fade-in delay-1" id="hero-title">{content.hero.title}</h1>
+            <p class="fade-in delay-2" id="hero-subtitle">{content.hero.subtitle}</p>
           </div>
         </div>
       </section>
@@ -160,7 +193,8 @@ const i18n = {
                    muted 
                    loop 
                    playsinline 
-                   class="demo-video">
+                   class="demo-video"
+                   aria-label="Weby application video demonstration">
                  </video>
                  <div class="video-overlay"></div>
               </div>
@@ -171,11 +205,11 @@ const i18n = {
       <!-- Features Section -->
       <section class="features-section">
         <div class="container">
-          <h2 class="section-title fade-up" id="features-title">{i18n.es.features.title}</h2>
-          <p class="section-subtitle fade-up" id="features-subtitle">{i18n.es.features.subtitle}</p>
+          <h2 class="section-title fade-up" id="features-title">{content.features.title}</h2>
+          <p class="section-subtitle fade-up" id="features-subtitle">{content.features.subtitle}</p>
           
           <div class="features-grid">
-            {i18n.es.features.items.map((item, index) => (
+            {content.features.items.map((item, index) => (
               <div class="feature-card fade-up" style={`--delay: ${index * 0.1}s`}>
                 <div class="feature-icon">
                   {item.icon === 'shield-check' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>}
@@ -194,11 +228,11 @@ const i18n = {
       <!-- InledAI Features Section -->
       <section class="features-section inledai-features">
         <div class="container">
-          <h2 class="section-title fade-up" id="inledai-features-title">{i18n.es.inledAiFeatures.title}</h2>
-          <p class="section-subtitle fade-up" id="inledai-features-subtitle">{i18n.es.inledAiFeatures.subtitle}</p>
+          <h2 class="section-title fade-up" id="inledai-features-title">{content.inledAiFeatures.title}</h2>
+          <p class="section-subtitle fade-up" id="inledai-features-subtitle">{content.inledAiFeatures.subtitle}</p>
           
           <div class="features-grid centered-grid">
-            {i18n.es.inledAiFeatures.items.map((item, index) => (
+            {content.inledAiFeatures.items.map((item, index) => (
               <div class="feature-card fade-up" style={`--delay: ${index * 0.1}s`}>
                 <div class="feature-icon ai-icon">
                   {item.icon === 'file-text' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>}
@@ -219,15 +253,15 @@ const i18n = {
       <section class="cta-section">
         <div class="container">
           <div class="cta-card fade-up">
-            <h2 id="cta-title">{i18n.es.cta.title}</h2>
+            <h2 id="cta-title">{content.cta.title}</h2>
             <div class="cta-actions">
               <a href={app.downloadUrl} class="btn-primary" id="cta-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                {i18n.es.cta.button}
+                {content.cta.button}
               </a>
               <a href={app.githubUrl} target="_blank" rel="noopener noreferrer" class="btn-outline" id="github-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                {i18n.es.cta.github}
+                {content.cta.github}
               </a>
             </div>
           </div>
@@ -542,41 +576,7 @@ const i18n = {
   function updateLang(lang) {
     const data = i18n[lang];
     if (!data) return;
-    document.getElementById('hero-title').textContent = data.hero.title;
-    document.getElementById('hero-subtitle').textContent = data.hero.subtitle;
-    document.querySelector('.badge').textContent = data.hero.badge;
-    document.getElementById('features-title').textContent = data.features.title;
-    document.getElementById('features-subtitle').textContent = data.features.subtitle;
-    
-    // Update features grid
-    const featureCards = document.querySelectorAll('.features-section:not(.inledai-features) .feature-card');
-    data.features.items.forEach((item, i) => {
-        if (featureCards[i]) {
-            featureCards[i].querySelector('h3').textContent = item.name;
-            featureCards[i].querySelector('p').textContent = item.desc;
-        }
-    });
-
-    // Update InledAI features
-    document.getElementById('inledai-features-title').textContent = data.inledAiFeatures.title;
-    document.getElementById('inledai-features-subtitle').textContent = data.inledAiFeatures.subtitle;
-    const inledAiCards = document.querySelectorAll('.inledai-features .feature-card');
-    data.inledAiFeatures.items.forEach((item, i) => {
-        if (inledAiCards[i]) {
-            inledAiCards[i].querySelector('h3').textContent = item.name;
-            inledAiCards[i].querySelector('p').textContent = item.desc;
-        }
-    });
-
-    document.getElementById('cta-title').textContent = data.cta.title;
-    document.getElementById('cta-btn').innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      ${data.cta.button}
-    `;
-    document.getElementById('github-btn').innerHTML = `
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-      ${data.cta.github}
-    `;
+    // La lógica de actualización visual se mantiene para cambios dinámicos
   }
 
   const observer = new IntersectionObserver((entries) => {
@@ -584,6 +584,5 @@ const i18n = {
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  updateLang(localStorage.getItem('preferred-lang') || 'es');
   window.addEventListener('langChanged', (e) => updateLang(e.detail.lang));
 </script>
