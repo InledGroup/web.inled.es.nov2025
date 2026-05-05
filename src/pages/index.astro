@@ -7,7 +7,6 @@ import Hero from '../components/Hero.astro';
 import ScrollSection from '../components/ScrollSection.astro';
 import StatsCounter from '../components/StatsCounter.astro';
 import HeroCTA from '../components/HeroCTA.astro';
-import AudioModal from '../components/AudioModal.astro';
 import ProductsGrid from '../components/ProductsGrid.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import { apps } from '../config/apps';
@@ -50,7 +49,6 @@ const saasProducts = saas.map(s => ({
 ---
 
 <Layout title="Inled Group - Dream, build" description={t('scroll.description')}>
-  <AudioModal />
   <Header />
   <Hero />
   <ScrollSection

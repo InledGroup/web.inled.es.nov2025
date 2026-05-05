@@ -1,7 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
-import AudioModal from '../../components/AudioModal.astro';
 import ServiceHero from '../../components/ServiceHero.astro';
 import ServiceFeatures from '../../components/ServiceFeatures.astro';
 import PricingSection from '../../components/PricingSection.astro';
@@ -28,7 +27,6 @@ if (!service) {
   title={`${service.name} - Inled Group`}
   description={service.description}
 >
-  <AudioModal />
   <Header />
 
   <ServiceHero

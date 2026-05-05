@@ -1,5 +1,13 @@
 # Changelog 
 
+## 2026-05-05
+Tras varios días de duro trabajo que no he escrito en el changelog, tenemos novedades interesantes: 
+- Regreso a Linux: hemos adquirido un ordenador con Linux para tener la experiencia nativa otra vez y huír de las VMs en un mac: amd64.
+- En planes una nueva extensión para GNOME. Ya está en review, daremos más detalles prontamente.
+- Office.inled.es ya es completamente funcional para desktop y tablet.
+- start.inled.es ya funciona y está en beta. Puedes probarlo desde [start.inled.es](https://start.inled.es). Implementa varias innovaciones de scraping pero los baneos son frecuentes. Aún así, funciona bastante bien.
+- Solucionado error en Bautilus. Los marcadores a carpetas del sistema en Linux no funcionaban dado que estas tienen diferentes nombres según el idioma configurado en la instalación de la distro. Ahora ya se puede solucionar desde ajustes.
+- Hechas algunas pruebas con Pulsar OS (que por ahora no va a salir) y con un fork de Brave browser, lo cual requiere demasiada computación y se deberán buscar soluciones alternativas con coste nulo o de lo contrario el proyecto por ahora no podrá continuar.
 
 ## 2026-04-21
 

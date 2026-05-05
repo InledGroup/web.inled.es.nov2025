@@ -11,6 +11,28 @@ export interface SaasProduct {
 }
 
 export const saas: SaasProduct[] = [
+  {
+    id: 'office',
+    name: 'Insuite Office',
+    description: {
+      es: 'El Office que se ejecuta en el navegador, es privado 100%, no sube nada a la nube, no necesitas cuenta y es 100% made in spain',
+      en: 'The Office suite that runs in your browser is 100% private, uploads nothing to the cloud, requires no account, and is 100% made in Spain.'
+    },
+    icon: 'https://hosted.inled.es/insuite.svg',
+    link: 'https://office.inled.es/',
+    isFeatured: 1
+  },
+    {
+    id: 'start',
+    name: 'Start',
+    description: {
+      es: 'El buscador de buscadores más privado y hecho en España',
+      en: 'The search engine of search engines, the most private and made in Spain'
+    },
+    icon: 'https://hosted.inled.es/start-simple-blanco-sinfondo.png',
+    link: 'https://start.inled.es',
+    isFeatured: 2
+  },
     {
     id: 'mypdf',
     name: 'MyPDF',
@@ -20,7 +42,7 @@ export const saas: SaasProduct[] = [
     },
     icon: 'https://hosted.inled.es/MYPDF.png',
     link: 'https://mypdf.inled.es',
-    isFeatured: 2
+    isFeatured: 4
   },
       {
     id: 'mymetadata',
@@ -31,7 +53,7 @@ export const saas: SaasProduct[] = [
     },
     icon: 'https://hosted.inled.es/mymetadata.svg',
     link: 'https://mymetadata.inled.es',
-    isFeatured: 2
+    isFeatured: 4
   },
     {
     id: 'edgeai',
@@ -43,16 +65,6 @@ export const saas: SaasProduct[] = [
     icon: 'https://hosted.inled.es/inledai.svg',
     link: 'https://edge.inled.es/landing',
     isFeatured: 3
-  },
-  {
-    id: 'start',
-    name: 'Start',
-    description: {
-      es: 'Tu página de inicio inteligente y multibuscador.',
-      en: 'Your intelligent home page and multi-search engine.'
-    },
-    icon: 'https://hosted.inled.es/start-simple-blanco-sinfondo.png',
-    link: 'https://start.inled.es'
   },
   {
     id: 'indoc',

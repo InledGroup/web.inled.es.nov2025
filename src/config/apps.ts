@@ -30,16 +30,28 @@ export const apps: App[] = [
     isFeatured: 1
   },
   {
-    id: 'tuby',
-    name: 'Tuby',
+    id: 'bautilus',
+    name: 'Bautilus',
     description: {
-      es: 'Descarga vídeos y audio de YT con la máxima calidad a 3 clics. Aislado y seguro.',
-      en: 'Download YT videos and audio with maximum quality in 3 clicks. Isolated and secure.'
+      es: 'Convierte tu navegador en un explorador de archivos estilo Nautilus (GNOME). Privado y todopoderoso.',
+      en: 'Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.'
     },
-    icon: 'https://hosted.inled.es/1/tuby.png',
-    link: '/apps/tuby',
-    isFeatured: 3
+    icon: 'https://hosted.inled.es/bautilus.png',
+    link: '/apps/bautilus',
+    isFeatured: 2
   },
+    {
+    id: 'tabnest',
+    name: 'TabNest',
+    description: {
+      es: 'Tu centro de control personal en cada nueva pestaña: TV, radio y noticias.',
+      en: 'Your personal control center in every new tab: TV, radio, and news.'
+    },
+    icon: 'https://hosted.inled.es/tabnest.png',
+    link: '/apps/tabnest',
+    isFeatured: 4,
+  },
+  
   {
     id: 'gemini-notifier',
     name: 'Gemini Notifier',
@@ -72,19 +84,8 @@ export const apps: App[] = [
     },
     icon: 'https://hosted.inled.es/weby.gif',
     link: '/apps/weby',
-    isFeatured: 5
   },
-   {
-    id: 'bautilus',
-    name: 'Bautilus',
-    description: {
-      es: 'Convierte tu navegador en un explorador de archivos estilo Nautilus (GNOME). Privado y todopoderoso.',
-      en: 'Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.'
-    },
-    icon: 'https://hosted.inled.es/bautilus.png',
-    link: '/apps/bautilus',
-    isFeatured: 6
-  },
+
         {
         id: 'darkreaderpdf',
         name: 'Dark Reader PDF',
@@ -105,16 +106,17 @@ export const apps: App[] = [
     icon: 'https://hosted.inled.es/oap.png',
     link: 'https://oap.inled.es'
   },
-    {
-    id: 'tabnest',
-    name: 'TabNest',
+  {
+    id: 'tuby',
+    name: 'Tuby',
     description: {
-      es: 'Tu centro de control personal en cada nueva pestaña: TV, radio y noticias.',
-      en: 'Your personal control center in every new tab: TV, radio, and news.'
+      es: 'Descarga vídeos y audio de YT con la máxima calidad a 3 clics. Aislado y seguro.',
+      en: 'Download YT videos and audio with maximum quality in 3 clicks. Isolated and secure.'
     },
-    icon: 'https://hosted.inled.es/tabnest.png',
-    link: '/apps/tabnest'
+    icon: 'https://hosted.inled.es/1/tuby.png',
+    link: '/apps/tuby',
   },
+
   {
     id: 'bastion',
     name: 'Bastion Browser',
