@@ -1,5 +1,11 @@
 # Changelog 
 
+## 2026-05-06  
+- Publicada Codexbar for GNOME en extensions.gnome.org 
+- Solucionado nombrado de modelos en codexbar y usage de codex  
+- Start Browser cada vez está más cerca gracias a una nueva manera de evitar la recompilación de chrome: abrir los paquetes de brave, parchearlos y volverlos a cerrar.
+- Mailform listo e integrado en la web.
+
 ## 2026-05-05
 Tras varios días de duro trabajo que no he escrito en el changelog, tenemos novedades interesantes: 
 - Regreso a Linux: hemos adquirido un ordenador con Linux para tener la experiencia nativa otra vez y huír de las VMs en un mac: amd64.
