@@ -338,6 +338,16 @@ export const apps: App[] = [
     link: '/apps/memorywarn'
   },
   {
+    id: 'codexbar-gnome',
+    name: 'CodexBar for GNOME',
+    description: {
+      es: 'Monitoriza el uso de tus proveedores de IA directamente en la barra de GNOME.',
+      en: 'Monitor your AI provider usage directly in the GNOME bar.'
+    },
+    icon: 'https://hosted.inled.es/codexbar-logo.png',
+    link: '/apps/codexbar-gnome'
+  },
+  {
     id: 'bautilus',
     name: 'Bautilus',
     description: {

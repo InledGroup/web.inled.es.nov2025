@@ -17,25 +17,13 @@ const t = useTranslations(lang);
       <p class="form-description translatable">{t('contact.description')}</p>
     </div>
 
-    <div class="iframe-container">
-      {/* 
-          Usamos la ruta local /mailform-embed que actúa como proxy.
-          Esto soluciona los problemas de Turnstile al mantener el origen inled.es
-      */}
-      <iframe
-        id="contact-iframe"
-        title="Formulario de contacto"
-        src="/mailform-embed"
-        frameborder="0"
-        width="100%"
-        height="750px"
-        allowtransparency="true"
-        loading="lazy"
-        style="background: transparent; border: none;"
-      ></iframe>
+    <div class="form-container-widget">
+      <div id="mailform"></div>
     </div>
   </div>
 </section>
+
+<script src="https://mailform.inled.es/widget.js" defer></script>
 
 <style>
   .contact-full-width {
@@ -87,82 +75,131 @@ const t = useTranslations(lang);
     margin: 0 auto;
   }
 
-  .iframe-container {
+  .form-container-widget {
     width: 100%;
-    display: flex;
-    justify-content: center;
-    /* Efecto de cristal para el contenedor del iframe si es necesario */
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    max-width: 650px;
+    margin: 0 auto;
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 32px;
-    overflow: hidden;
+    padding: 3rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   }
 
-  @media (max-width: 768px) {
-    .contact-full-width { padding: 4rem 1rem; }
-    .form-header h2 { font-size: 2.2rem; }
-    #contact-iframe { height: 850px; }
-  }
-</style>
-
-<style>
-  .contact-full-width {
-    width: 100%;
-    padding: 6rem 1.5rem;
-    margin: 0;
-    position: relative;
-    z-index: 10;
+  /* Mailform Widget Customization */
+  :global(#mailform) {
+    color: white;
+    font-family: 'Ubuntu', sans-serif;
   }
 
-  .contact-full-width.with-bg {
-    background: rgba(15, 15, 20, 0.5);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  :global(#mailform .mailform-group) {
+    margin-bottom: 2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.4rem !important;
   }
 
-  .contact-full-width.transparent {
-    background: transparent;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    border: none;
+  :global(#mailform .mailform-label) {
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.15em !important;
   }
 
-  .contact-inner-container {
-    max-width: 700px;
-    margin: 0 auto;
+  :global(#mailform .mailform-input), 
+  :global(#mailform .mailform-textarea) {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 1.1rem 1.4rem !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 14px !important;
+    color: white !important;
+    font-size: 1rem !important;
+    font-family: inherit !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+    outline: none !important;
   }
 
-  .form-header {
+  :global(#mailform .cf-turnstile) {
+    display: flex !important;
+    justify-content: center !important;
+    margin: 1.5rem 0 !important;
+    width: 100% !important;
+  }
+
+  :global(#mailform .mailform-input:focus), 
+  :global(#mailform .mailform-textarea:focus) {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-color: rgba(255, 255, 255, 0.4) !important;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) !important;
+  }
+
+  :global(#mailform .mailform-button) {
+    width: 100% !important;
+    background-color: #fff !important;
+    border: none !important;
+    border-radius: 100px !important;
+    color: #000 !important;
+    padding: 1.25rem !important;
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.12em !important;
+    cursor: pointer !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    margin-top: 1rem !important;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+  }
+
+  :global(#mailform .mailform-button:hover) {
+    background-color: #f0f0f0 !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 30px rgba(255, 255, 255, 0.1) !important;
+  }
+
+  :global(#mailform .mailform-button:active) {
+    transform: translateY(-1px) !important;
+  }
+
+  :global(#mailform .mailform-button:disabled) {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    transform: none !important;
+  }
+
+  :global(.mailform-success), 
+  :global(.mailform-error) {
+    padding: 1.5rem;
+    border-radius: 18px;
+    margin-top: 2rem;
     text-align: center;
-    margin-bottom: 4rem;
+    font-weight: 600;
+    font-size: 0.95rem;
   }
 
-  .form-header h2 {
-    margin: 0;
-    font-size: 3rem;
-    font-weight: 800;
+  :global(.mailform-success) {
+    background: rgba(255, 255, 255, 0.05);
     color: #fff;
-    letter-spacing: -0.04em;
-    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  .form-description {
-    font-size: 1.2rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
-    max-width: 550px;
-    margin: 0 auto;
-  }
-
-  .form-container-glass {
-    padding: 0;
-    background: transparent;
+  :global(.mailform-error) {
+    background: rgba(255, 73, 73, 0.1);
+    color: #ff4949;
+    border: 1px solid rgba(255, 73, 73, 0.2);
   }
 
   @media (max-width: 768px) {
     .contact-full-width { padding: 4rem 1rem; }
     .form-header h2 { font-size: 2.2rem; }
+    .form-container-widget { padding: 2rem 1.5rem; border-radius: 24px; }
   }
 </style>
