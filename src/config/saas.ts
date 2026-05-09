@@ -12,160 +12,158 @@ export interface SaasProduct {
 
 export const saas: SaasProduct[] = [
   {
-    id: 'office',
-    name: 'Insuite Office',
+    id: "office",
+    name: "Insuite Office",
     description: {
-      es: 'El Office que se ejecuta en el navegador, es privado 100%, no sube nada a la nube, no necesitas cuenta y es 100% made in spain',
-      en: 'The Office suite that runs in your browser is 100% private, uploads nothing to the cloud, requires no account, and is 100% made in Spain.'
+      es: "El Office que se ejecuta en el navegador, es privado 100%, no sube nada a la nube, no necesitas cuenta y es 100% made in spain",
+      en: "The Office suite that runs in your browser is 100% private, uploads nothing to the cloud, requires no account, and is 100% made in Spain.",
     },
-    icon: 'https://hosted.inled.es/insuite.svg',
-    link: 'https://office.inled.es/',
-    isFeatured: 1
-  },
-    {
-    id: 'start',
-    name: 'Start',
-    description: {
-      es: 'El buscador de buscadores más privado y hecho en España',
-      en: 'The search engine of search engines, the most private and made in Spain'
-    },
-    icon: 'https://hosted.inled.es/start-simple-blanco-sinfondo.png',
-    link: 'https://start.inled.es',
-    isFeatured: 2
-  },
-    {
-    id: 'mypdf',
-    name: 'MyPDF',
-    description: {
-      es: 'La alternativa privada e ilimitada a ilovePDF',
-      en: 'The private and unlimited alternative to ilovePDF'
-    },
-    icon: 'https://hosted.inled.es/MYPDF.png',
-    link: 'https://mypdf.inled.es',
-    isFeatured: 4
-  },
-      {
-    id: 'mymetadata',
-    name: 'MyMetadata',
-    description: {
-      es: 'Los eliminadores de metadatos disponibles suben su archivo a sus servidores. Nosotros no, todo se procesa en tu propio navegador.',
-      en: 'Metadata removers upload your file to their servers. We don\'t, everything is processed in your own browser.'
-    },
-    icon: 'https://hosted.inled.es/mymetadata.svg',
-    link: 'https://mymetadata.inled.es',
-    isFeatured: 4
-  },
-    {
-    id: 'edgeai',
-    name: 'Edge AI',
-    description: {
-      es: 'La alternativa 100% privada y local a los chatbots de IA de OpenAI y Google.',
-      en: 'The 100% private and local alternative to AI chatbots from OpenAI and Google.'
-    },
-    icon: 'https://hosted.inled.es/inledai.svg',
-    link: 'https://edge.inled.es/landing',
-    isFeatured: 3
+    icon: "https://hosted.inled.es/insuite.svg",
+    link: "https://office.inled.es/",
+    isFeatured: 2,
   },
   {
-    id: 'indoc',
-    name: 'InDoc',
+    id: "start",
+    name: "Start",
     description: {
-      es: 'Editor de texto y documentos en línea colaborativo.',
-      en: 'Collaborative online text and document editor.'
+      es: "El buscador de buscadores más privado y hecho en España",
+      en: "The search engine of search engines, the most private and made in Spain",
     },
-    icon: 'https://hosted.inled.es/INDOC.png',
-    link: 'https://insuite.inled.es/indoc'
+    icon: "https://hosted.inled.es/start-simple-blanco-sinfondo.png",
+    link: "https://start.inled.es",
+    isFeatured: 2,
   },
   {
-    id: 'inmd',
-    name: 'InMD',
+    id: "mypdf",
+    name: "MyPDF",
     description: {
-      es: 'Editor visual de Markdown potente y libre.',
-      en: 'Powerful and free visual Markdown editor.'
+      es: "La alternativa privada e ilimitada a ilovePDF",
+      en: "The private and unlimited alternative to ilovePDF",
     },
-    icon: 'https://hosted.inled.es/inMD.png',
-    link: 'https://insuite.inled.es/inmd'
+    icon: "https://hosted.inled.es/MYPDF.png",
+    link: "https://mypdf.inled.es",
+    isFeatured: 4,
   },
   {
-    id: 'mdpdf',
-    name: 'MDPDF Online',
+    id: "mymetadata",
+    name: "MyMetadata",
     description: {
-      es: 'Convierte Markdown a PDF desde tu navegador.',
-      en: 'Convert Markdown to PDF from your browser.'
+      es: "Los eliminadores de metadatos disponibles suben su archivo a sus servidores. Nosotros no, todo se procesa en tu propio navegador.",
+      en: "Metadata removers upload your file to their servers. We don't, everything is processed in your own browser.",
     },
-    icon: 'https://hosted.inled.es/MDPDF.png',
-    link: 'https://insuite.inled.es/mdpdf'
+    icon: "https://hosted.inled.es/mymetadata.svg",
+    link: "https://mymetadata.inled.es",
+    isFeatured: 4,
   },
   {
-    id: 'inlinked',
-    name: 'InLinked',
+    id: "edgeai",
+    name: "Edge AI",
     description: {
-      es: 'Generador de posts para LinkedIn potenciado por IA.',
-      en: 'AI-powered LinkedIn post generator.'
+      es: "La alternativa 100% privada y local a los chatbots de IA de OpenAI y Google.",
+      en: "The 100% private and local alternative to AI chatbots from OpenAI and Google.",
     },
-    icon: 'https://hosted.inled.es/INLINKED.png',
-    link: 'https://insuite.inled.es/inlinked'
+    icon: "https://hosted.inled.es/inledai.svg",
+    link: "https://edge.inled.es/landing",
+    isFeatured: 3,
   },
   {
-    id: 'inqr',
-    name: 'InQR',
+    id: "indoc",
+    name: "InDoc",
     description: {
-      es: 'Generador de códigos QR seguro y privado.',
-      en: 'Secure and private QR code generator.'
+      es: "Editor de texto y documentos en línea colaborativo.",
+      en: "Collaborative online text and document editor.",
     },
-    icon: 'https://hosted.inled.es/inqr.png',
-    link: 'https://insuite.inled.es/inqr'
+    icon: "https://hosted.inled.es/INDOC.png",
+    link: "https://insuite.inled.es/indoc",
   },
   {
-    id: 'mdocx',
-    name: 'MDocX',
+    id: "inmd",
+    name: "InMD",
     description: {
-      es: 'Convierte archivos Markdown a DOCX y viceversa al instante.',
-      en: 'Instantly convert Markdown files to DOCX and vice versa.'
+      es: "Editor visual de Markdown potente y libre.",
+      en: "Powerful and free visual Markdown editor.",
     },
-    icon: 'https://hosted.inled.es/MDOCX.png',
-    link: 'https://insuite.inled.es/mdoxc'
+    icon: "https://hosted.inled.es/inMD.png",
+    link: "https://insuite.inled.es/inmd",
   },
   {
-    id: 'devreka',
-    name: 'Devreka!',
+    id: "mdpdf",
+    name: "MDPDF Online",
     description: {
-      es: 'Generador de ideas de negocio para devs con IA.',
-      en: 'Business idea generator for devs with AI.'
+      es: "Convierte Markdown a PDF desde tu navegador.",
+      en: "Convert Markdown to PDF from your browser.",
     },
-    icon: 'https://hosted.inled.es/devreka.png',
-    link: 'https://devreka.inled.es'
+    icon: "https://hosted.inled.es/MDPDF.png",
+    link: "https://insuite.inled.es/mdpdf",
   },
   {
-    id: 'glassy',
-    name: 'Glassy',
+    id: "inlinked",
+    name: "InLinked",
     description: {
-      es: 'Transforma SVGs a liquid glass.',
-      en: 'Transform SVGs to liquid glass.'
+      es: "Generador de posts para LinkedIn potenciado por IA.",
+      en: "AI-powered LinkedIn post generator.",
     },
-    icon: 'https://hosted.inled.es/glassy.svg',
-    link: 'https://glassy.inled.es'
+    icon: "https://hosted.inled.es/INLINKED.png",
+    link: "https://insuite.inled.es/inlinked",
   },
   {
-    id: 'matrixwww',
-    name: 'Matrix WWW',
+    id: "inqr",
+    name: "InQR",
     description: {
-      es: 'Simulaciones de Matrix, en el navegador.',
-      en: 'Matrix simulations, in the browser.'
+      es: "Generador de códigos QR seguro y privado.",
+      en: "Secure and private QR code generator.",
     },
-    icon: 'https://hosted.inled.es/matrixwww.ico',
-    link: 'https://matrix-www.inled.es'
+    icon: "https://hosted.inled.es/inqr.png",
+    link: "https://insuite.inled.es/inqr",
   },
   {
-    id: 'aicloud',
-    name: 'AI Cloud',
+    id: "mdocx",
+    name: "MDocX",
     description: {
-      es: 'Crea chatbots de IA privados que se ejecutan en el navegador del visitante.',
-      en: 'Create private AI chatbots that run in the visitor\'s browser.'
+      es: "Convierte archivos Markdown a DOCX y viceversa al instante.",
+      en: "Instantly convert Markdown files to DOCX and vice versa.",
     },
-    icon: 'https://hosted.inled.es/inledai.svg',
-    link: 'https://aicloud.inled.es'
+    icon: "https://hosted.inled.es/MDOCX.png",
+    link: "https://insuite.inled.es/mdoxc",
   },
-
+  {
+    id: "devreka",
+    name: "Devreka!",
+    description: {
+      es: "Generador de ideas de negocio para devs con IA.",
+      en: "Business idea generator for devs with AI.",
+    },
+    icon: "https://hosted.inled.es/devreka.png",
+    link: "https://devreka.inled.es",
+  },
+  {
+    id: "glassy",
+    name: "Glassy",
+    description: {
+      es: "Transforma SVGs a liquid glass.",
+      en: "Transform SVGs to liquid glass.",
+    },
+    icon: "https://hosted.inled.es/glassy.svg",
+    link: "https://glassy.inled.es",
+  },
+  {
+    id: "matrixwww",
+    name: "Matrix WWW",
+    description: {
+      es: "Simulaciones de Matrix, en el navegador.",
+      en: "Matrix simulations, in the browser.",
+    },
+    icon: "https://hosted.inled.es/matrixwww.ico",
+    link: "https://matrix-www.inled.es",
+  },
+  {
+    id: "aicloud",
+    name: "AI Cloud",
+    description: {
+      es: "Crea chatbots de IA privados que se ejecutan en el navegador del visitante.",
+      en: "Create private AI chatbots that run in the visitor's browser.",
+    },
+    icon: "https://hosted.inled.es/inledai.svg",
+    link: "https://aicloud.inled.es",
+  },
 ];
-

@@ -34,15 +34,11 @@ const translations = {
       },
       providers: {
         title: "Multi-proveedor",
-        desc: "Soporte de Gemini y otros proveedores cuyos datos de uso son accesibles mediante API."
+        desc: "Soporte para todos los proveedores de CodexBar (steipete) accesibles vía API, incluyendo ahora soporte nativo para OpenAI Codex."
       }
     },
     roadmap: {
       title: "Próximamente",
-      codex: {
-        title: "Soporte Codex",
-        desc: "Estamos trabajando en la integración nativa para monitorizar el uso de Codex."
-      },
       claude: {
         title: "Claude Code",
         desc: "Pronto podrás ver el uso de Claude Code directamente desde la extensión."
@@ -81,15 +77,11 @@ const translations = {
       },
       providers: {
         title: "Multi-provider",
-        desc: "Support from Gemini and other providers whose usage data is accessible via API.."
+        desc: "Support for all CodexBar (steipete) providers accessible via API, now including native support for OpenAI Codex."
       }
     },
     roadmap: {
       title: "Coming Soon",
-      codex: {
-        title: "Codex Support",
-        desc: "We are working on native integration to monitor Codex usage."
-      },
       claude: {
         title: "Claude Code",
         desc: "Soon you'll be able to see Claude Code usage directly from the extension."
@@ -240,11 +232,6 @@ const t = translations[lang] || translations.es;
         <div class="container">
           <h2 class="section-title">{t.roadmap.title}</h2>
           <div class="roadmap-grid">
-            <div class="roadmap-item">
-              <div class="badge">PROXIMAMENTE</div>
-              <h3>{t.roadmap.codex.title}</h3>
-              <p>{t.roadmap.codex.desc}</p>
-            </div>
             <div class="roadmap-item">
               <div class="badge">PROXIMAMENTE</div>
               <h3>{t.roadmap.claude.title}</h3>

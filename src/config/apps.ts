@@ -9,7 +9,7 @@ export interface App {
   link: string;
   isFeatured?: number | false;
   notice?: {
-    type: 'warning' | 'info';
+    type: "warning" | "info";
     message: {
       es: string;
       en: string;
@@ -19,350 +19,350 @@ export interface App {
 
 export const apps: App[] = [
   {
-    id: 'agent-tunnel',
-    name: 'Agent Tunnel',
+    id: "codexbar-gnome",
+    name: "CodexBar for GNOME",
     description: {
-      es: 'Acceso remoto seguro para tus agentes de IA: monta carpetas y redirige comandos.',
-      en: 'Secure remote access for your AI agents: mount folders and redirect commands.'
+      es: "Monitoriza el uso de tus proveedores de IA directamente en la barra de GNOME.",
+      en: "Monitor your AI provider usage directly in the GNOME bar.",
     },
-    icon: 'https://hosted.inled.es/new-agent-tunnel.png',
-    link: '/apps/agent-tunnel',
-    isFeatured: 1
+    icon: "https://hosted.inled.es/codexbar-logo.png",
+    link: "/apps/codexbar-gnome",
+    isFeatured: 1,
   },
   {
-    id: 'bautilus',
-    name: 'Bautilus',
+    id: "agent-tunnel",
+    name: "Agent Tunnel",
     description: {
-      es: 'Convierte tu navegador en un explorador de archivos estilo Nautilus (GNOME). Privado y todopoderoso.',
-      en: 'Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.'
+      es: "Acceso remoto seguro para tus agentes de IA: monta carpetas y redirige comandos.",
+      en: "Secure remote access for your AI agents: mount folders and redirect commands.",
     },
-    icon: 'https://hosted.inled.es/bautilus.png',
-    link: '/apps/bautilus',
-    isFeatured: 2
+    icon: "https://hosted.inled.es/new-agent-tunnel.png",
+    link: "/apps/agent-tunnel",
+    isFeatured: 1,
   },
-    {
-    id: 'tabnest',
-    name: 'TabNest',
+  {
+    id: "bautilus",
+    name: "Bautilus",
     description: {
-      es: 'Tu centro de control personal en cada nueva pestaña: TV, radio y noticias.',
-      en: 'Your personal control center in every new tab: TV, radio, and news.'
+      es: "Convierte tu navegador en un explorador de archivos estilo Nautilus (GNOME). Privado y todopoderoso.",
+      en: "Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.",
     },
-    icon: 'https://hosted.inled.es/tabnest.png',
-    link: '/apps/tabnest',
+    icon: "https://hosted.inled.es/bautilus.png",
+    link: "/apps/bautilus",
+    isFeatured: 2,
+  },
+  {
+    id: "tabnest",
+    name: "TabNest",
+    description: {
+      es: "Tu centro de control personal en cada nueva pestaña: TV, radio y noticias.",
+      en: "Your personal control center in every new tab: TV, radio, and news.",
+    },
+    icon: "https://hosted.inled.es/tabnest.png",
+    link: "/apps/tabnest",
     isFeatured: 4,
   },
-  
+
   {
-    id: 'gemini-notifier',
-    name: 'Gemini Notifier',
+    id: "gemini-notifier",
+    name: "Gemini Notifier",
     description: {
-      es: 'Recibe notificaciones cuando Gemini CLI requiere tu atención. Instalación rápida mediante hooks.',
-      en: 'Get notifications when Gemini CLI requires your attention. Quick installation via hooks.'
+      es: "Recibe notificaciones cuando Gemini CLI requiere tu atención. Instalación rápida mediante hooks.",
+      en: "Get notifications when Gemini CLI requires your attention. Quick installation via hooks.",
     },
-    icon: 'https://hosted.inled.es/1/gemini-voice.png',
-    link: '/apps/gemini-notifier',
-    isFeatured: 4
+    icon: "https://hosted.inled.es/1/gemini-voice.png",
+    link: "/apps/gemini-notifier",
+    isFeatured: 4,
   },
 
-    {
-    id: 'vozes',
-    name: 'Vozes',
+  {
+    id: "vozes",
+    name: "Vozes",
     description: {
-      es: 'Escritura por voz para Linux, 100% local, privada e instantánea.',
-      en: 'Voice typing for Linux, 100% local, private and instant.'
+      es: "Escritura por voz para Linux, 100% local, privada e instantánea.",
+      en: "Voice typing for Linux, 100% local, private and instant.",
     },
-    icon: 'https://hosted.inled.es/vozes.png',
-    link: '/apps/vozes',
-    isFeatured: 4
+    icon: "https://hosted.inled.es/vozes.png",
+    link: "/apps/vozes",
+    isFeatured: 4,
   },
   {
-    id: 'weby',
-    name: 'Weby',
+    id: "weby",
+    name: "Weby",
     description: {
-      es: 'Tu copiloto de IA local y privado que resuelve dudas sobre la web que visitas.',
-      en: 'Your local and private AI copilot that solves doubts about the web you visit.'
+      es: "Tu copiloto de IA local y privado que resuelve dudas sobre la web que visitas.",
+      en: "Your local and private AI copilot that solves doubts about the web you visit.",
     },
-    icon: 'https://hosted.inled.es/weby.gif',
-    link: '/apps/weby',
+    icon: "https://hosted.inled.es/weby.gif",
+    link: "/apps/weby",
   },
 
-        {
-        id: 'darkreaderpdf',
-        name: 'Dark Reader PDF',
-        description: {
-          es: 'Abre tus archivos PDF en un modo oscuro real y personalizable.',
-          en: 'Open your PDF files in a true, customizable dark mode.'
-        },
-        icon: 'https://hosted.inled.es/darkreaderpdf.png',
-        link: '/apps/darkreaderpdf'
+  {
+    id: "darkreaderpdf",
+    name: "Dark Reader PDF",
+    description: {
+      es: "Abre tus archivos PDF en un modo oscuro real y personalizable.",
+      en: "Open your PDF files in a true, customizable dark mode.",
+    },
+    icon: "https://hosted.inled.es/darkreaderpdf.png",
+    link: "/apps/darkreaderpdf",
+  },
+  {
+    id: "oap",
+    name: "OAP",
+    description: {
+      es: "Marca tus objetivos e ir completándolos. Ideal para organizarse, autismo y TDAH.",
+      en: "Set your goals and mark them as completed. Ideal for organization, autism, and ADHD.",
+    },
+    icon: "https://hosted.inled.es/oap.png",
+    link: "https://oap.inled.es",
+  },
+  {
+    id: "tuby",
+    name: "Tuby",
+    description: {
+      es: "Descarga vídeos y audio de YT con la máxima calidad a 3 clics. Aislado y seguro.",
+      en: "Download YT videos and audio with maximum quality in 3 clicks. Isolated and secure.",
+    },
+    icon: "https://hosted.inled.es/1/tuby.png",
+    link: "/apps/tuby",
+  },
+
+  {
+    id: "bastion",
+    name: "Bastion Browser",
+    description: {
+      es: "Navegación ultra-segura mediante aislamiento remoto y endurecimiento de red.",
+      en: "Ultra-secure browsing through remote isolation and network hardening.",
+    },
+    icon: "https://hosted.inled.es/bastion.png",
+    link: "/bastion",
+  },
+  {
+    id: "swiftinstall",
+    name: "AppInstall",
+    description: {
+      es: "Instala, desinstala y gestiona paquetes .deb y .appimage fácilmente.",
+      en: "Easily install, uninstall and manage .deb and .appimage packages.",
+    },
+    icon: "https://hosted.inled.es/swiftinstall-logo.png",
+    link: "/apps/appinstall",
+  },
+  {
+    id: "cleany",
+    name: "Cleany",
+    description: {
+      es: "Una extensión perfecta para ordenadores públicos o compartidos.",
+      en: "A perfect extension for public or shared computers.",
+    },
+    icon: "https://hosted.inled.es/cleany.png",
+    link: "/apps/cleany",
+  },
+  {
+    id: "startchat",
+    name: "Startchat",
+    description: {
+      es: "Chat en la misma red wifi, sin servidores externos.",
+      en: "Chat on the same Wi-Fi network, without external servers.",
+    },
+    icon: "https://hosted.inled.es/startchat.png",
+    link: "/apps/startchat",
+    notice: {
+      type: "info",
+      message: {
+        es: "Próximamente disponible una actualización con traducción de la interfaz al inglés y transformación en PWA.",
+        en: "An update with English translation and PWA transformation is coming soon.",
       },
-  {
-    id: 'oap',
-    name: 'OAP',
-    description: {
-      es: 'Marca tus objetivos e ir completándolos. Ideal para organizarse, autismo y TDAH.',
-      en: 'Set your goals and mark them as completed. Ideal for organization, autism, and ADHD.'
     },
-    icon: 'https://hosted.inled.es/oap.png',
-    link: 'https://oap.inled.es'
   },
   {
-    id: 'tuby',
-    name: 'Tuby',
+    id: "inshare",
+    name: "InShare",
     description: {
-      es: 'Descarga vídeos y audio de YT con la máxima calidad a 3 clics. Aislado y seguro.',
-      en: 'Download YT videos and audio with maximum quality in 3 clicks. Isolated and secure.'
+      es: "Comparte archivos a través de la red local de forma 100% privada.",
+      en: "Share files across the local network in a 100% private way.",
     },
-    icon: 'https://hosted.inled.es/1/tuby.png',
-    link: '/apps/tuby',
-  },
-
-  {
-    id: 'bastion',
-    name: 'Bastion Browser',
-    description: {
-      es: 'Navegación ultra-segura mediante aislamiento remoto y endurecimiento de red.',
-      en: 'Ultra-secure browsing through remote isolation and network hardening.'
-    },
-    icon: 'https://hosted.inled.es/bastion.png',
-    link: '/bastion'
-  },
-  {
-    id: 'swiftinstall',
-    name: 'AppInstall',
-    description: {
-      es: 'Instala, desinstala y gestiona paquetes .deb y .appimage fácilmente.',
-      en: 'Easily install, uninstall and manage .deb and .appimage packages.'
-    },
-    icon: 'https://hosted.inled.es/swiftinstall-logo.png',
-    link: '/apps/appinstall'
-  },
-  {
-    id: 'cleany',
-    name: 'Cleany',
-    description: {
-      es: 'Una extensión perfecta para ordenadores públicos o compartidos.',
-      en: 'A perfect extension for public or shared computers.'
-    },
-    icon: 'https://hosted.inled.es/cleany.png',
-    link: '/apps/cleany'
-  },
-  {
-    id: 'startchat',
-    name: 'Startchat',
-    description: {
-      es: 'Chat en la misma red wifi, sin servidores externos.',
-      en: 'Chat on the same Wi-Fi network, without external servers.'
-    },
-    icon: 'https://hosted.inled.es/startchat.png',
-    link: '/apps/startchat',
+    icon: "https://hosted.inled.es/inshare.capture.png",
+    link: "/apps/inshare",
     notice: {
-      type: 'info',
+      type: "info",
       message: {
-        es: 'Próximamente disponible una actualización con traducción de la interfaz al inglés y transformación en PWA.',
-        en: 'An update with English translation and PWA transformation is coming soon.'
-      }
-    }
+        es: "Próximamente disponible una actualización con traducción de la interfaz al inglés y transformación en PWA.",
+        en: "An update with English translation and PWA transformation is coming soon.",
+      },
+    },
   },
   {
-    id: 'inshare',
-    name: 'InShare',
+    id: "moodlenotifier",
+    name: "Moodle Notifier",
     description: {
-      es: 'Comparte archivos a través de la red local de forma 100% privada.',
-      en: 'Share files across the local network in a 100% private way.'
+      es: "Estate al día de las novedades de tu Moodle.",
+      en: "Stay up to date with your Moodle news.",
     },
-    icon: 'https://hosted.inled.es/inshare.capture.png',
-    link: '/apps/inshare',
+    icon: "https://hosted.inled.es/moodlenotifier.png",
+    link: "/apps/moodlenotifier",
     notice: {
-      type: 'info',
+      type: "info",
       message: {
-        es: 'Próximamente disponible una actualización con traducción de la interfaz al inglés y transformación en PWA.',
-        en: 'An update with English translation and PWA transformation is coming soon.'
-      }
-    }
+        es: "Próximamente disponible una actualización con traducción de la interfaz al inglés.",
+        en: "An update with English translation is coming soon.",
+      },
+    },
   },
   {
-    id: 'moodlenotifier',
-    name: 'Moodle Notifier',
+    id: "warp-vpn",
+    name: "Warp VPN GUI",
     description: {
-      es: 'Estate al día de las novedades de tu Moodle.',
-      en: 'Stay up to date with your Moodle news.'
+      es: "Interfaz gráfica super sencilla para gestionar la VPN gratuita de Cloudflare: Warp.",
+      en: "Super simple graphical interface to manage Cloudflare's free VPN: Warp.",
     },
-    icon: 'https://hosted.inled.es/moodlenotifier.png',
-    link: '/apps/moodlenotifier',
+    icon: "https://hosted.inled.es/warpupscale.png",
+    link: "/apps/warp-vpn",
     notice: {
-      type: 'info',
+      type: "warning",
       message: {
-        es: 'Próximamente disponible una actualización con traducción de la interfaz al inglés.',
-        en: 'An update with English translation is coming soon.'
-      }
-    }
+        es: "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.",
+        en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
+      },
+    },
   },
   {
-    id: 'warp-vpn',
-    name: 'Warp VPN GUI',
+    id: "startomnibox",
+    name: "Start Omnibox",
     description: {
-      es: 'Interfaz gráfica super sencilla para gestionar la VPN gratuita de Cloudflare: Warp.',
-      en: 'Super simple graphical interface to manage Cloudflare\'s free VPN: Warp.'
+      es: "Usa el buscador que quieras. Fácil, a 3 clics.",
+      en: "Use the search engine you want. Easy, in 3 clicks.",
     },
-    icon: 'https://hosted.inled.es/warpupscale.png',
-    link: '/apps/warp-vpn',
+    icon: "https://hosted.inled.es/icon128.png",
+    link: "/apps/startomnibox",
     notice: {
-      type: 'warning',
+      type: "warning",
       message: {
-        es: 'Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.',
-        en: 'This resource no longer requires maintenance and is not Inled\'s main line of business. Currently, no time is being dedicated to this project.'
-      }
-    }
+        es: "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.",
+        en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
+      },
+    },
   },
   {
-    id: 'startomnibox',
-    name: 'Start Omnibox',
+    id: "startntp",
+    name: "Start New Tab Page",
     description: {
-      es: 'Usa el buscador que quieras. Fácil, a 3 clics.',
-      en: 'Use the search engine you want. Easy, in 3 clicks.'
+      es: "Experimenta la productividad con Start como página de inicio.",
+      en: "Experience productivity with Start as your home page.",
     },
-    icon: 'https://hosted.inled.es/icon128.png',
-    link: '/apps/startomnibox',
+    icon: "https://hosted.inled.es/start.newtabpage.png",
+    link: "/apps/startntp",
     notice: {
-      type: 'warning',
+      type: "warning",
       message: {
-        es: 'Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.',
-        en: 'This resource no longer requires maintenance and is not Inled\'s main line of business. Currently, no time is being dedicated to this project.'
-      }
-    }
+        es: "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.",
+        en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
+      },
+    },
   },
   {
-    id: 'startntp',
-    name: 'Start New Tab Page',
+    id: "winerror",
+    name: "Windows Error",
     description: {
-      es: 'Experimenta la productividad con Start como página de inicio.',
-      en: 'Experience productivity with Start as your home page.'
+      es: "Disfruta de la ventana de error de Windows XP en tu Mac.",
+      en: "Enjoy the Windows XP error window on your Mac.",
     },
-    icon: 'https://hosted.inled.es/start.newtabpage.png',
-    link: '/apps/startntp',
+    icon: "https://hosted.inled.es/winerror.png",
+    link: "/apps/winerror",
     notice: {
-      type: 'warning',
+      type: "warning",
       message: {
-        es: 'Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.',
-        en: 'This resource no longer requires maintenance and is not Inled\'s main line of business. Currently, no time is being dedicated to this project.'
-      }
-    }
+        es: "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.",
+        en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
+      },
+    },
   },
   {
-    id: 'winerror',
-    name: 'Windows Error',
+    id: "winbsod",
+    name: "WinBSOD",
     description: {
-      es: 'Disfruta de la ventana de error de Windows XP en tu Mac.',
-      en: 'Enjoy the Windows XP error window on your Mac.'
+      es: "Simula la BSOD de Windows... ¡en tu Mac!",
+      en: "Simulate the Windows BSOD... on your Mac!",
     },
-    icon: 'https://hosted.inled.es/winerror.png',
-    link: '/apps/winerror',
+    icon: "https://hosted.inled.es/winbsod.png",
+    link: "/apps/winbsod",
     notice: {
-      type: 'warning',
+      type: "warning",
       message: {
-        es: 'Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.',
-        en: 'This resource no longer requires maintenance and is not Inled\'s main line of business. Currently, no time is being dedicated to this project.'
-      }
-    }
+        es: "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.",
+        en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
+      },
+    },
   },
   {
-    id: 'winbsod',
-    name: 'WinBSOD',
+    id: "tabstacker",
+    name: "Tabstacker",
     description: {
-      es: 'Simula la BSOD de Windows... ¡en tu Mac!',
-      en: 'Simulate the Windows BSOD... on your Mac!'
+      es: "Guarda pestañas, envíalas y haz de todo con ellas fácilmente.",
+      en: "Save tabs, send them and do everything with them easily.",
     },
-    icon: 'https://hosted.inled.es/winbsod.png',
-    link: '/apps/winbsod',
+    icon: "https://hosted.inled.es/tabstacker.png",
+    link: "/apps/tabstacker",
     notice: {
-      type: 'warning',
+      type: "warning",
       message: {
-        es: 'Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.',
-        en: 'This resource no longer requires maintenance and is not Inled\'s main line of business. Currently, no time is being dedicated to this project.'
-      }
-    }
+        es: "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.",
+        en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
+      },
+    },
   },
   {
-    id: 'tabstacker',
-    name: 'Tabstacker',
+    id: "archive.is",
+    name: "Open in Archive.is",
     description: {
-      es: 'Guarda pestañas, envíalas y haz de todo con ellas fácilmente.',
-      en: 'Save tabs, send them and do everything with them easily.'
+      es: "Abre la página en archive.is a un clic.",
+      en: "Open the page in archive.is with one click.",
     },
-    icon: 'https://hosted.inled.es/tabstacker.png',
-    link: '/apps/tabstacker',
+    icon: "https://hosted.inled.es/archive.is.png",
+    link: "/apps/archive.is",
     notice: {
-      type: 'warning',
+      type: "warning",
       message: {
-        es: 'Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.',
-        en: 'This resource no longer requires maintenance and is not Inled\'s main line of business. Currently, no time is being dedicated to this project.'
-      }
-    }
+        es: "Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.",
+        en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
+      },
+    },
   },
   {
-    id: 'archive.is',
-    name: 'Open in Archive.is',
+    id: "cruzcristiana",
+    name: "Cruz Cristiana para GNOME",
     description: {
-      es: 'Abre la página en archive.is a un clic.',
-      en: 'Open the page in archive.is with one click.'
+      es: "Muestra la cruz de Cristo para que la presencia de Dios esté contigo.",
+      en: "Display the cross of Christ so that God's presence is with you.",
     },
-    icon: 'https://hosted.inled.es/archive.is.png',
-    link: '/apps/archive.is',
+    icon: "https://hosted.inled.es/cruzcristiana-gnome-logo.png",
+    link: "/apps/cruzcristiana",
+  },
+  {
+    id: "memorywarn",
+    name: "Memory Warn",
+    description: {
+      es: "Advierte cuando el uso de memoria de su ordenador supera un umbral establecido.",
+      en: "Warns when your computer's memory usage exceeds a set threshold.",
+    },
+    icon: "https://hosted.inled.es/memory-warn-logo.png",
+    link: "/apps/memorywarn",
+  },
+  {
+    id: "bautilus",
+    name: "Bautilus",
+    description: {
+      es: "Convierte tu navegador en un explorador de archivos similar al Nautilus de GNOME. Privado y todopoderoso.",
+      en: "Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.",
+    },
+    icon: "https://hosted.inled.es/bautilus.png",
+    link: "/apps/bautilus",
     notice: {
-      type: 'warning',
+      type: "info",
       message: {
-        es: 'Este recurso ya no requiere mantenimiento y no es la principal línea de negocio de Inled. Actualmente no se está dedicando tiempo a este proyecto.',
-        en: 'This resource no longer requires maintenance and is not Inled\'s main line of business. Currently, no time is being dedicated to this project.'
-      }
-    }
-  },
-  {
-    id: 'cruzcristiana',
-    name: 'Cruz Cristiana para GNOME',
-    description: {
-      es: 'Muestra la cruz de Cristo para que la presencia de Dios esté contigo.',
-      en: 'Display the cross of Christ so that God\'s presence is with you.'
+        es: "Esta extensión se encuentra actualmente en fase Beta pública.",
+        en: "This extension is currently in public Beta.",
+      },
     },
-    icon: 'https://hosted.inled.es/cruzcristiana-gnome-logo.png',
-    link: '/apps/cruzcristiana'
   },
-  {
-    id: 'memorywarn',
-    name: 'Memory Warn',
-    description: {
-      es: 'Advierte cuando el uso de memoria de su ordenador supera un umbral establecido.',
-      en: 'Warns when your computer\'s memory usage exceeds a set threshold.'
-    },
-    icon: 'https://hosted.inled.es/memory-warn-logo.png',
-    link: '/apps/memorywarn'
-  },
-  {
-    id: 'codexbar-gnome',
-    name: 'CodexBar for GNOME',
-    description: {
-      es: 'Monitoriza el uso de tus proveedores de IA directamente en la barra de GNOME.',
-      en: 'Monitor your AI provider usage directly in the GNOME bar.'
-    },
-    icon: 'https://hosted.inled.es/codexbar-logo.png',
-    link: '/apps/codexbar-gnome'
-  },
-  {
-    id: 'bautilus',
-    name: 'Bautilus',
-    description: {
-      es: 'Convierte tu navegador en un explorador de archivos similar al Nautilus de GNOME. Privado y todopoderoso.',
-      en: 'Turn your browser into a Nautilus-style (GNOME) file explorer. Private and powerful.'
-    },
-    icon: 'https://hosted.inled.es/bautilus.png',
-    link: '/apps/bautilus',
-    notice: {
-      type: 'info',
-      message: {
-        es: 'Esta extensión se encuentra actualmente en fase Beta pública.',
-        en: 'This extension is currently in public Beta.'
-      }
-    }
-  },
-
 ];
