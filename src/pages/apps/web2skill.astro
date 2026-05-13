@@ -1,0 +1,619 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const app = {
+  id: "web2skill",
+  title: "web2skill",
+  logo: "https://hosted.inled.es/web2skill-w2s.png",
+  downloadUrl: "https://github.com/InledGroup/web2skill/releases/latest/download/web2skill-extension.zip",
+  githubUrl: "https://github.com/InledGroup/web2skill",
+  videoUrl: "https://hosted.inled.es/web2skill.mp4"
+};
+
+const i18n = {
+  es: {
+    meta: {
+      title: "web2skill | Convierte Documentación en Skills de IA",
+      description: "web2skill es una extensión de Chrome que descarga sitios web de documentación completos como skills en formato Markdown, optimizados para IA."
+    },
+    hero: {
+      title: "De Documentación a Skills de IA.",
+      subtitle: "Descarga sitios web completos de documentación como archivos Markdown interconectados, listos para alimentar a tu IA favorita.",
+      badge: "Nuevo Lanzamiento"
+    },
+    features: {
+      title: "Potencia tu IA con documentación real",
+      subtitle: "web2skill extrae el conocimiento de la web y lo formatea para que sea procesable por LLMs.",
+      items: [
+        { 
+          name: "Markdown Puro", 
+          desc: "Descarga todo el sitio web como archivos .md limpios y estructurados.", 
+          icon: "file-text" 
+        },
+        { 
+          name: "Enlaces Relativos", 
+          desc: "Sustituye automáticamente los enlaces web por enlaces relativos entre archivos Markdown.", 
+          icon: "link" 
+        },
+        { 
+          name: "Selección Inteligente", 
+          desc: "Elige qué páginas guardar. Detecta automáticamente el menú de navegación del sitio.", 
+          icon: "mouse-pointer" 
+        },
+        { 
+          name: "Optimizado para IA", 
+          desc: "Diseñado específicamente para crear repositorios de conocimiento para sistemas RAG y agentes.", 
+          icon: "sparkles" 
+        }
+      ]
+    },
+    cta: {
+      title: "Empieza a convertir webs ahora",
+      button: "Descargar Extensión (.zip)",
+      github: "Ver en GitHub",
+      disclaimer: "Instala en modo desarrollador (Chrome > Extensiones > Cargar descomprimida)"
+    }
+  },
+  en: {
+    meta: {
+      title: "web2skill | Turn Documentation into AI Skills",
+      description: "web2skill is a Chrome extension that downloads entire documentation websites as Markdown skills, optimized for AI."
+    },
+    hero: {
+      title: "From Docs to AI Skills.",
+      subtitle: "Download entire documentation websites as interconnected Markdown files, ready to feed your favorite AI.",
+      badge: "New Release"
+    },
+    features: {
+      title: "Power your AI with real documentation",
+      subtitle: "web2skill extracts web knowledge and formats it to be processable by LLMs.",
+      items: [
+        { 
+          name: "Pure Markdown", 
+          desc: "Download the entire website as clean, structured .md files.", 
+          icon: "file-text" 
+        },
+        { 
+          name: "Relative Links", 
+          desc: "Automatically replaces web links with relative links between Markdown files.", 
+          icon: "link" 
+        },
+        { 
+          name: "Smart Selection", 
+          desc: "Choose which pages to save. Automatically detects the site's navigation menu.", 
+          icon: "mouse-pointer" 
+        },
+        { 
+          name: "AI Optimized", 
+          desc: "Specifically designed to create knowledge repositories for RAG systems and agents.", 
+          icon: "sparkles" 
+        }
+      ]
+    },
+    cta: {
+      title: "Start converting webs now",
+      button: "Download Extension (.zip)",
+      github: "View on GitHub",
+      disclaimer: "Install in developer mode (Chrome > Extensions > Load unpacked)"
+    }
+  }
+};
+
+const content = i18n[lang] || i18n.es;
+
+const socialImage = "https://hosted.inled.es/web2skill-w2s.png";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "web2skill",
+  "operatingSystem": "Chrome, Edge, Brave",
+  "applicationCategory": "BrowserApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": content.meta.description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Inled Group",
+    "url": "https://inled.es"
+  }
+};
+---
+
+<Layout title={content.meta.title} description={content.meta.description} image={socialImage}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <div id="page-content" class="theme-dark">
+    <Header />
+    
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="container">
+          <div class="hero-content">
+            <div class="badge-container fade-in">
+              <span class="retro-badge">{content.hero.badge}</span>
+            </div>
+            
+            <div class="hero-logo-container fade-in">
+              <img src={app.logo} alt="web2skill Logo" class="main-logo-hero" />
+            </div>
+
+            <h1 class="fade-in delay-1 retro-text">{content.hero.title}</h1>
+            <p class="fade-in delay-2">{content.hero.subtitle}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Video Demo Section -->
+      <section class="video-section">
+        <div class="container">
+           <div class="video-wrapper fade-up">
+              <div class="video-container" id="video-root">
+                 <video 
+                   id="announcement-video"
+                   src={app.videoUrl} 
+                   loop 
+                   playsinline 
+                   class="demo-video">
+                 </video>
+                 <div class="video-overlay" id="video-overlay">
+                    <button class="play-button" id="play-btn" aria-label="Play video">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <div class="mobile-hint" id="mobile-hint">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/><path d="m15 5 3 3-3 3"/><path d="M18 8H11a3 3 0 0 0-3 3v2"/></svg>
+                       <span>Gira la pantalla para una mejor experiencia</span>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section class="features-section">
+        <div class="container">
+          <h2 class="section-title fade-up retro-text">{content.features.title}</h2>
+          <p class="section-subtitle fade-up">{content.features.subtitle}</p>
+          
+          <div class="features-grid">
+            {content.features.items.map((item, index) => (
+              <div class="feature-card fade-up" style={`--delay: ${index * 0.1}s`}>
+                <div class="feature-icon">
+                  {item.icon === 'file-text' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>}
+                  {item.icon === 'link' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>}
+                  {item.icon === 'mouse-pointer' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg>}
+                  {item.icon === 'sparkles' && <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>}
+                </div>
+                <h3>{item.name}</h3>
+                <p>{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Section -->
+      <section class="cta-section">
+        <div class="container">
+          <div class="cta-card fade-up">
+            <h2 class="retro-text">{content.cta.title}</h2>
+            <div class="cta-actions">
+              <a href={app.downloadUrl} class="btn-retro" id="cta-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                {content.cta.button}
+              </a>
+              <a href={app.githubUrl} target="_blank" rel="noopener noreferrer" class="btn-outline-retro" id="github-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+                {content.cta.github}
+              </a>
+            </div>
+            <p class="cta-disclaimer">{content.cta.disclaimer}</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+  #page-content {
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --accent-color: #ffffff;
+    --retro-border: #ffffff;
+    --muted-color: #888888;
+    
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  .retro-text {
+    font-family: 'Press Start 2P', cursive;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  body { background-color: #000000 !important; overflow-x: hidden; }
+
+  #page-content :global(header) {
+    background: transparent !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+</style>
+
+<style>
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: 180px;
+    padding-bottom: 80px;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Grid background */
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), 
+                      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    z-index: 0;
+    pointer-events: none;
+    mask-image: radial-gradient(circle at center, black, transparent 80%);
+  }
+
+  .hero-content {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .retro-badge {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--retro-border);
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    color: #fff;
+    margin-bottom: 2rem;
+    display: inline-block;
+  }
+
+  .hero-logo-container {
+    margin-bottom: 3rem;
+  }
+
+  .main-logo-hero {
+    width: clamp(150px, 20vw, 250px);
+    height: auto;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.2));
+  }
+
+  h1 {
+    font-size: clamp(1.5rem, 5vw, 3.5rem);
+    margin-bottom: 2rem;
+    color: #fff;
+  }
+
+  p {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--muted-color);
+    max-width: 700px;
+    line-height: 1.6;
+  }
+
+  /* Video Section */
+  .video-section {
+    padding: 4rem 0 8rem;
+  }
+
+  .video-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 4px solid #fff;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    background: #000;
+  }
+
+  .video-container {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #000;
+    overflow: hidden;
+  }
+
+  .demo-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+  }
+
+  .video-overlay.playing {
+    background: rgba(0,0,0,0);
+    backdrop-filter: none;
+  }
+
+  .video-overlay.playing .play-button,
+  .video-overlay.playing .mobile-hint {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .play-button {
+    background: rgba(0,0,0,0.5);
+    border: 4px solid #fff;
+    color: #fff;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-bottom: 2rem;
+    padding: 0;
+    z-index: 3;
+  }
+
+  .play-button:hover {
+    background: #fff;
+    color: #000;
+    transform: scale(1.1);
+  }
+
+  .play-button svg {
+    margin-left: 8px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .mobile-hint {
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    color: #fff;
+    text-align: center;
+    max-width: 80%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+  }
+
+  @media (max-width: 768px) {
+    .mobile-hint {
+      display: flex;
+    }
+    .play-button {
+      width: 100px;
+      height: 100px;
+    }
+    .play-button svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  /* Features Section */
+  .features-section { padding: 8rem 0; text-align: center; }
+  .section-title { font-size: 2rem; margin-bottom: 1.5rem; color: #fff; }
+  .section-subtitle { margin-bottom: 5rem; color: var(--muted-color); max-width: 600px; margin-left: auto; margin-right: auto; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+  }
+
+  .feature-card {
+    background: #0a0a0a;
+    padding: 3rem 2rem;
+    border: 1px solid #222;
+    text-align: left;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .feature-card:hover {
+    border-color: #fff;
+    transform: translate(-5px, -5px);
+    box-shadow: 5px 5px 0px #fff;
+  }
+
+  .feature-icon {
+    width: 64px;
+    height: 64px;
+    border: 2px solid #333;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .feature-card h3 { font-family: 'Press Start 2P', cursive; font-size: 0.8rem; line-height: 1.4; margin-bottom: 1.5rem; color: #fff; }
+  .feature-card p { font-size: 0.95rem; color: #888; margin-bottom: 0; }
+
+  /* CTA Section */
+  .cta-section { padding: 8rem 0; }
+  .cta-card {
+    border: 4px solid #fff;
+    padding: 6rem 2rem;
+    text-align: center;
+    background: #000;
+  }
+
+  .cta-card h2 { font-size: clamp(1.2rem, 4vw, 2.5rem); margin-bottom: 4rem; color: #fff; }
+  .cta-actions { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2rem; }
+
+  .btn-retro {
+    background: #fff;
+    color: #000;
+    padding: 1.2rem 2.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    text-decoration: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-retro:hover {
+    background: #eee;
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0px #888;
+  }
+
+  .btn-outline-retro {
+    background: transparent;
+    color: #fff;
+    padding: 1.2rem 2.5rem;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.7rem;
+    text-decoration: none;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .btn-outline-retro:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0px #fff;
+  }
+
+  .cta-disclaimer {
+    color: #555;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  /* Animations */
+  .fade-in { opacity: 0; transform: translateY(20px); animation: fadeIn 1s forwards; }
+  .fade-up { opacity: 0; transform: translateY(30px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  @keyframes fadeIn { to { opacity: 1; transform: translateY(0); } }
+  .delay-1 { animation-delay: 0.2s; }
+  .delay-2 { animation-delay: 0.4s; }
+
+  @media (max-width: 768px) {
+    .hero-section { padding-top: 140px; }
+    .cta-card { padding: 4rem 1.5rem; }
+    .btn-retro, .btn-outline-retro { width: 100%; justify-content: center; }
+    
+    .main-logo-hero {
+      width: 100%;
+      max-width: 240px;
+    }
+
+    h1, .section-title, .cta-card h2 {
+      font-size: clamp(0.9rem, 4vw, 1.2rem) !important;
+      line-height: 1.6;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+    
+    .video-wrapper {
+      border-width: 2px;
+    }
+  }
+</style>
+
+<script>
+  const video = document.getElementById('announcement-video') as HTMLVideoElement;
+  const playBtn = document.getElementById('play-btn');
+  const overlay = document.getElementById('video-overlay');
+
+  if (video && playBtn && overlay) {
+    const toggleVideo = () => {
+      if (video.paused) {
+        video.play();
+        video.muted = false;
+        video.volume = 1.0;
+        overlay.classList.add('playing');
+        
+        // Intentar rotación en mobile solo la primera vez que se pulsa Play
+        if (window.innerWidth < 768 && !video.dataset.rotated) {
+          video.dataset.rotated = "true";
+          if (video.requestFullscreen) {
+            video.requestFullscreen().then(() => {
+              // @ts-ignore
+              if (screen.orientation && screen.orientation.lock) {
+                // @ts-ignore
+                screen.orientation.lock('landscape').catch(() => {});
+              }
+            }).catch(() => {});
+          }
+        }
+      } else {
+        video.pause();
+        overlay.classList.remove('playing');
+      }
+    };
+
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleVideo();
+    });
+
+    overlay.addEventListener('click', toggleVideo);
+    video.addEventListener('click', toggleVideo);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>

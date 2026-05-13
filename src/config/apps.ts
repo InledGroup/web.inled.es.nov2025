@@ -19,6 +19,17 @@ export interface App {
 
 export const apps: App[] = [
   {
+    id: "web2skill",
+    name: "web2skill",
+    description: {
+      es: "Convierte documentación web en skills de Markdown optimizadas para IA.",
+      en: "Convert web documentation into AI-optimized Markdown skills.",
+    },
+    icon: "https://hosted.inled.es/web2skill-w2s.png",
+    link: "/apps/web2skill",
+    isFeatured: 1,
+  },
+  {
     id: "codexbar-gnome",
     name: "CodexBar for GNOME",
     description: {
@@ -38,7 +49,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/new-agent-tunnel.png",
     link: "/apps/agent-tunnel",
-    isFeatured: 1,
+    isFeatured: 3,
   },
   {
     id: "bautilus",
