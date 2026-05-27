@@ -1,0 +1,409 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import FeatureSection from '../../components/FeatureSection.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const app = {
+  id: "ai-exporter",
+  title: "AI Exporter",
+  logo: "https://hosted.inled.es/aiexporter.png",
+  gifUrl: "https://hosted.inled.es/aiexporter-converter.gif",
+  videoUrl: "https://hosted.inled.es/aiexporterdemopdf.mp4",
+  downloadUrl: "https://github.com/InledGroup/open-ai-exporter/releases/latest",
+  githubUrl: "https://github.com/InledGroup/open-ai-exporter"
+};
+
+const translations = {
+  es: {
+    meta: {
+      title: "AI Exporter | Exporta tus chats de IA gratis a PDF, Word y más",
+      description: "La mejor extensión de Chrome para exportar conversaciones de Gemini, ChatGPT, Claude y más. Totalmente gratis, con soporte para fórmulas y personalización PDF."
+    },
+    hero: {
+      title: "AI Exporter",
+      subtitle: "Exporta tus conversaciones con IA de forma 100% gratuita y privada. WORD, PDF, MD, TXT y JSON.",
+      badge: "100% Local & Privado"
+    },
+    features: {
+      formats: {
+        title: "Todos los formatos, todas las IAs",
+        description: "Compatible con Gemini, Perplexity, NotebookLM, Claude, ChatGPT y DeepSeek. Exporta a Word, PDF, Markdown, Texto plano y JSON con un solo clic.",
+      },
+      privacy: {
+        title: "Privacidad sin compromisos",
+        description: "A diferencia de otras soluciones, AI Exporter procesa todo en tu dispositivo. Tus conversaciones nunca se suben a la nube ni se comparten con terceros. Seguridad absoluta para tus datos.",
+      },
+      customization: {
+        title: "Personalización Total para PDF",
+        description: "Ajusta el tamaño de la fuente y de los mensajes antes de exportar. Ideal para crear documentos limpios y profesionales. Soporta renderizado de fórmulas complejas y formateo avanzado.",
+      }
+    },
+    cta: {
+      title: "Empieza a exportar hoy mismo",
+      button: "Instalar Extensión",
+      github: "Ver en GitHub"
+    }
+  },
+  en: {
+    meta: {
+      title: "AI Exporter | Export your AI chats for free to PDF, Word and more",
+      description: "The best Chrome extension to export conversations from Gemini, ChatGPT, Claude and more. Totally free, with formula support and PDF customization."
+    },
+    hero: {
+      title: "AI Exporter",
+      subtitle: "Export your AI conversations 100% for free and privately. WORD, PDF, MD, TXT, and JSON.",
+      badge: "100% Local & Private"
+    },
+    features: {
+      formats: {
+        title: "All formats, all AIs",
+        description: "Compatible with Gemini, Perplexity, NotebookLM, Claude, ChatGPT, and DeepSeek. Export to Word, PDF, Markdown, Plain Text, and JSON with a single click.",
+      },
+      privacy: {
+        title: "Compromise-free Privacy",
+        description: "Unlike other solutions, AI Exporter processes everything on your device. Your conversations are never uploaded to the cloud or shared with third parties. Absolute security for your data.",
+      },
+      customization: {
+        title: "Total PDF Customization",
+        description: "Adjust font and message size before exporting. Ideal for creating clean and professional documents. Supports complex formula rendering and advanced formatting.",
+      }
+    },
+    cta: {
+      title: "Start exporting today",
+      button: "Install Extension",
+      github: "View on GitHub"
+    }
+  }
+};
+
+const t = translations[lang] || translations.es;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "AI Exporter",
+  "operatingSystem": "ChromeOS, Windows, macOS, Linux",
+  "applicationCategory": "Browser Extension",
+  "downloadUrl": app.downloadUrl,
+  "softwareVersion": "latest",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": t.meta.description
+};
+---
+
+<Layout title={t.meta.title} description={t.meta.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Header />
+
+  <main>
+    <!-- Hero Section -->
+    <section class="app-hero">
+      <div class="hero-container">
+        <div class="badge">{t.hero.badge}</div>
+        <div class="logo-wrapper">
+          <img src={app.logo} alt="AI Exporter Logo" class="app-logo" />
+        </div>
+        <h1 class="title">{t.hero.title}</h1>
+        <p class="subtitle">{t.hero.subtitle}</p>
+        <div class="hero-actions">
+          <a href={app.downloadUrl} class="btn-primary">{t.cta.button}</a>
+          <a href={app.githubUrl} class="btn-secondary">{t.cta.github}</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formats Feature -->
+    <FeatureSection
+      title={t.features.formats.title}
+      description={t.features.formats.description}
+      imageSrc={app.gifUrl}
+      imageAlt="Supported Formats and AIs"
+    />
+
+    <!-- Privacy Section -->
+    <section class="privacy-highlight">
+      <div class="container">
+        <div class="privacy-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <path d="m9 12 2 2 4-4"></path>
+          </svg>
+        </div>
+        <h2 class="title">{t.features.privacy.title}</h2>
+        <p class="description">{t.features.privacy.description}</p>
+        <div class="privacy-badge">{lang === 'es' ? 'Procesamiento 100% Local' : '100% Local Processing'}</div>
+      </div>
+    </section>
+
+    <!-- Customization / Video Section -->
+    <section class="video-section">
+      <div class="container">
+        <div class="video-content">
+          <h2 class="section-title">{t.features.customization.title}</h2>
+          <p class="section-description">{t.features.customization.description}</p>
+          <ul class="feature-list">
+            <li>{lang === 'es' ? 'Renderizado de fórmulas matemáticas complejas' : 'Complex mathematical formula rendering'}</li>
+            <li>{lang === 'es' ? 'Preserva el formateo original de la IA' : 'Preserves original AI formatting'}</li>
+            <li>{lang === 'es' ? 'Ajuste dinámico de márgenes y tamaños' : 'Dynamic margin and size adjustment'}</li>
+          </ul>
+        </div>
+        <div class="video-wrapper">
+          <video autoplay muted loop playsinline class="demo-video">
+            <source src={app.videoUrl} type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <div class="container">
+        <h2>{t.cta.title}</h2>
+        <div class="cta-buttons">
+          <a href={app.downloadUrl} class="btn-primary">{t.cta.button}</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  main {
+    background: #000;
+    color: white;
+  }
+
+  .app-hero {
+    padding: 120px 20px 60px;
+    text-align: center;
+    background: radial-gradient(circle at top, rgba(50, 50, 50, 0.3) 0%, transparent 70%);
+  }
+
+  .hero-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    color: #fff;
+  }
+
+  .logo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .app-logo {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.1));
+    display: block;
+  }
+
+  .title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 3rem;
+    line-height: 1.5;
+    max-width: 600px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 100px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Privacy Highlight */
+  .privacy-highlight {
+    padding: 100px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #000, #050505);
+  }
+
+  .privacy-highlight .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .privacy-icon {
+    color: #4ade80;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .privacy-highlight .title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .privacy-highlight .description {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2.5rem;
+  }
+
+  .privacy-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    color: #4ade80;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Video Section */
+  .video-section {
+    padding: 100px 20px;
+    background: #050505;
+  }
+
+  .video-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-description {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .feature-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+  }
+
+  .feature-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .video-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .demo-video {
+    width: 100%;
+    display: block;
+  }
+
+  /* Final CTA */
+  .final-cta {
+    padding: 100px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #050505, #000);
+  }
+
+  .final-cta h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 968px) {
+    .video-section .container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .video-wrapper {
+      order: 1;
+    }
+  }
+</style>

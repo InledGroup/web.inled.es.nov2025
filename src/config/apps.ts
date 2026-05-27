@@ -19,6 +19,17 @@ export interface App {
 
 export const apps: App[] = [
   {
+    id: "ai-exporter",
+    name: "AI Exporter",
+    description: {
+      es: "Exporta tus conversaciones con IA de forma 100% gratuita a WORD, PDF, MD, TXT y JSON.",
+      en: "Export your AI conversations 100% for free to WORD, PDF, MD, TXT, and JSON.",
+    },
+    icon: "https://hosted.inled.es/aiexporter.png",
+    link: "/apps/ai-exporter",
+    isFeatured: 1,
+  },
+  {
     id: "web2skill",
     name: "web2skill",
     description: {
