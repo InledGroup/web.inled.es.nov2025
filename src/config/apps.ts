@@ -30,6 +30,17 @@ export const apps: App[] = [
     isFeatured: 1,
   },
   {
+    id: "appinstall",
+    name: "AppInstall",
+    description: {
+      es: "Tu gestor de paquetes todo en uno: instala, desinstala y gestiona apps con facilidad.",
+      en: "Your all-in-one package manager: easily install, uninstall, and manage apps.",
+    },
+    icon: "https://hosted.inled.es/swiftinstall-logo.png",
+    link: "/apps/appinstall",
+    isFeatured: 1,
+  },
+  {
     id: "web2skill",
     name: "web2skill",
     description: {
@@ -159,16 +170,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/bastion.png",
     link: "/bastion",
-  },
-  {
-    id: "swiftinstall",
-    name: "AppInstall",
-    description: {
-      es: "Instala, desinstala y gestiona paquetes .deb y .appimage fácilmente.",
-      en: "Easily install, uninstall and manage .deb and .appimage packages.",
-    },
-    icon: "https://hosted.inled.es/swiftinstall-logo.png",
-    link: "/apps/appinstall",
   },
   {
     id: "cleany",

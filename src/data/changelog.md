@@ -2,7 +2,7 @@
 
 ## 2026-05-09
 - CodexBar for GNOME: Solucionado error que hacía que solo obtuviera resultados del modelo pro para calcular el porcentaje de uso que indicar en la miniatura. Añadido soporte para proveedores personalizados. Añadido indicador de comunidad.  
-- AppInstall (antes Swiftinstall): rediseñada UI, mejorada. Soporte Homebrew y RPM. Instalación de PWAs. Mejora del proceso de instalación de appimages. Solucionada congelación temporal de la UI al desinstalar un paquetes. Abstraida la implementación concreta para cada distro.
+- AppInstall (antes appinstall): rediseñada UI, mejorada. Soporte Homebrew y RPM. Instalación de PWAs. Mejora del proceso de instalación de appimages. Solucionada congelación temporal de la UI al desinstalar un paquetes. Abstraida la implementación concreta para cada distro.
 - Tabnest: Añadida funcionalidad para obtención de favicons de marcadores.  
 - Bautilus: Solucionados errores que provocaban desbordamiento de memoria. Añadido efecto de carga en la barar de progreso de descargas. Mejorada la implementación de las descargas. Añadido soporte para carpetas del sistema en idioma de instalación en Linux.
 
