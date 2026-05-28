@@ -2,6 +2,7 @@ ai-exporter
 appinstall
 web2skill
 codexbar-gnome
+macboat
 office
 start
 agent-tunnel

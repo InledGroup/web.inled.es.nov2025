@@ -474,4 +474,19 @@ export const appsData: AppData[] = [
       sourceCode: "https://github.com/jaimegh-es/codexbar-gnome",
     },
   },
+  {
+    id: "macboat",
+    title: "Macboat",
+    icon: "https://hosted.inled.es/macboat.png",
+    platform: ["Linux", "Windows"],
+    shortDescription: "La forma más sencilla de ejecutar macOS en Linux y Windows.",
+    description: "# macOS everywhere. That's Macboat.\n\nExperimenta macOS en tu hardware actual con Macboat. Potente, sencillo y basado en tecnologías de vanguardia.\n\n### Características Principales\n\n- **Rendimiento Nativo**: Optimizado para aprovechar al máximo tu CPU y GPU.\n- **Simplicidad Absoluta**: Sin configuraciones complejas.\n- **100% Open Source**: Transparente y auditable.\n\n### Aviso Legal\n\nMacboat es una herramienta de virtualización. El EULA de Apple especifica que macOS solo debe ejecutarse en hardware oficial de Apple. Al usar Macboat, usted acepta que es el único responsable de cumplir con dichos términos.",
+    screenshots: [],
+    video: "",
+    downloads: {
+      github: "https://github.com/InledGroup/macboat/releases/latest",
+      sourceforge: "",
+      sourceCode: "https://github.com/InledGroup/macboat",
+    },
+  },
 ];

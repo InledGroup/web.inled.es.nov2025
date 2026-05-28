@@ -58,6 +58,16 @@ export const apps: App[] = [
     link: "/apps/codexbar-gnome",
   },
   {
+    id: "macboat",
+    name: "Macboat",
+    description: {
+      es: "La forma más sencilla de ejecutar macOS en Linux y Windows. Potente, sencillo y basado en tecnologías de vanguardia.",
+      en: "The easiest way to run macOS on Linux and Windows. Powerful, simple, and based on cutting-edge technologies.",
+    },
+    icon: "https://hosted.inled.es/macboat.png",
+    link: "/apps/macboat",
+  },
+  {
     id: "agent-tunnel",
     name: "Agent Tunnel",
     description: {

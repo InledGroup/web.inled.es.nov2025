@@ -1,0 +1,744 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const app = {
+  id: "macboat",
+  title: "Macboat",
+  logo: "https://hosted.inled.es/macboat.png",
+  downloadUrl: "https://github.com/InledGroup/macboat/releases/latest",
+  githubUrl: "https://github.com/InledGroup/macboat",
+  releasesUrl: "https://github.com/InledGroup/macboat/releases/"
+};
+
+const translations = {
+  es: {
+    meta: {
+      title: "Macboat | Corre macOS en Linux con integración total",
+      description: "Experimenta macOS 11 a 15 en tu hardware Linux con Macboat. Potente, sencillo y basado en Docker."
+    },
+    nav: {
+      features: "Funciones",
+      prerequisites: "Requisitos",
+      download: "Descargar",
+      contribute: "Contribuir",
+      community: "Comunidad",
+      faq: "FAQ"
+    },
+    hero: {
+      title: "Ejecuta macOS en 🐧 Linux",
+      subtitle: " ✨ sin dolores de cabeza ",
+      explore: "Explorar Funciones",
+      download: "Descargar"
+    },
+    download: {
+      title: "Elige tu arquitectura y formato preferido. Macboat está listo para la acción.",
+      currentVersion: "Versión actual: v1.0.1",
+      platforms: [
+        { name: "AppImage", icon: "fa-solid fa-box", arch: "x86_64, arm64" },
+        { name: "Debian / Ubuntu", icon: "fa-brands fa-debian", arch: "amd64, arm64" },
+        { name: "Fedora / RedHat", icon: "fa-brands fa-fedora", arch: "x86_64, aarch64" }
+      ],
+      beta: "Macboat se encuentra actualmente en fase Beta. Puede haber errores."
+    },
+    requirements: {
+      title: "Prerrequisitos",
+      subtitle: "Antes de ejecutar Macboat, asegúrate de que tu sistema cumple los requisitos indicados a continuación.",
+      hardware: {
+        title: "Requisitos de Hardware",
+        ram: "RAM: Al menos 8 GB de RAM (Recomendado 16 GB)",
+        cpu: "CPU: Al menos 4 hilos de CPU",
+        storage: "Almacenamiento: Al menos 64 GB de espacio libre",
+        virtualization: "Virtualización: KVM habilitado en BIOS/UEFI",
+        macos: "Soporte: macOS 11 (Big Sur) hasta macOS 15 (Sequoia)"
+      },
+      container: {
+        title: "Contenedores",
+        docker: "Docker Desktop NO es compatible. Usa Docker nativo.",
+        group: "Usuario añadido al grupo docker (requiere reiniciar sesión)",
+        daemon: "El demonio de Docker está en ejecución"
+      }
+    },
+    faq: {
+      title: "Preguntas Frecuentes",
+      questions: [
+        {
+          q: "¿Esto es como Winboat?",
+          a: "No, aún no hay integración nativa. Por ahora es solo macOS con su escritorio completo."
+        },
+        {
+          q: "¿Puedo correr apps de Mac?",
+          a: "Sí, puedes instalar y ejecutar aplicaciones de macOS dentro del entorno virtualizado."
+        },
+        {
+          q: "¿Puedo usar directorios compartidos?",
+          a: "Sí, aunque estamos perfeccionando esa función y puede que no funcione perfectamente todavía."
+        },
+        {
+          q: "No me instala, me da error",
+          a: "Si experimentas problemas durante la instalación, te recomendamos probar con una versión más antigua de mac."
+        }
+      ]
+    },
+    legal: {
+      title: "Aviso Legal EULA",
+      content: "Macboat es una herramienta de virtualización. El EULA de Apple especifica que macOS solo debe ejecutarse en hardware oficial de Apple. Al usar Macboat, usted acepta que es el único responsable de cumplir con dichos términos."
+    }
+  },
+  en: {
+    meta: {
+      title: "Macboat | Run macOS on Linux with seamless integration",
+      description: "Experience macOS 11 to 15 on your Linux hardware with Macboat. Powerful, simple, and Docker-based."
+    },
+    nav: {
+      features: "Features",
+      prerequisites: "Pre-Requisites",
+      download: "Download",
+      contribute: "Contribute",
+      community: "Community",
+      faq: "FAQ"
+    },
+    hero: {
+      title: "Run macOS on 🐧 Linux",
+      subtitle: "with ✨ a few clicks",
+      explore: "Explore Features",
+      download: "Download"
+    },
+    download: {
+      title: "Choose your preferred architecture and format. Macboat is ready for action.",
+      currentVersion: "Current version: v1.0.1",
+      platforms: [
+        { name: "AppImage", icon: "fa-solid fa-box", arch: "x86_64, arm64" },
+        { name: "Debian / Ubuntu", icon: "fa-brands fa-debian", arch: "amd64, arm64" },
+        { name: "Fedora / RedHat", icon: "fa-brands fa-fedora", arch: "x86_64, aarch64" }
+      ],
+      beta: "Macboat is currently in Beta. Expect errors."
+    },
+    requirements: {
+      title: "Pre-Requisites",
+      subtitle: "Before running Macboat, make sure your system meets the requirements below.",
+      hardware: {
+        title: "Hardware Requirements",
+        ram: "RAM: At least 8 GB of RAM (16 GB Recommended)",
+        cpu: "CPU: At least 4 CPU threads",
+        storage: "Storage: At least 64 GB of free space",
+        virtualization: "Virtualization: KVM enabled in BIOS/UEFI",
+        macos: "Support: macOS 11 (Big Sur) to macOS 15 (Sequoia)"
+      },
+      container: {
+        title: "Containerization",
+        docker: "Docker Desktop is NOT supported. Use native Docker.",
+        group: "User added to the docker group (Relog required)",
+        daemon: "Docker daemon is running"
+      }
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      questions: [
+        {
+          q: "Is this like Winboat?",
+          a: "No, there is no native integration yet. For now, it's just macOS with its full desktop."
+        },
+        {
+          q: "Can I run Mac apps?",
+          a: "Yes, you can install and run macOS applications within the virtualized environment."
+        },
+        {
+          q: "Can I use shared directories?",
+          a: "Yes, although we are still perfecting that feature and it may not work perfectly yet."
+        },
+        {
+          q: "It doesn't install, I get an error",
+          a: "If you experience issues during installation, we recommend trying an older macos versions."
+        }
+      ]
+    },
+    legal: {
+      title: "EULA Legal Notice",
+      content: "Macboat is a virtualization tool. Apple's EULA specifies that macOS should only be run on official Apple hardware. By using Macboat, you agree that you are solely responsible for complying with such terms."
+    }
+  }
+};
+
+const t = translations[lang] || translations.es;
+---
+
+<Layout title={t.meta.title} description={t.meta.description}>
+  <div class="macboat-clone">
+    <!-- Custom Floating Navbar -->
+    <nav class="floating-nav">
+        <div class="nav-logo" >
+            <a href="/" style="text-decoration: none; color: white;">
+            <img src={app.logo} alt="Macboat" />
+            <span>Macboat</span>
+            </a>
+      </div>
+      <div class="nav-links">
+        <a href="#requirements">{t.nav.prerequisites}</a>
+        <a href="#download">{t.nav.download}</a>
+        <a href="#faq">{t.nav.faq}</a>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-logo">
+          <img src={app.logo} alt="Macboat Logo" />
+        </div>
+        <h1 class="hero-title">
+          {t.hero.title} <br/>
+          <span class="gradient-text">{t.hero.subtitle}</span>
+        </h1>
+        <div class="hero-actions">
+          <a href="#features" class="btn-outline">
+            <i class="fa-solid fa-list-ul gradient-icon"></i>
+            {t.hero.explore}
+          </a>
+          <a href="#download" class="btn-primary">
+            <i class="fa-solid fa-download"></i>
+            {t.hero.download}
+            <span class="beta-tag">BETA</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Simplified Download Section -->
+      <section id="download" class="download-section">
+        <p class="section-intro">{t.download.title}</p>
+
+        <div class="download-grid">
+          {t.download.platforms.map((platform) => (
+            <div class="download-mini-card">
+              <div class="card-icon">
+                <i class={`${platform.icon} gradient-icon`}></i>
+              </div>
+              <div class="card-info">
+                <h3>{platform.name}</h3>
+                <p>{platform.arch}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="download-actions">
+            <a href={app.downloadUrl} class="btn-primary large">
+              <i class="fa-brands fa-github"></i>
+              {lang === 'es' ? 'Ver todas las descargas en GitHub' : 'View all downloads on GitHub'}
+            </a>
+            <p class="version-info">{t.download.currentVersion}</p>
+        </div>
+
+        <div class="beta-disclaimer">
+          <p>✨ {t.download.beta}</p>
+        </div>
+      </section>
+
+      <!-- Requirements Section -->
+      <section id="requirements" class="requirements-section">
+        <h2 class="section-title">
+          <span class="gradient-text">{t.requirements.title}</span>
+        </h2>
+        <p class="section-subtitle">{t.requirements.subtitle}</p>
+
+        <div class="requirements-grid">
+          <!-- Hardware Card -->
+          <div class="glass-card">
+            <div class="card-header">
+              <div class="icon">
+                <i class="fa-solid fa-microchip gradient-icon"></i>
+              </div>
+              <h3>{t.requirements.hardware.title}</h3>
+            </div>
+            <ul class="req-list">
+              <li><i class="fa-solid fa-check gradient-icon"></i> {t.requirements.hardware.ram}</li>
+              <li><i class="fa-solid fa-check gradient-icon"></i> {t.requirements.hardware.cpu}</li>
+              <li><i class="fa-solid fa-check gradient-icon"></i> {t.requirements.hardware.storage}</li>
+              <li><i class="fa-solid fa-check gradient-icon"></i> {t.requirements.hardware.virtualization}</li>
+              <li><i class="fa-solid fa-check gradient-icon"></i> {t.requirements.hardware.macos}</li>
+            </ul>
+          </div>
+
+          <!-- Containerization Card -->
+          <div class="glass-card">
+            <div class="card-header">
+              <div class="icon">
+                <i class="fa-solid fa-cube gradient-icon"></i>
+              </div>
+              <h3>{t.requirements.container.title}</h3>
+            </div>
+            <div class="card-body">
+              <ul class="req-list">
+                <li><i class="fa-solid fa-link gradient-icon"></i> Docker How?</li>
+                <li class="warning"><i class="fa-solid fa-triangle-exclamation"></i> NOTE: {t.requirements.container.docker}</li>
+                <li><i class="fa-solid fa-user-group gradient-icon"></i> {t.requirements.container.group}</li>
+                <li><i class="fa-solid fa-gears gradient-icon"></i> {t.requirements.container.daemon}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="faq-section">
+        <h2 class="section-title">
+          <span class="gradient-text">{t.faq.title}</span>
+        </h2>
+
+        <div class="faq-container">
+          {t.faq.questions.map((faq) => (
+            <details class="faq-item">
+              <summary>
+                <i class="fa-solid fa-caret-right caret"></i>
+                {faq.q}
+              </summary>
+              <div class="faq-answer">
+                <p>{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <!-- Legal Section -->
+      <section class="legal-section">
+        <div class="glass-card legal-card">
+           <h3><i class="fa-solid fa-scale-balanced gradient-icon"></i> {t.legal.title}</h3>
+           <p>{t.legal.content}</p>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="clone-footer">
+    </footer>
+  </div>
+</Layout>
+
+<style>
+  :root {
+    --mac-primary: #4287ED;
+    --mac-secondary: #774EDA;
+    --glass-bg: rgba(26, 26, 46, 0.4);
+    --glass-border: rgba(66, 135, 237, 0.2);
+    --text-color: #ffffff;
+    --text-muted: rgba(255, 255, 255, 0.6);
+  }
+
+  .macboat-clone {
+    background-color: #000;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 10px);
+    color: var(--text-color);
+    min-height: 100vh;
+    font-family: 'Inter', -apple-system, sans-serif;
+    padding-bottom: 50px;
+  }
+
+  .gradient-icon {
+    background: linear-gradient(135deg, var(--mac-primary), var(--mac-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  /* Custom Floating Nav */
+  .floating-nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(20, 20, 35, 0.7);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+  }
+
+  .nav-logo img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: white;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding-top: 150px;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+
+  .hero-logo img {
+    width: 150px;
+    height: 150px;
+    filter: drop-shadow(0 0 40px rgba(66, 135, 237, 0.4));
+    margin-bottom: 40px;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--mac-primary), var(--mac-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .btn-primary, .btn-outline {
+    padding: 12px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, var(--mac-primary), var(--mac-secondary));
+    color: white;
+    position: relative;
+  }
+
+  .btn-outline {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+
+  .btn-primary:hover, .btn-outline:hover {
+    transform: translateY(-2px);
+  }
+
+  .beta-tag {
+    background: #FFD700;
+    color: black;
+    font-size: 0.6rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+
+  /* Download Section */
+  .download-section {
+    padding: 60px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-intro {
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    font-size: 1.1rem;
+  }
+
+  .download-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .download-mini-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    text-align: left;
+    transition: transform 0.3s;
+  }
+
+  .download-mini-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .card-icon {
+    font-size: 1.5rem;
+  }
+
+  .card-info h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .card-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .download-actions {
+    margin-top: 30px;
+  }
+
+  .btn-primary.large {
+    padding: 15px 40px;
+    font-size: 1.1rem;
+    display: inline-flex;
+  }
+
+  .version-info {
+    font-size: 0.8rem;
+    opacity: 0.5;
+    margin-top: 15px;
+  }
+
+  .beta-disclaimer {
+    margin-top: 40px;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #FFD700;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  /* Requirements Section */
+  .requirements-section {
+    padding: 80px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .section-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 40px;
+  }
+
+  .section-subtitle {
+    color: var(--text-muted);
+    margin-bottom: 60px;
+  }
+
+  .requirements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 30px;
+    text-align: left;
+  }
+
+  .glass-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 30px;
+    backdrop-filter: blur(10px);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+
+  .card-header .icon { font-size: 1.5rem; }
+  .card-header h3 { font-size: 1.8rem; font-weight: 700; }
+
+  .req-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .req-list li {
+    margin-bottom: 15px;
+    color: var(--text-muted);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .req-list li i {
+    width: 20px;
+    text-align: center;
+  }
+
+  .req-list li.warning {
+    color: #FFD700;
+    font-weight: 600;
+  }
+
+  .req-list li.warning i {
+    color: #FFD700;
+    background: transparent;
+    -webkit-text-fill-color: initial;
+  }
+
+  /* FAQ Section */
+  .faq-section {
+    padding: 80px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .faq-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: left;
+    margin-top: 40px;
+  }
+
+  .faq-item {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .faq-item[open] {
+    border-color: rgba(66, 135, 237, 0.5);
+    background: rgba(66, 135, 237, 0.05);
+  }
+
+  summary {
+    padding: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.1rem;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .caret {
+    transition: transform 0.3s;
+    color: var(--mac-primary);
+  }
+
+  .faq-item[open] .caret {
+    transform: rotate(90deg);
+  }
+
+  .faq-answer {
+    padding: 0 20px 20px 55px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+
+  /* Legal Section */
+  .legal-section {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .legal-card {
+    border-color: rgba(66, 135, 237, 0.1);
+  }
+
+  .legal-card h3 {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .legal-card p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* Footer */
+  .clone-footer {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .support-badge {
+    background: rgba(119, 78, 218, 0.3);
+    border: 1px solid var(--mac-secondary);
+    border-radius: 50px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .floating-nav {
+      display: none;
+    }
+    .requirements-grid {
+      grid-template-columns: 1fr;
+    }
+    .section-title {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('section, .fade-up').forEach(el => observer.observe(el));
+</script>
