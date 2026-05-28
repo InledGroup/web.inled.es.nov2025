@@ -1,6 +1,9 @@
 name: Update Project Data
 
 on:
+  push:
+    branches:
+      - main
   schedule:
     - cron: '0 * * * *' # Cada hora
   workflow_dispatch: # Permite ejecución manual
