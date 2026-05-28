@@ -7,7 +7,6 @@ export interface SaasProduct {
   };
   icon: string;
   link: string;
-  isFeatured?: number | false;
 }
 
 export const saas: SaasProduct[] = [
@@ -20,7 +19,6 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/insuite.svg",
     link: "https://office.inled.es/",
-    isFeatured: 2,
   },
   {
     id: "start",
@@ -31,7 +29,6 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/start-simple-blanco-sinfondo.png",
     link: "https://start.inled.es",
-    isFeatured: 2,
   },
   {
     id: "mypdf",
@@ -42,7 +39,6 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/MYPDF.png",
     link: "https://mypdf.inled.es",
-    isFeatured: 4,
   },
   {
     id: "mymetadata",
@@ -53,7 +49,6 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/mymetadata.svg",
     link: "https://mymetadata.inled.es",
-    isFeatured: 4,
   },
   {
     id: "edgeai",
@@ -64,7 +59,6 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/inledai.svg",
     link: "https://edge.inled.es/landing",
-    isFeatured: 3,
   },
   {
     id: "indoc",

@@ -1,0 +1,27 @@
+name: Update Project Data
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Cada hora
+  workflow_dispatch: # Permite ejecución manual
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Make script executable
+        run: chmod +x scripts/update-project-data.sh
+        
+      - name: Fetch GitHub Project Data
+        env:
+          GITHUB_TOKEN: ${{ secrets.PROJECT_DATA_TOKEN }}
+        run: ./scripts/update-project-data.sh InledGroup 1
+        
+      - name: Commit and Push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add src/data/github-project.json
+          git diff --quiet && git diff --staged --quiet || (git commit -m "docs: update github project data [skip ci]" && git push)

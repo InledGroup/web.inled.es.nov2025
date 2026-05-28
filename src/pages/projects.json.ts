@@ -1,11 +1,18 @@
 import { apps } from '../config/apps';
 import { saas } from '../config/saas';
 import { appsData } from '../config/apps_full';
+import { featuredIds } from '../config/featured';
 
 export const prerender = true;
 
 export async function GET() {
   const projectsMap = new Map();
+
+  // Helper to get priority
+  const getPriority = (id: string) => {
+    const index = featuredIds.indexOf(id);
+    return index === -1 ? 999 : index;
+  };
 
   // 1. Procesar SaaS
   saas.forEach(item => {
@@ -15,7 +22,7 @@ export async function GET() {
       logo: item.icon,
       link: item.link.startsWith('http') ? item.link : `https://inled.es${item.link}`,
       type: 'saas',
-      isFeatured: item.isFeatured ?? 999 // Usamos 999 para los no destacados
+      priority: getPriority(item.id)
     });
   });
 
@@ -28,7 +35,7 @@ export async function GET() {
         logo: item.icon,
         link: item.link.startsWith('http') ? item.link : `https://inled.es${item.link}`,
         type: 'app',
-        isFeatured: item.isFeatured || 999
+        priority: getPriority(item.id)
       });
     }
   });
@@ -47,14 +54,15 @@ export async function GET() {
         logo: item.icon,
         link: item.downloads.github || `https://inled.es/apps/${item.id}`,
         type: 'project',
-        isFeatured: 999 // appsData no suele tener isFeatured
+        priority: getPriority(item.id)
       });
     }
   });
 
   const allProjects = Array.from(projectsMap.values())
-    .sort((a, b) => (a.isFeatured === b.isFeatured ? 0 : a.isFeatured < b.isFeatured ? -1 : 1))
-    .map(({ isFeatured, ...project }) => project); // Eliminamos isFeatured del JSON final si quieres, o déjalo si lo necesitas. 
+    .sort((a, b) => a.priority - b.priority)
+    .map(({ priority, ...project }) => project); 
+ // Eliminamos isFeatured del JSON final si quieres, o déjalo si lo necesitas. 
     // Lo he quitado del .map final para que el JSON quede limpio, pero habiendo ordenado antes.
 
   return new Response(JSON.stringify(allProjects, null, 2), {

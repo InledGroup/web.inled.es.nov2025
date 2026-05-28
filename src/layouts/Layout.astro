@@ -3,8 +3,7 @@ import PageTransition from '../components/PageTransition.astro';
 import Footer from '../components/Footer.astro';
 import AnnouncementBanner from '../components/AnnouncementBanner.astro';
 import { getLangFromLocals } from '../i18n/utils';
-import { apps } from '../config/apps';
-import { saas } from '../config/saas';
+import { getFeaturedItems } from '../config/featured';
 
 const lang = getLangFromLocals(Astro.locals);
 
@@ -16,15 +15,15 @@ interface Props {
 
 const { title, description = "Inled Group", image = "https://hosted.inled.es/hero-bg.jpg" } = Astro.props;
 
+const featuredItems = getFeaturedItems();
+
 // Generar navegación dinámica para SEO (Sitelinks)
-const featuredApps = apps
-  .filter(app => app.isFeatured)
-  .sort((a, b) => (Number(a.isFeatured) || 99) - (Number(b.isFeatured) || 99))
+const featuredApps = featuredItems
+  .filter(item => item.type === 'app')
   .slice(0, 4);
 
-const featuredSaas = saas
-  .filter(s => s.isFeatured)
-  .sort((a, b) => (Number(a.isFeatured) || 99) - (Number(b.isFeatured) || 99))
+const featuredSaas = featuredItems
+  .filter(item => item.type === 'saas')
   .slice(0, 4);
 
 const siteNavigation = [

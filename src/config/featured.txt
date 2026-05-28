@@ -1,0 +1,7 @@
+ai-exporter
+appinstall
+web2skill
+codexbar-gnome
+office
+start
+agent-tunnel

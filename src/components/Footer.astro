@@ -1,21 +1,20 @@
 ---
 import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
-import { apps } from '../config/apps';
-import { saas } from '../config/saas';
+import { getFeaturedItems } from '../config/featured';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 const translatePath = useTranslatedPath();
 
+const featuredItems = getFeaturedItems();
+
 // Proyectos destacados para el footer (máximo 6 en total)
-const featuredApps = apps
-  .filter(app => app.isFeatured)
-  .sort((a, b) => (Number(a.isFeatured) || 99) - (Number(b.isFeatured) || 99))
+const featuredApps = featuredItems
+  .filter(item => item.type === 'app')
   .slice(0, 3);
 
-const featuredSaas = saas
-  .filter(s => s.isFeatured)
-  .sort((a, b) => (Number(a.isFeatured) || 99) - (Number(b.isFeatured) || 99))
+const featuredSaas = featuredItems
+  .filter(item => item.type === 'saas')
   .slice(0, 3);
 ---
 

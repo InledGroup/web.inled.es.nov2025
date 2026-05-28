@@ -1,32 +1,14 @@
 ---
-import { saas } from '../config/saas';
-import { apps } from '../config/apps';
+import { getFeaturedItems } from '../config/featured';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 
-const featuredSaas = saas
-  .filter(item => item.isFeatured !== undefined && item.isFeatured !== false)
-  .map(item => ({
-    ...item,
-    type: 'saas' as const,
-    description: item.description[lang]
-  }));
-
-const featuredApps = apps
-  .filter(item => item.isFeatured !== undefined && item.isFeatured !== false)
-  .map(item => ({
-    ...item,
-    type: 'app' as const,
-    description: item.description[lang]
-  }));
-
-const allFeatured = [...featuredSaas, ...featuredApps].sort((a, b) => {
-  const posA = typeof a.isFeatured === 'number' ? a.isFeatured : 999;
-  const posB = typeof b.isFeatured === 'number' ? b.isFeatured : 999;
-  return posA - posB;
-});
+const allFeatured = getFeaturedItems().map(item => ({
+  ...item,
+  description: item.description[lang]
+}));
 
 interface Props {
   title?: string;

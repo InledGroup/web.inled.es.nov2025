@@ -7,7 +7,6 @@ export interface App {
   };
   icon: string;
   link: string;
-  isFeatured?: number | false;
   notice?: {
     type: "warning" | "info";
     message: {
@@ -27,7 +26,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/aiexporter.png",
     link: "/apps/ai-exporter",
-    isFeatured: 1,
   },
   {
     id: "appinstall",
@@ -38,7 +36,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/swiftinstall-logo.png",
     link: "/apps/appinstall",
-    isFeatured: 1,
   },
   {
     id: "web2skill",
@@ -49,7 +46,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/web2skill-w2s.png",
     link: "/apps/web2skill",
-    isFeatured: 1,
   },
   {
     id: "codexbar-gnome",
@@ -60,7 +56,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/codexbar-logo.png",
     link: "/apps/codexbar-gnome",
-    isFeatured: 1,
   },
   {
     id: "agent-tunnel",
@@ -71,7 +66,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/new-agent-tunnel.png",
     link: "/apps/agent-tunnel",
-    isFeatured: 3,
   },
   {
     id: "bautilus",
@@ -82,7 +76,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/bautilus.png",
     link: "/apps/bautilus",
-    isFeatured: 2,
   },
   {
     id: "tabnest",
@@ -93,7 +86,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/tabnest.png",
     link: "/apps/tabnest",
-    isFeatured: 4,
   },
 
   {
@@ -105,7 +97,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/1/gemini-voice.png",
     link: "/apps/gemini-notifier",
-    isFeatured: 4,
   },
 
   {
@@ -117,7 +108,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/vozes.png",
     link: "/apps/vozes",
-    isFeatured: 4,
   },
   {
     id: "weby",

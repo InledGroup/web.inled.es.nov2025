@@ -15,6 +15,7 @@ import { saas } from '../config/saas';
 import NewsletterSection from '../components/NewsletterSection.astro';
 import BlogSection from '../components/BlogSection.astro';
 import Changelog from '../components/Changelog.astro';
+import Planning from '../components/Planning.astro';
 import NewsletterNotification from '../components/NewsletterNotification.astro';
 import ContactForm from '../components/ContactForm.astro';
 
@@ -90,6 +91,8 @@ const saasProducts = saas.map(s => ({
   <div id="apps">
     <ProductsGrid title={t('grid.apps')} products={appProducts} />
   </div>
+
+  <Planning />
 
   <Changelog />
 

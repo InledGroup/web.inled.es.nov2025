@@ -70,6 +70,9 @@ export const ui = {
     'contact.button': 'ENVIAR MENSAJE',
     'contact.success': 'Mensaje enviado correctamente.',
     'contact.error': 'Hubo un error al enviar el mensaje.',
+    'planning.title': 'Incidencias y planning de tareas',
+    'planning.subtitle': 'Conoce en qué estamos trabajando',
+    'planning.button': 'Abrir en GitHub',
   },
   en: {
     'nav.saas': 'SaaS',
@@ -135,5 +138,8 @@ export const ui = {
     'contact.button': 'SEND MESSAGE',
     'contact.success': 'Message sent successfully.',
     'contact.error': 'There was an error sending the message.',
+    'planning.title': 'Issues and Task Planning',
+    'planning.subtitle': 'Know what we are working on',
+    'planning.button': 'Open on GitHub',
   },
 } as const;
