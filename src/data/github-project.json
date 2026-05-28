@@ -1,6 +1,150 @@
 {
-  "title": "Planning",
+  "title": "Inled Issues and Errors",
   "items": {
-    "nodes": []
+    "nodes": [
+      {
+        "content": {
+          "title": "[Bug] GUI shows no output for openrouter provider (CLI works correctly)",
+          "url": "https://github.com/InledGroup/codexbar-gnome/issues/2",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {
+              "text": "[Bug] GUI shows no output for openrouter provider (CLI works correctly)",
+              "field": {
+                "name": "Title"
+              }
+            },
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "GNOME 50 Cross Appearance",
+          "url": "https://github.com/InledGroup/cruzcristiana-gnome/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {
+              "text": "GNOME 50 Cross Appearance",
+              "field": {
+                "name": "Title"
+              }
+            },
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Gnome 42.9 Support",
+          "url": "https://github.com/InledGroup/screenshot-annotator/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "text": "Gnome 42.9 Support",
+              "field": {
+                "name": "Title"
+              }
+            },
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Incompatible relicensing to MIT.",
+          "url": "https://github.com/InledGroup/pulsaros-win11-icon-theme/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "text": "Incompatible relicensing to MIT.",
+              "field": {
+                "name": "Title"
+              }
+            },
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Actualizar web inled con este dashboard, roadmap y soporte claude de codexbar",
+          "url": "https://github.com/InledGroup/web.inled.es.nov2025/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Actualizar web inled con este dashboard, roadmap y soporte claude de codexbar",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      }
+    ]
   }
 }
