@@ -116,7 +116,7 @@
         "content": {
           "title": "Actualizar web inled con este dashboard, roadmap y soporte claude de codexbar",
           "url": "https://github.com/InledGroup/web.inled.es.nov2025/issues/1",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": [
               {
@@ -131,7 +131,7 @@
             {},
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
