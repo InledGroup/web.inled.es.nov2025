@@ -4,6 +4,39 @@
     "nodes": [
       {
         "content": {
+          "title": "responsive to mobile",
+          "url": "https://github.com/extensions-gnome/extensions-gnome.github.io/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "In progress",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "responsive to mobile",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
           "title": "[Bug] GUI shows no output for openrouter provider (CLI works correctly)",
           "url": "https://github.com/InledGroup/codexbar-gnome/issues/2",
           "state": "CLOSED",
@@ -241,8 +274,41 @@
       },
       {
         "content": {
-          "title": "responsive to mobile",
-          "url": "https://github.com/extensions-gnome/extensions-gnome.github.io/issues/1",
+          "title": "bad guidance for ai models",
+          "url": "https://github.com/InledLabs/mdpedia/issues/15",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "bug"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "bad guidance for ai models",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "share folders",
+          "url": "https://github.com/InledGroup/macboat/issues/1",
           "state": "OPEN",
           "labels": {
             "nodes": [
@@ -264,40 +330,7 @@
               }
             },
             {
-              "text": "responsive to mobile",
-              "field": {
-                "name": "Title"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "content": {
-          "title": "bad guidance for ai models",
-          "url": "https://github.com/InledLabs/mdpedia/issues/15",
-          "state": "OPEN",
-          "labels": {
-            "nodes": [
-              {
-                "name": "bug"
-              }
-            ]
-          }
-        },
-        "fieldValues": {
-          "nodes": [
-            {},
-            {},
-            {},
-            {
-              "name": "Backlog",
-              "field": {
-                "name": "Status"
-              }
-            },
-            {
-              "text": "bad guidance for ai models",
+              "text": "share folders",
               "field": {
                 "name": "Title"
               }
