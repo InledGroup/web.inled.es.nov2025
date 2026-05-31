@@ -149,7 +149,7 @@
         "content": {
           "title": "Reportar mensajes de estado, error, falta de dependencias en el uso de cookie importer",
           "url": "https://github.com/InledGroup/codexbar-gnome/issues/6",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": []
           }
@@ -159,7 +159,7 @@
             {},
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
@@ -265,6 +265,39 @@
             },
             {
               "text": "responsive to mobile",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "bad guidance for ai models",
+          "url": "https://github.com/InledLabs/mdpedia/issues/15",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "bug"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "bad guidance for ai models",
               "field": {
                 "name": "Title"
               }
