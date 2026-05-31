@@ -177,7 +177,7 @@
         "content": {
           "title": "image exporting correctly on pdf",
           "url": "https://github.com/InledGroup/open-ai-exporter/issues/1",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": [
               {
@@ -192,7 +192,7 @@
             {},
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
@@ -210,7 +210,7 @@
         "content": {
           "title": "Botones landing no redirigen a /search",
           "url": "https://github.com/InledGroup/start-cf/issues/1",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": [
               {
@@ -225,7 +225,7 @@
             {},
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
