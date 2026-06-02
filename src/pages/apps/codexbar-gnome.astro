@@ -9,7 +9,7 @@ const translations = {
   es: {
     meta: {
       title: "CodexBar for GNOME | Monitor de IA en tu Escritorio",
-      description: "Extensión de GNOME Shell para monitorizar el uso de proveedores de IA (OpenAI, Claude, Codex) directamente en tu barra de herramientas."
+      description: "Extensión de GNOME Shell para monitorizar el uso de proveedores de IA (OpenAI, Claude, Codex, Gemini, OpenRouter) directamente en tu barra de herramientas."
     },
     hero: {
       title: "CodexBar for GNOME",
@@ -34,25 +34,20 @@ const translations = {
       },
       providers: {
         title: "Multi-proveedor",
-        desc: "Soporte para todos los proveedores de CodexBar (steipete) accesibles vía API, incluyendo ahora soporte nativo para OpenAI Codex."
-      }
-    },
-    roadmap: {
-      title: "Próximamente",
-      claude: {
-        title: "Claude Code",
-        desc: "Pronto podrás ver el uso de Claude Code directamente desde la extensión."
+        desc: "Soporta todos los proveedores que Codexbar CLI soporta, entre ellos Claude, Codex, Gemini, OpenRouter..."
       },
-      web: {
-        title: "Codexbar CLI web-fetch",
-        desc: "Estamos trabajando para portar completamente la experiencia de Codexbar de Macos para ser 100% usable en Linux."
-      }
+      supportedProviders: "Soporta, entre otros muchos:"
+    },
+    contribute: {
+      title: "Proyecto Comunitario",
+      desc: "CodexBar for GNOME es de código abierto. ¡Te invitamos a contribuir para seguir mejorando la experiencia de IA en Linux!",
+      button: "Contribuir en GitHub"
     }
   },
   en: {
     meta: {
       title: "CodexBar for GNOME | AI Monitor on your Desktop",
-      description: "GNOME Shell extension to monitor AI provider usage (OpenAI, Claude, Codex) directly on your toolbar."
+      description: "GNOME Shell extension to monitor AI provider usage (OpenAI, Claude, Codex, Gemini, OpenRouter) directly on your toolbar."
     },
     hero: {
       title: "CodexBar for GNOME",
@@ -77,19 +72,14 @@ const translations = {
       },
       providers: {
         title: "Multi-provider",
-        desc: "Support for all CodexBar (steipete) providers accessible via API, now including native support for OpenAI Codex."
-      }
-    },
-    roadmap: {
-      title: "Coming Soon",
-      claude: {
-        title: "Claude Code",
-        desc: "Soon you'll be able to see Claude Code usage directly from the extension."
+        desc: "Supports all providers supported by Codexbar CLI, including Claude, Codex, Gemini, OpenRouter..."
       },
-      web: {
-        title: "Codexbar CLI web-fetch",
-        desc: "We are working to port the complete Codexbar experience from Macos to be 100% usable on Linux."
-      }
+      supportedProviders: "Supports, among many others:"
+    },
+    contribute: {
+      title: "Community Project",
+      desc: "CodexBar for GNOME is open source. We invite you to contribute and help us improve the AI experience on Linux!",
+      button: "Contribute on GitHub"
     }
   }
 };
@@ -100,7 +90,7 @@ const t = translations[lang] || translations.es;
 <Layout title={t.meta.title} description={t.meta.description}>
   <div class="gnome-page">
     <Header />
-    
+
     <main>
       <!-- Hero -->
       <section class="hero">
@@ -114,8 +104,13 @@ const t = translations[lang] || translations.es;
               <p class="subtitle">{t.hero.subtitle}</p>
               <p class="description">{t.hero.description}</p>
               <div class="actions">
-                <a href="https://extensions.gnome.org/extension/9841/codexbar/" class="btn btn-primary">{t.hero.cta}</a>
-                <a href="https://github.com/jaimegh-es/codexbar-gnome" class="btn btn-secondary">{t.hero.secondaryCta}</a>
+                <a href="https://extensions.gnome.org/extension/9841/codexbar/" class="btn btn-primary">
+                  <span class="gnome-btn-icon">
+                      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M19.703 0c-4.99 0-5.927 7.111-3.12 7.111 2.81 0 8.113-7.111 3.12-7.111M11.99.872q-.119-.001-.25.016c-2.811.364-1.82 5.25-.324 5.34 1.449.09 3.032-5.347.574-5.356M7.123 2.803a1.4 1.4 0 0 0-.488.114c-2.259.933-.344 4.776.921 4.519 1.168-.24 1.319-4.671-.433-4.632Zm-3.6 3.016a1.05 1.05 0 0 0-.634.215c-1.807 1.248.607 4.269 1.671 3.799.93-.41.338-3.967-1.037-4.014m10.032 2.309c-3.835.033-8.716 1.978-9.567 5.784C3.044 18.14 7.875 24 12.915 24c2.48 0 5.34-2.24 5.875-5.077.409-2.163-4.81-1.295-4.623.137.225 1.715-1.258 2.561-2.711 1.454-4.623-3.52 7.658-5.276 6.847-10.086-.263-1.56-2.29-2.322-4.748-2.301Z"/></svg>
+                  </span>
+                  {t.hero.cta}
+                </a>
+                <a href="https://github.com/InledGroup/codexbar-gnome" class="btn btn-secondary">{t.hero.secondaryCta}</a>
               </div>
             </div>
 
@@ -135,7 +130,7 @@ const t = translations[lang] || translations.es;
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- The Dropdown Menu (Cloned from Image) -->
                 <div class="extension-menu" id="extension-menu">
                   <div class="popup-header">
@@ -203,6 +198,21 @@ const t = translations[lang] || translations.es;
         </div>
       </section>
 
+      <!-- Mini Hero: Providers -->
+      <section class="mini-hero">
+        <div class="container">
+          <div class="mini-hero-content">
+            <h2 class="mini-hero-title">{t.supportedProviders}</h2>
+            <div class="provider-logos-mini">
+                <div class="provider-logo-slot" title="Claude"><svg  preserveAspectRatio="xMidYMid" viewBox="0 0 256 257"><path fill="#D97757" d="m50.228 170.321 50.357-28.257.843-2.463-.843-1.361h-2.462l-8.426-.518-28.775-.778-24.952-1.037-24.175-1.296-6.092-1.297L0 125.796l.583-3.759 5.12-3.434 7.324.648 16.202 1.101 24.304 1.685 17.629 1.037 26.118 2.722h4.148l.583-1.685-1.426-1.037-1.101-1.037-25.147-17.045-27.22-18.017-14.258-10.37-7.713-5.25-3.888-4.925-1.685-10.758 7-7.713 9.397.649 2.398.648 9.527 7.323 20.35 15.75L94.817 91.9l3.889 3.24 1.555-1.102.195-.777-1.75-2.917-14.453-26.118-15.425-26.572-6.87-11.018-1.814-6.61c-.648-2.723-1.102-4.991-1.102-7.778l7.972-10.823L71.42 0 82.05 1.426l4.472 3.888 6.61 15.101 10.694 23.786 16.591 32.34 4.861 9.592 2.592 8.879.973 2.722h1.685v-1.556l1.36-18.211 2.528-22.36 2.463-28.776.843-8.1 4.018-9.722 7.971-5.25 6.222 2.981 5.12 7.324-.713 4.73-3.046 19.768-5.962 30.98-3.889 20.739h2.268l2.593-2.593 10.499-13.934 17.628-22.036 7.778-8.749 9.073-9.657 5.833-4.601h11.018l8.1 12.055-3.628 12.443-11.342 14.388-9.398 12.184-13.48 18.147-8.426 14.518.778 1.166 2.01-.194 30.46-6.481 16.462-2.982 19.637-3.37 8.88 4.148.971 4.213-3.5 8.62-20.998 5.184-24.628 4.926-36.682 8.685-.454.324.519.648 16.526 1.555 7.065.389h17.304l32.21 2.398 8.426 5.574 5.055 6.805-.843 5.184-12.962 6.611-17.498-4.148-40.83-9.721-14-3.5h-1.944v1.167l11.666 11.406 21.387 19.314 26.767 24.887 1.36 6.157-3.434 4.86-3.63-.518-23.526-17.693-9.073-7.972-20.545-17.304h-1.36v1.814l4.73 6.935 25.017 37.59 1.296 11.536-1.814 3.76-6.481 2.268-7.13-1.297-14.647-20.544-15.1-23.138-12.185-20.739-1.49.843-7.194 77.448-3.37 3.953-7.778 2.981-6.48-4.925-3.436-7.972 3.435-15.749 4.148-20.544 3.37-16.333 3.046-20.285 1.815-6.74-.13-.454-1.49.194-15.295 20.999-23.267 31.433-18.406 19.702-4.407 1.75-7.648-3.954.713-7.064 4.277-6.286 25.47-32.405 15.36-20.092 9.917-11.6-.065-1.686h-.583L44.07 198.125l-12.055 1.555-5.185-4.86.648-7.972 2.463-2.593 20.35-13.992z"/></svg></div>
+                <div class="provider-logo-slot" title="OpenAI"><svg  fill="#fff" fill-rule="evenodd" style="flex:none;line-height:1" viewBox="0 0 24 24"><title>Codex</title><path clip-rule="evenodd" d="M8.086.457a6.105 6.105 0 013.046-.415c1.333.153 2.521.72 3.564 1.7a.117.117 0 00.107.029c1.408-.346 2.762-.224 4.061.366l.063.03.154.076c1.357.703 2.33 1.77 2.918 3.198.278.679.418 1.388.421 2.126a5.655 5.655 0 01-.18 1.631.167.167 0 00.04.155 5.982 5.982 0 011.578 2.891c.385 1.901-.01 3.615-1.183 5.14l-.182.22a6.063 6.063 0 01-2.934 1.851.162.162 0 00-.108.102c-.255.736-.511 1.364-.987 1.992-1.199 1.582-2.962 2.462-4.948 2.451-1.583-.008-2.986-.587-4.21-1.736a.145.145 0 00-.14-.032c-.518.167-1.04.191-1.604.185a5.924 5.924 0 01-2.595-.622 6.058 6.058 0 01-2.146-1.781c-.203-.269-.404-.522-.551-.821a7.74 7.74 0 01-.495-1.283 6.11 6.11 0 01-.017-3.064.166.166 0 00.008-.074.115.115 0 00-.037-.064 5.958 5.958 0 01-1.38-2.202 5.196 5.196 0 01-.333-1.589 6.915 6.915 0 01.188-2.132c.45-1.484 1.309-2.648 2.577-3.493.282-.188.55-.334.802-.438.286-.12.573-.22.861-.304a.129.129 0 00.087-.087A6.016 6.016 0 015.635 2.31C6.315 1.464 7.132.846 8.086.457zm-.804 7.85a.848.848 0 00-1.473.842l1.694 2.965-1.688 2.848a.849.849 0 001.46.864l1.94-3.272a.849.849 0 00.007-.854l-1.94-3.393zm5.446 6.24a.849.849 0 000 1.695h4.848a.849.849 0 000-1.696h-4.848z"/></svg></div>
+                <div class="provider-logo-slot" title="Gemini"><svg  viewBox="0 0 296 298" fill="none"><mask id="gemini__a" x="0" y="0" maskUnits="userSpaceOnUse" style="mask-type:alpha"><path fill="#3186FF" d="M141.201 4.886c2.282-6.17 11.042-6.071 13.184.148l5.985 17.37a184.004 184.004 0 0 0 111.257 113.049l19.304 6.997c6.143 2.227 6.156 10.91.02 13.155l-19.35 7.082a184.001 184.001 0 0 0-109.495 109.385l-7.573 20.629c-2.241 6.105-10.869 6.121-13.133.025l-7.908-21.296a184 184 0 0 0-109.02-108.658l-19.698-7.239c-6.102-2.243-6.118-10.867-.025-13.132l20.083-7.467A183.998 183.998 0 0 0 133.291 26.28l7.91-21.394Z"/></mask><g mask="url(#gemini__a)"><g filter="url(#gemini__b)"><ellipse cx="163" cy="149" fill="#3689FF" rx="196" ry="159"/></g><g filter="url(#gemini__c)"><ellipse cx="33.5" cy="142.5" fill="#F6C013" rx="68.5" ry="72.5"/></g><g filter="url(#gemini__d)"><ellipse cx="19.5" cy="148.5" fill="#F6C013" rx="68.5" ry="72.5"/></g><g filter="url(#gemini__e)"><path fill="#FA4340" d="M194 10.5C172 82.5 65.5 134.333 22.5 135L144-66l50 76.5Z"/></g><g filter="url(#gemini__f)"><path fill="#FA4340" d="M190.5-12.5C168.5 59.5 62 111.333 19 112L140.5-89l50 76.5Z"/></g><g filter="url(#gemini__g)"><path fill="#14BB69" d="M194.5 279.5C172.5 207.5 66 155.667 23 155l121.5 201 50-76.5Z"/></g><g filter="url(#gemini__h)"><path fill="#14BB69" d="M196.5 320.5C174.5 248.5 68 196.667 25 196l121.5 201 50-76.5Z"/></g></g><defs><filter id="gemini__b" x="-69" y="-46" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_69_17998" stdDeviation="18"/></filter><filter id="gemini__c" x="-99" y="6" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_69_17998" stdDeviation="18"/></filter><filter id="gemini__d" x="-113" y="12" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_69_17998" stdDeviation="18"/></filter><filter id="gemini__e" x="-41.5" y="-130" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_69_17998" stdDeviation="32"/></filter><filter id="gemini__f" x="-45" y="-153" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_69_17998" stdDeviation="32"/></filter><filter id="gemini__g" x="-41" y="91" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_69_17998" stdDeviation="32"/></filter><filter id="gemini__h" x="-39" y="132" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse"><feFlood flood-opacity="0" result="BackgroundImageFix"/><feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/><feGaussianBlur result="effect1_foregroundBlur_69_17998" stdDeviation="32"/></filter></defs></svg></div>
+                <div class="provider-logo-slot" title="OpenRouter"><svg  viewBox="0 0 512 512" fill="#ffff" stroke="#ffff"><g clip-path="url(#openrouter_dark__clip0_205_3)"><path d="M3 248.945C18 248.945 76 236 106 219C136 202 136 202 198 158C276.497 102.293 332 120.945 423 120.945" stroke-width="20"/><path d="M511 121.5L357.25 210.268L357.25 32.7324L511 121.5Z"/><path d="M0 249C15 249 73 261.945 103 278.945C133 295.945 133 295.945 195 339.945C273.497 395.652 329 377 420 377" stroke-width="20"/><path d="M508 376.445L354.25 287.678L354.25 465.213L508 376.445Z"/></g></svg></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Features -->
       <section class="features">
         <div class="container">
@@ -222,25 +232,22 @@ const t = translations[lang] || translations.es;
               <div class="icon"><i class="fa-solid fa-microchip"></i></div>
               <h3>{t.features.providers.title}</h3>
               <p>{t.features.providers.desc}</p>
+
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Roadmap -->
-      <section class="roadmap">
+      <!-- Contribute -->
+      <section class="contribute">
         <div class="container">
-          <h2 class="section-title">{t.roadmap.title}</h2>
-          <div class="roadmap-grid">
-            <div class="roadmap-item">
-              <div class="badge">PROXIMAMENTE</div>
-              <h3>{t.roadmap.claude.title}</h3>
-              <p>{t.roadmap.claude.desc}</p>
-            </div>
-            <div class="roadmap-item">
-              <div class="badge">EXCLUSIVO</div>
-              <h3>{t.roadmap.web.title}</h3>
-              <p>{t.roadmap.web.desc}</p>
+          <div class="contribute-content">
+            <h2 class="section-title">{t.contribute.title}</h2>
+            <p class="contribute-desc">{t.contribute.desc}</p>
+            <div class="contribute-actions">
+              <a href="https://github.com/InledGroup/codexbar-gnome" class="btn btn-primary">
+                <i class="fa-brands fa-github"></i> {t.contribute.button}
+              </a>
             </div>
           </div>
         </div>
@@ -614,46 +621,84 @@ const t = translations[lang] || translations.es;
   .feature-card p {
     color: #888;
     line-height: 1.6;
+    margin-bottom: 1.5rem;
   }
 
-  /* Roadmap */
-  .roadmap {
-    padding: 100px 0 140px;
-  }
-
-  .roadmap-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  .provider-logos-mini {
+    display: flex;
     gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
-  .roadmap-item {
-    padding: 2rem;
+  .provider-logo-slot {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+  }
+
+  .provider-logo-slot:hover {
+    transform: scale(1.1);
+  }
+
+  .provider-logo-slot svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .gnome-btn-icon {
+    display: inline-flex;
+    margin-right: 0.8rem;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+  }
+
+  .gnome-btn-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Mini Hero */
+  .mini-hero {
+    padding: 40px 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
+  }
+
+  .mini-hero-content .mini-hero-title {
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+  }
+
+  /* Contribute */
+  .contribute {
+    padding: 100px 0 140px;
+    text-align: center;
+  }
+
+  .contribute-content {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 4rem;
     background: linear-gradient(135deg, #1e1e1e, #121212);
-    border-radius: 20px;
+    border-radius: 32px;
     border: 1px solid #333;
   }
 
-  .roadmap-item .badge {
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    background: rgba(53, 132, 228, 0.1);
-    color: var(--gnome-accent);
-    border-radius: 6px;
-    font-size: 0.7rem;
-    font-weight: 800;
-    margin-bottom: 1rem;
-    letter-spacing: 0.05em;
-  }
-
-  .roadmap-item h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .roadmap-item p {
-    color: #777;
-    font-size: 0.95rem;
+  .contribute-desc {
+    font-size: 1.2rem;
+    color: #aaa;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
   }
 
   @media (max-width: 968px) {
@@ -687,7 +732,7 @@ const t = translations[lang] || translations.es;
     const trigger = document.getElementById('extension-trigger');
     const menu = document.getElementById('extension-menu');
     const tabs = document.querySelectorAll('.tab');
-    
+
     // Start with menu visible for the simulation "wow" effect
     setTimeout(() => {
       menu.classList.add('show');
@@ -713,7 +758,7 @@ const t = translations[lang] || translations.es;
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
-        
+
         const providerTitle = menu.querySelector('.provider-title');
         const providerStatus = menu.querySelector('.provider-status');
         const usageSection = menu.querySelector('.usage-section');
