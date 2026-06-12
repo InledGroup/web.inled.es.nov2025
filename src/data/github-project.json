@@ -307,7 +307,7 @@
       },
       {
         "content": {
-          "title": "share folders",
+          "title": "Mejoras para preparar la beta",
           "url": "https://github.com/InledGroup/macboat/issues/1",
           "state": "OPEN",
           "labels": {
@@ -330,7 +330,40 @@
               }
             },
             {
-              "text": "share folders",
+              "text": "Mejoras para preparar la beta",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Mejoras para relanzar el proyecto",
+          "url": "https://github.com/InledGroup/bastion.browser/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Mejoras para relanzar el proyecto",
               "field": {
                 "name": "Title"
               }
