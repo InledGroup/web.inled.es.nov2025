@@ -370,6 +370,33 @@
             }
           ]
         }
+      },
+      {
+        "content": {
+          "title": "firmas repo",
+          "url": "https://github.com/InledGroup/DroidTux/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "firmas repo",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
       }
     ]
   }
