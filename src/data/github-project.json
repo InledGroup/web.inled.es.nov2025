@@ -342,7 +342,7 @@
         "content": {
           "title": "Mejoras para relanzar el proyecto",
           "url": "https://github.com/InledGroup/bastion.browser/issues/1",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": [
               {
@@ -357,7 +357,7 @@
             {},
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
