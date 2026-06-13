@@ -1,8 +1,5 @@
-ai-exporter
-appinstall
-web2skill
 codexbar-gnome
-macboat
+ai-exporter
 office
 start
 agent-tunnel

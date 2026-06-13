@@ -13,7 +13,8 @@ const app = {
   gifUrl: "https://hosted.inled.es/aiexporter-converter.gif",
   videoUrl: "https://hosted.inled.es/aiexporterdemopdf.mp4",
   downloadUrl: "https://github.com/InledGroup/open-ai-exporter/releases/latest",
-  githubUrl: "https://github.com/InledGroup/open-ai-exporter"
+  githubUrl: "https://github.com/InledGroup/open-ai-exporter",
+  firefoxUrl: "https://addons.mozilla.org/es-ES/firefox/addon/open-ai-exporter/"
 };
 
 const translations = {
@@ -43,7 +44,8 @@ const translations = {
     },
     cta: {
       title: "Empieza a exportar hoy mismo",
-      button: "Instalar Extensión",
+      button: "Instalar en Chrome",
+      firefox: "Instalar en Firefox",
       github: "Ver en GitHub"
     }
   },
@@ -73,7 +75,8 @@ const translations = {
     },
     cta: {
       title: "Start exporting today",
-      button: "Install Extension",
+      button: "Install on Chrome",
+      firefox: "Install on Firefox",
       github: "View on GitHub"
     }
   }
@@ -113,8 +116,15 @@ const jsonLd = {
         <h1 class="title">{t.hero.title}</h1>
         <p class="subtitle">{t.hero.subtitle}</p>
         <div class="hero-actions">
-          <a href={app.downloadUrl} class="btn-primary">{t.cta.button}</a>
-          <a href={app.githubUrl} class="btn-secondary">{t.cta.github}</a>
+          <a href={app.downloadUrl} class="btn-primary">
+            <i class="fa-brands fa-chrome"></i> {t.cta.button}
+          </a>
+          <a href={app.firefoxUrl} class="btn-primary firefox">
+            <i class="fa-brands fa-firefox-browser"></i> {t.cta.firefox}
+          </a>
+          <a href={app.githubUrl} class="btn-secondary">
+            <i class="fa-brands fa-github"></i> {t.cta.github}
+          </a>
         </div>
       </div>
     </section>
@@ -167,7 +177,12 @@ const jsonLd = {
       <div class="container">
         <h2>{t.cta.title}</h2>
         <div class="cta-buttons">
-          <a href={app.downloadUrl} class="btn-primary">{t.cta.button}</a>
+          <a href={app.downloadUrl} class="btn-primary">
+            <i class="fa-brands fa-chrome"></i> {t.cta.button}
+          </a>
+          <a href={app.firefoxUrl} class="btn-primary firefox">
+            <i class="fa-brands fa-firefox-browser"></i> {t.cta.firefox}
+          </a>
         </div>
       </div>
     </section>
@@ -178,6 +193,16 @@ const jsonLd = {
   main {
     background: #000;
     color: white;
+  }
+
+  .btn-primary.firefox {
+    background: #ff7139; /* Firefox orange */
+    color: #fff;
+  }
+
+  .btn-primary.firefox:hover {
+    background: #e6602a;
+    box-shadow: 0 10px 20px rgba(255, 113, 57, 0.3);
   }
 
   .app-hero {
@@ -258,6 +283,10 @@ const jsonLd = {
   .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(255, 255, 255, 0.2);
+  }
+
+  .btn-primary i, .btn-secondary i {
+    margin-right: 8px;
   }
 
   .btn-secondary {

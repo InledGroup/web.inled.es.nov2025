@@ -85,6 +85,11 @@ const translations = {
     legal: {
       title: "Aviso Legal EULA",
       content: "Macboat es una herramienta de virtualización. El EULA de Apple especifica que macOS solo debe ejecutarse en hardware oficial de Apple. Al usar Macboat, usted acepta que es el único responsable de cumplir con dichos términos."
+    },
+    rewriteNotice: {
+      title: "AVISO IMPORTANTE",
+      message: "Esta aplicación va a ser completamente reescrita próximamente. Se recomienda no descargar la versión actual aún.",
+      close: "Entendido"
     }
   },
   en: {
@@ -158,6 +163,11 @@ const translations = {
     legal: {
       title: "EULA Legal Notice",
       content: "Macboat is a virtualization tool. Apple's EULA specifies that macOS should only be run on official Apple hardware. By using Macboat, you agree that you are solely responsible for complying with such terms."
+    },
+    rewriteNotice: {
+      title: "IMPORTANT NOTICE",
+      message: "This application will be completely rewritten soon. It is recommended not to download the current version yet.",
+      close: "Got it"
     }
   }
 };
@@ -167,6 +177,18 @@ const t = translations[lang] || translations.es;
 
 <Layout title={t.meta.title} description={t.meta.description}>
   <div class="macboat-clone">
+    <!-- Rewrite Notice Popup -->
+    <div id="rewrite-popup" class="rewrite-popup">
+      <div class="popup-content">
+        <div class="popup-icon">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h2>{t.rewriteNotice.title}</h2>
+        <p>{t.rewriteNotice.message}</p>
+        <button id="close-popup" class="btn-primary">{t.rewriteNotice.close}</button>
+      </div>
+    </div>
+
     <!-- Custom Floating Navbar -->
     <nav class="floating-nav">
         <div class="nav-logo" >
@@ -325,6 +347,86 @@ const t = translations[lang] || translations.es;
     --glass-border: rgba(66, 135, 237, 0.2);
     --text-color: #ffffff;
     --text-muted: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Rewrite Popup Styles */
+  .rewrite-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .rewrite-popup.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .popup-content {
+    background: #0a0a0f;
+    border: 2px solid #ff4d4d;
+    border-radius: 24px;
+    padding: 40px;
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 0 50px rgba(255, 77, 77, 0.2), inset 0 0 20px rgba(255, 77, 77, 0.05);
+    transform: scale(0.9) translateY(20px);
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .rewrite-popup.active .popup-content {
+    transform: scale(1) translateY(0);
+  }
+
+  .popup-icon {
+    font-size: 3.5rem;
+    color: #ff4d4d;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 0 10px rgba(255, 77, 77, 0.3));
+  }
+
+  .popup-content h2 {
+    color: #ff4d4d;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .popup-content p {
+    color: #fff;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    opacity: 0.9;
+  }
+
+  #close-popup {
+    background: #ff4d4d;
+    border: none;
+    width: 100%;
+    justify-content: center;
+    font-size: 1.1rem;
+    padding: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
+  }
+  
+  #close-popup:hover {
+    background: #ff3333;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 77, 77, 0.4);
   }
 
   .macboat-clone {
@@ -732,6 +834,24 @@ const t = translations[lang] || translations.es;
 </style>
 
 <script>
+  // Popup Logic
+  const popup = document.getElementById('rewrite-popup');
+  const closePopup = document.getElementById('close-popup');
+
+  if (popup && !localStorage.getItem('macboat-rewrite-notice-closed')) {
+    // Show popup after a short delay
+    setTimeout(() => {
+      popup.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Prevent scrolling while popup is active
+    }, 800);
+
+    closePopup?.addEventListener('click', () => {
+      popup.classList.remove('active');
+      document.body.style.overflow = ''; // Restore scrolling
+      localStorage.setItem('macboat-rewrite-notice-closed', 'true');
+    });
+  }
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
