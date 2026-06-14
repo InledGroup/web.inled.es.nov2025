@@ -307,7 +307,7 @@
       },
       {
         "content": {
-          "title": "Mejoras para preparar la beta",
+          "title": "rehacer todo",
           "url": "https://github.com/InledGroup/macboat/issues/1",
           "state": "OPEN",
           "labels": {
@@ -330,7 +330,7 @@
               }
             },
             {
-              "text": "Mejoras para preparar la beta",
+              "text": "rehacer todo",
               "field": {
                 "name": "Title"
               }
@@ -375,7 +375,7 @@
         "content": {
           "title": "firmas repo",
           "url": "https://github.com/InledGroup/DroidTux/issues/1",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": []
           }
@@ -384,7 +384,7 @@
           "nodes": [
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
