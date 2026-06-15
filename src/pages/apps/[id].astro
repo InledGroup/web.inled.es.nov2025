@@ -2,38 +2,16 @@
 import Layout from "../../layouts/Layout.astro";
 import Header from "../../components/Header.astro";
 import { appsData } from "../../config/apps_full";
+export const prerender = false;
 import { marked } from "marked";
 
-export const prerender = true;
+const { id } = Astro.params;
+const app = appsData.find((a) => a.id === id);
 
-export async function getStaticPaths() {
-  const excludedIds = [
-    "weby",
-    "web2skill",
-    "tabnest",
-    "demo",
-    "cleany",
-    "moodlenotifier",
-    "appinstall",
-    "appinstall",
-    "darkreaderpdf",
-    "bautilus",
-    "vozes",
-    "geminissh",
-    "codexbar-gnome",
-    "ai-exporter",
-    "macboat"
-  ];
-
-  return appsData
-    .filter((app) => !excludedIds.includes(app.id))
-    .map((app) => ({
-      params: { id: app.id },
-      props: { app },
-    }));
+if (!app) {
+  return Astro.redirect("/404");
 }
 
-const { app } = Astro.props;
 const content = await marked.parse(app.description);
 ---
 

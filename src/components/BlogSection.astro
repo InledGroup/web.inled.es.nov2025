@@ -1,7 +1,6 @@
 ---
 import { getPosts, formatDate } from '../lib/blogger';
 import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
-import AutoTranslate from './AutoTranslate.astro';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
@@ -38,7 +37,6 @@ const latestPosts = posts.slice(0, 3);
       ))}
     </div>
   </div>
-  <AutoTranslate lang={lang} />
 </section>
 
 <style>

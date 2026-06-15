@@ -2,75 +2,88 @@
 import { apps } from '../config/apps';
 import { saas } from '../config/saas';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
+import SocialLinks from './SocialLinks.astro';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 ---
 
 <div class="floating-header-container">
-  <header class="taskbar">
-    <a href="/" class="taskbar-item logo-item" aria-label="Home">
-      <img src="https://hosted.inled.es/INLED_simple-removebg-preview.png" alt="Inled Logo">
-    </a>
+  <div class="header-content-wrapper">
+    <header class="taskbar">
+      <a href="/" class="taskbar-item logo-item" aria-label="Home">
+        <img src="https://hosted.inled.es/INLED_simple-removebg-preview.png" alt="Inled Logo">
+      </a>
 
-    <div class="taskbar-divider"></div>
+      <div class="taskbar-divider"></div>
 
-    <div class="apps-grid-container">
-      <button class="taskbar-item apps-grid-toggle" aria-label="Apps Menu">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-      </button>
-      
-      <div class="apps-grid-overlay" data-lenis-prevent>
-        <div class="apps-grid-content">
-          <div class="grid-section">
-            <h3>{t('grid.saas')}</h3>
-            <div class="grid-items">
-              {saas.map((item) => (
-                <a href={item.link} class="grid-item">
-                  <div class="grid-item-icon">
-                    <img src={item.icon} alt={item.name} loading="lazy" />
-                  </div>
-                  <span class="grid-item-name">{item.name}</span>
-                </a>
-              ))}
+      <div class="apps-grid-container">
+        <button class="taskbar-item apps-grid-toggle" aria-label="Apps Menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
+        </button>
+        
+        <div class="apps-grid-overlay" data-lenis-prevent>
+          <div class="apps-grid-content">
+            <div class="grid-section">
+              <h3>{t('grid.saas')}</h3>
+              <div class="grid-items">
+                {saas.map((item) => (
+                  <a href={item.link} class="grid-item">
+                    <div class="grid-item-icon">
+                      <img src={item.icon} alt={item.name} loading="lazy" />
+                    </div>
+                    <span class="grid-item-name">{item.name}</span>
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
 
-          <div class="grid-divider"></div>
+            <div class="grid-divider"></div>
 
-          <div class="grid-section">
-            <h3>{t('grid.apps')}</h3>
-            <div class="grid-items">
-              {apps.map((app) => (
-                <a href={app.link} class="grid-item">
-                  <div class="grid-item-icon">
-                    <img src={app.icon} alt={app.name} loading="lazy" />
-                  </div>
-                  <span class="grid-item-name">{app.name}</span>
-                </a>
-              ))}
+            <div class="grid-section">
+              <h3>{t('grid.apps')}</h3>
+              <div class="grid-items">
+                {apps.map((app) => (
+                  <a href={app.link} class="grid-item">
+                    <div class="grid-item-icon">
+                      <img src={app.icon} alt={app.name} loading="lazy" />
+                    </div>
+                    <span class="grid-item-name">{app.name}</span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="taskbar-divider"></div>
+
+      <div class="lang-selector-container">
+          <button class="taskbar-item lang-toggle" aria-label="Change Language">
+              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+          </button>
+          <div class="lang-menu">
+              <button class={`lang-btn ${lang === 'es' ? 'active' : ''}`} data-lang="es">Español</button>
+              <button class={`lang-btn ${lang === 'en' ? 'active' : ''}`} data-lang="en">English</button>
+          </div>
+      </div>
+
+      <div class="taskbar-divider"></div>
+
+      <a href="/contacto" class="taskbar-item contact-item" aria-label={t('nav.contact')}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      </a>
+    </header>
+
+    <div class="social-header">
+      <SocialLinks />
     </div>
+  </div>
+</div>
 
-    <div class="taskbar-divider"></div>
-
-    <div class="lang-selector-container">
-        <button class="taskbar-item lang-toggle" aria-label="Change Language">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
-        </button>
-        <div class="lang-menu">
-            <button class={`lang-btn ${lang === 'es' ? 'active' : ''}`} data-lang="es">Español</button>
-            <button class={`lang-btn ${lang === 'en' ? 'active' : ''}`} data-lang="en">English</button>
-        </div>
-    </div>
-
-    <a href="/contacto" class="taskbar-item contact-item" aria-label={t('nav.contact')}>
-      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-    </a>
-  </header>
+<div class="mobile-social-dock">
+  <SocialLinks />
 </div>
 
 <style>
@@ -85,25 +98,103 @@ const t = useTranslations(lang);
     pointer-events: none;
   }
 
-  .taskbar {
+  .header-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    pointer-events: none;
+  }
+
+  @media (min-width: 769px) {
+    .header-content-wrapper {
+      flex-direction: row;
+      gap: 0.5rem;
+    }
+  }
+
+  .taskbar, .social-header {
+    pointer-events: auto;
     display: flex;
     align-items: center;
+    height: 60px; /* Fixed height for both to match */
+  }
+
+  .taskbar {
     gap: 0.5rem;
-    padding: 0.5rem;
+    padding: 0 0.5rem;
     background: rgba(20, 20, 25, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 20px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    pointer-events: auto;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .social-header {
+    background: rgba(20, 20, 25, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 0 0.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .social-header :global(.social-links) {
+    gap: 0.25rem;
+  }
+
+  .social-header :global(.social-links a) {
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+  }
+
+  .social-header :global(.social-links a:hover) {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-4px);
+  }
+
+  .social-header:hover {
+    background: rgba(25, 25, 30, 0.85);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: scale(1.02);
   }
 
   .taskbar:hover {
     background: rgba(25, 25, 30, 0.85);
     border-color: rgba(255, 255, 255, 0.25);
     transform: scale(1.02);
+  }
+
+  /* Mobile Social Dock */
+  .mobile-social-dock {
+    display: none;
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(20, 20, 25, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 0.5rem;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
+    z-index: 2000;
+  }
+
+  @media (max-width: 768px) {
+    .social-header {
+      display: none;
+    }
+    .mobile-social-dock {
+      display: flex;
+    }
   }
 
   .taskbar-item {
@@ -328,50 +419,60 @@ const t = useTranslations(lang);
 </style>
 
 <script>
-  const appsGridContainer = document.querySelector('.apps-grid-container');
-  const appsGridToggle = document.querySelector('.apps-grid-toggle');
-  const langSelectorContainer = document.querySelector('.lang-selector-container');
-  const langToggle = document.querySelector('.lang-toggle');
-  const langBtns = document.querySelectorAll('.lang-btn');
+  function initHeader() {
+    const taskbar = document.querySelector('.taskbar');
+    const langSelector = document.querySelector('.lang-selector-container');
+    const appsGrid = document.querySelector('.apps-grid-container');
 
-  // Apps Menu Toggle
-  appsGridToggle?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    langSelectorContainer?.classList.remove('open');
-    appsGridContainer?.classList.toggle('open');
-  });
+    if (!taskbar) return;
 
-  // Lang Menu Toggle
-  langToggle?.addEventListener('click', (e) => {
-    e.stopPropagation();
-    appsGridContainer?.classList.remove('open');
-    langSelectorContainer?.classList.toggle('open');
-  });
+    // Toggle para el grid de apps
+    const appsToggle = taskbar.querySelector('.apps-grid-toggle');
+    appsToggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      langSelector?.classList.remove('open');
+      appsGrid?.classList.toggle('open');
+    });
 
-  // Language selector logic
-  function setLanguage(lang: string) {
-    document.cookie = `preferred-lang=${lang}; path=/; max-age=${60*60*24*365}; SameSite=Lax`;
-    localStorage.setItem('preferred-lang', lang);
-    window.location.reload();
+    // Toggle para el selector de idioma
+    const langToggle = taskbar.querySelector('.lang-toggle');
+    langToggle?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      appsGrid?.classList.remove('open');
+      langSelector?.classList.toggle('open');
+    });
+
+    // Lógica para cambiar de idioma
+    const langBtns = document.querySelectorAll('.lang-btn');
+    langBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const lang = (e.currentTarget as HTMLElement).dataset.lang;
+        if (lang) {
+          document.cookie = `preferred-lang=${lang}; path=/; max-age=${60*60*24*365}; SameSite=Lax`;
+          localStorage.setItem('preferred-lang', lang);
+          window.location.reload();
+        }
+      });
+    });
+
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.apps-grid-container')) {
+        appsGrid?.classList.remove('open');
+      }
+      if (!target.closest('.lang-selector-container')) {
+        langSelector?.classList.remove('open');
+      }
+    });
   }
 
-  langBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const target = e.currentTarget as HTMLElement;
-      const lang = target.getAttribute('data-lang');
-      if (lang) setLanguage(lang);
-    });
-  });
-
-  // Close when clicking outside
-  document.addEventListener('click', (e) => {
-    const target = e.target as HTMLElement;
-    
-    if (!target.closest('.apps-grid-container')) {
-      appsGridContainer?.classList.remove('open');
-    }
-    if (!target.closest('.lang-selector-container')) {
-      langSelectorContainer?.classList.remove('open');
-    }
-  });
+  // Ejecutar en cada carga de página (soporte para View Transitions si se activan luego)
+  document.addEventListener('astro:page-load', initHeader);
+  // Ejecutar también en la carga inicial estándar
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initHeader();
+  } else {
+    document.addEventListener('DOMContentLoaded', initHeader);
+  }
 </script>

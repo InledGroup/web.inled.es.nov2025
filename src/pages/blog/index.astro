@@ -2,10 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import { getPosts, formatDate } from '../../lib/blogger';
+export const prerender = false;
 import AutoTranslate from '../../components/AutoTranslate.astro';
 import { getLangFromLocals } from '../../i18n/utils';
-
-export const prerender = true;
 
 const lang = getLangFromLocals(Astro.locals);
 const posts = await getPosts();
@@ -58,7 +57,7 @@ const description = "Últimas noticias y actualizaciones de Inled Group";
         </div>
       </div>
     </section>
-    <AutoTranslate lang={lang} />
+    <AutoTranslate />
   </main>
 </Layout>
 
