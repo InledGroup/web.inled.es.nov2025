@@ -1,0 +1,266 @@
+---
+import { apps } from '../config/apps';
+import { saas } from '../config/saas';
+import { appsData } from '../config/apps_full';
+import { featuredIds } from '../config/featured';
+import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath();
+
+// Get priority helper
+const getPriority = (id: string) => {
+  const index = featuredIds.indexOf(id);
+  return index === -1 ? 999 : index;
+};
+
+// Normalize and combine all products
+const projectsMap = new Map();
+
+// 1. Process SaaS
+saas.forEach(item => {
+  projectsMap.set(item.id, {
+    id: item.id,
+    name: item.name,
+    description: item.description,
+    icon: item.icon,
+    link: item.link,
+    type: 'saas'
+  });
+});
+
+// 2. Process Apps
+apps.forEach(item => {
+  if (!projectsMap.has(item.id)) {
+    projectsMap.set(item.id, {
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      icon: item.icon,
+      link: item.link,
+      type: 'app'
+    });
+  }
+});
+
+// 3. Process appsData (technical projects)
+appsData.forEach(item => {
+  if (!projectsMap.has(item.id)) {
+    projectsMap.set(item.id, {
+      id: item.id,
+      name: item.title,
+      description: { es: item.shortDescription, en: item.shortDescription },
+      icon: item.icon,
+      link: item.downloads.github || `/apps/${item.id}`,
+      type: 'project'
+    });
+  }
+});
+
+const allProducts = Array.from(projectsMap.values());
+
+// Sort by priority (featured first)
+const sortedProducts = [...allProducts].sort((a, b) => getPriority(a.id) - getPriority(b.id));
+
+// Triple the products to ensure the loop is seamless even on large screens
+const displayProducts = [...sortedProducts, ...sortedProducts, ...sortedProducts];
+---
+
+<div class="carousel-container">
+  <div class="carousel-track" style={`--items-count: ${sortedProducts.length};`}>
+    {displayProducts.map((product, index) => (
+      <div class="product-card" key={`${product.id}-${index}`}>
+        <div class="card-content">
+          {product.icon ? (
+            <img src={product.icon} alt={product.name} class="product-logo" loading="lazy" />
+          ) : (
+            <div class="product-logo-fallback">{product.name.charAt(0)}</div>
+          )}
+          <span class="product-name">{product.name}</span>
+        </div>
+        <div class="card-overlay">
+          <p class="product-description">{product.description[lang]}</p>
+          <a href={product.link} class="view-button">
+            {t('grid.explore')}
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .carousel-container {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+    padding: 2rem 0;
+    margin-top: 4rem;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.03), transparent);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    padding: 0 0.75rem;
+    animation: scroll 80s linear infinite;
+  }
+
+  .carousel-track:hover {
+    animation-play-state: paused;
+  }
+
+  .product-card {
+    position: relative;
+    width: 240px;
+    height: 140px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: default;
+    backdrop-filter: blur(5px);
+  }
+
+  .product-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.4s ease;
+    width: 100%;
+    padding: 1.5rem;
+  }
+
+  .product-logo {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+  }
+
+  .product-logo-fallback {
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .product-name {
+    font-weight: 600;
+    color: #fff;
+    font-size: 1.1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.95);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .product-card:hover .card-overlay {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .product-card:hover .card-content {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  .product-description {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .view-button {
+    background: #fff;
+    color: #000;
+    padding: 0.5rem 1.25rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .view-button:hover {
+    background: #eee;
+    transform: scale(1.05);
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-1 * (240px + 1.5rem) * var(--items-count))); }
+  }
+
+  @media (max-width: 768px) {
+    .product-card {
+      width: 200px;
+      height: 120px;
+    }
+    .product-logo {
+      width: 44px;
+      height: 44px;
+    }
+    .product-name {
+      font-size: 1rem;
+    }
+    .carousel-track {
+      animation: scroll 60s linear infinite;
+    }
+    @keyframes scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-1 * (200px + 1.5rem) * var(--items-count))); }
+    }
+  }
+</style>

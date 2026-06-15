@@ -11,6 +11,7 @@ import ProductsGrid from '../components/ProductsGrid.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import { apps } from '../config/apps';
 import { saas } from '../config/saas';
+import SaaSShowcase from '../components/SaaSShowcase.astro';
 
 import NewsletterSection from '../components/NewsletterSection.astro';
 import BlogSection from '../components/BlogSection.astro';
@@ -49,16 +50,62 @@ const saasProducts = saas.map(s => ({
 }));
 ---
 
-<Layout title="Inled Group - Dream, build" description={t('scroll.description')}>
+<Layout title="Inled Group - Dream, Build" description={t('scroll.description')}>
   <Header />
   <Hero />
-  <ScrollSection
-    title={t('scroll.title')}
-    description={t('scroll.description')}>
-    <StatsCounter stats={stats} />
-  </ScrollSection>
 
-  <HeroCTA
+  <SaaSShowcase
+    ids={['office', 'start', 'mypdf']}
+    badge={lang === 'es' ? 'Soberanía Digital' : 'Digital Sovereignty'}
+    title={lang === 'es' ? 'Tus herramientas, bajo tu control' : 'Your tools, under your control'}
+  />
+
+  <SaaSShowcase
+    ids={['appinstall', 'codexbar-gnome', 'vozes',]}
+    reversed={true}
+    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+    title={lang === 'es' ? 'Linux a tope!' : 'Linux at its best!'}
+  />
+
+  <SaaSShowcase
+    ids={['codexbar-gnome', 'ai-exporter', 'edgeai', 'agent-tunnel', 'web2skill', 'vozes', 'gemini-notifier', 'weby',]}
+    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+    title={lang === 'es' ? 'La IA puede hacer mucho.' : 'AI can do a lot'}
+  />
+
+  <SaaSShowcase
+    ids={['bautilus', 'tabnest', 'cleany', 'moodlenotifier',]}
+    reversed={true}
+    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+    title={lang === 'es' ? 'Desbloquea el potencial del navegador' : "Unlock the browser's potential"}
+  />
+
+  <SaaSShowcase
+    ids={['oap',]}
+    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+    title={lang === 'es' ? 'Consigue tus objetivos' : "Achieve your goals"}
+  />
+
+  <SaaSShowcase
+    ids={['bastion',]}
+    reversed={true}
+    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+    title={lang === 'es' ? 'Seguridad cuando la necesitas' : "Security when you need it"}
+  />
+
+  <SaaSShowcase
+    ids={['mdpdf', 'inlinked', 'inmd', 'inqr', 'mymetadata']}
+    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+    title={lang === 'es' ? 'Para cada cosa, un editor. Sin instalar, con privacidad' : "For every need, an editor. No installation required, with privacy guaranteed."}
+  />
+
+  <Planning />
+
+  <Changelog />
+
+  <BlogSection />
+
+<!--  <HeroCTA
     title={t('cta.title')}
     description={t('cta.description')}
     primaryButtonText={t('cta.primary')}
@@ -83,7 +130,7 @@ const saasProducts = saas.map(s => ({
     buttonHref="https://ai.inled.es"
   />-->
 
-  
+
   <div id="saas">
     <ProductsGrid title={t('grid.saas')} products={saasProducts} />
   </div>
@@ -92,13 +139,11 @@ const saasProducts = saas.map(s => ({
     <ProductsGrid title={t('grid.apps')} products={appProducts} />
   </div>
 
-  <Planning />
-
-  <Changelog />
-
-  <BlogSection />
 
   <NewsletterSection />
   <NewsletterNotification />
-  
+
+</Layout>
+ <NewsletterNotification />
+
 </Layout>
