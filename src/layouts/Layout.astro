@@ -1,5 +1,4 @@
 ---
-import PageTransition from '../components/PageTransition.astro';
 import Footer from '../components/Footer.astro';
 import AnnouncementBanner from '../components/AnnouncementBanner.astro';
 import { getLangFromLocals } from '../i18n/utils';
@@ -84,7 +83,7 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
@@ -120,7 +119,6 @@ const jsonLd = {
   </head>
   <body>
 
-    <PageTransition />
     <slot />
     <Footer />
     <script>
