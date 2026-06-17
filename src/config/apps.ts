@@ -18,6 +18,16 @@ export interface App {
 
 export const apps: App[] = [
   {
+    id: "droidtux",
+    name: "DroidTux",
+    description: {
+      es: "Ejecuta tus apps de Android directamente en tu escritorio Linux con total integración.",
+      en: "Run your Android apps directly on your Linux desktop with full integration.",
+    },
+    icon: "https://hosted.inled.es/droidtux.png",
+    link: "/apps/droidtux",
+  },
+  {
     id: "ai-exporter",
     name: "AI Exporter",
     description: {

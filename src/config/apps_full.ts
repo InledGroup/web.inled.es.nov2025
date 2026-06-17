@@ -18,7 +18,27 @@ export interface AppData {
   };
 }
 
-export const appsData: AppData[] = [
+export const appsData: App[] = [
+  {
+    id: "droidtux",
+    title: "DroidTux",
+    icon: "https://hosted.inled.es/droidtux.png",
+    platform: ["Linux"],
+    shortDescription:
+      "Ejecuta tus apps de Android en Linux como si fueran nativas.",
+    description:
+      "# DroidTux: Android en tu escritorio Linux\n\nDroidTux te permite ejecutar aplicaciones de Android en tu sistema Linux con una integración total, sin necesidad de emuladores pesados o versiones de Android obsoletas.\n\n### ¿Por qué DroidTux?\n\n- **Usa tu propio móvil**: A diferencia de Waydroid, DroidTux utiliza el Android de tu teléfono, manteniendo tus datos y apps.\n- **Siempre actualizado**: Al usar tu móvil, siempre tendrás la última versión de Android que tengas instalada.\n- **Simplicidad total**: Olvídate de configuraciones complejas de Scrcpy o instalaciones pesadas.\n- **Integración perfecta**: Las aplicaciones aparecen como ventanas individuales en tu escritorio.\n- **Alto rendimiento**: Ejecución fluida gracias a la conexión directa por depuración USB.",
+    screenshots: [
+      "https://hosted.inled.es/apps-droidtux-integradas.png",
+      "https://hosted.inled.es/apps-droidtux-demo2.png"
+    ],
+    video: "",
+    downloads: {
+      github: "https://github.com/InledGroup/DroidTux/releases/latest",
+      sourceforge: "",
+      sourceCode: "https://github.com/InledGroup/DroidTux",
+    },
+  },
   {
     id: "geminissh",
     title: "Gemini SSH",
