@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
 import { getLangFromLocals } from '../../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
@@ -106,24 +107,8 @@ const t = translations[lang] || translations.es;
 ---
 
 <Layout title={t.meta.title} description={t.meta.description}>
+  <Header />
   <div class="droidtux-page">
-    
-    <!-- Floating Navbar -->
-    <nav class="floating-nav">
-      <div class="nav-logo">
-        <a href="/" style="text-decoration: none; color: white;">
-          <img src={app.logo} alt="DroidTux" />
-          <span>DroidTux</span>
-        </a>
-      </div>
-      <div class="nav-links">
-        <a href="#comparison">{t.nav.comparison}</a>
-        <a href="#screenshots">{t.nav.screenshots}</a>
-        <a href="#install">{t.nav.install}</a>
-        <a href={app.githubUrl} target="_blank">{t.nav.github}</a>
-      </div>
-    </nav>
-
     <main>
       <!-- Hero Section -->
       <section class="hero-section">
@@ -280,53 +265,6 @@ const t = translations[lang] || translations.es;
     background: linear-gradient(135deg, var(--dt-primary), #00ff88);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-  }
-
-  /* Floating Nav */
-  .floating-nav {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    background: rgba(10, 10, 15, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    border-radius: 50px;
-    padding: 8px 24px;
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 700;
-  }
-
-  .nav-logo img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 20px;
-  }
-
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover {
-    color: var(--dt-primary);
   }
 
   /* Hero Section */
@@ -651,14 +589,6 @@ const t = translations[lang] || translations.es;
   }
 
   @media (max-width: 768px) {
-    .floating-nav {
-      width: 90%;
-      gap: 16px;
-      padding: 8px 16px;
-    }
-    .nav-links { gap: 12px; }
-    .nav-logo span { display: none; }
-    
     .hero-actions {
       flex-direction: column;
       align-items: center;
