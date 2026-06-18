@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
 import { getLangFromLocals } from '../../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
@@ -16,80 +17,79 @@ const app = {
 const translations = {
   es: {
     meta: {
-      title: "Macboat | Corre macOS en Linux con integración total",
-      description: "Experimenta macOS 11 a 15 en tu hardware Linux con Macboat. Potente, sencillo y basado en Docker."
+      title: "Macboat | Run macOS on Linux with seamless integration",
+      description: "Experience macOS 11 to 15 on your Linux hardware with Macboat. Powerful, simple, and Docker-based."
     },
     nav: {
-      features: "Funciones",
-      prerequisites: "Requisitos",
-      download: "Descargar",
-      contribute: "Contribuir",
-      community: "Comunidad",
+      features: "Features",
+      prerequisites: "Pre-Requisites",
+      download: "Download",
+      contribute: "Contribute",
+      community: "Community",
       faq: "FAQ"
     },
     hero: {
-      title: "Ejecuta macOS en 🐧 Linux",
-      subtitle: " ✨ sin dolores de cabeza ",
-      explore: "Explorar Funciones",
-      download: "Descargar"
+      title: "Run macOS on 🐧 Linux",
+      subtitle: " ✨ without headaches ",
+      explore: "Explore Features",
+      download: "Download"
     },
     download: {
-      title: "Elige tu arquitectura y formato preferido. Macboat está listo para la acción.",
-      currentVersion: "Versión actual: v1.0.1",
+      title: "Choose your preferred architecture and format. Macboat is ready for action.",
+      currentVersion: "Current version: v1.0.1",
       platforms: [
-        { name: "AppImage", icon: "fa-solid fa-box", arch: "x86_64, arm64" },
+        { name: "Arch Linux", icon: "fa-brands fa-linux", arch: "x86_64" },
         { name: "Debian / Ubuntu", icon: "fa-brands fa-debian", arch: "amd64, arm64" },
         { name: "Fedora / RedHat", icon: "fa-brands fa-fedora", arch: "x86_64, aarch64" }
-      ],
-      beta: "Macboat se encuentra actualmente en fase Beta. Puede haber errores."
+      ]
     },
     requirements: {
-      title: "Prerrequisitos",
-      subtitle: "Antes de ejecutar Macboat, asegúrate de que tu sistema cumple los requisitos indicados a continuación.",
+      title: "Pre-Requisites",
+      subtitle: "Before running Macboat, make sure your system meets the requirements below.",
       hardware: {
-        title: "Requisitos de Hardware",
-        ram: "RAM: Al menos 8 GB de RAM (Recomendado 16 GB)",
-        cpu: "CPU: Al menos 4 hilos de CPU",
-        storage: "Almacenamiento: Al menos 64 GB de espacio libre",
-        virtualization: "Virtualización: KVM habilitado en BIOS/UEFI",
-        macos: "Soporte: macOS 11 (Big Sur) hasta macOS 15 (Sequoia)"
+        title: "Hardware Requirements",
+        ram: "RAM: At least 8 GB of RAM (16 GB Recommended)",
+        cpu: "CPU: At least 4 CPU threads",
+        storage: "Storage: At least 64 GB of free space",
+        virtualization: "Virtualization: KVM enabled in BIOS/UEFI",
+        macos: "Support: macOS 11 (Big Sur) to macOS 15 (Sequoia)"
       },
       container: {
-        title: "Contenedores",
-        docker: "Docker Desktop NO es compatible. Usa Docker nativo.",
-        group: "Usuario añadido al grupo docker (requiere reiniciar sesión)",
-        daemon: "El demonio de Docker está en ejecución"
+        title: "Containerization",
+        docker: "Docker Desktop is NOT supported. Use native Docker.",
+        group: "User added to the docker group (relog required)",
+        daemon: "Docker daemon is running"
       }
     },
     faq: {
-      title: "Preguntas Frecuentes",
+      title: "Frequently Asked Questions",
       questions: [
         {
-          q: "¿Esto es como Winboat?",
-          a: "No, aún no hay integración nativa. Por ahora es solo macOS con su escritorio completo."
+          q: "Is this like Winboat?",
+          a: "No, there is no native integration yet. For now, it's just macOS with its full desktop."
         },
         {
-          q: "¿Puedo correr apps de Mac?",
-          a: "Sí, puedes instalar y ejecutar aplicaciones de macOS dentro del entorno virtualizado."
+          q: "Can I run Mac apps?",
+          a: "Yes, you can install and run macOS applications within the virtualized environment."
         },
         {
-          q: "¿Puedo usar directorios compartidos?",
-          a: "Sí, aunque estamos perfeccionando esa función y puede que no funcione perfectamente todavía."
+          q: "Can I use shared directories?",
+          a: "Yes, although we are still perfecting that feature and it may not work perfectly yet."
         },
         {
-          q: "No me instala, me da error",
-          a: "Si experimentas problemas durante la instalación, te recomendamos probar con una versión más antigua de mac."
+          q: "It doesn't install, I get an error",
+          a: "If you experience issues during installation, we recommend trying an older macOS versions."
         }
       ]
     },
     legal: {
-      title: "Aviso Legal EULA",
-      content: "Macboat es una herramienta de virtualización. El EULA de Apple especifica que macOS solo debe ejecutarse en hardware oficial de Apple. Al usar Macboat, usted acepta que es el único responsable de cumplir con dichos términos."
+      title: "EULA Legal Notice",
+      content: "Macboat is a virtualization tool. Apple's EULA specifies that macOS should only be run on official Apple hardware. By using Macboat, you agree that you are solely responsible for complying with such terms."
     },
     rewriteNotice: {
-      title: "AVISO IMPORTANTE",
-      message: "Esta aplicación va a ser completamente reescrita próximamente. Se recomienda no descargar la versión actual aún.",
-      close: "Entendido"
+      title: "IMPORTANT NOTICE",
+      message: "This application will be completely rewritten soon. It is recommended not to download the current version yet.",
+      close: "Got it"
     }
   },
   en: {
@@ -115,11 +115,10 @@ const translations = {
       title: "Choose your preferred architecture and format. Macboat is ready for action.",
       currentVersion: "Current version: v1.0.1",
       platforms: [
-        { name: "AppImage", icon: "fa-solid fa-box", arch: "x86_64, arm64" },
+        { name: "Arch Linux", icon: "fa-brands fa-linux", arch: "x86_64" },
         { name: "Debian / Ubuntu", icon: "fa-brands fa-debian", arch: "amd64, arm64" },
         { name: "Fedora / RedHat", icon: "fa-brands fa-fedora", arch: "x86_64, aarch64" }
-      ],
-      beta: "Macboat is currently in Beta. Expect errors."
+      ]
     },
     requirements: {
       title: "Pre-Requisites",
@@ -156,7 +155,7 @@ const translations = {
         },
         {
           q: "It doesn't install, I get an error",
-          a: "If you experience issues during installation, we recommend trying an older macos versions."
+          a: "If you experience issues during installation, we recommend trying an older macOS versions."
         }
       ]
     },
@@ -172,10 +171,11 @@ const translations = {
   }
 };
 
-const t = translations[lang] || translations.es;
+const t = translations[lang] || translations.en;
 ---
 
 <Layout title={t.meta.title} description={t.meta.description}>
+  <Header />
   <div class="macboat-clone">
     <!-- Rewrite Notice Popup -->
     <div id="rewrite-popup" class="rewrite-popup">
@@ -189,21 +189,6 @@ const t = translations[lang] || translations.es;
       </div>
     </div>
 
-    <!-- Custom Floating Navbar -->
-    <nav class="floating-nav">
-        <div class="nav-logo" >
-            <a href="/" style="text-decoration: none; color: white;">
-            <img src={app.logo} alt="Macboat" />
-            <span>Macboat</span>
-            </a>
-      </div>
-      <div class="nav-links">
-        <a href="#requirements">{t.nav.prerequisites}</a>
-        <a href="#download">{t.nav.download}</a>
-        <a href="#faq">{t.nav.faq}</a>
-      </div>
-    </nav>
-
     <main>
       <!-- Hero Section -->
       <section class="hero-section">
@@ -215,14 +200,13 @@ const t = translations[lang] || translations.es;
           <span class="gradient-text">{t.hero.subtitle}</span>
         </h1>
         <div class="hero-actions">
-          <a href="#features" class="btn-outline">
+          <a href="#requirements" class="btn-outline">
             <i class="fa-solid fa-list-ul gradient-icon"></i>
             {t.hero.explore}
           </a>
           <a href="#download" class="btn-primary">
             <i class="fa-solid fa-download"></i>
             {t.hero.download}
-            <span class="beta-tag">BETA</span>
           </a>
         </div>
       </section>
@@ -248,13 +232,9 @@ const t = translations[lang] || translations.es;
         <div class="download-actions">
             <a href={app.downloadUrl} class="btn-primary large">
               <i class="fa-brands fa-github"></i>
-              {lang === 'es' ? 'Ver todas las descargas en GitHub' : 'View all downloads on GitHub'}
+              View all releases on GitHub
             </a>
             <p class="version-info">{t.download.currentVersion}</p>
-        </div>
-
-        <div class="beta-disclaimer">
-          <p>✨ {t.download.beta}</p>
         </div>
       </section>
 
@@ -293,7 +273,7 @@ const t = translations[lang] || translations.es;
             </div>
             <div class="card-body">
               <ul class="req-list">
-                <li><i class="fa-solid fa-link gradient-icon"></i> Docker How?</li>
+                <li><i class="fa-solid fa-link gradient-icon"></i> Docker setup</li>
                 <li class="warning"><i class="fa-solid fa-triangle-exclamation"></i> NOTE: {t.requirements.container.docker}</li>
                 <li><i class="fa-solid fa-user-group gradient-icon"></i> {t.requirements.container.group}</li>
                 <li><i class="fa-solid fa-gears gradient-icon"></i> {t.requirements.container.daemon}</li>
@@ -338,6 +318,13 @@ const t = translations[lang] || translations.es;
     </footer>
   </div>
 </Layout>
+
+<style is:global>
+  body {
+    background-color: #000 !important;
+    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 10px) !important;
+  }
+</style>
 
 <style>
   :root {
@@ -430,12 +417,11 @@ const t = translations[lang] || translations.es;
   }
 
   .macboat-clone {
-    background-color: #000;
-    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 10px);
     color: var(--text-color);
     min-height: 100vh;
     font-family: 'Inter', -apple-system, sans-serif;
     padding-bottom: 50px;
+    padding-top: 80px;
   }
 
   .gradient-icon {
@@ -445,56 +431,9 @@ const t = translations[lang] || translations.es;
     display: inline-block;
   }
 
-  /* Custom Floating Nav */
-  .floating-nav {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    background: rgba(20, 20, 35, 0.7);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--glass-border);
-    border-radius: 50px;
-    padding: 10px 30px;
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-weight: 700;
-  }
-
-  .nav-logo img {
-    width: 24px;
-    height: 24px;
-  }
-
-  .nav-links {
-    display: flex;
-    gap: 20px;
-  }
-
-  .nav-links a {
-    color: var(--text-muted);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: color 0.3s;
-  }
-
-  .nav-links a:hover {
-    color: white;
-  }
-
   /* Hero Section */
   .hero-section {
-    padding-top: 150px;
+    padding-top: 100px;
     padding-bottom: 80px;
     text-align: center;
   }
@@ -550,17 +489,6 @@ const t = translations[lang] || translations.es;
 
   .btn-primary:hover, .btn-outline:hover {
     transform: translateY(-2px);
-  }
-
-  .beta-tag {
-    background: #FFD700;
-    color: black;
-    font-size: 0.6rem;
-    padding: 2px 6px;
-    border-radius: 4px;
-    position: absolute;
-    top: -10px;
-    right: -10px;
   }
 
   /* Download Section */
@@ -630,17 +558,6 @@ const t = translations[lang] || translations.es;
     font-size: 0.8rem;
     opacity: 0.5;
     margin-top: 15px;
-  }
-
-  .beta-disclaimer {
-    margin-top: 40px;
-    padding: 20px;
-    font-size: 0.9rem;
-    color: #FFD700;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6;
   }
 
   /* Requirements Section */
@@ -808,22 +725,7 @@ const t = translations[lang] || translations.es;
     justify-content: flex-start;
   }
 
-  .support-badge {
-    background: rgba(119, 78, 218, 0.3);
-    border: 1px solid var(--mac-secondary);
-    border-radius: 50px;
-    padding: 10px 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
   @media (max-width: 768px) {
-    .floating-nav {
-      display: none;
-    }
     .requirements-grid {
       grid-template-columns: 1fr;
     }

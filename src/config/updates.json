@@ -1,0 +1,11 @@
+[
+  {
+    "appId": "macboat",
+    "version": "2.0.6",
+    "date": "2026-06-18",
+    "changes": {
+      "es": "Reprogramada desde cero, ahora más ligera, en Python y con GTK. Se han solucionado errores. Apariencia concuerda con la del sistema",
+      "en": "Completely reprogrammed from scratch, now lighter, in Python and with GTK. Bugs have been fixed. System-matched appearance."
+    }
+  }
+]

@@ -1,0 +1,176 @@
+---
+import { apps } from '../config/apps';
+import updates from '../config/updates.json';
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+
+const latestUpdates = updates.map(update => {
+  const app = apps.find(a => a.id === update.appId);
+  return {
+    ...update,
+    appName: app ? app.name : update.appId,
+    appIcon: app ? app.icon : '',
+    appLink: app ? app.link : '#',
+    changes: update.changes[lang as keyof typeof update.changes] || update.changes.es
+  };
+});
+
+const sectionTitle = lang === 'es' ? 'Actualizaciones Recientes' : 'Recent Updates';
+---
+
+<section class="updates-section">
+  <div class="container">
+    <h2 class="section-title">{sectionTitle}</h2>
+    <div class="updates-grid">
+      {latestUpdates.map((update) => (
+        <a href={update.appLink} class="update-card">
+          <div class="update-header">
+            <img src={update.appIcon} alt={update.appName} class="app-icon" />
+            <div class="app-info">
+              <h3 class="app-name">{update.appName}</h3>
+              <span class="version-tag">v{update.version}</span>
+            </div>
+          </div>
+          <p class="update-changes">{update.changes}</p>
+          <div class="update-footer">
+            <span class="update-date">{update.date}</span>
+            <span class="view-more">{lang === 'es' ? 'Ver más' : 'View more'} →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .updates-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.02));
+    position: relative;
+    z-index: 10;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .updates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .update-card {
+    background: rgba(20, 20, 20, 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .update-card:hover {
+    transform: translateY(-4px);
+    background: rgba(30, 30, 30, 0.8);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  .update-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .app-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    object-fit: contain;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px;
+  }
+
+  .app-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-name {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .version-tag {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    font-family: monospace;
+  }
+
+  .update-changes {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .update-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .update-date {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+  }
+
+  .view-more {
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+  }
+
+  .update-card:hover .view-more {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  @media (max-width: 640px) {
+    .updates-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .updates-section {
+      padding: 3rem 1.5rem;
+    }
+  }
+</style>

@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 export const prerender = false;
 
 import Hero from '../components/Hero.astro';
+import AppUpdates from '../components/AppUpdates.astro';
 import ScrollSection from '../components/ScrollSection.astro';
 import StatsCounter from '../components/StatsCounter.astro';
 import HeroCTA from '../components/HeroCTA.astro';
@@ -53,6 +54,7 @@ const saasProducts = saas.map(s => ({
 <Layout title="Inled Group - Dream, Build" description={t('scroll.description')}>
   <Header />
   <Hero />
+  <AppUpdates />
 
   <SaaSShowcase
     ids={['office', 'start', 'mypdf']}
@@ -70,6 +72,18 @@ const saasProducts = saas.map(s => ({
     reversed={true}
     badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
     title={lang === 'es' ? 'Linux a tope!' : 'Linux at its best!'}
+    screenshots={{
+        'appinstall': 'https://hosted.inled.es/appinstall-shot.png',
+        'codexbar-gnome': 'https://hosted.inled.es/codexbar-shot.gif',
+        'vozes': 'https://hosted.inled.es/vozes-frame.png'
+    }}
+
+  />
+
+  <SaaSShowcase
+    ids={['macboat', 'droidtux']}
+    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+    title={lang === 'es' ? 'Experiencia' : 'Linux at its best!'}
     screenshots={{
         'appinstall': 'https://hosted.inled.es/appinstall-shot.png',
         'codexbar-gnome': 'https://hosted.inled.es/codexbar-shot.gif',
@@ -182,4 +196,3 @@ const saasProducts = saas.map(s => ({
   <NewsletterNotification />
 
 </Layout>
-
