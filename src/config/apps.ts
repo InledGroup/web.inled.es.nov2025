@@ -18,16 +18,6 @@ export interface App {
 
 export const apps: App[] = [
   {
-    id: "seafari",
-    name: "Seafari",
-    description: {
-      es: "Navegador clon de Safari construido sobre Firefox, con máxima libertad, compatibilidad y miles de extensiones.",
-      en: "Safari browser clone built on Firefox, offering maximum freedom, compatibility, and thousands of extensions.",
-    },
-    icon: "https://hosted.inled.es/seafari.png",
-    link: "/apps/seafari",
-  },
-  {
     id: "droidtux",
     name: "DroidTux",
     description: {
@@ -407,5 +397,15 @@ export const apps: App[] = [
         en: "This extension is currently in public Beta.",
       },
     },
+  },
+  {
+    id: "seafari",
+    name: "Seafari",
+    description: {
+      es: "Navegador clon de Safari construido sobre Firefox, con máxima libertad, compatibilidad y miles de extensiones.",
+      en: "Safari browser clone built on Firefox, offering maximum freedom, compatibility, and thousands of extensions.",
+    },
+    icon: "https://hosted.inled.es/seafari.png",
+    link: "/apps/seafari",
   },
 ];
