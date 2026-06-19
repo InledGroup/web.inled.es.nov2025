@@ -1,0 +1,1335 @@
+---
+// Import general website layout and header
+// Importar la plantilla general y el cabezal de la web
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+// Detect the current language for SEO metadata purposes
+// Detectar el idioma actual para metadatos SEO
+const lang = getLangFromLocals(Astro.locals);
+
+// Define metadata translations (both output English content to satisfy "haz la pagina en inglés")
+// Definir traducciones para metadatos (ambas muestran inglés para cumplir con el requisito)
+const translations = {
+  es: {
+    title: "Seafari - Out-of-the-box Safari experience on Linux",
+    description: "Seafari is a Firefox-based Safari clone for Linux. Works completely out of the box, with daily updates, uBlock Origin pre-enabled, and maximum compatibility."
+  },
+  en: {
+    title: "Seafari - Out-of-the-box Safari experience on Linux",
+    description: "Seafari is a Firefox-based Safari clone for Linux. Works completely out of the box, with daily updates, uBlock Origin pre-enabled, and maximum compatibility."
+  }
+};
+
+const t = translations[lang] || translations.en;
+
+// JSON-LD Structured Data for SEO optimization
+// Datos estructurados JSON-LD para optimización SEO
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Seafari",
+  "operatingSystem": "Linux",
+  "applicationCategory": "WebBrowser",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": t.description,
+  "publisher": {
+    "@type": "Organization",
+    "name": "Inled Group",
+    "url": "https://inled.es"
+  }
+};
+---
+
+<Layout title={t.title} description={t.description}>
+  <!-- Inject JSON-LD into the head -->
+  <!-- Inyectar JSON-LD en la cabecera -->
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <div id="seafari-page-container">
+    <!-- General Web Floating Header -->
+    <!-- Cabecera flotante general de la web -->
+    <Header />
+
+    <main>
+      <!-- Hero Section (Parchment Canvas) -->
+      <!-- Sección Hero (Lienzo Parchment claro) -->
+      <section class="tile tile-parchment hero-section">
+        <div class="section-container text-center">
+          <div class="logo-wrapper">
+            <img src="https://hosted.inled.es/seafari.png" alt="Seafari Logo" class="seafari-logo" />
+          </div>
+
+          <h1 class="hero-title">Seafari</h1>
+          <p class="hero-tagline">The Safari experience on Linux. Powered by Firefox core.</p>
+
+          <!-- Beta Warning & System Theme Requirement Notice (Apple styled alert banner) -->
+          <!-- Aviso de Versión Beta y Requisito de Tema de Sistema (estilo banner de alerta Apple) -->
+          <div class="warning-banner">
+            <div class="warning-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="warning-content">
+              <strong>Beta & Work in Progress:</strong> Some features are still unpolished.
+              <span class="warning-highlight">Important:</span> Currently, Seafari requires your operating system to be in <strong>Dark Mode</strong> (it does not render correctly in Light Mode).
+            </div>
+          </div>
+
+          <!-- Download & Repo actions -->
+          <!-- Acciones de descarga y repositorio -->
+          <div class="cta-actions">
+            <a href="https://github.com/InledGroup/seafari/releases" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Download Releases
+            </a>
+            <a href="https://github.com/InledGroup/seafari" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+              View on GitHub
+            </a>
+          </div>
+
+          <!-- Video Presentation: Resting on surface with dropshadow, no browser frame chrome -->
+          <!-- Presentación de vídeo: apoyado directamente en el lienzo con sombra, sin el cromo del navegador -->
+          <div class="video-container-raw">
+            <video src="https://hosted.inled.es/seafari-demo.mp4" autoplay loop muted playsinline></video>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1: Bento grid showcasing the 3 core features out-of-the-box (Light Canvas) -->
+      <!-- Sección 1: Cuadrícula bento que muestra las 3 características clave (Lienzo Claro) -->
+      <section class="tile tile-light">
+        <div class="section-container">
+          <div class="apple-grid-split">
+            <!-- Left Side: Bold Solid Color Graphic Card (Firefox Extensions - mostly free) -->
+            <!-- Lado Izquierdo: Tarjeta de color sólido (Extensiones Firefox - en su mayoría gratuitas) -->
+            <div class="graphic-card-solid">
+              <div class="solid-card-badge">Extensions Ecosystem</div>
+              <h3 class="solid-card-heading">Thousands of Firefox extensions. Mostly free.</h3>
+              <p class="solid-card-paragraph">
+                Access the vast, unrestricted Firefox Add-ons library. Enjoy password managers, developer toolkits, and themes without the proprietary restrictions of Chrome or Safari's paywalled ecosystems.
+              </p>
+              <div class="solid-card-icon-container">
+                <svg xmlns="http://www.w3.org/2000/svg" class="solid-card-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              </div>
+              <div class="plus-action-indicator">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+            </div>
+
+            <!-- Right Column Stack: uBlock Origin Card + Daily Updates Card -->
+            <!-- Columna Derecha: Tarjeta uBlock Origin + Tarjeta Actualizaciones Diarias -->
+            <div class="right-column-stack">
+
+              <!-- Card 2: uBlock Origin pre-enabled (replicated Safari Privacy Report popover bubble) -->
+              <!-- Tarjeta 2: uBlock Origin activado (burbuja de Informe de Privacidad estilo Safari) -->
+              <div class="description-card-visual">
+                <div class="desc-card-header">
+                  <h4 class="desc-card-title">uBlock Origin. Enabled by Default.</h4>
+                  <p class="desc-card-text">
+                    Block ads, scripts, and trackers automatically. While Google Chrome restricts ad blockers through Manifest V3, Seafari comes pre-equipped and fully optimized to shield your web experience.
+                  </p>
+                </div>
+
+                <div class="privacy-report-popover">
+                  <div class="popover-header">
+                    <div class="shield-badge-group">
+                      <span class="popover-shield-number">15</span>
+                      <div class="popover-shield-labels">
+                        <div class="popover-host">google.com</div>
+                        <div class="popover-sub">trackers prevented from profiling you</div>
+                      </div>
+                    </div>
+                    <div class="popover-info-icon">ⓘ</div>
+                  </div>
+                  <div class="popover-tracker-title">uBlock Shield Status</div>
+                  <div class="popover-tracker-list">
+                    <div class="popover-tracker-item">securepubads.g.doubleclick.net</div>
+                    <div class="popover-tracker-item">google-analytics.com</div>
+                    <div class="popover-tracker-item">c.amazon-adsystem.com</div>
+                    <div class="popover-tracker-item">adnxs.com</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3: Daily Security Updates directly from Mozilla source -->
+              <!-- Tarjeta 3: Actualizaciones de seguridad diarias desde fuentes de Mozilla -->
+              <div class="description-card-visual bg-parchment-card">
+                <div class="desc-card-header">
+                  <h4 class="desc-card-title">Daily Security Updates</h4>
+                  <p class="desc-card-text">
+                    Stay secure without waiting. Seafari downloads updates directly from Mozilla repositories daily, ensuring immediate patches for zero-days and browser performance.
+                  </p>
+                </div>
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Comparison Table comparing Seafari vs Safari and Chrome (Dark Canvas `#272729`) -->
+      <!-- Sección 2: Tabla Comparativa Seafari vs Safari y Chrome (Lienzo Oscuro `#272729`) -->
+      <section class="tile tile-dark">
+        <div class="section-container">
+          <div class="comparison-block">
+            <!-- Centered and white-colored span/badge -->
+            <!-- Span/badge inicial centrado y de color blanco -->
+            <div class="text-center badge-wrap-center">
+              <span class="tile-badge badge-white">Browsing Privacy & Freedom</span>
+            </div>
+
+            <h2 class="tile-title-center">Seafari vs Safari & Chrome</h2>
+
+            <!-- Apple-styled comparison table featuring Seafari, Safari, and Google Chrome -->
+            <!-- Tabla de comparación estilo Apple que incluye Seafari, Safari y Google Chrome -->
+            <div class="comparison-table-wrapper">
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th class="text-left">Feature Overview</th>
+                    <th class="text-center th-browser">
+                      <div class="table-browser-header">
+                        <img src="https://hosted.inled.es/seafari.png" alt="Seafari" class="table-browser-icon" />
+                        <span>Seafari</span>
+                      </div>
+                    </th>
+                    <th class="text-center th-browser">
+                      <div class="table-browser-header">
+                        <!-- Safari Compass Icon SVG -->
+                        <img src="https://hosted.inled.es/Safari-iOS-Logo-2017-present.png" alt="safari" class="table-browser-icon" />
+                        <span>Safari</span>
+                      </div>
+                    </th>
+                    <th class="text-center th-browser">
+                      <div class="table-browser-header">
+                        <!-- Chrome Logo Vector SVG -->
+                        <img src="https://hosted.inled.es/Google_Chrome_icon_(February_2022).svg" alt="chrome" class="table-browser-icon" />
+                        <span>Chrome</span>
+                      </div>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="feature-cell">Thousands of Firefox Extensions available (mostly free)</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                  </tr>
+                  <tr>
+                    <td class="feature-cell">uBlock Origin enabled by default (unrestricted by MV3)</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                  </tr>
+                  <tr>
+                    <td class="feature-cell">Daily security updates directly from Mozilla source</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                  </tr>
+                  <tr>
+                    <td class="feature-cell">Out-of-the-box setup (no configuration required)</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                  </tr>
+                  <tr>
+                    <td class="feature-cell">Open-source, fully auditable</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                  </tr>
+                  <tr>
+                    <td class="feature-cell">Does not belong to big-tech company</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Package availability (Parchment Canvas) -->
+      <!-- Sección 3: Disponibilidad de paquetes (Lienzo Parchment claro) -->
+      <section class="tile tile-parchment">
+        <div class="section-container">
+          <div class="text-center section-header-wrap">
+            <span class="tile-badge badge-blue">Native Packages</span>
+            <h2 class="tile-title">Built for the Linux Ecosystem</h2>
+            <p class="tile-text-narrow">Get native packages for your favorite distribution, ready to run without manual compiling or complex sandbox setup.</p>
+          </div>
+
+          <!-- Minimal package layout with brand SVGs and clean typography -->
+          <!-- Maquetación limpia de paquetes con SVGs de marca y tipografía simple -->
+          <div class="packages-list-minimal">
+            <div class="pkg-item">
+              <div class="pkg-header">
+                <!-- Debian Spiral Graphic SVG -->
+                <img src="https://hosted.inled.es/debian.svg" alt="debian" class="pkg-logo" />
+                <div class="pkg-details">
+                  <h3 class="pkg-title-text">Debian / Ubuntu / Mint</h3>
+                  <span class="pkg-extension">.deb package</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pkg-item">
+              <div class="pkg-header">
+                <!-- Fedora 'f' Infinity Graphic SVG -->
+               <img src="https://hosted.inled.es/Fedora_logo.svg" alt="fedora" class="pkg-logo" />
+                <div class="pkg-details">
+                  <h3 class="pkg-title-text">Fedora / RHEL / CentOS</h3>
+                  <span class="pkg-extension">.rpm package</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="pkg-item">
+              <div class="pkg-header">
+                <!-- Arch Linux Mountain Graphic SVG -->
+                <img src="https://hosted.inled.es/archlinux-logo.png" alt="arch linux" class="pkg-logo" />
+                <div class="pkg-details">
+                  <h3 class="pkg-title-text">Arch Linux / Manjaro</h3>
+                  <span class="pkg-extension">.pkg.tar.zst package</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Repository Update Section (Light Canvas - alternating light section) -->
+      <!-- Sección del Repositorio de Actualizaciones (Lienzo Claro - sección clara alternante) -->
+      <section class="tile tile-light repo-update-section">
+        <div class="section-container text-center">
+          <span class="tile-badge badge-blue">Updates Portal</span>
+          <h2 class="tile-title">Make sure you are updated, configure the Inled repo</h2>
+          <p class="tile-text-narrow">
+            Receive seamless automatic browser upgrades alongside your normal system updates. Follow the setup instructions to add Inled's package repository to your Linux distribution.
+          </p>
+          <div class="cta-actions justify-center">
+            <a href="https://apt.inled.es" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Repository Instructions
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Final Call to Action (Dark Canvas `#252527`) -->
+      <!-- Sección 4: Llamada final a la acción (Lienzo Oscuro `#252527`) -->
+      <section class="tile tile-dark-final">
+        <div class="section-container text-center cta-container">
+          <h2 class="hero-title">Browse with elegance and freedom.</h2>
+          <!-- White colored tagline/subtitle -->
+          <!-- Subtítulo / tagline de color blanco -->
+          <p class="hero-tagline tagline-white">Set sail with Seafari. Secure, private, and fully customizable.</p>
+
+          <div class="cta-actions justify-center">
+            <a href="https://github.com/InledGroup/seafari/releases" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+              Download Releases
+            </a>
+            <a href="https://github.com/InledGroup/seafari" class="btn btn-secondary-on-dark" target="_blank" rel="noopener noreferrer">
+                View the code
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style is:global>
+  /* Import Google Font Inter to substitute SF Pro Display on non-Apple systems */
+  /* Importar Google Font Inter para sustituir SF Pro Display en sistemas que no sean Apple */
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+  /* Global Body settings to match Apple's web typography and background */
+  /* Ajustes globales del Body para coincidir con la tipografía y el fondo de Apple */
+  body {
+    background-color: #f5f5f7 !important; /* Parchment base */
+    color: #1d1d1f !important; /* Ink text */
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  }
+
+  /* Override the default website background and layout wrap */
+  /* Sobrescribir el fondo por defecto del layout de la web */
+  #seafari-page-container {
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+    min-height: 100vh;
+  }
+
+  /* Adjust the default website floating header for the parchment background */
+  /* Ajustar la cabecera flotante de la web para el fondo claro */
+  #seafari-page-container :global(.taskbar) {
+    background: rgba(245, 245, 247, 0.75) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  #seafari-page-container :global(.taskbar-item) {
+    color: #1d1d1f !important;
+  }
+
+  #seafari-page-container :global(.taskbar-item:hover) {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  #seafari-page-container :global(.taskbar-divider) {
+    background: rgba(0, 0, 0, 0.1) !important;
+  }
+
+  #seafari-page-container :global(.social-header) {
+    background: rgba(245, 245, 247, 0.75) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  #seafari-page-container :global(.social-header :global(.social-links a)) {
+    color: #1d1d1f !important;
+  }
+
+  #seafari-page-container :global(.social-header :global(.social-links a:hover)) {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  #seafari-page-container :global(.apps-grid-overlay) {
+    background: rgba(245, 245, 247, 0.98) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  #seafari-page-container :global(.grid-section h3) {
+    color: rgba(0, 0, 0, 0.4) !important;
+  }
+
+  #seafari-page-container :global(.grid-item-name) {
+    color: #1d1d1f !important;
+  }
+
+  #seafari-page-container :global(.grid-item:hover) {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  #seafari-page-container :global(.grid-divider) {
+    background: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  #seafari-page-container :global(.lang-menu) {
+    background: rgba(245, 245, 247, 0.95) !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  #seafari-page-container :global(.lang-btn) {
+    color: rgba(0, 0, 0, 0.7) !important;
+  }
+
+  #seafari-page-container :global(.lang-btn:hover) {
+    background: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  #seafari-page-container :global(.lang-btn.active) {
+    background: rgba(0, 0, 0, 0.08) !important;
+    color: #1d1d1f !important;
+  }
+
+  /* Style the global footer component to match Apple's parchment design style */
+  /* Ajustar el footer global para el estilo claro de Apple */
+  #seafari-page-container + :global(footer) {
+    background-color: #f5f5f7 !important;
+    color: #1d1d1f !important;
+    border-top: 1px solid #e0e0e0 !important;
+    box-shadow: none !important;
+    padding: 64px 32px 32px !important;
+  }
+
+  #seafari-page-container + :global(footer::before) {
+    display: none !important;
+  }
+
+  #seafari-page-container + :global(footer .footer-logo img) {
+    filter: invert(0.9) !important; /* Make logo visible on light canvas */
+  }
+
+  #seafari-page-container + :global(footer .footer-tagline) {
+    color: #333333 !important;
+  }
+
+  #seafari-page-container + :global(footer .footer-column h4) {
+    color: #7a7a7a !important;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  #seafari-page-container + :global(footer .footer-column nav a) {
+    color: #333333 !important;
+    font-size: 17px; /* 17px matching dense links leading in DESIGN.md */
+    line-height: 2.41 !important;
+  }
+
+  #seafari-page-container + :global(footer .footer-column nav a:hover) {
+    color: #0066cc !important;
+  }
+
+  #seafari-page-container + :global(footer .footer-bottom) {
+    border-top-color: #e0e0e0 !important;
+  }
+
+  #seafari-page-container + :global(footer .footer-copyright p) {
+    color: #7a7a7a !important;
+  }
+</style>
+
+<style>
+  /* Base typography and metrics variables from DESIGN.md */
+  /* Variables base de tipografía y métricas de DESIGN.md */
+  :root {
+    --color-primary: #0066cc;
+    --color-primary-focus: #0071e3;
+    --color-primary-on-dark: #2997ff;
+    --color-ink: #1d1d1f;
+    --color-body-muted: #cccccc;
+    --color-ink-muted-80: #333333;
+    --color-ink-muted-48: #7a7a7a;
+    --color-divider-soft: #f0f0f0;
+    --color-hairline: #e0e0e0;
+    --color-canvas: #ffffff;
+    --color-canvas-parchment: #f5f5f7;
+    --color-surface-tile-1: #272729;
+    --color-surface-tile-2: #2a2a2c;
+    --color-surface-tile-3: #252527;
+  }
+
+  /* Structural tile section - rectangular, edge-to-edge, no rounding */
+  /* Secciones estructurales "tile" - rectangulares, de borde a borde, sin redondeo */
+  .tile {
+    width: 100%;
+    padding: 80px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+  }
+
+  .hero-section {
+    padding-top: 150px; /* Offset the floating web header */
+  }
+
+  /* Alternating theme styles */
+  /* Estilos de temas alternos */
+  .tile-parchment {
+    background-color: var(--color-canvas-parchment);
+    color: var(--color-ink);
+  }
+
+  .tile-light {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+  }
+
+  .tile-dark {
+    background-color: var(--color-surface-tile-1);
+    color: #ffffff;
+  }
+
+  .tile-dark-final {
+    background-color: var(--color-surface-tile-3);
+    color: #ffffff;
+  }
+
+  /* Grid layouts & containers */
+  /* Contenedores y layouts de cuadrículas */
+  .section-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .grid-two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+
+  /* Apple split layout (bento grid layout) */
+  /* Diseño bento/dividido estilo Apple */
+  .apple-grid-split {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+
+  .right-column-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Left Side: Bold Solid Color Graphic Card (Extensions layout) */
+  /* Lado Izquierdo: Tarjeta de color sólido (Diseño de extensiones) */
+  .graphic-card-solid {
+    background-color: #4c53c4; /* Solid Royal Blue-purple from Safari page reference */
+    border-radius: 24px;
+    padding: 48px;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  .solid-card-badge {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
+  }
+
+  .solid-card-heading {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 40px 0 12px 0;
+  }
+
+  .solid-card-paragraph {
+    font-size: 16px;
+    line-height: 1.5;
+    opacity: 0.9;
+    margin: 0 0 40px 0;
+  }
+
+  .solid-card-icon-container {
+    opacity: 0.95;
+  }
+
+  .solid-card-svg {
+    width: 64px;
+    height: 64px;
+  }
+
+  .plus-action-indicator {
+    position: absolute;
+    bottom: 32px;
+    right: 32px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  /* Right Side: Clean Safari-like Description Card and visuals */
+  /* Lado Derecho: Tarjeta descriptiva y visualizaciones */
+  .description-card-visual {
+    background-color: #ffffff;
+    border: 1px solid var(--color-hairline);
+    border-radius: 24px;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+    gap: 32px;
+  }
+
+  .bg-parchment-card {
+    background-color: var(--color-canvas-parchment);
+  }
+
+  .desc-card-header {
+    margin-bottom: 8px;
+  }
+
+  .desc-card-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    color: var(--color-ink);
+  }
+
+  .desc-card-text {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--color-ink-muted-80);
+    margin: 0;
+  }
+
+  /* Replicated Safari Privacy Report popover bubble (anti-ai-slop, realistic UI element) */
+  /* Burbuja de Informe de Privacidad estilo Safari replicada en CSS puro */
+  .privacy-report-popover {
+    background-color: #ffffff;
+    border: 1px solid #d2d2d7;
+    border-radius: 16px;
+    padding: 20px;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+  }
+
+  /* Little pointer arrow on top */
+  .privacy-report-popover::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 40px;
+    width: 14px;
+    height: 14px;
+    background-color: #ffffff;
+    border-left: 1px solid #d2d2d7;
+    border-top: 1px solid #d2d2d7;
+    transform: rotate(45deg);
+  }
+
+  .popover-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid #f2f2f7;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .shield-badge-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .popover-shield-number {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    background-color: #34c759; /* Apple Green */
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .popover-shield-labels {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .popover-host {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .popover-sub {
+    font-size: 11px;
+    color: var(--color-ink-muted-48);
+  }
+
+  .popover-info-icon {
+    font-size: 16px;
+    color: #8e8e93;
+    cursor: default;
+  }
+
+  .popover-tracker-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #8e8e93;
+    letter-spacing: 0.05em;
+    margin-bottom: 8px;
+  }
+
+  .popover-tracker-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .popover-tracker-item {
+    font-family: monospace;
+    font-size: 12px;
+    color: #3a3a3c;
+    word-break: break-all;
+  }
+
+  /* Replicated Firefox Update cycle graphic */
+  /* Gráfico de ciclo de actualizaciones de Firefox en CSS */
+  .update-cycle-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .update-node {
+    padding: 10px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .update-node.source {
+    background-color: #ff9500;
+    color: #ffffff;
+  }
+
+  .update-node.app {
+    background-color: var(--color-primary);
+    color: #ffffff;
+  }
+
+  .update-arrow {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-ink-muted-48);
+    animation: slide-right 1.5s infinite;
+  }
+
+  @keyframes slide-right {
+    0% { transform: translateX(-5px); opacity: 0.3; }
+    50% { transform: translateX(5px); opacity: 1; }
+    100% { transform: translateX(-5px); opacity: 0.3; }
+  }
+
+  .update-badge {
+    background-color: #34c759;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+  }
+
+  /* Comparison block & table styles */
+  /* Bloque de comparación y estilos de tabla */
+  .comparison-block {
+    width: 100%;
+  }
+
+  .badge-wrap-center {
+    margin-bottom: 12px;
+  }
+
+  .badge-white {
+    color: #ffffff !important;
+  }
+
+  .tile-title-center {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.10;
+    letter-spacing: -0.01em;
+    margin: 0 0 48px 0;
+    text-align: center;
+  }
+
+  .comparison-table-wrapper {
+    background-color: #0c0c0e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 32px;
+    max-width: 960px;
+    margin: 0 auto;
+    overflow-x: auto;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #ffffff;
+  }
+
+  .comparison-table th {
+    padding: 16px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 600;
+  }
+
+  .th-browser {
+    width: 140px;
+  }
+
+  .table-browser-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+
+  .table-browser-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  .table-browser-icon-svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .table-browser-icon-svg.compass-blue {
+    color: var(--color-primary-on-dark);
+  }
+
+  .table-browser-icon-svg.chrome-colors {
+    color: #ffcc00;
+  }
+
+  .comparison-table td {
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 16px;
+  }
+
+  .comparison-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .feature-cell {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .status-cell {
+    text-align: center;
+  }
+
+  .check-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #34c759;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .cross-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ff3b30;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  /* Typography styles matching DESIGN.md */
+  /* Estilos de tipografía mapeados a DESIGN.md */
+  .hero-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 1.07;
+    letter-spacing: -0.28px; /* SF Pro Display tight tracking */
+    margin: 0 0 12px 0;
+  }
+
+  .hero-tagline {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.14;
+    letter-spacing: 0.196px;
+    color: var(--color-ink-muted-80);
+    margin: 0 0 24px 0;
+    opacity: 0.9;
+  }
+
+  .tile-dark .hero-tagline {
+    color: var(--color-body-muted);
+  }
+
+  /* final HeroCTA subtitle is white */
+  /* El subtítulo del HeroCTA final es blanco */
+  .tagline-white {
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  .tile-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.10;
+    letter-spacing: -0.01em; /* Negative tracking for display */
+    margin: 0 0 20px 0;
+  }
+
+  .tile-text {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px; /* 17px body standard */
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.374px;
+    margin: 0 0 16px 0;
+    opacity: 0.95;
+  }
+
+  .tile-text-muted {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.47;
+    letter-spacing: -0.374px;
+    color: var(--color-ink-muted-48);
+    margin: 0;
+  }
+
+  .tile-dark .tile-text-muted {
+    color: var(--color-body-muted);
+    opacity: 0.7;
+  }
+
+  .tile-badge {
+    display: inline-block;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+
+  .badge-blue {
+    color: var(--color-primary-on-dark);
+  }
+
+  .tile-light .badge-blue,
+  .tile-parchment .badge-blue {
+    color: var(--color-primary);
+  }
+
+  /* Logo wrapper */
+  .logo-wrapper {
+    margin-bottom: 24px;
+  }
+
+  .seafari-logo {
+    width: 96px;
+    height: 96px;
+    object-fit: contain;
+    border-radius: 20px;
+  }
+
+  /* Warning banner warning styles */
+  /* Estilos para el banner de advertencia */
+  .warning-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    background-color: rgba(245, 158, 11, 0.07);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    border-radius: 12px; /* rounded.md style */
+    padding: 16px 24px;
+    text-align: left;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto 32px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.43;
+    color: var(--color-ink);
+    box-sizing: border-box;
+  }
+
+  .warning-icon {
+    color: #f59e0b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .warning-content {
+    flex-grow: 1;
+  }
+
+  .warning-highlight {
+    color: #b45309;
+    font-weight: 600;
+  }
+
+  /* Apple Button grammars: pills, scale-down on active, outline variants */
+  /* Botones estilo Apple: píldoras, escala reducida al pulsar, variantes outline */
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+    margin-bottom: 48px;
+    justify-content: center;
+  }
+
+  .btn {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+    padding: 11px 22px;
+    border-radius: 9999px; /* rounded.pill */
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s, border-color 0.2s;
+  }
+
+  .btn:active {
+    transform: scale(0.95); /* Active micro-interaction from DESIGN.md */
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    color: #ffffff;
+    border: 1px solid var(--color-primary);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--color-primary-focus);
+    border-color: var(--color-primary-focus);
+  }
+
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(0, 102, 204, 0.05);
+  }
+
+  .btn-secondary-on-dark {
+    background-color: transparent;
+    color: var(--color-primary-on-dark);
+    border: 1px solid var(--color-primary-on-dark);
+  }
+
+  .btn-secondary-on-dark:hover {
+    background-color: rgba(41, 151, 255, 0.08);
+  }
+
+  /* Video container without mock browser frame */
+  /* Contenedor del video sin el cromo del navegador */
+  .video-container-raw {
+    width: 100%;
+    max-width: 960px;
+    border-radius: 18px; /* rounded.lg */
+    overflow: hidden;
+    background-color: #000000;
+    box-shadow: rgba(0, 0, 0, 0.22) 3px 5px 30px 0px; /* Only shadow in layout, product-shadow */
+    border: 1px solid var(--color-hairline);
+    margin: 40px auto 0;
+    aspect-ratio: 16/10;
+    display: flex;
+  }
+
+  .video-container-raw video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Specifications layout (Parchment Tile 3) */
+  /* Layout de especificaciones técnicas (Lienzo Parchment Tile 3) */
+  .section-header-wrap {
+    margin-bottom: 48px;
+  }
+
+  .tile-text-narrow {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 17px;
+    color: var(--color-ink-muted-80);
+  }
+
+  /* Minimal package list grid - anti-ai-slop, clean layout */
+  /* Rejilla de lista de paquetes minimalista - anti-ai-slop, diseño limpio */
+  .packages-list-minimal {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    width: 100%;
+  }
+
+  .pkg-item {
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-hairline);
+    border-radius: 20px;
+    padding: 32px;
+    transition: border-color 0.2s;
+  }
+
+  .pkg-item:hover {
+    border-color: #bbbbbb;
+  }
+
+  .pkg-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .pkg-logo {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .debian-color { color: #d70a53; }
+  .fedora-color { color: #3c6eb4; }
+  .arch-color { color: #1793d1; }
+
+  .pkg-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pkg-title-text {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0 0 4px 0;
+  }
+
+  .pkg-extension {
+    font-family: monospace;
+    font-size: 13px;
+    color: var(--color-ink-muted-48);
+  }
+
+  /* Final CTA layout details */
+  /* Detalles finales de la llamada a la acción */
+  .cta-container {
+    padding: 40px 0;
+  }
+
+  .justify-center {
+    justify-content: center;
+  }
+
+  /* Responsive styling definitions */
+  /* Definiciones de diseño responsive */
+  @media (max-width: 1024px) {
+    .packages-list-minimal {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 968px) {
+    .apple-grid-split {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .graphic-card-solid {
+      min-height: 320px;
+      padding: 32px;
+    }
+
+    .description-card-visual {
+      min-height: auto;
+      padding: 32px;
+    }
+
+    .solid-card-heading {
+      font-size: 32px;
+      margin: 24px 0;
+    }
+
+    .tile-title-center {
+      font-size: 34px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .tile {
+      padding: 48px 0;
+    }
+
+    .hero-section {
+      padding-top: 120px;
+    }
+
+    .hero-title {
+      font-size: 40px;
+    }
+
+    .hero-tagline {
+      font-size: 21px;
+    }
+
+    .warning-banner {
+      flex-direction: column;
+      text-align: center;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .cta-actions {
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .packages-list-minimal {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .comparison-table th, .comparison-table td {
+      padding: 12px;
+      font-size: 14px;
+    }
+
+    .th-browser span {
+      display: none; /* Hide labels on mobile header, keep only icon */
+    }
+  }
+</style>

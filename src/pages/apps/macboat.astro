@@ -178,16 +178,6 @@ const t = translations[lang] || translations.en;
   <Header />
   <div class="macboat-clone">
     <!-- Rewrite Notice Popup -->
-    <div id="rewrite-popup" class="rewrite-popup">
-      <div class="popup-content">
-        <div class="popup-icon">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-        </div>
-        <h2>{t.rewriteNotice.title}</h2>
-        <p>{t.rewriteNotice.message}</p>
-        <button id="close-popup" class="btn-primary">{t.rewriteNotice.close}</button>
-      </div>
-    </div>
 
     <main>
       <!-- Hero Section -->
@@ -409,7 +399,7 @@ const t = translations[lang] || translations.en;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(255, 77, 77, 0.3);
   }
-  
+
   #close-popup:hover {
     background: #ff3333;
     transform: translateY(-2px);
