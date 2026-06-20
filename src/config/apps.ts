@@ -28,6 +28,26 @@ export const apps: App[] = [
     link: "/apps/droidtux",
   },
   {
+    id: "seafari",
+    name: "Seafari",
+    description: {
+      es: "Navegador clon de Safari construido sobre Firefox, con máxima libertad, compatibilidad y miles de extensiones.",
+      en: "Safari browser clone built on Firefox, offering maximum freedom, compatibility, and thousands of extensions.",
+    },
+    icon: "https://hosted.inled.es/seafari.png",
+    link: "/apps/seafari",
+  },
+  {
+    id: "macboat",
+    name: "Macboat",
+    description: {
+      es: "La forma más sencilla de ejecutar macOS en Linux y Windows. Potente, sencillo y basado en tecnologías de vanguardia.",
+      en: "The easiest way to run macOS on Linux and Windows. Powerful, simple, and based on cutting-edge technologies.",
+    },
+    icon: "https://hosted.inled.es/macboat.png",
+    link: "/apps/macboat",
+  },
+  {
     id: "ai-exporter",
     name: "AI Exporter",
     description: {
@@ -66,16 +86,6 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/codexbar-logo.png",
     link: "/apps/codexbar-gnome",
-  },
-  {
-    id: "macboat",
-    name: "Macboat",
-    description: {
-      es: "La forma más sencilla de ejecutar macOS en Linux y Windows. Potente, sencillo y basado en tecnologías de vanguardia.",
-      en: "The easiest way to run macOS on Linux and Windows. Powerful, simple, and based on cutting-edge technologies.",
-    },
-    icon: "https://hosted.inled.es/macboat.png",
-    link: "/apps/macboat",
   },
   {
     id: "agent-tunnel",
@@ -397,15 +407,5 @@ export const apps: App[] = [
         en: "This extension is currently in public Beta.",
       },
     },
-  },
-  {
-    id: "seafari",
-    name: "Seafari",
-    description: {
-      es: "Navegador clon de Safari construido sobre Firefox, con máxima libertad, compatibilidad y miles de extensiones.",
-      en: "Safari browser clone built on Firefox, offering maximum freedom, compatibility, and thousands of extensions.",
-    },
-    icon: "https://hosted.inled.es/seafari.png",
-    link: "/apps/seafari",
   },
 ];

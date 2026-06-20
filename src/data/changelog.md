@@ -1,5 +1,13 @@
 # Changelog 
 
+## 2026-06-20  
+- Seafari listo
+- Macboat adaptado a app nativa (adios Electron)
+- Droidtux listo
+- Repos para PACMAN, DNF y APT
+- Appinstall portado a Arch
+- En espera colaboración con Pear OS
+
 ## 2026-05-09
 - CodexBar for GNOME: Solucionado error que hacía que solo obtuviera resultados del modelo pro para calcular el porcentaje de uso que indicar en la miniatura. Añadido soporte para proveedores personalizados. Añadido indicador de comunidad.  
 - AppInstall (antes appinstall): rediseñada UI, mejorada. Soporte Homebrew y RPM. Instalación de PWAs. Mejora del proceso de instalación de appimages. Solucionada congelación temporal de la UI al desinstalar un paquetes. Abstraida la implementación concreta para cada distro.
