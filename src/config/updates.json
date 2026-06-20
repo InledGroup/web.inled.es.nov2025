@@ -7,5 +7,14 @@
       "es": "Reprogramada desde cero, ahora más ligera, en Python y con GTK. Se han solucionado errores. Apariencia concuerda con la del sistema",
       "en": "Completely reprogrammed from scratch, now lighter, in Python and with GTK. Bugs have been fixed. System-matched appearance."
     }
+  },
+  {
+    "appId": "appinstall",
+    "version": "15",
+    "date": "2026-06-20",
+    "changes": {
+      "es": "Compatibilidad con Pacman (Arch). Actualización de sistema incorporada. Skip de investigación de paquetes incorporada. ",
+      "en": "Pacman (Arch) compatibility. Built-in system update. Built-in package search skip."
+    }
   }
 ]

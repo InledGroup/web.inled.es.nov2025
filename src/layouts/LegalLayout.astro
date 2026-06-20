@@ -1,0 +1,297 @@
+---
+import Layout from './Layout.astro';
+import Header from '../components/Header.astro';
+
+/**
+ * ES: Interfaz de propiedades que acepta el Layout Legal.
+ * EN: Props interface accepted by the Legal Layout.
+ */
+interface Props {
+  title: string;
+  description?: string;
+  updatedAt?: string;
+}
+
+const { title, description, updatedAt } = Astro.props;
+---
+
+<!-- 
+  ES: Renderizamos dentro del Layout principal para heredar cabeceras SEO globales,
+      los scripts de Microsoft Clarity, la carga de fuentes Ubuntu y Lenis (scroll suave).
+  EN: Render inside the main Layout to inherit global SEO headers, Microsoft Clarity scripts,
+      Ubuntu font loading, and Lenis (smooth scroll).
+-->
+<Layout title={title} description={description}>
+  <!-- 
+    ES: Barra de navegación superior de Inled.
+    EN: Inled's top navigation bar.
+  -->
+  <Header />
+
+  <main class="legal-page">
+    <article class="legal-container">
+      {updatedAt && (
+        <div class="legal-meta">
+          <span class="update-tag">
+            <i class="fa-regular fa-clock"></i>
+            {/* ES: Última actualización | EN: Last updated */}
+            Última actualización: {updatedAt}
+          </span>
+        </div>
+      )}
+
+      <!-- 
+        ES: Contenedor donde se inyectará el HTML generado a partir del Markdown.
+        EN: Container where the HTML generated from the Markdown will be injected.
+      -->
+      <div class="legal-content">
+        <slot />
+      </div>
+    </article>
+  </main>
+</Layout>
+
+<style is:global>
+  /* 
+    ES: Estilos específicos para el contenido renderizado desde el Markdown.
+    EN: Specific styles for content rendered from Markdown.
+  */
+  .legal-content h1 {
+    color: #ffffff;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #ffffff 0%, #b5b5b5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .legal-content h2 {
+    color: #ffffff;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 0.5rem;
+  }
+
+  .legal-content h3 {
+    color: #ffffff;
+    font-size: 1.35rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .legal-content p {
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.8;
+    font-size: 1.05rem;
+    margin-bottom: 1.5rem;
+    font-weight: 300;
+  }
+
+  .legal-content ul, 
+  .legal-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .legal-content li {
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .legal-content li strong {
+    color: #ffffff;
+    font-weight: 500;
+  }
+
+  .legal-content a {
+    color: #a78bfa; /* Morado suave de Inled */
+    text-decoration: none;
+    border-bottom: 1px dashed rgba(167, 139, 250, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .legal-content a:hover {
+    color: #f472b6; /* Rosa suave */
+    border-bottom-color: rgba(244, 114, 182, 0.8);
+    text-shadow: 0 0 8px rgba(244, 114, 182, 0.3);
+  }
+
+  .legal-content blockquote {
+    border-left: 4px solid #a78bfa;
+    background: rgba(167, 139, 250, 0.05);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+    border-radius: 0 12px 12px 0;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .legal-content blockquote p {
+    margin-bottom: 0;
+  }
+
+  .legal-content hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+    margin: 2.5rem 0;
+  }
+
+  /* Responsive styling for typography */
+  @media (max-width: 768px) {
+    .legal-content h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .legal-content h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+    }
+
+    .legal-content h3 {
+      font-size: 1.2rem;
+    }
+
+    .legal-content p, 
+    .legal-content li {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+  }
+</style>
+
+<style>
+  .legal-page {
+    min-height: 100vh;
+    padding-top: 140px; /* ES: Espacio para evitar superposición con el header flotante | EN: Space to avoid overlay with floating header */
+    padding-bottom: 80px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  /* 
+    ES: Imagen de fondo difusa fija.
+    EN: Fixed blurry background image.
+  */
+  .legal-page::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://hosted.inled.es/better.inled.svg') center center / cover no-repeat;
+    z-index: -2;
+  }
+
+  /* 
+    ES: Capa oscura intermedia con desenfoque de fondo.
+    EN: Dark intermediate layer with backdrop filter.
+  */
+  .legal-page::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.25);
+    z-index: -1;
+  }
+
+  /* 
+    ES: Contenedor con efecto Glassmorphism (cristal esmerilado).
+    EN: Container with Glassmorphism effect (frosted glass).
+  */
+  .legal-container {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 1.5rem;
+    padding: 3.5rem 3rem;
+    background: rgba(10, 10, 12, 0.45);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 
+    ES: Detalle decorativo de luz en el borde superior.
+    EN: Top border glow decorative detail.
+  */
+  .legal-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(167, 139, 250, 0) 0%, rgba(167, 139, 250, 0.3) 50%, rgba(167, 139, 250, 0) 100%);
+  }
+
+  /* 
+    ES: Metadatos de la página legal (como la fecha de actualización).
+    EN: Legal page metadata (like updated date).
+  */
+  .legal-meta {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .update-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.4rem 0.8rem;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    font-weight: 300;
+  }
+
+  .update-tag i {
+    font-size: 0.8rem;
+    color: #a78bfa;
+  }
+
+  /* 
+    ES: Adaptabilidad para dispositivos móviles.
+    EN: Adaptability for mobile devices.
+  */
+  @media (max-width: 768px) {
+    .legal-page {
+      padding-top: 100px;
+      padding-bottom: 50px;
+    }
+
+    .legal-container {
+      padding: 2.5rem 1.5rem;
+      border-radius: 16px;
+      margin: 0 1rem;
+    }
+
+    .legal-meta {
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import { getCollection, render } from 'astro:content';
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+/**
+ * ES: Indicamos a Astro que pre-renderice este archivo como páginas estáticas (SSG).
+ *     Esto ofrece un rendimiento extremo, seguridad y cero consumo de cómputo en la petición.
+ * EN: Tell Astro to pre-render this file as static pages (SSG).
+ *     This offers extreme performance, security, and zero compute consumption on request.
+ */
+export const prerender = true;
+
+/**
+ * ES: Define los paths estáticos para todas las entradas de la colección 'legal'.
+ * EN: Defines the static paths for all entries in the 'legal' collection.
+ */
+export async function getStaticPaths() {
+  const legalEntries = await getCollection('legal');
+  
+  // ES: Mapeamos cada archivo Markdown a un parámetro de ruta basado en su ID (nombre de archivo sin extensión).
+  // EN: Map each Markdown file to a route parameter based on its ID (filename without extension).
+  return legalEntries.map((entry) => ({
+    params: { legalSlug: entry.id },
+    props: { entry },
+  }));
+}
+
+// ES: Obtenemos la entrada de los props inyectados por getStaticPaths
+// EN: Get the entry from props injected by getStaticPaths
+const { entry } = Astro.props;
+const { title, description, updatedAt } = entry.data;
+
+// ES: Renderizamos el componente del contenido Markdown a HTML dinámico
+// EN: Render the Markdown content component to dynamic HTML
+const { Content } = await render(entry);
+---
+
+{/* 
+  ES: Renderizamos la página legal con el layout común e inyectamos el contenido Markdown.
+  EN: Render the legal page with the common layout and inject the Markdown content.
+*/}
+<LegalLayout title={title} description={description} updatedAt={updatedAt}>
+  <Content />
+</LegalLayout>

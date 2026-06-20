@@ -47,10 +47,12 @@ const featuredSaas = featuredItems
           </nav>
         </div>
         <div class="footer-column">
-          <h4>{t('footer.projects')}</h4>
+          <h4>{t('footer.legaltitle')}</h4>
           <nav>
             <a href={translatePath('/privacy-policy')}>{t('footer.privacy')}</a>
             <a href={translatePath('/cookie-policy')}>{t('footer.cookies')}</a>
+            <a href={translatePath('/aviso-legal')}>{t('footer.legal')}</a>
+            <a href={translatePath('/eu-ai-act')}>{t('footer.aiact')}</a>
             <a href={translatePath('/contacto')}>{t('nav.contact')}</a>
           </nav>
         </div>
@@ -183,7 +185,7 @@ const featuredSaas = featuredItems
       grid-template-columns: 1fr;
       gap: 3rem;
     }
-    
+
     .footer-brand {
       align-items: center;
       text-align: center;
