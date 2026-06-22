@@ -21,7 +21,7 @@
             {},
             {},
             {
-              "name": "In progress",
+              "name": "To triage",
               "field": {
                 "name": "Status"
               }
@@ -307,39 +307,6 @@
       },
       {
         "content": {
-          "title": "rehacer todo",
-          "url": "https://github.com/InledGroup/macboat/issues/1",
-          "state": "OPEN",
-          "labels": {
-            "nodes": [
-              {
-                "name": "enhancement"
-              }
-            ]
-          }
-        },
-        "fieldValues": {
-          "nodes": [
-            {},
-            {},
-            {},
-            {
-              "name": "Backlog",
-              "field": {
-                "name": "Status"
-              }
-            },
-            {
-              "text": "rehacer todo",
-              "field": {
-                "name": "Title"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "content": {
           "title": "Mejoras para relanzar el proyecto",
           "url": "https://github.com/InledGroup/bastion.browser/issues/1",
           "state": "CLOSED",
@@ -391,6 +358,39 @@
             },
             {
               "text": "firmas repo",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "rehacer todo",
+          "url": "https://github.com/InledGroup/macboat/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "rehacer todo",
               "field": {
                 "name": "Title"
               }
