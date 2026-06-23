@@ -397,6 +397,72 @@
             }
           ]
         }
+      },
+      {
+        "content": {
+          "title": "Do not modify websites",
+          "url": "https://github.com/InledGroup/seafari/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "bug"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Do not modify websites",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Error loading fonts",
+          "url": "https://github.com/InledGroup/office/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "bug"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Error loading fonts",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
       }
     ]
   }
