@@ -402,7 +402,7 @@
         "content": {
           "title": "Do not modify websites",
           "url": "https://github.com/InledGroup/seafari/issues/1",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": [
               {
@@ -417,7 +417,7 @@
             {},
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
