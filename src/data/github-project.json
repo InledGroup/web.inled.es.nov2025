@@ -463,6 +463,114 @@
             }
           ]
         }
+      },
+      {
+        "content": {
+          "title": "Soporte AUR, Flatpak y Snap",
+          "url": "https://github.com/InledGroup/appinstall/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Soporte AUR, Flatpak y Snap",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "error triggering apt",
+          "url": "https://github.com/InledGroup/seafari/issues/2",
+          "state": "OPEN",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "error triggering apt",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "add repo once installed",
+          "url": "https://github.com/InledGroup/seafari/issues/3",
+          "state": "OPEN",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "add repo once installed",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "dependencias arch + subir a aur",
+          "url": "https://github.com/InledGroup/appinstall/issues/2",
+          "state": "OPEN",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "dependencias arch + subir a aur",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
       }
     ]
   }
