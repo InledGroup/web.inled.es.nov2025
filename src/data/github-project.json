@@ -495,7 +495,7 @@
         "content": {
           "title": "error triggering apt",
           "url": "https://github.com/InledGroup/seafari/issues/2",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": []
           }
@@ -504,7 +504,7 @@
           "nodes": [
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
