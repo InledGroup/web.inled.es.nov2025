@@ -468,7 +468,7 @@
         "content": {
           "title": "Soporte AUR, Flatpak y Snap",
           "url": "https://github.com/InledGroup/appinstall/issues/1",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": []
           }
@@ -477,7 +477,7 @@
           "nodes": [
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
@@ -522,7 +522,7 @@
         "content": {
           "title": "add repo once installed",
           "url": "https://github.com/InledGroup/seafari/issues/3",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": []
           }
@@ -531,7 +531,7 @@
           "nodes": [
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
@@ -549,7 +549,7 @@
         "content": {
           "title": "dependencias arch + subir a aur",
           "url": "https://github.com/InledGroup/appinstall/issues/2",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": []
           }
@@ -558,13 +558,40 @@
           "nodes": [
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
             },
             {
               "text": "dependencias arch + subir a aur",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "apt repo",
+          "url": "https://github.com/InledGroup/DroidTux/issues/2",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "apt repo",
               "field": {
                 "name": "Title"
               }
