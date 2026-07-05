@@ -1,29 +1,20 @@
 [
   {
-    "appId": "macboat",
-    "version": "2.0.6",
-    "date": "2026-06-18",
-    "changes": {
-      "es": "Reprogramada desde cero, ahora más ligera, en Python y con GTK. Se han solucionado errores. Apariencia concuerda con la del sistema",
-      "en": "Completely reprogrammed from scratch, now lighter, in Python and with GTK. Bugs have been fixed. System-matched appearance."
-    }
-  },
-  {
     "appId": "appinstall",
-    "version": "15",
-    "date": "2026-06-20",
+    "version": "16",
+    "date": "2026-07-05",
     "changes": {
-      "es": "Compatibilidad con Pacman (Arch). Actualización de sistema incorporada. Skip de investigación de paquetes incorporada. ",
-      "en": "Pacman (Arch) compatibility. Built-in system update. Built-in package search skip."
+      "es": "Ahora es compatible con Flatpak, Snap, Arch y AUR. ",
+      "en": "It is now compatible with Flatpak, Snap, Arch, and AUR."
     }
   },
   {
     "appId": "seafari",
-    "version": "1.3.X",
-    "date": "2026-06-20",
+    "version": "1.11",
+    "date": "2026-07-05",
     "changes": {
-      "es": "Solucionados errores críticos. Experiencia usable. Queda por solucionar incoherencias visuales y asemejarlo más a Safari. Beta lista ",
-      "en": "Critical bugs fixed. Visual inconsistencies with the border radius still need to be addressed, making it more like Safari. Beta ready."
+      "es": "Seafari ya se actualiza sin problemas.",
+      "en": "Seafari now updates without issues."
     }
   }
 ]

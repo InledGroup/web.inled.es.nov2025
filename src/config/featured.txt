@@ -1,3 +1,4 @@
+seafari
 codexbar-gnome
 droidtux
 ai-exporter
