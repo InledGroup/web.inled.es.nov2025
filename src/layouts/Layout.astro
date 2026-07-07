@@ -3,6 +3,8 @@ import Footer from '../components/Footer.astro';
 import AnnouncementBanner from '../components/AnnouncementBanner.astro';
 import { getLangFromLocals } from '../i18n/utils';
 import { getFeaturedItems } from '../config/featured';
+import { apps } from '../config/apps';
+import { saas } from '../config/saas';
 
 const lang = getLangFromLocals(Astro.locals);
 
@@ -15,6 +17,15 @@ interface Props {
 const { title, description = "Inled Group", image = "https://hosted.inled.es/hero-bg.jpg" } = Astro.props;
 
 const featuredItems = getFeaturedItems();
+
+const currentPath = Astro.url.pathname;
+const allProducts = [...saas, ...apps];
+const isArchivedPage = allProducts.some(p => p.archive && (
+  currentPath === p.link || 
+  currentPath === p.link + '/' ||
+  p.link === currentPath ||
+  (p.id && currentPath.includes('/apps/' + p.id))
+));
 
 // Generar navegación dinámica para SEO (Sitelinks)
 const featuredApps = featuredItems
@@ -117,8 +128,19 @@ const jsonLd = {
         </script>
 
   </head>
-  <body>
-
+  <body class={isArchivedPage ? "archive-active-body" : ""}>
+    {isArchivedPage && (
+      <div class="archive-overlay-banner">
+        <div class="archive-overlay-content">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 0.25rem;"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+          <span>
+            {lang === 'es' 
+              ? 'Este proyecto está archivado y no se mantiene activamente por ahora.' 
+              : 'This project is archived and is not actively maintained for now.'}
+          </span>
+        </div>
+      </div>
+    )}
     <slot />
     <Footer />
     <script>
@@ -135,6 +157,8 @@ const jsonLd = {
         touchMultiplier: 2,
         infinite: false,
       });
+
+      (window as any).lenis = lenis;
 
       function raf(time: number) {
         lenis.raf(time);
@@ -183,5 +207,36 @@ const jsonLd = {
 
   .lenis.lenis-scrolling iframe {
     pointer-events: none;
+  }
+
+  .archive-overlay-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(239, 68, 68, 0.1);
+    border-bottom: 1px solid rgba(239, 68, 68, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #f87171;
+    z-index: 10000;
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .archive-overlay-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  body.archive-active-body .floating-header-container {
+    top: 3.5rem !important;
   }
 </style>

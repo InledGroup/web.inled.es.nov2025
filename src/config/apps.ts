@@ -14,6 +14,7 @@ export interface App {
       en: string;
     };
   };
+  archive?: boolean;
 }
 
 export const apps: App[] = [
@@ -234,6 +235,7 @@ export const apps: App[] = [
         en: "An update with English translation and PWA transformation is coming soon.",
       },
     },
+    archive: true,
   },
   {
     id: "moodlenotifier",
@@ -268,6 +270,7 @@ export const apps: App[] = [
         en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
       },
     },
+    archive: true,
   },
   {
     id: "startomnibox",
@@ -285,6 +288,7 @@ export const apps: App[] = [
         en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
       },
     },
+    archive: true,
   },
   {
     id: "startntp",
@@ -302,6 +306,7 @@ export const apps: App[] = [
         en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
       },
     },
+    archive: true,
   },
   {
     id: "winerror",
@@ -319,6 +324,7 @@ export const apps: App[] = [
         en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
       },
     },
+    archive: true,
   },
   {
     id: "winbsod",
@@ -336,6 +342,7 @@ export const apps: App[] = [
         en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
       },
     },
+    archive: true,
   },
   {
     id: "tabstacker",
@@ -353,6 +360,7 @@ export const apps: App[] = [
         en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
       },
     },
+    archive: true,
   },
   {
     id: "archive.is",
@@ -370,6 +378,7 @@ export const apps: App[] = [
         en: "This resource no longer requires maintenance and is not Inled's main line of business. Currently, no time is being dedicated to this project.",
       },
     },
+    archive: true,
   },
   {
     id: "cruzcristiana",
@@ -390,6 +399,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/memory-warn-logo.png",
     link: "/apps/memorywarn",
+    archive: true,
   },
   {
     id: "bautilus",

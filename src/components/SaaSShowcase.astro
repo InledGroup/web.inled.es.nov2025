@@ -5,99 +5,43 @@ import { apps } from '../config/apps';
 
 interface Props {
   ids: string[];
-  reversed?: boolean;
   badge?: string;
   title?: string;
-  screenshots?: Record<string, string>;
+  subtitle?: string;
 }
 
-const { ids, reversed = false, badge, title, screenshots = {} } = Astro.props;
+const { ids, badge, title, subtitle } = Astro.props;
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 
-// Combine both sources and filter by provided IDs
 const allProducts = [...saas, ...apps];
 const products = ids.map(id => allProducts.find(p => p.id === id)).filter(Boolean);
-
-const showcaseProducts = products.map(p => {
-  return {
-    ...p,
-    screenshot: screenshots[p.id] || null
-  };
-});
 ---
 
-<section class={`saas-showcase ${reversed ? 'reversed' : ''}`}>
-  <div class="container">
-    <div class="showcase-grid">
-      <!-- Visual Column -->
-      <div class="showcase-visual">
-        <div class="visual-glass">
-          {showcaseProducts.map((p, index) => {
-            const isVideo = p.screenshot && /\.(mp4|webm|ogg)$/i.test(p.screenshot);
-            return (
-              <div class={`screenshot-placeholder ${index === 0 ? 'active' : ''}`} data-id={p.id}>
-                {p.screenshot ? (
-                  isVideo ? (
-                    <video
-                      src={p.screenshot}
-                      autoplay
-                      muted
-                      loop
-                      playsinline
-                      class="real-screenshot"
-                    />
-                  ) : (
-                    <img src={p.screenshot} alt={p.name} class="real-screenshot" />
-                  )
-                ) : (
-                  <div class="placeholder-content">
-                    <img src={p.icon} alt="" class="placeholder-icon" />
-                    <div class="placeholder-text">
-                      <p>{p.name}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-        <div class="visual-controls">
-          <div class="progress-bar"><div class="progress-fill"></div></div>
-          <div class="dots-nav">
-             {showcaseProducts.map((_, i) => <span class={`dot ${i === 0 ? 'active' : ''}`} data-index={i}></span>)}
+<section class="saas-showcase">
+  <div class="showcase-inner">
+    <div class="showcase-header">
+      {badge && <span class="badge">{badge}</span>}
+      {title && <h2 class="showcase-title">{title}</h2>}
+      {subtitle && <p class="showcase-subtitle">{subtitle}</p>}
+    </div>
+
+    <div class="cards-row">
+      {products.map(p => (
+        <a href={p.link} class="product-card">
+          <div class="card-icon">
+            <img src={p.icon} alt={p.name} loading="lazy" />
           </div>
-        </div>
-      </div>
+          <h3 class="card-name">{p.name}</h3>
+          <p class="card-desc">{p.description[lang]}</p>
+        </a>
+      ))}
+    </div>
 
-      <!-- Content Column -->
-      <div class="showcase-content">
-        <div class="content-header">
-            {title && <h2>{title}</h2>}
-        </div>
-
-        <div class="product-list">
-          {showcaseProducts.map((p, index) => (
-            <div class={`product-item ${index === 0 ? 'active' : ''}`} data-id={p.id} data-index={index}>
-              <div class="product-icon-wrapper">
-                <img src={p.icon} alt={p.name} />
-              </div>
-              <div class="product-info">
-                <h3>{p.name}</h3>
-                <div class="description-expand">
-                    <p>{p.description[lang]}</p>
-                    <div class="product-actions">
-                        <a href={p.link} class="btn-primary">{lang === 'es' ? 'Acceder' : 'Access'}</a>
-                        <a href={p.link} class="btn-link">
-                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M9 18l6-6-6-6"/></svg>
-                        </a>
-                    </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+    <div class="sec-progress">
+      <div class="sec-progress-bar">
+        <div class="sec-progress-fill"></div>
       </div>
     </div>
   </div>
@@ -105,420 +49,186 @@ const showcaseProducts = products.map(p => {
 
 <style>
   .saas-showcase {
+    min-width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 4rem;
+    flex-shrink: 0;
     position: relative;
-    padding: 12rem 2rem;
-    overflow: hidden;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     background: rgba(0, 0, 0, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+    border-left: 1px solid rgba(255, 255, 255, 0.04);
   }
 
-  .container {
-    position: relative;
-    z-index: 2;
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-
-  .showcase-grid {
-    display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 5rem;
-    align-items: center;
-  }
-
-  .reversed .showcase-grid {
-    grid-template-columns: 0.9fr 1.1fr;
-  }
-
-  .reversed .showcase-visual {
-    order: 2;
-  }
-  .reversed .showcase-content {
-    order: 1;
-  }
-
-  /* Visual Column */
-  .showcase-visual {
-    position: relative;
+  .showcase-inner {
     width: 100%;
-  }
-
-  .visual-glass {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 500px;
-    transition: all 0.5s ease;
-  }
-
-  .screenshot-placeholder {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.6s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0;
-  }
-
-  .screenshot-placeholder.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .real-screenshot {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    border-radius: 1rem;
-    transition: all 0.6s ease;
-    opacity: 0;
-    transform: scale(0.98);
-  }
-
-  .screenshot-placeholder.active .real-screenshot {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .placeholder-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    opacity: 0.3;
-  }
-
-  .placeholder-icon {
-    width: 80px;
-    height: 80px;
-    filter: grayscale(1);
-  }
-
-  .placeholder-text {
-    text-align: center;
-  }
-
-  .placeholder-text span {
-    display: block;
-    font-size: 0.7rem;
-    letter-spacing: 0.3em;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-  }
-
-  .placeholder-text p {
-    font-size: 1.2rem;
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-
-  .visual-controls {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding: 0 1.5rem;
-  }
-
-  .progress-bar {
-    flex: 1;
-    height: 2px;
-    background: rgba(255,255,255,0.05);
-    border-radius: 1px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: #fff;
-    width: 0%;
-  }
-
-  .dots-nav {
-    display: flex;
-    gap: 12px;
-  }
-
-  .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .dot.active {
-    background: #fff;
-    transform: scale(1.4);
-  }
-
-  /* Content Column */
-  .showcase-content {
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
     gap: 3rem;
+    height: 100%;
+    justify-content: center;
+    padding: 2rem 0;
   }
 
-  .content-header h2 {
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    font-weight: 900;
-    line-height: 1.1;
-    margin-top: 1rem;
-    letter-spacing: -0.03em;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
-  }
-
-  .badge {
-    background: rgba(255,255,255,0.08);
-    padding: 0.5rem 1.25rem;
-    border-radius: 100px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.5);
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-
-  .product-list {
+  .showcase-header {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
   }
 
-  .product-item {
+  .badge {
+    display: inline-block;
+    width: fit-content;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .showcase-title {
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+    color: #fff;
+    margin: 0;
+  }
+
+  .showcase-subtitle {
+    font-size: clamp(1rem, 1.3vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0;
+  }
+
+  .cards-row {
     display: flex;
-    gap: 1.5rem;
-    padding: 1.75rem;
-    border-radius: 2rem;
-    background: transparent;
-    border: 1px solid transparent;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: pointer;
-    user-select: none;
+    gap: 2rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    align-items: stretch;
+    min-height: 0;
   }
 
-  .product-item:hover {
+  .cards-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-card {
+    flex: 1;
+    min-width: 320px;
+    max-width: 400px;
     background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: none;
+    position: relative;
+    overflow: hidden;
   }
 
-  .product-item.active {
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  .product-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
   }
 
-  .product-icon-wrapper {
-    width: 52px;
-    height: 52px;
+  .card-icon {
+    width: 56px;
+    height: 56px;
     flex-shrink: 0;
-    background: rgba(255,255,255,0.03);
-    border-radius: 14px;
-    padding: 0.75rem;
-    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .product-icon-wrapper img {
+  .card-icon img {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
 
-  .product-info h3 {
+  .card-name {
     font-size: 1.4rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
-    color: rgba(255,255,255,0.7);
-    transition: color 0.4s ease;
-  }
-
-  .product-item.active h3 {
     color: #fff;
+    margin: 0;
+    line-height: 1.25;
   }
 
-  .description-expand {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  .card-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
   }
 
-  .product-item.active .description-expand {
-    grid-template-rows: 1fr;
+  .sec-progress {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
   }
 
-  .description-expand > div {
+  .sec-progress-bar {
+    width: 200px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
     overflow: hidden;
   }
 
-  .product-info p {
-    color: rgba(255,255,255,0.4);
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-    color: rgba(255,255,255,0.6);
-  }
-
-  .product-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .btn-primary {
-    background: #fff;
-    color: #000;
-    padding: 0.6rem 1.75rem;
-    border-radius: 100px;
-    font-weight: 800;
-    text-decoration: none;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-  }
-
-  .btn-primary:hover {
-    transform: scale(1.05);
-  }
-
-  .btn-link {
-    color: #fff;
-    opacity: 0.5;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    transition: all 0.3s ease;
-  }
-
-  .btn-link:hover {
-    opacity: 1;
-    transform: translateX(5px);
+  .sec-progress-fill {
+    height: 100%;
+    background: #ffffff;
+    width: 0%;
   }
 
   @media (max-width: 1024px) {
-    .showcase-grid, .reversed .showcase-grid {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-    }
-    .showcase-visual, .reversed .showcase-visual {
-        order: 2;
-    }
-    .showcase-content, .reversed .showcase-content {
-        order: 1;
-    }
     .saas-showcase {
-        padding: 6rem 1.5rem;
+      padding: 2rem 1.5rem;
+    }
+
+    .cards-row {
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      min-width: 280px;
+      padding: 2rem 1.5rem;
     }
   }
 
   @media (max-width: 768px) {
-    .product-item {
-        padding: 1.25rem;
+    .saas-showcase {
+      padding: 1.5rem 1rem;
+    }
+
+    .product-card {
+      min-width: 260px;
+      max-width: none;
+      flex: 0 0 280px;
     }
   }
 </style>
-
-<script>
-  function initShowcase() {
-    const sections = document.querySelectorAll('.saas-showcase');
-
-    sections.forEach(section => {
-      const items = section.querySelectorAll('.product-item');
-      const screenshots = section.querySelectorAll('.screenshot-placeholder');
-      const dots = section.querySelectorAll('.dot');
-      const progressFill = section.querySelector('.progress-fill') as HTMLElement;
-
-      let currentIndex = 0;
-      const intervalTime = 6000;
-      let timer: any;
-
-      function updateShowcase(index: number) {
-        if (index === currentIndex && items[index].classList.contains('active')) return;
-
-        items.forEach(i => i.classList.remove('active'));
-        screenshots.forEach(s => s.classList.remove('active'));
-        dots.forEach(d => d.classList.remove('active'));
-
-        items[index].classList.add('active');
-        screenshots[index].classList.add('active');
-        dots[index].classList.add('active');
-
-        currentIndex = index;
-        resetProgress();
-      }
-
-      function resetProgress() {
-        if (progressFill) {
-          progressFill.style.transition = 'none';
-          progressFill.style.width = '0%';
-          setTimeout(() => {
-            progressFill.style.transition = `width ${intervalTime}ms linear`;
-            progressFill.style.width = '100%';
-          }, 50);
-        }
-      }
-
-      function startTimer() {
-        stopTimer();
-        timer = setInterval(() => {
-          let next = (currentIndex + 1) % items.length;
-          updateShowcase(next);
-        }, intervalTime);
-      }
-
-      function stopTimer() {
-        if (timer) clearInterval(timer);
-      }
-
-      items.forEach((item, i) => {
-        // Handle both click (mobile) and mouseenter (desktop)
-        item.addEventListener('mouseenter', () => {
-          if (window.innerWidth > 1024) {
-            stopTimer();
-            updateShowcase(i);
-          }
-        });
-
-        item.addEventListener('click', (e) => {
-          // On mobile or small screens, we use click
-          if (window.innerWidth <= 1024) {
-             stopTimer();
-             updateShowcase(i);
-          }
-        });
-
-        item.addEventListener('mouseleave', () => {
-          if (window.innerWidth > 1024) {
-            startTimer();
-          }
-        });
-      });
-
-      dots.forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          updateShowcase(i);
-          startTimer();
-        });
-      });
-
-      updateShowcase(0);
-      startTimer();
-    });
-  }
-
-  document.addEventListener('DOMContentLoaded', initShowcase);
-  document.addEventListener('astro:page-load', initShowcase);
-</script>

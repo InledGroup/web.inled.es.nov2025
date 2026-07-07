@@ -7,6 +7,7 @@ export interface SaasProduct {
   };
   icon: string;
   link: string;
+  archive?: boolean;
 }
 
 export const saas: SaasProduct[] = [
@@ -119,6 +120,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/MDOCX.png",
     link: "https://insuite.inled.es/mdoxc",
+    archive: true,
   },
   {
     id: "devreka",
@@ -129,6 +131,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/devreka.png",
     link: "https://devreka.inled.es",
+    archive: true,
   },
   {
     id: "glassy",
@@ -139,6 +142,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/glassy.svg",
     link: "https://glassy.inled.es",
+    archive: true,
   },
   {
     id: "matrixwww",
@@ -149,6 +153,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/matrixwww.ico",
     link: "https://matrix-www.inled.es",
+    archive: true,
   },
   {
     id: "aicloud",
@@ -159,5 +164,6 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/inledai.svg",
     link: "https://aicloud.inled.es",
+    archive: true,
   },
 ];

@@ -1,12 +1,13 @@
 # Changelog 
 
-# 2026-07-05
+## 2026-07-05
 - Solucionados errores críticos de firmas en Arch
 - Seafari ya se actualiza con normalidad
 - Desarrollo de PulsarOS en pausa (voy a tener que hacer versión arch y versión debian, para los drivers.)
 - Appinstall actualizado. Faltan corregir algunos errores que seguramente aparezcan nuevos.
 - Codexbar GNOME actualizado para usar arquitectura hexagonal. Rechazado en EGO por pequeños errores que soluionaré mañana.
 - MacBoat actualizado (desde hace ya días) para solucionar problemas de red. Falta hacerle documentación.
+- 
 
 ## 2026-06-20  
 - Seafari listo

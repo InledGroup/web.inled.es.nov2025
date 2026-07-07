@@ -1,0 +1,144 @@
+---
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+
+const discordInviteUrl = "https://discord.com/invite/PSeTkDMnr";
+const githubOrgUrl = "https://github.com/InledGroup";
+---
+
+<section class="contribute-section">
+  <div class="container">
+    <div class="contribute-card">
+      <div class="contribute-content">
+        <h3 class="contribute-title">{t('contribute.title')}</h3>
+        <p class="contribute-text">{t('contribute.text')}</p>
+        <p class="contribute-warning">{t('contribute.warning')}</p>
+      </div>
+      <div class="contribute-actions">
+        <a href={discordInviteUrl} target="_blank" rel="noopener noreferrer" class="btn btn-discord">
+          <i class="fa-brands fa-discord"></i>
+          {t('contribute.discord')}
+        </a>
+        <a href={githubOrgUrl} target="_blank" rel="noopener noreferrer" class="btn btn-github">
+          <i class="fa-brands fa-github"></i>
+          {t('contribute.github')}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contribute-section {
+    padding: 4rem 2rem;
+    background: transparent;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .contribute-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .contribute-content {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contribute-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .contribute-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+  }
+
+  .contribute-warning {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+    border-left: 2px solid rgba(255, 255, 255, 0.25);
+    padding-left: 0.75rem;
+  }
+
+  .contribute-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.6rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .btn-discord {
+    background: rgba(88, 101, 242, 0.1);
+    color: #5865f2;
+    border: 1px solid rgba(88, 101, 242, 0.25);
+  }
+
+  .btn-discord:hover {
+    background: #5865f2;
+    color: #fff;
+    border-color: #5865f2;
+  }
+
+  .btn-github {
+    background: rgba(255, 255, 255, 0.02);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-github:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 768px) {
+    .contribute-card {
+      padding: 2rem 1.5rem;
+      gap: 2rem;
+    }
+    
+    .contribute-actions {
+      width: 100%;
+    }
+
+    .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

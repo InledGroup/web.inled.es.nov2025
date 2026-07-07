@@ -8,7 +8,6 @@ import AppUpdates from '../components/AppUpdates.astro';
 import ScrollSection from '../components/ScrollSection.astro';
 import StatsCounter from '../components/StatsCounter.astro';
 import HeroCTA from '../components/HeroCTA.astro';
-import ProductsGrid from '../components/ProductsGrid.astro';
 import FeatureSection from '../components/FeatureSection.astro';
 import { apps } from '../config/apps';
 import { saas } from '../config/saas';
@@ -18,6 +17,7 @@ import NewsletterSection from '../components/NewsletterSection.astro';
 import BlogSection from '../components/BlogSection.astro';
 import Changelog from '../components/Changelog.astro';
 import Planning from '../components/Planning.astro';
+import Contribute from '../components/Contribute.astro';
 import NewsletterNotification from '../components/NewsletterNotification.astro';
 import ContactForm from '../components/ContactForm.astro';
 
@@ -32,7 +32,7 @@ const stats = [
   { value: 100, label: t('stats.users'), suffix: '%' },
 ];
 
-const appProducts = apps.map(a => ({
+const appProducts = apps.filter(a => !a.archive).map(a => ({
   icon: a.icon,
   name: a.name,
   description: a.description[lang],
@@ -43,12 +43,31 @@ const appProducts = apps.map(a => ({
   } : undefined
 }));
 
-const saasProducts = saas.map(s => ({
+const saasProducts = saas.filter(s => !s.archive).map(s => ({
   icon: s.icon,
   name: s.name,
   description: s.description[lang],
   link: s.link
 }));
+
+const archivedProducts = [
+  ...saas.filter(s => s.archive).map(s => ({
+    icon: s.icon,
+    name: s.name,
+    description: s.description[lang],
+    link: s.link
+  })),
+  ...apps.filter(a => a.archive).map(a => ({
+    icon: a.icon,
+    name: a.name,
+    description: a.description[lang],
+    link: a.link,
+    notice: a.notice ? {
+      type: a.notice.type,
+      message: a.notice.message[lang]
+    } : undefined
+  }))
+];
 ---
 
 <Layout title="Inled Group - Dream, Build" description={t('scroll.description')}>
@@ -56,106 +75,82 @@ const saasProducts = saas.map(s => ({
   <Hero />
   <AppUpdates />
 
-  <SaaSShowcase
-    ids={['office', 'start', 'mypdf']}
-    badge={lang === 'es' ? 'Soberanía Digital' : 'Digital Sovereignty'}
-    title={lang === 'es' ? 'Tus herramientas, bajo tu control' : 'Your tools, under your control'}
-    screenshots={{
-        'office': 'https://hosted.inled.es/insuite-office-matrix.gif',
-        'start': 'https://hosted.inled.es/start-shot.png',
-        'mypdf': 'https://hosted.inled.es/mypdf-shot.png'
-    }}
-  />
+  <div id="showcase-strip" data-lenis-prevent>
+    <div class="showcase-track">
+      <SaaSShowcase
+        ids={['office', 'start', 'mypdf']}
+        badge={lang === 'es' ? 'Soberanía Digital' : 'Digital Sovereignty'}
+        title={lang === 'es' ? 'Tus herramientas, bajo tu control' : 'Your tools, under your control'}
+        subtitle={lang === 'es' ? 'Productividad sin depender de terceros. Todo en tu navegador, todo privado.' : 'Productivity without third-party dependence. All in your browser, all private.'}
+      />
 
-  <SaaSShowcase
-    ids={['appinstall', 'codexbar-gnome', 'vozes',]}
-    reversed={true}
-    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-    title={lang === 'es' ? 'Linux a tope!' : 'Linux at its best!'}
-    screenshots={{
-        'appinstall': 'https://hosted.inled.es/appinstall-shot.png',
-        'codexbar-gnome': 'https://hosted.inled.es/codexbar-shot.gif',
-        'vozes': 'https://hosted.inled.es/vozes-frame.png'
-    }}
+      <SaaSShowcase
+        ids={['appinstall', 'codexbar-gnome', 'vozes']}
+        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+        title={lang === 'es' ? 'Linux a tope!' : 'Linux at its best!'}
+        subtitle={lang === 'es' ? 'Herramientas nativas para tu escritorio. Instalación, monitorización y voz.' : 'Native tools for your desktop. Install, monitor, and voice.'}
+      />
 
-  />
+      <SaaSShowcase
+        ids={['macboat', 'droidtux']}
+        badge={lang === 'es' ? 'Multiplataforma' : 'Cross-platform'}
+        title={lang === 'es' ? 'Experiencia sin límites' : 'Unlimited experience'}
+        subtitle={lang === 'es' ? 'Ejecuta cualquier sistema en tu máquina. Sin límites, sin ataduras.' : 'Run any system on your machine. No limits, no ties.'}
+      />
 
-  <SaaSShowcase
-    ids={['macboat', 'droidtux']}
-    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-    title={lang === 'es' ? 'Experiencia' : 'Linux at its best!'}
-    screenshots={{
-        'appinstall': 'https://hosted.inled.es/appinstall-shot.png',
-        'codexbar-gnome': 'https://hosted.inled.es/codexbar-shot.gif',
-        'vozes': 'https://hosted.inled.es/vozes-frame.png'
-    }}
+      <SaaSShowcase
+        ids={['codexbar-gnome', 'ai-exporter', 'edgeai', 'agent-tunnel', 'web2skill', 'vozes', 'gemini-notifier', 'weby']}
+        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+        title={lang === 'es' ? 'La IA puede hacer mucho.' : 'AI can do a lot'}
+        subtitle={lang === 'es' ? 'Inteligencia artificial libre, local y privada. Sin cuentas, sin nubes.' : 'Free, local, private AI. No accounts, no clouds.'}
+      />
 
-  />
+      <SaaSShowcase
+        ids={['bautilus', 'tabnest', 'cleany', 'moodlenotifier']}
+        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+        title={lang === 'es' ? 'Desbloquea el potencial del navegador' : "Unlock the browser's potential"}
+        subtitle={lang === 'es' ? 'Extensiones que transforman tu navegador en algo mucho más potente.' : 'Extensions that turn your browser into something far more powerful.'}
+      />
 
-  <SaaSShowcase
-    ids={['codexbar-gnome', 'ai-exporter', 'edgeai', 'agent-tunnel', 'web2skill', 'vozes', 'gemini-notifier', 'weby',]}
-    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-    title={lang === 'es' ? 'La IA puede hacer mucho.' : 'AI can do a lot'}
-    screenshots={{
-        'codexbar-gnome': 'https://hosted.inled.es/codexbar-shot.gif',
-        'ai-exporter': 'https://hosted.inled.es/aiexporter-converter.gif',
-        'edgeai': 'https://hosted.inled.es/edgeai.png',
-        'agent-tunnel': 'https://hosted.inled.es/new-agent-tunnel.png',
-        'web2skill': 'https://hosted.inled.es/web2skill.mp4',
-        'vozes': 'https://hosted.inled.es/vozes-frame.png',
-        'weby': 'https://hosted.inled.es/demoweby.mp4',
-    }}
-  />
+      <SaaSShowcase
+        ids={['oap']}
+        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+        title={lang === 'es' ? 'Consigue tus objetivos' : "Achieve your goals"}
+        subtitle={lang === 'es' ? 'Organiza tu vida con objetivos claros y seguimiento visual.' : 'Organize your life with clear goals and visual tracking.'}
+      />
 
-  <SaaSShowcase
-    ids={['bautilus', 'tabnest', 'cleany', 'moodlenotifier',]}
-    reversed={true}
-    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-    title={lang === 'es' ? 'Desbloquea el potencial del navegador' : "Unlock the browser's potential"}
-    screenshots={{
-        'bautilus': 'https://hosted.inled.es/bautilus-demo.png',
-        'tabnest': 'https://hosted.inled.es/tabnest-shot.png',
-        'moodlenotifier': 'https://hosted.inled.es/moodlenotifier-screenshot1.png',
-    }}
-  />
+      <SaaSShowcase
+        ids={['bastion']}
+        badge={lang === 'es' ? 'Seguridad' : 'Security'}
+        title={lang === 'es' ? 'Seguridad cuando la necesitas' : "Security when you need it"}
+        subtitle={lang === 'es' ? 'Navegación ultra-segura con aislamiento remoto y endurecimiento de red.' : 'Ultra-secure browsing with remote isolation and network hardening.'}
+      />
 
-  <SaaSShowcase
-    ids={['oap',]}
-    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-    title={lang === 'es' ? 'Consigue tus objetivos' : "Achieve your goals"}
-    screenshots={{
-        'oap': 'https://hosted.inled.es/oap-shot.png',
-    }}
-  />
+      <SaaSShowcase
+        ids={['mdpdf', 'inlinked', 'inmd', 'inqr', 'mymetadata']}
+        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
+        title={lang === 'es' ? 'Para cada cosa, un editor' : 'For every need, an editor'}
+        subtitle={lang === 'es' ? 'Sin instalar, con privacidad. Todo se procesa en tu navegador.' : 'No installation, full privacy. Everything runs in your browser.'}
+      />
+    </div>
+  </div>
 
-  <SaaSShowcase
-    ids={['bastion',]}
-    reversed={true}
-    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-    title={lang === 'es' ? 'Seguridad cuando la necesitas' : "Security when you need it"}
-    screenshots={{
-        'bastion': 'https://hosted.inled.es/bastion-shot.png',
-    }}
-  />
+  <div class="comunidad-wrapper">
+    <section class="comunidad-header-section">
+      <div class="comunidad-header-container">
+        <h2 class="comunidad-title">{t('community.title')}</h2>
+        <p class="comunidad-subtitle">{t('community.subtitle')}</p>
+      </div>
+    </section>
 
-  <SaaSShowcase
-    ids={['mdpdf', 'inlinked', 'inmd', 'inqr', 'mymetadata']}
-    badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-    title={lang === 'es' ? 'Para cada cosa, un editor. Sin instalar, con privacidad' : "For every need, an editor. No installation required, with privacy guaranteed."}
-    screenshots={{
-        'mdpdf': 'https://hosted.inled.es/mdpdf-shot.png',
-        'inlinked': 'https://hosted.inled.es/inlinked-shot.png',
-        'inqr': 'https://hosted.inled.es/inqr-shot.png',
-        'inmd': 'https://hosted.inled.es/inmd-shot.png',
-        'mymetadata': 'https://hosted.inled.es/mymetadata-shot.png',
-    }}
-  />
+    <Planning />
 
-  <Planning />
+    <Changelog />
 
-  <Changelog />
+    <BlogSection />
 
-  <BlogSection />
+    <Contribute />
+  </div>
 
 <!--  <HeroCTA
     title={t('cta.title')}
@@ -183,16 +178,417 @@ const saasProducts = saas.map(s => ({
   />-->
 
 
-  <div id="saas">
-    <ProductsGrid title={t('grid.saas')} products={saasProducts} />
-  </div>
-
-  <div id="apps">
-    <ProductsGrid title={t('grid.apps')} products={appProducts} />
-  </div>
+  {archivedProducts.length > 0 && (
+    <section class="archived-section">
+      <div class="archived-container">
+        <div class="archived-header">
+          <h2 class="archived-title">{lang === 'es' ? 'Archivos' : 'Archives'}</h2>
+          <p class="archived-subtitle">
+            {lang === 'es' ? 'Proyectos que por ahora no se mantienen' : 'Projects not maintained for now'}
+          </p>
+        </div>
+        
+        <div class="archived-grid">
+          {archivedProducts.map(product => (
+            <a href={product.link} class="archived-card">
+              <div class="archived-card-icon">
+                <img src={product.icon} alt={product.name} />
+              </div>
+              <div class="archived-card-content">
+                <h3 class="archived-card-title">{product.name}</h3>
+                <p class="archived-card-desc">{product.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
 
 
   <NewsletterSection />
   <NewsletterNotification />
 
 </Layout>
+
+<style>
+  #showcase-strip {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .showcase-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .comunidad-wrapper {
+    background: rgba(10, 10, 15, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 4rem;
+  }
+
+  .comunidad-header-section {
+    padding: 6rem 2rem 2rem 2rem;
+    background: transparent;
+  }
+
+  .comunidad-header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 2rem;
+  }
+
+  .comunidad-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.05em;
+    line-height: 1.1;
+  }
+
+  .comunidad-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0.75rem 0 0 0;
+    font-weight: 400;
+  }
+
+  .archived-section {
+    padding: 6rem 2rem;
+    background: rgba(10, 10, 15, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .archived-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .archived-header {
+    text-align: left;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.5rem;
+  }
+
+  .archived-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.04em;
+  }
+
+  .archived-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0.5rem 0 0 0;
+    font-weight: 400;
+  }
+
+  .archived-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .archived-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    text-decoration: none;
+    transition: background-color 0.2s, border-color 0.2s, transform 0.2s;
+  }
+
+  .archived-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .archived-card-icon img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: contain;
+  }
+
+  .archived-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .archived-card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+  }
+
+  .archived-card-desc {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 0;
+  }
+</style>
+
+<style is:global>
+  .showcase-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 90px;
+    height: 90px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 99999;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .showcase-cursor.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+</style>
+
+<script is:inline>
+  function initShowcaseStrip() {
+    const strip = document.getElementById('showcase-strip');
+    if (!strip) return;
+    if (strip.dataset.init) return;
+    strip.dataset.init = '1';
+
+    const track = strip.querySelector('.showcase-track');
+    const sections = track.querySelectorAll('.saas-showcase');
+    const count = sections.length;
+    if (count < 2) return;
+
+    let currentIndex = 0;
+    let isTransitioning = false;
+    let autoTimer = null;
+    let progressStartTime = 0;
+    let progressRafId = null;
+    const AUTO_DELAY = 6000;
+
+    // Set initial style/transform
+    track.style.transform = 'translate3d(0px, 0px, 0px)';
+
+    function scrollToShowcase(index) {
+      if (index < 0 || index >= count || isTransitioning) return;
+
+      currentIndex = index;
+      isTransitioning = true;
+
+      const tx = index * 100;
+      track.style.transform = `translate3d(-${tx}vw, 0px, 0px)`;
+
+      updateProgressBars();
+      startAutoRotation();
+
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 800);
+    }
+
+    function updateProgressBars() {
+      sections.forEach((sec, idx) => {
+        const fill = sec.querySelector('.sec-progress-fill');
+        if (fill) {
+          fill.style.transition = 'none';
+          fill.style.width = idx < currentIndex ? '100%' : '0%';
+        }
+      });
+
+      if (progressRafId) cancelAnimationFrame(progressRafId);
+      if (currentIndex === count - 1) return;
+
+      const currentFill = sections[currentIndex].querySelector('.sec-progress-fill');
+      if (currentFill) {
+        currentFill.offsetHeight; // trigger reflow
+        progressStartTime = performance.now();
+
+        function animateProgress(now) {
+          const elapsed = now - progressStartTime;
+          const progress = Math.min(elapsed / AUTO_DELAY, 1);
+          currentFill.style.width = (progress * 100) + '%';
+
+          if (progress < 1) {
+            progressRafId = requestAnimationFrame(animateProgress);
+          }
+        }
+        progressRafId = requestAnimationFrame(animateProgress);
+      }
+    }
+
+    function startAutoRotation() {
+      if (autoTimer) clearTimeout(autoTimer);
+      if (currentIndex === count - 1) return;
+
+      autoTimer = setTimeout(() => {
+        scrollToShowcase(currentIndex + 1);
+      }, AUTO_DELAY);
+    }
+
+    // Intercept vertical scroll on strip to scroll horizontally
+    strip.addEventListener('wheel', (e) => {
+      if (e.deltaY === 0) return;
+
+      if (isTransitioning) {
+        e.preventDefault();
+        return;
+      }
+
+      if (e.deltaY > 0) {
+        // Scroll down -> next section
+        if (currentIndex < count - 1) {
+          e.preventDefault();
+          scrollToShowcase(currentIndex + 1);
+        }
+      } else {
+        // Scroll up -> prev section
+        if (currentIndex > 0) {
+          e.preventDefault();
+          scrollToShowcase(currentIndex - 1);
+        }
+      }
+    }, { passive: false });
+
+    // Touch support for swiping
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    strip.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+      touchStartY = e.changedTouches[0].clientY;
+    }, { passive: true });
+
+    strip.addEventListener('touchend', (e) => {
+      if (isTransitioning) return;
+
+      const touchEndX = e.changedTouches[0].clientX;
+      const touchEndY = e.changedTouches[0].clientY;
+
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+        if (diffX < 0) {
+          if (currentIndex < count - 1) {
+            scrollToShowcase(currentIndex + 1);
+          }
+        } else {
+          if (currentIndex > 0) {
+            scrollToShowcase(currentIndex - 1);
+          }
+        }
+      }
+    }, { passive: true });
+
+    // Dynamic lightweight custom cursor follower
+    let cursor = document.querySelector('.showcase-cursor');
+    if (!cursor) {
+      cursor = document.createElement('div');
+      cursor.className = 'showcase-cursor';
+      cursor.textContent = 'CLICK';
+      document.body.appendChild(cursor);
+    }
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+
+      const target = (e.target && typeof e.target.closest === 'function') ? e.target.closest('.product-card') : null;
+      if (target) {
+        cursor.classList.add('active');
+      } else {
+        cursor.classList.remove('active');
+      }
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursor.classList.remove('active');
+    });
+
+    // Intersection observer to control rotation and progress bar animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          updateProgressBars();
+          startAutoRotation();
+        } else {
+          if (autoTimer) clearTimeout(autoTimer);
+          if (progressRafId) cancelAnimationFrame(progressRafId);
+          const currentFill = sections[currentIndex].querySelector('.sec-progress-fill');
+          if (currentFill) {
+            currentFill.style.transition = 'none';
+            currentFill.style.width = '0%';
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(strip);
+
+    // Auto-center observer: centers the showcase section in screen when 50% becomes visible
+    const centerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const rect = strip.getBoundingClientRect();
+          if (Math.abs(rect.top) > 20) {
+            const lenis = window.lenis;
+            if (lenis) {
+              lenis.scrollTo(strip, { duration: 1.0 });
+            } else {
+              window.scrollTo({
+                top: strip.offsetTop,
+                behavior: 'smooth'
+              });
+            }
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+
+    centerObserver.observe(strip);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initShowcaseStrip);
+  } else {
+    initShowcaseStrip();
+  }
+  document.addEventListener('astro:page-load', initShowcaseStrip);
+</script>
