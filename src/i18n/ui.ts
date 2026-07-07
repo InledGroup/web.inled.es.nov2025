@@ -97,6 +97,7 @@ export const ui = {
     "contribute.text": "Si quieres colaborar conmigo en algún proyecto o simplemente por entretenerte un rato, ¡únete a nuestro Discord o contribuye directamente en GitHub!",
     "contribute.warning": "Aviso: La colaboración no es remunerada. Se dará crédito a todos los colaboradores en las publicaciones oficiales de los proyectos en los que participen.",
     "contribute.discord": "Únete a Discord",
+    "contribute.matrix": "Únete a Matrix",
     "contribute.github": "Ver en GitHub",
   },
   en: {
@@ -188,6 +189,7 @@ export const ui = {
     "contribute.text": "If you want to collaborate with me on any project or just to have some fun, join our Discord or contribute directly on GitHub!",
     "contribute.warning": "Notice: Collaboration is non-remunerated. All contributors will be credited in official publications of the projects they contribute to.",
     "contribute.discord": "Join Discord",
+    "contribute.matrix": "Join Matrix",
     "contribute.github": "View on GitHub",
   },
 } as const;

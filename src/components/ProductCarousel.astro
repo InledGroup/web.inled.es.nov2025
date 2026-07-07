@@ -20,6 +20,7 @@ const projectsMap = new Map();
 
 // 1. Process SaaS
 saas.forEach(item => {
+  if (item.archive) return;
   projectsMap.set(item.id, {
     id: item.id,
     name: item.name,
@@ -32,6 +33,7 @@ saas.forEach(item => {
 
 // 2. Process Apps
 apps.forEach(item => {
+  if (item.archive) return;
   if (!projectsMap.has(item.id)) {
     projectsMap.set(item.id, {
       id: item.id,
@@ -46,6 +48,8 @@ apps.forEach(item => {
 
 // 3. Process appsData (technical projects)
 appsData.forEach(item => {
+  const isArchived = apps.some(a => a.id === item.id && a.archive);
+  if (isArchived) return;
   if (!projectsMap.has(item.id)) {
     projectsMap.set(item.id, {
       id: item.id,

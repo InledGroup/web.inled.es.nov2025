@@ -21,13 +21,13 @@ const t = useTranslations(lang);
         <button class="taskbar-item apps-grid-toggle" aria-label="Apps Menu">
           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
         </button>
-        
+
         <div class="apps-grid-overlay" data-lenis-prevent>
           <div class="apps-grid-content">
             <div class="grid-section">
               <h3>{t('grid.saas')}</h3>
               <div class="grid-items">
-                {saas.map((item) => (
+                {saas.filter(item => !item.archive).map((item) => (
                   <a href={item.link} class="grid-item">
                     <div class="grid-item-icon">
                       <img src={item.icon} alt={item.name} loading="lazy" />
@@ -43,7 +43,7 @@ const t = useTranslations(lang);
             <div class="grid-section">
               <h3>{t('grid.apps')}</h3>
               <div class="grid-items">
-                {apps.map((app) => (
+                {apps.filter(app => !app.archive).map((app) => (
                   <a href={app.link} class="grid-item">
                     <div class="grid-item-icon">
                       <img src={app.icon} alt={app.name} loading="lazy" />
@@ -68,6 +68,7 @@ const t = useTranslations(lang);
               <button class={`lang-btn ${lang === 'en' ? 'active' : ''}`} data-lang="en">English</button>
           </div>
       </div>
+
 
       <div class="taskbar-divider"></div>
 
