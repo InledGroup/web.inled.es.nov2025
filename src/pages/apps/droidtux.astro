@@ -23,7 +23,7 @@ const translations = {
     nav: {
       comparison: "Comparativa",
       screenshots: "Capturas",
-      install: "Instalación",
+      install: "Compatibilidad",
       github: "GitHub"
     },
     hero: {
@@ -46,10 +46,30 @@ const translations = {
       }
     },
     install: {
-      title: "Instalación en Arch Linux",
-      command: "sudo pacman -U (nombrearchivo).pkg.tar.xz",
-      instructions: "Descarga el paquete .pkg.tar.xz de las releases y ejecútalo en tu terminal.",
+      arch: {
+        title: "Arch Linux",
+        command: "sudo pacman -U (nombrearchivo).pkg.tar.xz",
+        instructions: "Descarga el paquete .pkg.tar.xz de las releases y ejecútalo en tu terminal.",
+        note: "No está disponible en AUR. Tras el ataque de malware que sufrió AUR, no están aceptando nuevos paquetes por ahora."
+      },
+      debian: {
+        title: "Debian / Ubuntu",
+        command: "sudo dpkg -i (nombrearchivo).deb",
+        instructions: "Descarga el paquete .deb de las releases e instálalo con dpkg."
+      },
+      fedora: {
+        title: "Fedora",
+        command: "sudo rpm -i (nombrearchivo).rpm",
+        instructions: "Descarga el paquete .rpm de las releases e instálalo con rpm."
+      },
       requirements: "Requiere tener activada la depuración USB en tu teléfono Android."
+    },
+    compat: {
+      title: "Compatible con",
+      debian: "Debian / Ubuntu",
+      fedora: "Fedora",
+      arch: "Arch Linux",
+      hint: "Haz clic en un logo para ver la instalación"
     },
     complement: {
       title: "Mejora la experiencia",
@@ -89,10 +109,30 @@ const translations = {
       }
     },
     install: {
-      title: "Arch Linux Installation",
-      command: "sudo pacman -U (filename).pkg.tar.xz",
-      instructions: "Download the .pkg.tar.xz package from releases and run it in your terminal.",
+      arch: {
+        title: "Arch Linux",
+        command: "sudo pacman -U (filename).pkg.tar.xz",
+        instructions: "Download the .pkg.tar.xz package from releases and run it in your terminal.",
+        note: "Not available on AUR. After the AUR malware attack, they are not accepting new packages for now."
+      },
+      debian: {
+        title: "Debian / Ubuntu",
+        command: "sudo dpkg -i (filename).deb",
+        instructions: "Download the .deb package from releases and install it with dpkg."
+      },
+      fedora: {
+        title: "Fedora",
+        command: "sudo rpm -i (filename).rpm",
+        instructions: "Download the .rpm package from releases and install it with rpm."
+      },
       requirements: "Requires USB debugging enabled on your Android phone."
+    },
+    compat: {
+      title: "Compatible with",
+      debian: "Debian / Ubuntu",
+      fedora: "Fedora",
+      arch: "Arch Linux",
+      hint: "Click a logo for installation instructions"
     },
     complement: {
       title: "Enhance the experience",
@@ -183,22 +223,74 @@ const t = translations[lang] || translations.es;
         </div>
       </section>
 
-      <!-- Installation Section -->
-      <section id="install" class="install-section">
+      <!-- Compatibility & Installation Section -->
+      <section id="compat" class="compat-section">
         <h2 class="section-title">
-          <span class="gradient-text">{t.install.title}</span>
+          <span class="gradient-text">{t.compat.title}</span>
         </h2>
-        <div class="install-card glass-card">
-          <div class="terminal-header">
-            <div class="dots"><span></span><span></span><span></span></div>
-            <span class="terminal-title">Terminal</span>
+        <div class="distro-grid">
+          <div class="distro-item" data-distro="debian">
+            <img src="https://hosted.inled.es/debian.svg" alt="Debian" />
+            <span>{t.compat.debian}</span>
           </div>
-          <div class="terminal-body">
-            <code>{t.install.command}</code>
+          <div class="distro-item" data-distro="fedora">
+            <img src="https://hosted.inled.es/Fedora_logo.svg" alt="Fedora" />
+            <span>{t.compat.fedora}</span>
           </div>
-          <p class="install-note">{t.install.instructions}</p>
-          <div class="requirement-tag">
-            <i class="fa-solid fa-circle-info"></i> {t.install.requirements}
+          <div class="distro-item" data-distro="arch">
+            <img src="https://hosted.inled.es/archlinux-logo.png" alt="Arch Linux" />
+            <span>{t.compat.arch}</span>
+          </div>
+        </div>
+        <p class="compat-hint">{t.compat.hint}</p>
+        <div class="install-cards">
+          <div class="install-toggle" id="install-debian">
+            <div class="install-card glass-card">
+              <div class="terminal-header">
+                <div class="dots"><span></span><span></span><span></span></div>
+                <span class="terminal-title">{t.install.debian.title}</span>
+              </div>
+              <div class="terminal-body">
+                <code>{t.install.debian.command}</code>
+              </div>
+              <p class="install-note">{t.install.debian.instructions}</p>
+              <div class="requirement-tag">
+                <i class="fa-solid fa-circle-info"></i> {t.install.requirements}
+              </div>
+            </div>
+          </div>
+          <div class="install-toggle" id="install-fedora">
+            <div class="install-card glass-card">
+              <div class="terminal-header">
+                <div class="dots"><span></span><span></span><span></span></div>
+                <span class="terminal-title">{t.install.fedora.title}</span>
+              </div>
+              <div class="terminal-body">
+                <code>{t.install.fedora.command}</code>
+              </div>
+              <p class="install-note">{t.install.fedora.instructions}</p>
+              <div class="requirement-tag">
+                <i class="fa-solid fa-circle-info"></i> {t.install.requirements}
+              </div>
+            </div>
+          </div>
+          <div class="install-toggle" id="install-arch">
+            <div class="install-card glass-card">
+              <div class="terminal-header">
+                <div class="dots"><span></span><span></span><span></span></div>
+                <span class="terminal-title">{t.install.arch.title}</span>
+              </div>
+              <div class="terminal-body">
+                <code>{t.install.arch.command}</code>
+              </div>
+              <p class="install-note">{t.install.arch.instructions}</p>
+              <div class="requirement-tag">
+                <i class="fa-solid fa-circle-info"></i> {t.install.requirements}
+              </div>
+              <p class="install-note install-warn">
+                <i class="fa-solid fa-triangle-exclamation"></i> {t.install.arch.note}
+              </p>
+            </div>
           </div>
         </div>
       </section>
@@ -232,6 +324,27 @@ const t = translations[lang] || translations.es;
     </footer>
   </div>
 </Layout>
+
+<script>
+  document.querySelectorAll('.distro-item').forEach(function(item) {
+    item.addEventListener('click', function() {
+      var distro = this.dataset.distro;
+      var target = document.getElementById('install-' + distro);
+      if (!target) return;
+      var isActive = this.classList.contains('active');
+      document.querySelectorAll('.distro-item.active').forEach(function(el) {
+        el.classList.remove('active');
+      });
+      document.querySelectorAll('.install-toggle.visible').forEach(function(el) {
+        el.classList.remove('visible');
+      });
+      if (!isActive) {
+        this.classList.add('active');
+        target.classList.add('visible');
+      }
+    });
+  });
+</script>
 
 <style>
   :root {
@@ -454,13 +567,125 @@ const t = translations[lang] || translations.es;
     font-weight: 500;
   }
 
-  /* Install Section */
-  .install-section {
+  /* Compatibility Section */
+  .compat-section {
     padding: 80px 20px;
     max-width: 800px;
     margin: 0 auto;
+    text-align: center;
   }
 
+  .distro-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .distro-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 20px;
+    border-radius: 16px;
+    transition: all 0.3s;
+    min-width: 120px;
+    border: 1px solid transparent;
+    position: relative;
+  }
+
+  .distro-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    filter: grayscale(0.3);
+    transition: all 0.3s;
+  }
+
+  .distro-item span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.3s;
+  }
+
+  .distro-item:hover img {
+    filter: grayscale(0);
+    transform: scale(1.1);
+  }
+
+  .distro-item:hover span {
+    color: #fff;
+  }
+
+  .distro-item.active {
+    background: rgba(61, 220, 132, 0.08);
+    border-color: rgba(61, 220, 132, 0.2);
+  }
+
+  .distro-item.active img {
+    filter: grayscale(0);
+  }
+
+  .distro-item.active span {
+    color: var(--dt-primary);
+  }
+
+  .distro-item::after {
+    content: '\f078';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 0.7rem;
+    color: var(--dt-primary);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .distro-item:hover::after,
+  .distro-item.active::after {
+    opacity: 1;
+  }
+
+  .compat-hint {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    opacity: 0.5;
+    margin-bottom: 30px;
+  }
+
+  .install-toggle {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.3s;
+    opacity: 0;
+    margin-bottom: 0;
+  }
+
+  .install-toggle.visible {
+    max-height: 400px;
+    opacity: 1;
+    margin-bottom: 20px;
+  }
+
+  .install-warn {
+    color: #ffbd2e !important;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-top: 1px solid rgba(255, 189, 46, 0.15);
+    margin-top: 0;
+    padding-top: 16px;
+  }
+
+  .install-warn i {
+    font-size: 1rem;
+  }
+
+  /* Install Card styles */
   .install-card {
     padding: 0;
     overflow: hidden;

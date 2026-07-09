@@ -24,6 +24,12 @@ const translations = {
         "feat_3_desc": "Escribe letra por letra emulando un teclado real, lo que garantiza compatibilidad con cualquier aplicación.",
         "feat_4_title": "Funciona en todo el sistema",
         "feat_4_desc": "Desde el navegador hasta tu editor de código favorito o la terminal. Si puedes escribir, puedes usar Vozes.",
+        "feat_5_title": "Detección de Silencios",
+        "feat_5_desc": "Sensibilidad configurable para ignorar pausas y silencios. Ajusta el nivel de detección a tu entorno.",
+        "feat_6_title": "4 Tamaños de Modelo",
+        "feat_6_desc": "Elige entre Tiny, Base, Small o Medium. Encuentra el equilibrio perfecto entre precisión y rendimiento para tu equipo.",
+        "feat_7_title": "Hotkey Personalizable",
+        "feat_7_desc": "Asigna la combinación de teclas que quieras para activar el dictado: F12, Ctrl+Mayús, o la que mejor se adapte a ti.",
         "how_title": "Tan simple como hablar",
         "step_1_title": "Activa con una tecla",
         "step_1_desc": "Pulsa F12 (o tu tecla preferida) para empezar a escuchar. Sin menús, sin distracciones.",
@@ -33,10 +39,21 @@ const translations = {
         "step_3_desc": "Vuelve a pulsar la tecla de activación y Vozes terminará de escribir por ti.",
         "visual_listening": "Vozes está escuchando...",
         "visual_typing": "Escribiendo tus pensamientos letra por letra...",
+        "demo_key": "F12",
+        "demo_voice": "Hey Jarvis",
+        "demo_silence": "Silencio",
+        "demo_listening": "Escuchando...",
+        "demo_transcribing": "Transcribiendo...",
+        "demo_typing": "Escribiendo en el sistema...",
+        "demo_done": "✓ Hecho",
+        "demo_waiting_key": "Esperando F12...",
+        "demo_waiting_voice": "Esperando 'Hey Jarvis'...",
+        "demo_detected_key": "Detectado: F12",
+        "demo_detected_silence": "Detectado: Silencio",
         "cta_title": "Empieza a escribir con tu voz",
         "cta_desc": "Descarga Vozes para Linux y descubre la libertad de la escritura por voz privada.",
         "cta_btn": "Descargar de GitHub",
-        "cta_meta": "Disponible para Ubuntu, Debian, Fedora y Arch Linux.",
+        "cta_meta": "Lista para Arch Linux, Debian y Fedora. Funciona en Wayland y X11. Gratuita. Viene con 4 tamaños del modelo para escoger el que mejor funcione en tu PC.",
         "footer_by": "Vozes por Inled Group",
         "footer_love": "© " + new Date().getFullYear() + " Inled Group. Creado con ❤️ para la comunidad de Linux."
     },
@@ -60,6 +77,12 @@ const translations = {
         "feat_3_desc": "Writes letter by letter emulating a real keyboard, ensuring compatibility with any application.",
         "feat_4_title": "Works System-wide",
         "feat_4_desc": "From the browser to your favorite code editor or the terminal. If you can type, you can use Vozes.",
+        "feat_5_title": "Silence Detection",
+        "feat_5_desc": "Configurable sensitivity to ignore pauses and silence. Adjust the detection level to your environment.",
+        "feat_6_title": "4 Model Sizes",
+        "feat_6_desc": "Choose from Tiny, Base, Small, or Medium. Find the perfect balance between accuracy and performance for your machine.",
+        "feat_7_title": "Customizable Hotkey",
+        "feat_7_desc": "Set any key combination to activate dictation: F12, Ctrl+Shift, or whatever works best for your workflow.",
         "how_title": "As simple as speaking",
         "step_1_title": "Activate with a key",
         "step_1_desc": "Press F12 (or your preferred key) to start listening. No menus, no distractions.",
@@ -69,10 +92,21 @@ const translations = {
         "step_3_desc": "Press the activation key again and Vozes will finish typing for you.",
         "visual_listening": "Vozes is listening...",
         "visual_typing": "Writing your thoughts letter by letter...",
+        "demo_key": "F12",
+        "demo_voice": "Hey Jarvis",
+        "demo_silence": "Silence",
+        "demo_listening": "Listening...",
+        "demo_transcribing": "Transcribing...",
+        "demo_typing": "Writing to system...",
+        "demo_done": "✓ Done",
+        "demo_waiting_key": "Waiting for F12...",
+        "demo_waiting_voice": "Waiting for 'Hey Jarvis'...",
+        "demo_detected_key": "Detected: F12",
+        "demo_detected_silence": "Detected: Silence",
         "cta_title": "Start writing with your voice",
         "cta_desc": "Download Vozes for Linux and discover the freedom of private voice typing.",
         "cta_btn": "Download from GitHub",
-        "cta_meta": "Available for Ubuntu, Debian, Fedora, and Arch Linux.",
+        "cta_meta": "Ready for Arch Linux, Debian, and Fedora. Works on Wayland and X11. Free. Comes with 4 model sizes to choose the best one for your PC.",
         "footer_by": "Vozes by Inled Group",
         "footer_love": "© " + new Date().getFullYear() + " Inled Group. Created with ❤️ for the Linux community."
     }
@@ -182,6 +216,27 @@ const video = "https://hosted.inled.es/vozesdemo.mp4";
                         <h3>{t.feat_4_title}</h3>
                         <p>{t.feat_4_desc}</p>
                     </div>
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-ear-listen"></i>
+                        </div>
+                        <h3>{t.feat_5_title}</h3>
+                        <p>{t.feat_5_desc}</p>
+                    </div>
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3>{t.feat_6_title}</h3>
+                        <p>{t.feat_6_desc}</p>
+                    </div>
+                    <div class="feature-card fade-up">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-keyboard"></i>
+                        </div>
+                        <h3>{t.feat_7_title}</h3>
+                        <p>{t.feat_7_desc}</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -217,25 +272,50 @@ const video = "https://hosted.inled.es/vozesdemo.mp4";
                         </div>
                     </div>
                     <div class="image-side fade-up">
-                        <div class="glass-card">
-                            <div class="card-header">
-                                <div class="dots">
-                                    <span class="dot red"></span>
-                                    <span class="dot yellow"></span>
-                                    <span class="dot green"></span>
+                        <div id="demo-i18n"
+                            data-key={t.demo_key}
+                            data-voice={t.demo_voice}
+                            data-silence={t.demo_silence}
+                            data-listening={t.demo_listening}
+                            data-transcribing={t.demo_transcribing}
+                            data-typing={t.demo_typing}
+                            data-done={t.demo_done}
+                            data-waiting-key={t.demo_waiting_key}
+                            data-waiting-voice={t.demo_waiting_voice}
+                            data-detected-key={t.demo_detected_key}
+                            data-detected-silence={t.demo_detected_silence}
+                            style="display:none"
+                        ></div>
+                        <div class="demo-card" id="demo-card">
+                            <div class="demo-overlap">
+                                <div class="card-wave">
+                                    <div class="card-wave-head">
+                                        <span class="w-dot"></span>
+                                        <span class="w-dot"></span>
+                                        <span class="w-dot"></span>
+                                        <span class="w-label" id="demo-status">Vozes</span>
+                                    </div>
+                                    <div class="card-wave-body">
+                                        <div id="demo-siri-container"></div>
+                                        <div class="demo-phrase" id="demo-transcription"></div>
+                                    </div>
                                 </div>
-                                <div class="title-bar">{t.visual_listening}</div>
-                            </div>
-                            <div class="card-content">
-                                <div class="voice-waves">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
+                                <div class="demo-cli">
+                                    <span class="cli-dollar">$</span>
+                                    <span id="demo-typed-text"></span>
+                                    <span class="cli-cursor" id="demo-cursor">▊</span>
                                 </div>
-                                <p class="typing-text">{t.visual_typing}</p>
                             </div>
+                            <div class="demo-nav">
+                                <span class="nav-dot active"></span>
+                                <span class="nav-dot"></span>
+                                <span class="nav-dot"></span>
+                                <span class="nav-dot"></span>
+                                <span class="nav-info" id="mode-trigger"></span>
+                                <span class="nav-arrow">→</span>
+                                <span class="nav-info" id="mode-stop"></span>
+                            </div>
+                            <div class="demo-pop" id="trigger-overlay"></div>
                         </div>
                     </div>
                 </div>
@@ -330,6 +410,151 @@ const video = "https://hosted.inled.es/vozesdemo.mp4";
                 navbar?.classList.remove('scrolled');
             }
         });
+    </script>
+
+    <script is:inline src="https://unpkg.com/siriwave/dist/siriwave.umd.min.js"></script>
+    <script is:inline>
+        var siriWave = new SiriWave({
+            container: document.getElementById("demo-siri-container"),
+            width: 450,
+            height: 65,
+            style: "ios9",
+            amplitude: 0.8,
+            speed: 0.15,
+            autostart: true,
+            lerpSpeed: 0.05,
+            curveDefinition: [
+                { color: "255,138,101", supportLine: true },
+                { color: "244,81,30" },
+                { color: "255,138,101" },
+                { color: "255,112,67" },
+            ]
+        });
+
+        var _i18n = document.getElementById('demo-i18n').dataset;
+        var _key = _i18n.key;
+        var _voice = _i18n.voice;
+        var _silence = _i18n.silence;
+        var _listening = _i18n.listening;
+        var _transcribing = _i18n.transcribing;
+        var _typing = _i18n.typing;
+        var _done = _i18n.done;
+        var _waitingKey = _i18n.waitingKey;
+        var _waitingVoice = _i18n.waitingVoice;
+        var _detectedKey = _i18n.detectedKey;
+        var _detectedSilence = _i18n.detectedSilence;
+
+        var modes = [
+            { trigger: _key, triggerIcon: 'keyboard', stop: _key, stopIcon: 'keyboard', phrase: 'Hola, esto es una prueba de escritura por voz.' },
+            { trigger: _voice, triggerIcon: 'microphone', stop: _silence, stopIcon: 'volume-off', phrase: 'Vozes funciona en local, sin internet y con total privacidad.' },
+            { trigger: _key, triggerIcon: 'keyboard', stop: _silence, stopIcon: 'volume-off', phrase: 'Tu privacidad está garantizada. Todo queda en tu ordenador.' },
+            { trigger: _voice, triggerIcon: 'microphone', stop: _key, stopIcon: 'keyboard', phrase: 'Compatible con cualquier aplicaci\u00f3n de tu sistema Linux.' }
+        ];
+
+        var currentMode = 0;
+        var charIndex = 0;
+        var glassEl = document.getElementById('demo-transcription');
+        var typedEl = document.getElementById('demo-typed-text');
+        var cursorEl = document.getElementById('demo-cursor');
+        var statusEl = document.getElementById('demo-status');
+        var overlayEl = document.getElementById('trigger-overlay');
+        var demoCard = document.getElementById('demo-card');
+
+        function showOverlay(icon, text) {
+            overlayEl.innerHTML = '<i class="fa-solid fa-' + icon + '"></i> ' + text;
+            overlayEl.classList.add('show');
+        }
+
+        function hideOverlay() {
+            overlayEl.classList.remove('show');
+        }
+
+        function updateModeDots() {
+            var dots = document.querySelectorAll('.nav-dot');
+            for (var i = 0; i < dots.length; i++) {
+                dots[i].classList.toggle('active', i === currentMode);
+            }
+        }
+
+        function runMode() {
+            var mode = modes[currentMode];
+            updateModeDots();
+            document.getElementById('mode-trigger').textContent = mode.trigger;
+            document.getElementById('mode-stop').textContent = mode.stop;
+
+            glassEl.textContent = '';
+            typedEl.textContent = '';
+            cursorEl.style.display = 'inline';
+            siriWave.setAmplitude(0.2);
+            statusEl.textContent = 'Vozes';
+            demoCard.classList.remove('transcribing', 'show-cli');
+
+            showOverlay(mode.triggerIcon, ' ' + mode.trigger);
+            statusEl.textContent = mode.trigger === _key ? _waitingKey : _waitingVoice;
+
+            setTimeout(function () {
+                hideOverlay();
+                statusEl.textContent = _listening;
+                siriWave.setAmplitude(1.2);
+                charIndex = 0;
+
+                setTimeout(function () {
+                    statusEl.textContent = _transcribing;
+                    siriWave.setAmplitude(2.0);
+                    demoCard.classList.add('transcribing');
+                    typeInGlass();
+                }, 800);
+            }, 1200);
+        }
+
+        function typeInGlass() {
+            var mode = modes[currentMode];
+            if (charIndex < mode.phrase.length) {
+                glassEl.textContent += mode.phrase[charIndex];
+                charIndex++;
+                var delay = 20 + Math.random() * 30;
+                setTimeout(typeInGlass, delay);
+            } else {
+                siriWave.setAmplitude(0.3);
+                showOverlay(mode.stopIcon, ' ' + mode.stop);
+                statusEl.textContent = mode.stop === _silence ? _detectedSilence : _detectedKey;
+
+                setTimeout(function () {
+                    hideOverlay();
+                    statusEl.textContent = _typing;
+                    siriWave.setAmplitude(0.05);
+                    demoCard.classList.add('show-cli');
+                    typeInTerminal();
+                }, 1200);
+            }
+        }
+
+        function typeInTerminal() {
+            var mode = modes[currentMode];
+            var text = mode.phrase;
+            var i = 0;
+
+            function typeChar() {
+                if (i < text.length) {
+                    typedEl.textContent += text[i];
+                    i++;
+                    setTimeout(typeChar, 12 + Math.random() * 18);
+                } else {
+                    cursorEl.style.display = 'none';
+                    statusEl.textContent = _done;
+                    setTimeout(function () {
+                        cursorEl.style.display = 'inline';
+                        currentMode = (currentMode + 1) % modes.length;
+                        setTimeout(runMode, 1000);
+                    }, 2000);
+                }
+            }
+
+            typedEl.textContent = '';
+            typeChar();
+        }
+
+        setTimeout(runMode, 600);
     </script>
 
     <style>
@@ -721,31 +946,209 @@ const video = "https://hosted.inled.es/vozesdemo.mp4";
             text-align: center;
         }
 
-        .voice-waves {
+        .demo-card {
+            position: relative;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255, 138, 101, 0.1);
+            padding: 24px;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .card-wave {
+            background: white;
+            border-radius: 14px;
+            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 138, 101, 0.1);
+            overflow: hidden;
+        }
+
+        .card-wave-head {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 14px;
+            background: #fdfaf9;
+            border-bottom: 1px solid #f0e6e2;
+        }
+
+        .w-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .w-dot:nth-child(1) { background: #ff5f56; }
+        .w-dot:nth-child(2) { background: #ffbd2e; }
+        .w-dot:nth-child(3) { background: #27c93f; }
+
+        .w-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-left: 6px;
+        }
+
+        .card-wave-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            min-height: 110px;
+        }
+
+        #demo-siri-container {
+            width: 100%;
+            height: 60px;
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 5px;
-            height: 40px;
-            margin-bottom: 2rem;
         }
 
-        .voice-waves span {
-            width: 4px;
-            height: 10px;
+        #demo-siri-container canvas {
+            max-width: 100%;
+        }
+
+        .demo-phrase {
+            font-size: 0.85rem;
+            line-height: 1.4;
+            text-align: center;
+            color: var(--text-main);
+            white-space: pre-wrap;
+            word-break: break-word;
+            padding: 0 4px;
+            min-height: 1.4em;
+        }
+
+        .transcribing .demo-phrase {
+            color: var(--warm-accent);
+            font-weight: 600;
+        }
+
+        .demo-overlap {
+            position: relative;
+            min-height: 180px;
+        }
+
+        .demo-overlap > .card-wave {
+            position: relative;
+            z-index: 2;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        .demo-cli {
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: none;
+            background: #fdfaf9;
+            border: 1px solid #f0e6e2;
+            border-radius: 14px;
+            padding: 20px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            color: var(--text-main);
+            align-items: center;
+            gap: 6px;
+            min-height: 120px;
+            flex-wrap: wrap;
+            align-content: center;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .show-cli .demo-cli {
+            display: flex;
+            z-index: 3;
+            animation: cliSlideUp 0.4s ease-out;
+        }
+
+        .show-cli .card-wave {
+            transform: scale(0.92);
+            opacity: 0.2;
+        }
+
+        @keyframes cliSlideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to   { transform: translateY(0);    opacity: 1; }
+        }
+
+        .cli-dollar {
+            color: var(--warm-accent);
+            font-weight: bold;
+        }
+
+        .cli-cursor {
+            color: var(--warm-accent);
+            animation: blink 0.8s step-end infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .demo-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .nav-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s;
+        }
+
+        .nav-dot.active {
             background: var(--warm-primary);
-            border-radius: 50px;
-            animation: wave 1s ease-in-out infinite;
+            box-shadow: 0 0 4px rgba(255, 138, 101, 0.4);
         }
 
-        .voice-waves span:nth-child(2) { height: 20px; animation-delay: 0.1s; }
-        .voice-waves span:nth-child(3) { height: 30px; animation-delay: 0.2s; }
-        .voice-waves span:nth-child(4) { height: 20px; animation-delay: 0.3s; }
-        .voice-waves span:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+        .nav-info {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
 
-        @keyframes wave {
-            0%, 100% { transform: scaleY(1); }
-            50% { transform: scaleY(1.5); }
+        .nav-arrow {
+            font-size: 0.72rem;
+            color: #ccc;
+        }
+
+        .demo-pop {
+            position: absolute;
+            top: 42%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--warm-card);
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 138, 101, 0.15);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.25s;
+            pointer-events: none;
+            z-index: 10;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .demo-pop.show {
+            opacity: 1;
+        }
+
+        .demo-pop i {
+            margin-right: 6px;
+            color: var(--warm-accent);
         }
 
         .typing-text {
