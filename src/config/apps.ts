@@ -22,7 +22,7 @@ export const apps: App[] = [
     id: "droidtux",
     name: "DroidTux",
     description: {
-      es: "Ejecuta tus apps de Android directamente en tu escritorio Linux con total integración.",
+      es: "Run your Android apps directly on your Linux desktop with full integration.",
       en: "Run your Android apps directly on your Linux desktop with full integration.",
     },
     icon: "https://hosted.inled.es/droidtux.png",

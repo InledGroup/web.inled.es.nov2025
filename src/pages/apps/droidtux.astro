@@ -3,7 +3,9 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import { getLangFromLocals } from '../../i18n/utils';
 
-const lang = getLangFromLocals(Astro.locals);
+// Force page language to English
+Astro.locals.lang = 'en';
+const lang = 'en';
 
 const app = {
   id: "droidtux",
@@ -14,136 +16,69 @@ const app = {
   releasesUrl: "https://github.com/InledGroup/DroidTux/releases/"
 };
 
-const translations = {
-  es: {
-    meta: {
-      title: "DroidTux | Apps de Android en tu escritorio Linux",
-      description: "Ejecuta tus aplicaciones de Android como ventanas nativas en Linux conectando tu teléfono."
+const t = {
+  meta: {
+    title: "DroidTux | Android Apps on your Linux Desktop",
+    description: "Run your Android applications as native windows on Linux by connecting your phone."
+  },
+  nav: {
+    comparison: "Comparison",
+    screenshots: "Screenshots",
+    install: "Install",
+    github: "GitHub"
+  },
+  hero: {
+    title: "Run Android Apps on 🐧 Linux",
+    subtitle: " ✨ Just connect your phone ",
+    explore: "See Comparison",
+    download: "Download"
+  },
+  comparison: {
+    title: "Why DroidTux is different",
+    waydroid: {
+      name: "Waydroid",
+      desc: "Installs a full Android system on your PC. It often uses obsolete Android versions and consumes many resources.",
+      diff: "DroidTux uses YOUR phone's Android, with YOUR data and updated apps."
     },
-    nav: {
-      comparison: "Comparativa",
-      screenshots: "Capturas",
-      install: "Compatibilidad",
-      github: "GitHub"
-    },
-    hero: {
-      title: "Usa tus Apps de Android en 🐧 Linux",
-      subtitle: " ✨ Conecta tu móvil y listo ",
-      explore: "Ver Comparativa",
-      download: "Descargar"
-    },
-    comparison: {
-      title: "Por qué DroidTux es diferente",
-      waydroid: {
-        name: "Waydroid",
-        desc: "Instala un sistema Android completo en tu PC. Suele usar versiones de Android obsoletas y consume muchos recursos.",
-        diff: "DroidTux usa el Android de TU móvil, con TUS datos y apps actualizadas."
-      },
-      scrcpy: {
-        name: "Scrcpy",
-        desc: "Excelente para ver la pantalla, pero muy difícil de integrar aplicaciones individuales como ventanas.",
-        diff: "DroidTux integra cada app como una ventana independiente en tu escritorio."
-      }
-    },
-    install: {
-      arch: {
-        title: "Arch Linux",
-        command: "sudo pacman -U (nombrearchivo).pkg.tar.xz",
-        instructions: "Descarga el paquete .pkg.tar.xz de las releases y ejecútalo en tu terminal.",
-        note: "No está disponible en AUR. Tras el ataque de malware que sufrió AUR, no están aceptando nuevos paquetes por ahora."
-      },
-      debian: {
-        title: "Debian / Ubuntu",
-        command: "sudo dpkg -i (nombrearchivo).deb",
-        instructions: "Descarga el paquete .deb de las releases e instálalo con dpkg."
-      },
-      fedora: {
-        title: "Fedora",
-        command: "sudo rpm -i (nombrearchivo).rpm",
-        instructions: "Descarga el paquete .rpm de las releases e instálalo con rpm."
-      },
-      requirements: "Requiere tener activada la depuración USB en tu teléfono Android."
-    },
-    compat: {
-      title: "Compatible con",
-      debian: "Debian / Ubuntu",
-      fedora: "Fedora",
-      arch: "Arch Linux",
-      hint: "Haz clic en un logo para ver la instalación"
-    },
-    complement: {
-      title: "Mejora la experiencia",
-      desc: "Para una integración total de archivos y notificaciones, recomendamos usar:",
-      kde: "KDE Connect",
-      gs: "GSConnect"
+    scrcpy: {
+      name: "Scrcpy",
+      desc: "Excellent for screen mirroring, but very difficult to integrate individual apps as windows.",
+      diff: "DroidTux integrates each app as an independent window on your desktop."
     }
   },
-  en: {
-    meta: {
-      title: "DroidTux | Android Apps on your Linux Desktop",
-      description: "Run your Android applications as native windows on Linux by connecting your phone."
+  install: {
+    arch: {
+      title: "Arch Linux",
+      command: "sudo pacman -U (filename).pkg.tar.xz",
+      instructions: "Download the .pkg.tar.xz package from releases and run it in your terminal.",
+      note: "Not available on AUR. After the AUR malware attack, they are not accepting new packages for now."
     },
-    nav: {
-      comparison: "Comparison",
-      screenshots: "Screenshots",
-      install: "Install",
-      github: "GitHub"
+    debian: {
+      title: "Debian / Ubuntu",
+      command: "sudo dpkg -i (filename).deb",
+      instructions: "Download the .deb package from releases and install it with dpkg."
     },
-    hero: {
-      title: "Run Android Apps on 🐧 Linux",
-      subtitle: " ✨ Just connect your phone ",
-      explore: "See Comparison",
-      download: "Download"
+    fedora: {
+      title: "Fedora",
+      command: "sudo rpm -i (filename).rpm",
+      instructions: "Download the .rpm package from releases and install it with rpm."
     },
-    comparison: {
-      title: "Why DroidTux is different",
-      waydroid: {
-        name: "Waydroid",
-        desc: "Installs a full Android system on your PC. It often uses obsolete Android versions and consumes many resources.",
-        diff: "DroidTux uses YOUR phone's Android, with YOUR data and updated apps."
-      },
-      scrcpy: {
-        name: "Scrcpy",
-        desc: "Excellent for screen mirroring, but very difficult to integrate individual apps as windows.",
-        diff: "DroidTux integrates each app as an independent window on your desktop."
-      }
-    },
-    install: {
-      arch: {
-        title: "Arch Linux",
-        command: "sudo pacman -U (filename).pkg.tar.xz",
-        instructions: "Download the .pkg.tar.xz package from releases and run it in your terminal.",
-        note: "Not available on AUR. After the AUR malware attack, they are not accepting new packages for now."
-      },
-      debian: {
-        title: "Debian / Ubuntu",
-        command: "sudo dpkg -i (filename).deb",
-        instructions: "Download the .deb package from releases and install it with dpkg."
-      },
-      fedora: {
-        title: "Fedora",
-        command: "sudo rpm -i (filename).rpm",
-        instructions: "Download the .rpm package from releases and install it with rpm."
-      },
-      requirements: "Requires USB debugging enabled on your Android phone."
-    },
-    compat: {
-      title: "Compatible with",
-      debian: "Debian / Ubuntu",
-      fedora: "Fedora",
-      arch: "Arch Linux",
-      hint: "Click a logo for installation instructions"
-    },
-    complement: {
-      title: "Enhance the experience",
-      desc: "For full file and notification integration, we recommend using:",
-      kde: "KDE Connect",
-      gs: "GSConnect"
-    }
+    requirements: "Requires USB debugging enabled on your Android phone."
+  },
+  compat: {
+    title: "Compatible with",
+    debian: "Debian / Ubuntu",
+    fedora: "Fedora",
+    arch: "Arch Linux",
+    hint: "Click a logo for installation instructions"
+  },
+  complement: {
+    title: "Enhance the experience",
+    desc: "For full file and notification integration, we recommend using:",
+    kde: "KDE Connect",
+    gs: "GSConnect"
   }
 };
-
-const t = translations[lang] || translations.es;
 ---
 
 <Layout title={t.meta.title} description={t.meta.description}>
@@ -347,6 +282,11 @@ const t = translations[lang] || translations.es;
 </script>
 
 <style>
+  /* Hide language selector on this page since it is English-only */
+  :global(.lang-selector-container) {
+    display: none !important;
+  }
+
   :root {
     --dt-primary: #3DDC84; /* Android Green */
     --dt-secondary: #073042;

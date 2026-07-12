@@ -6,6 +6,11 @@ export const prerender = false;
 import { marked } from "marked";
 
 const { id } = Astro.params;
+
+if (id === "droidtux") {
+  return Astro.redirect("/apps/droidtux");
+}
+
 const app = appsData.find((a) => a.id === id);
 
 if (!app) {
