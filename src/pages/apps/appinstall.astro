@@ -7,40 +7,39 @@ const lang = getLangFromLocals(Astro.locals);
 
 const translations = {
     es: {
-        title: "AppInstall - Tu gestor de paquetes todo en uno para Linux",
+        title: "AppInstall - Tu gestor de paquetes todo en uno para cualquier distro Linux",
         description: "Instala, desinstala y gestiona paquetes de forma profesional. Soporte para APT, Homebrew, DNF, PWAs y más.",
-        badge: "V15 ya disponible",
+        badge: "V17.1 ya disponible con correcciones de errores",
         heroTitle: "TU GESTOR DE PAQUETES <br/><span class=\"gradient-text\">TODO EN UNO</span>",
-        heroDesc: "AppInstall es la herramienta definitiva para gestionar tu software en Linux. Olvídate de la terminal para gestionar aplicaciones y paquetes. Hazlo todo a un clic.",
+        heroDesc: "AppInstall es la herramienta definitiva para gestionar tu software en Linux. Olvídate de la terminal para gestionar aplicaciones y paquetes. Hazlo todo con un clic.",
         btnDownload: "Descargar AppInstall",
-        btnFeatures: "Explorar funciones",
+        btnFeatures: "Descubre más!",
         gridTitle: "Todo lo que hacías con comandos, ahora con clics",
         feat1Title: "Desinstalador",
         feat1Desc: "Elimina aplicaciones que las stores no te listan, como paquetes del sistema y apps no graficas.",
         feat2Title: "Busca apps",
-        feat2Desc: "Encuentra cualquier aplicación en los repositorios de APT, Homebrew y DNF desde una sola interfaz.",
+        feat2Desc: "Encuentra cualquier aplicación en los repositorios de APT, Homebrew, DNF, Flathub, Snap y AUR desde una sola interfaz.",
         feat3Title: "Creador de PWAs",
-        feat3Desc: "Convierte cualquier sitio web en una aplicación de escritorio nativa con un solo clic. No pesa más, no te instala electron.",
-        feat4Title: "Soporte Multi-repo",
-        feat4Desc: "Integración nativa con Homebrew, APT y DNF según tu distribución de Linux.",
+        feat3Desc: "Convierte cualquier sitio web en una aplicación de escritorio nativa con un solo clic. No pesa más, no te instala Electron.",
+        feat4Title: "Soporta todas las distros",
+        feat4Desc: "Disfruta de la comodidad de Appinstall en cualquier distro como Debian, Fedora o Arch",
         feat5Title: "Instalador sencillo",
-        feat5Desc: "Instala .deb, .appimage y .dnf sin complicaciones.",
+        feat5Desc: "Instala cualquier paquete fácilmente",
         feat6Title: "Limpia basura y soluciona errores",
         feat6Desc: "Corrige instalaciones fallidas con un clic. Borra basura de tu sistema con otro clic.",
         demo: "Ver demo",
         searchBadge: "Novedad",
-        searchTitle: "Buscador en tiempo real",
-        searchDesc: "¿Cansado de buscar comandos para instalar una app? AppInstall busca en los repositorios de <strong>APT, Homebrew y DNF</strong> simultáneamente. Encuentra la versión exacta que necesitas e instálala sin tocar la terminal.",
+        searchTitle: "Busca en cualquier sitio, todo desde uno",
+        searchDesc: "¿Cansado de buscar comandos para instalar una app? AppInstall busca en los repositorios de <strong>APT, Homebrew, DNF, Pacman, AUR, Flathub y Snap</strong> simultáneamente. Encuentra la app que buscas, como si fuera la App Store.",
         searchL1: "Detección automática de tu distro.",
         searchL2: "Resultados instantáneos de múltiples fuentes.",
         searchL3: "Instalación en un clic desde los resultados.",
         uninstallTitle: "Desinstalación de cualquier cosa",
         uninstallDesc: "Las tiendas de apps de linux solo te listan apps gráficas, pero linux está lleno de apps que no ves... Pues con Appinstall las desinstalas con un clic, listandose todas desde apt, dnf, homebrew, pwas, appimages...",
         uninstallL1: "Cualquier app instalada.",
-        uninstallL2: "deb, dnf, appimage, homebrew.",
-        uninstallL3: "Próximamente snap y flathub.",
+        uninstallL2: "deb, dnf, appimage, homebrew, snap, flathub, pacman, aur.",
         integrationTitle: "Hazlo predeterminado a 3 clics",
-        integrationDesc: "AppInstall se integra perfectamente con tu explorador de archivos. Haz clic derecho en cualquier paquete <strong>.deb</strong> o <strong>.appimage</strong> y selecciona AppInstall para una gestión inmediata y segura.",
+        integrationDesc: "",
         integrationL1: "Asociación de archivos automática.",
         integrationL2: "Menú contextual \"Abrir con...\".",
         integrationL3: "Interfaz nativa y ligera.",
@@ -50,45 +49,44 @@ const translations = {
         oss: "Gratuito y de Código Abierto"
     },
     en: {
-        title: "AppInstall - Your All-in-One Package Manager for Linux",
-        description: "Install, uninstall, and manage packages professionally. Support for APT, Homebrew, DNF, PWAs, and more.",
-        badge: "V15 now available",
+        title: "AppInstall - Your All-in-One Package Manager for Any Linux Distribution",
+        description: "Professionally install, uninstall, and manage packages. Full support for APT, Homebrew, DNF, PWAs, Pacman, AUR, Flathub, Snap, and more.",
+        badge: "V17.1 Now Available with Bug Fixes",
         heroTitle: "YOUR ALL-IN-ONE <br/><span class=\"gradient-text\">PACKAGE MANAGER</span>",
         heroDesc: "AppInstall is the ultimate tool for managing your software on Linux. Forget the terminal for managing applications and packages. Do it all with a single click.",
         btnDownload: "Download AppInstall",
         btnFeatures: "Explore Features",
-        gridTitle: "Everything you did with commands, now with clicks",
+        gridTitle: "Everything You Did with Commands, Now with Clicks",
         feat1Title: "Uninstaller",
         feat1Desc: "Remove applications that app stores don't list, such as system packages and non-graphical apps.",
         feat2Title: "Search Apps",
-        feat2Desc: "Find any application in APT, Homebrew, and DNF repositories from a single interface.",
+        feat2Desc: "Find any application in APT, Homebrew, DNF, Flathub, Snap, and AUR repositories from a single interface.",
         feat3Title: "PWA Creator",
         feat3Desc: "Convert any website into a native desktop application with a single click. No extra weight, no Electron installation.",
-        feat4Title: "Multi-repo Support",
-        feat4Desc: "Native integration with Homebrew, APT, and DNF according to your Linux distribution.",
+        feat4Title: "Multi-Distro Support",
+        feat4Desc: "Enjoy AppInstall on any distribution like Debian, Fedora, or Arch Linux.",
         feat5Title: "Simple Installer",
-        feat5Desc: "Install .deb, .appimage, and .dnf files without complications.",
+        feat5Desc: "Easily install any package with a single click.",
         feat6Title: "Clean Junk & Fix Errors",
         feat6Desc: "Fix failed installations with one click. Clear junk from your system with another.",
-        demo: "Watch demo",
+        demo: "Watch Demo",
         searchBadge: "New",
-        searchTitle: "Real-time Search",
-        searchDesc: "Tired of looking for commands to install an app? AppInstall searches <strong>APT, Homebrew, and DNF</strong> repositories simultaneously. Find the exact version you need and install it without touching the terminal.",
-        searchL1: "Automatic detection of your distro.",
+        searchTitle: "Search Anywhere, Everything in One Place",
+        searchDesc: "Tired of searching for commands to install an app? AppInstall searches <strong>APT, Homebrew, DNF, Pacman, AUR, Flathub, and Snap</strong> repositories simultaneously. Find the app you're looking for, like a true App Store.",
+        searchL1: "Automatic distro detection.",
         searchL2: "Instant results from multiple sources.",
-        searchL3: "One-click installation from results.",
+        searchL3: "One-click installation from search results.",
         uninstallTitle: "Uninstall Anything",
-        uninstallDesc: "Linux app stores only list graphical apps, but Linux is full of apps you don't see... With AppInstall, you can uninstall them with one click, listing everything from apt, dnf, homebrew, PWAs, appimages...",
-        uninstallL1: "Any installed app.",
-        uninstallL2: "deb, dnf, appimage, homebrew.",
-        uninstallL3: "Coming soon: snap and flathub.",
-        integrationTitle: "Make it Default in 3 Clicks",
-        integrationDesc: "AppInstall integrates perfectly with your file explorer. Right-click any <strong>.deb</strong> or <strong>.appimage</strong> package and select AppInstall for immediate and secure management.",
+        uninstallDesc: "Linux app stores only list graphical apps, but Linux is full of hidden applications... With AppInstall, uninstall everything with one click. Includes apt, dnf, homebrew, PWAs, AppImages, and more...",
+        uninstallL1: "Any installed application.",
+        uninstallL2: "deb, dnf, appimage, homebrew, snap, flathub, pacman, aur.",
+        integrationTitle: "Make It Default in 3 Clicks",
+        integrationDesc: "",
         integrationL1: "Automatic file association.",
-        integrationL2: "Contextual menu \"Open with...\".",
+        integrationL2: "\"Open with...\" contextual menu.",
         integrationL3: "Native and lightweight interface.",
-        finalTitle: "Start using AppInstall today",
-        finalDesc: "Compatible with Ubuntu, Debian, Fedora and Arch Linux.",
+        finalTitle: "Start Using AppInstall Today",
+        finalDesc: "Compatible with Ubuntu, Debian, Fedora, and Arch Linux.",
         btnFinalDownload: "Download",
         oss: "Free and Open Source"
     }
@@ -124,13 +122,13 @@ const t = translations[lang] || translations.es;
                         <div class="icon"><i class="fa-solid fa-trash-can"></i></div>
                         <h3>{t.feat1Title}</h3>
                         <p>{t.feat1Desc}</p>
-                        <a href="#uninstall-detail" class="learn-more">{t.demo} →</a>
+                       <!-- <a href="#uninstall-detail" class="learn-more">{t.demo} →</a>  -->
                     </div>
                     <div class="feature-card fade-up" style="transition-delay: 0.1s;">
                         <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                         <h3>{t.feat2Title}</h3>
                         <p>{t.feat2Desc}</p>
-                        <a href="#search-detail" class="learn-more">{t.demo} →</a>
+                       <!-- <a href="#search-detail" class="learn-more">{t.demo} →</a> -->
                     </div>
                     <div class="feature-card fade-up" style="transition-delay: 0.2s;">
                         <div class="icon"><i class="fa-solid fa-globe"></i></div>
@@ -146,7 +144,7 @@ const t = translations[lang] || translations.es;
                         <div class="icon"><i class="fa-solid fa-bolt"></i></div>
                         <h3>{t.feat5Title}</h3>
                         <p>{t.feat5Desc}</p>
-                        <a href="#integration-detail" class="learn-more">{t.demo} →</a>
+                      <!--  <a href="#integration-detail" class="learn-more">{t.demo} →</a> -->
                     </div>
                     <div class="feature-card fade-up" style="transition-delay: 0.5s;">
                         <div class="icon"><i class="fa-solid fa-broom"></i></div>
@@ -160,7 +158,7 @@ const t = translations[lang] || translations.es;
         <!-- Detailed Features with Videos -->
 
         <!-- Search Detail -->
-        <section id="search-detail" class="detail-section">
+       <!-- <section id="search-detail" class="detail-section">
             <div class="container split">
                 <div class="detail-text fade-up">
                     <div class="detail-badge">{t.searchBadge}</div>
@@ -180,7 +178,7 @@ const t = translations[lang] || translations.es;
             </div>
         </section>
 
-        <!-- Uninstall Detail -->
+  
         <section id="uninstall-detail" class="detail-section alt-bg">
             <div class="container split reverse">
                 <div class="detail-text fade-up">
@@ -189,7 +187,6 @@ const t = translations[lang] || translations.es;
                     <ul class="detail-list">
                         <li><i class="fa-solid fa-check"></i> {t.uninstallL1}</li>
                         <li><i class="fa-solid fa-check"></i> {t.uninstallL2}</li>
-                        <li><i class="fa-solid fa-check"></i> {t.uninstallL3}</li>
                     </ul>
                 </div>
                 <div class="detail-video fade-up">
@@ -200,8 +197,8 @@ const t = translations[lang] || translations.es;
             </div>
         </section>
 
-        <!-- Integration Detail -->
-        <section id="integration-detail" class="detail-section">
+
+   <section id="integration-detail" class="detail-section">
             <div class="container split">
                 <div class="detail-text fade-up">
                     <h2>{t.integrationTitle}</h2>
@@ -218,9 +215,10 @@ const t = translations[lang] || translations.es;
                     </video>
                 </div>
             </div>
-        </section>
+        </section> -->
 
-        <!-- Final CTA / Download -->
+        
+
         <section id="install" class="download-section">
             <div class="container">
                 <div class="download-card fade-up">
@@ -234,7 +232,7 @@ const t = translations[lang] || translations.es;
                     </div>
                 </div>
             </div>
-        </section>
+        </section>  
     </main>
 </Layout>
 

@@ -17,17 +17,19 @@ const t = useTranslations(lang);
 
 const allProducts = [...saas, ...apps];
 const products = ids.map(id => allProducts.find(p => p.id === id)).filter(Boolean);
+
+const hasMany = products.length > 4;
+const hasMedium = products.length === 4;
 ---
 
 <section class="saas-showcase">
   <div class="showcase-inner">
     <div class="showcase-header">
-      {badge && <span class="badge">{badge}</span>}
       {title && <h2 class="showcase-title">{title}</h2>}
       {subtitle && <p class="showcase-subtitle">{subtitle}</p>}
     </div>
 
-    <div class="cards-row">
+    <div class:list={["cards-row", { "has-many": hasMany, "has-medium": hasMedium }]}>
       {products.map(p => (
         <a href={p.link} class="product-card">
           <div class="card-icon">
@@ -184,6 +186,38 @@ const products = ids.map(id => allProducts.find(p => p.id === id)).filter(Boolea
     flex: 1;
   }
 
+  /* Ajustes dinámicos si hay más de 4 tarjetas */
+  .cards-row.has-many {
+    gap: 1.25rem;
+  }
+  .cards-row.has-many .product-card {
+    min-width: 220px;
+    max-width: 250px;
+    padding: 1.75rem 1.25rem;
+    gap: 1rem;
+  }
+  .cards-row.has-many .card-icon {
+    width: 44px;
+    height: 44px;
+  }
+  .cards-row.has-many .card-name {
+    font-size: 1.15rem;
+  }
+  .cards-row.has-many .card-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  /* Ajuste intermedio si hay exactamente 4 tarjetas */
+  .cards-row.has-medium {
+    gap: 1.5rem;
+  }
+  .cards-row.has-medium .product-card {
+    min-width: 260px;
+    max-width: 300px;
+    padding: 2rem 1.5rem;
+  }
+
   .sec-progress {
     width: 100%;
     display: flex;
@@ -205,30 +239,67 @@ const products = ids.map(id => allProducts.find(p => p.id === id)).filter(Boolea
     width: 0%;
   }
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1024px), (orientation: portrait) {
     .saas-showcase {
-      padding: 2rem 1.5rem;
+      min-width: 0;
+      width: 100%;
+      height: auto;
+      padding: 5rem 1.5rem;
+      border-left: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .showcase-inner {
+      height: auto;
+      padding: 0;
+      gap: 2rem;
     }
 
     .cards-row {
-      gap: 1.5rem;
+      flex-direction: column;
+      overflow-x: visible;
+      gap: 1.25rem;
     }
 
+    .cards-row.has-many .product-card,
+    .cards-row.has-medium .product-card,
     .product-card {
-      min-width: 280px;
+      min-width: 0 !important;
+      max-width: 100% !important;
+      width: 100%;
+      flex: 1 1 auto !important;
       padding: 2rem 1.5rem;
+      gap: 1rem;
+    }
+
+    .cards-row.has-many .card-icon,
+    .cards-row.has-medium .card-icon,
+    .card-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .cards-row.has-many .card-name,
+    .cards-row.has-medium .card-name,
+    .card-name {
+      font-size: 1.25rem;
+    }
+
+    .cards-row.has-many .card-desc,
+    .cards-row.has-medium .card-desc,
+    .card-desc {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .sec-progress {
+      display: none !important;
     }
   }
 
   @media (max-width: 768px) {
     .saas-showcase {
-      padding: 1.5rem 1rem;
-    }
-
-    .product-card {
-      min-width: 260px;
-      max-width: none;
-      flex: 0 0 280px;
+      padding: 4rem 1rem;
     }
   }
 </style>

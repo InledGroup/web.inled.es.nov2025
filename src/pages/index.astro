@@ -78,53 +78,42 @@ const archivedProducts = [
   <div id="showcase-strip" data-lenis-prevent>
     <div class="showcase-track">
       <SaaSShowcase
-        ids={['office', 'start', 'mypdf']}
-        badge={lang === 'es' ? 'Soberanía Digital' : 'Digital Sovereignty'}
-        title={lang === 'es' ? 'Tus herramientas, bajo tu control' : 'Your tools, under your control'}
-        subtitle={lang === 'es' ? 'Productividad sin depender de terceros. Todo en tu navegador, todo privado.' : 'Productivity without third-party dependence. All in your browser, all private.'}
+        ids={['office', 'start', 'mypdf', 'mymetadata', 'seafari']}
+        title={lang === 'es' ? 'No dependas de quien no respeta tu privacidad' : 'Do not depend on those who do not respect your privacy'}
+        subtitle={lang === 'es' ? 'Alternativas Europeas, programadas en España, que no venden tus datos por que básicamente no los obtienen.' : 'European alternatives, programmed in Spain, that do not sell your data because they basically do not obtain it.'}
       />
 
       <SaaSShowcase
         ids={['appinstall', 'codexbar-gnome', 'vozes']}
-        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-        title={lang === 'es' ? 'Linux a tope!' : 'Linux at its best!'}
-        subtitle={lang === 'es' ? 'Herramientas nativas para tu escritorio. Instalación, monitorización y voz.' : 'Native tools for your desktop. Install, monitor, and voice.'}
+        title={lang === 'es' ? 'Ya no hay excusa: ¡usa Linux!' : 'There is no excuse anymore: use Linux!'}
+        subtitle={lang === 'es' ? 'Haz que Linux sea más fácil de usar y tenga lo que necesitas. Potentes herramientas para que disfrutes usando Linux.' : 'Make Linux easier to use and have what you need. Powerful tools for you to enjoy using Linux'}
       />
 
       <SaaSShowcase
         ids={['macboat', 'droidtux']}
-        badge={lang === 'es' ? 'Multiplataforma' : 'Cross-platform'}
-        title={lang === 'es' ? 'Experiencia sin límites' : 'Unlimited experience'}
-        subtitle={lang === 'es' ? 'Ejecuta cualquier sistema en tu máquina. Sin límites, sin ataduras.' : 'Run any system on your machine. No limits, no ties.'}
-      />
+        title={lang === 'es' ? 'Nadie lo había pensado. Pues lo programamos.' : 'Nobody had thought about it. So we programmed it.'}
+        subtitle={lang === 'es' ? 'Los límites de los sistemas operativos desaparecen gracias a estas aplicaciones, listas para que comiences a disfrutar de una experiencia del futuro' : 'The limits of operating systems disappear thanks to these applications, ready for you to start enjoying an experience of the future.'}
+      /The limits of operating systems disappear thanks to these applications, ready for you to start enjoying an experience of the future
 
       <SaaSShowcase
-        ids={['codexbar-gnome', 'ai-exporter', 'edgeai', 'agent-tunnel', 'web2skill', 'vozes', 'gemini-notifier', 'weby']}
-        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
-        title={lang === 'es' ? 'La IA puede hacer mucho.' : 'AI can do a lot'}
-        subtitle={lang === 'es' ? 'Inteligencia artificial libre, local y privada. Sin cuentas, sin nubes.' : 'Free, local, private AI. No accounts, no clouds.'}
+        ids={['codexbar-gnome', 'ai-exporter', 'web2skill', 'vozes']}
+        title={lang === 'es' ? 'Exprime las capacidades de la IA' : 'Unleash the capabilities of AI'}
+        subtitle={lang === 'es' ? 'Todas estas apps son privadas y te permiten exprimir las capacidades de la IA' : 'All these apps are private and allow you to take advantage of the capabilities of AI'}
       />
 
       <SaaSShowcase
         ids={['bautilus', 'tabnest', 'cleany', 'moodlenotifier']}
-        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
         title={lang === 'es' ? 'Desbloquea el potencial del navegador' : "Unlock the browser's potential"}
         subtitle={lang === 'es' ? 'Extensiones que transforman tu navegador en algo mucho más potente.' : 'Extensions that turn your browser into something far more powerful.'}
       />
 
       <SaaSShowcase
         ids={['oap']}
-        badge={lang === 'es' ? 'Inteligencia Libre' : 'Open Intelligence'}
         title={lang === 'es' ? 'Consigue tus objetivos' : "Achieve your goals"}
         subtitle={lang === 'es' ? 'Organiza tu vida con objetivos claros y seguimiento visual.' : 'Organize your life with clear goals and visual tracking.'}
       />
 
-      <SaaSShowcase
-        ids={['bastion']}
-        badge={lang === 'es' ? 'Seguridad' : 'Security'}
-        title={lang === 'es' ? 'Seguridad cuando la necesitas' : "Security when you need it"}
-        subtitle={lang === 'es' ? 'Navegación ultra-segura con aislamiento remoto y endurecimiento de red.' : 'Ultra-secure browsing with remote isolation and network hardening.'}
-      />
+
 
       <SaaSShowcase
         ids={['mdpdf', 'inlinked', 'inmd', 'inqr', 'mymetadata']}
@@ -142,14 +131,13 @@ const archivedProducts = [
         <p class="comunidad-subtitle">{t('community.subtitle')}</p>
       </div>
     </section>
-
+    <BlogSection />
+    <Contribute />
+    <Changelog />
     <Planning />
 
-    <Changelog />
 
-    <BlogSection />
 
-    <Contribute />
   </div>
 
 <!--  <HeroCTA
@@ -225,6 +213,21 @@ const archivedProducts = [
     height: 100%;
     will-change: transform;
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @media (max-width: 1024px), (orientation: portrait) {
+    #showcase-strip {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .showcase-track {
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+      transform: none !important;
+    }
   }
 
   .comunidad-wrapper {
@@ -382,6 +385,12 @@ const archivedProducts = [
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
   }
+
+  @media (max-width: 1024px), (orientation: portrait) {
+    .showcase-cursor {
+      display: none !important;
+    }
+  }
 </style>
 
 <script is:inline>
@@ -403,10 +412,16 @@ const archivedProducts = [
     let progressRafId = null;
     const AUTO_DELAY = 6000;
 
+    // Helper to check if screen is mobile size or vertical orientation
+    function isVerticalOrMobile() {
+      return window.innerWidth <= 1024 || window.innerHeight > window.innerWidth;
+    }
+
     // Set initial style/transform
     track.style.transform = 'translate3d(0px, 0px, 0px)';
 
     function scrollToShowcase(index) {
+      if (isVerticalOrMobile()) return;
       if (index < 0 || index >= count || isTransitioning) return;
 
       currentIndex = index;
@@ -424,6 +439,7 @@ const archivedProducts = [
     }
 
     function updateProgressBars() {
+      if (isVerticalOrMobile()) return;
       sections.forEach((sec, idx) => {
         const fill = sec.querySelector('.sec-progress-fill');
         if (fill) {
@@ -454,6 +470,7 @@ const archivedProducts = [
     }
 
     function startAutoRotation() {
+      if (isVerticalOrMobile()) return;
       if (autoTimer) clearTimeout(autoTimer);
       if (currentIndex === count - 1) return;
 
@@ -464,6 +481,7 @@ const archivedProducts = [
 
     // Intercept vertical scroll on strip to scroll horizontally
     strip.addEventListener('wheel', (e) => {
+      if (isVerticalOrMobile()) return;
       if (e.deltaY === 0) return;
 
       if (isTransitioning) {
@@ -491,11 +509,13 @@ const archivedProducts = [
     let touchStartY = 0;
 
     strip.addEventListener('touchstart', (e) => {
+      if (isVerticalOrMobile()) return;
       touchStartX = e.changedTouches[0].clientX;
       touchStartY = e.changedTouches[0].clientY;
     }, { passive: true });
 
     strip.addEventListener('touchend', (e) => {
+      if (isVerticalOrMobile()) return;
       if (isTransitioning) return;
 
       const touchEndX = e.changedTouches[0].clientX;
@@ -527,6 +547,7 @@ const archivedProducts = [
     }
 
     document.addEventListener('mousemove', (e) => {
+      if (isVerticalOrMobile()) return;
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
 
@@ -544,6 +565,11 @@ const archivedProducts = [
 
     // Intersection observer to control rotation and progress bar animation
     const observer = new IntersectionObserver((entries) => {
+      if (isVerticalOrMobile()) {
+        if (autoTimer) clearTimeout(autoTimer);
+        if (progressRafId) cancelAnimationFrame(progressRafId);
+        return;
+      }
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           updateProgressBars();
@@ -564,6 +590,7 @@ const archivedProducts = [
 
     // Auto-center observer: centers the showcase section in screen when 50% becomes visible
     const centerObserver = new IntersectionObserver((entries) => {
+      if (isVerticalOrMobile()) return;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const rect = strip.getBoundingClientRect();

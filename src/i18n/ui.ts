@@ -12,7 +12,7 @@ export const ui = {
     "nav.contact": "Contacto",
     "hero.title": "Dream, Build",
     "hero.subtitle":
-      "Desarrollamos software libre, gratuito y privado; reconstruímos la soberanía tecnológica nacional. Pioneros en desarrollo con agentes de IA y tecnologías libres.",
+      "Desarrollamos software libre innovador, útil y que respeta al usuario. ¡Únete a la comunidad!",
     "scroll.title": "Hacemos el software de tus sueños",
     "scroll.description":
       "Inled Group es una marca de software pionera en el desarrollo con agentes de inteligencia artificial y tecnologías libres. En Inled construimos el software que todos han soñado, por ello nuestro lema es Dream, build.",
@@ -93,8 +93,8 @@ export const ui = {
     "planning.button": "Abrir en GitHub",
     "community.title": "Comunidad",
     "community.subtitle": "Mira planning, errores, changelog, blog...",
-    "contribute.title": "Contribuir",
-    "contribute.text": "Si quieres colaborar conmigo en algún proyecto o simplemente por entretenerte un rato, ¡únete a nuestro Discord o contribuye directamente en GitHub!",
+    "contribute.title": "¡Anímate a contribuir!",
+    "contribute.text": "Si quieres colaborar en algún proyecto o simplemente por entretenerte un rato, ¡únete a nuestro Discord, Matrix o contribuye directamente en GitHub!",
     "contribute.warning": "Aviso: La colaboración no es remunerada. Se dará crédito a todos los colaboradores en las publicaciones oficiales de los proyectos en los que participen.",
     "contribute.discord": "Únete a Discord",
     "contribute.matrix": "Únete a Matrix",
@@ -106,7 +106,7 @@ export const ui = {
     "nav.contact": "Contact",
     "hero.title": "Dream, Build",
     "hero.subtitle":
-      "We develop free, open-source and private software; we rebuild national technological sovereignty. Pioneers in development with AI agents and free technologies.",
+      "We develop innovative, useful free software that respects the user. Join the community!",
     "scroll.title": "We build the software of your dreams",
     "scroll.description":
       "Inled Group is a software brand pioneering development with artificial intelligence agents and free technologies. At Inled, we build the software everyone has dreamed of, which is why our motto is Dream, build.",
@@ -185,8 +185,8 @@ export const ui = {
     "planning.button": "Open on GitHub",
     "community.title": "Community",
     "community.subtitle": "Check out our planning, issues, changelog, blog...",
-    "contribute.title": "Contribute",
-    "contribute.text": "If you want to collaborate with me on any project or just to have some fun, join our Discord or contribute directly on GitHub!",
+    "contribute.title": "Dare to contribute!",
+    "contribute.text": "If you want to collaborate on any project or just to have some fun, join our Discord, Matrix or contribute directly on GitHub!",
     "contribute.warning": "Notice: Collaboration is non-remunerated. All contributors will be credited in official publications of the projects they contribute to.",
     "contribute.discord": "Join Discord",
     "contribute.matrix": "Join Matrix",

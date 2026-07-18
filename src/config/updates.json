@@ -1,20 +1,11 @@
 [
   {
     "appId": "appinstall",
-    "version": "16",
+    "version": "17.1",
     "date": "2026-07-05",
     "changes": {
-      "es": "Ahora es compatible con Flatpak, Snap, Arch y AUR. ",
-      "en": "It is now compatible with Flatpak, Snap, Arch, and AUR."
-    }
-  },
-  {
-    "appId": "seafari",
-    "version": "1.11",
-    "date": "2026-07-05",
-    "changes": {
-      "es": "Seafari ya se actualiza sin problemas.",
-      "en": "Seafari now updates without issues."
+      "es": "Resueltos errores, mejorada la usabilidad",
+      "en": "Fixed bugs, improved usability"
     }
   }
 ]

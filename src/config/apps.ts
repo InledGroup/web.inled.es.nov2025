@@ -97,6 +97,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/new-agent-tunnel.png",
     link: "/apps/agent-tunnel",
+    archive: true,
   },
   {
     id: "bautilus",
@@ -119,16 +120,6 @@ export const apps: App[] = [
     link: "/apps/tabnest",
   },
 
-  {
-    id: "gemini-notifier",
-    name: "Gemini Notifier",
-    description: {
-      es: "Recibe notificaciones cuando Gemini CLI requiere tu atención. Instalación rápida mediante hooks.",
-      en: "Get notifications when Gemini CLI requires your attention. Quick installation via hooks.",
-    },
-    icon: "https://hosted.inled.es/1/gemini-voice.png",
-    link: "/apps/gemini-notifier",
-  },
 
   {
     id: "vozes",
@@ -180,6 +171,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/1/tuby.png",
     link: "/apps/tuby",
+    archive: true,
   },
 
   {
@@ -191,6 +183,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/bastion.png",
     link: "/bastion",
+    archive: true,
   },
   {
     id: "cleany",
