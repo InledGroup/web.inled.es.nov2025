@@ -2,10 +2,19 @@
   {
     "appId": "appinstall",
     "version": "17.1",
-    "date": "2026-07-05",
+    "date": "2026-08-17",
     "changes": {
       "es": "Resueltos errores, mejorada la usabilidad",
       "en": "Fixed bugs, improved usability"
+    }
+  },
+  {
+    "appId": "codexbar-gnome",
+    "version": "17.1",
+    "date": "2026-08-18",
+    "changes": {
+      "es": "Contribuciones muy útiles de la comunidad y nueva funcionalidad para testear renderizado de datos.",
+      "en": "Very useful contributions from the community and new functionality to test data rendering."
     }
   }
 ]

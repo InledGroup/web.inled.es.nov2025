@@ -28,53 +28,56 @@ const t = {
     github: "GitHub"
   },
   hero: {
-    title: "Run Android Apps on 🐧 Linux",
-    subtitle: " ✨ Just connect your phone ",
-    explore: "See Comparison",
-    download: "Download"
+    title: "Use your phone's 📱 Android apps on 🐧 Linux",
+    subtitle: "Just connect your phone over USB or Wi-Fi",
+    explore: "Contribute",
+    download: "Download Latest Release"
   },
   comparison: {
     title: "Why DroidTux is different",
     waydroid: {
       name: "Waydroid",
-      desc: "Installs a full Android system on your PC. It often uses obsolete Android versions and consumes many resources.",
-      diff: "DroidTux uses YOUR phone's Android, with YOUR data and updated apps."
+      desc: "Install an Android on an LXC on your PC. It normally uses obsolete versions which requires using third-party compilation options.",
+      diff: "DroidTux displays the apps on your Android phone and everything runs on your phone. You can pick it up and take the information with you comfortably."
     },
     scrcpy: {
       name: "Scrcpy",
-      desc: "Excellent for screen mirroring, but very difficult to integrate individual apps as windows.",
-      diff: "DroidTux integrates each app as an independent window on your desktop."
+      desc: "What Droidtux uses below, perfect for expert users who want to have full control.",
+      diff: "Droidtux makes it easy for users with an interface and app extraction automation."
     }
   },
   install: {
+    title: "Installation Instructions",
     arch: {
-      title: "Arch Linux",
-      command: "sudo pacman -U (filename).pkg.tar.xz",
-      instructions: "Download the .pkg.tar.xz package from releases and run it in your terminal.",
-      note: "Not available on AUR. After the AUR malware attack, they are not accepting new packages for now."
+      title: "Arch Linux Package",
+      command: "sudo pacman -U droidtux-latest.pkg.tar.xz",
+      instructions: "Download the .pkg.tar.xz archive from GitHub releases and run the local installation in your terminal.",
+      note: "It is planned to upload it to AUR but for now they do not allow new accounts."
     },
     debian: {
-      title: "Debian / Ubuntu",
-      command: "sudo dpkg -i (filename).deb",
-      instructions: "Download the .deb package from releases and install it with dpkg."
+      title: "Debian / Ubuntu Package",
+      command: "sudo dpkg -i droidtux-latest.deb",
+      instructions: "Download the .deb binary installer from the official GitHub releases and run dpkg to unpack.",
+      note: ""
     },
     fedora: {
-      title: "Fedora",
-      command: "sudo rpm -i (filename).rpm",
-      instructions: "Download the .rpm package from releases and install it with rpm."
+      title: "Fedora Package",
+      command: "sudo rpm -i droidtux-latest.rpm",
+      instructions: "Download the .rpm binary installer from releases and perform a standard rpm system installation.",
+      note: ""
     },
-    requirements: "Requires USB debugging enabled on your Android phone."
+    requirements: "It is recommended to enable USB debugging on the phone and from Droidtux there is a configurator to configure wireless debugging so that the phone is discoverable on the network."
   },
   compat: {
-    title: "Compatible with",
+    title: "Compatible Distros",
     debian: "Debian / Ubuntu",
     fedora: "Fedora",
     arch: "Arch Linux",
-    hint: "Click a logo for installation instructions"
+    hint: "Choose your distribution tab below to view installation commands"
   },
   complement: {
-    title: "Enhance the experience",
-    desc: "For full file and notification integration, we recommend using:",
+    title: "And if you use these apps, you'll nail it!",
+    desc: "These apps add more functionality and work perfectly alongside Droidtux.",
     kde: "KDE Connect",
     gs: "GSConnect"
   }
@@ -83,6 +86,7 @@ const t = {
 
 <Layout title={t.meta.title} description={t.meta.description}>
   <Header />
+  
   <div class="droidtux-page">
     <main>
       <!-- Hero Section -->
@@ -91,17 +95,22 @@ const t = {
           <img src={app.logo} alt="DroidTux Logo" />
         </div>
         <h1 class="hero-title">
-          {t.hero.title} <br/>
-          <span class="gradient-text">{t.hero.subtitle}</span>
+          {t.hero.title}
         </h1>
+        <p class="hero-subtitle">
+          {t.hero.subtitle}
+        </p>
         <div class="hero-actions">
-          <a href="#comparison" class="btn-outline">
-            <i class="fa-solid fa-layer-group gradient-icon"></i>
-            {t.hero.explore}
+          <a href={app.githubUrl}>
+            <md-outlined-button>
+              {t.hero.explore}
+            </md-outlined-button>
           </a>
-          <a href={app.downloadUrl} class="btn-primary">
-            <i class="fa-solid fa-download"></i>
-            {t.hero.download}
+          <a href={app.downloadUrl} target="_blank">
+            <md-filled-button>
+              <span slot="icon" class="material-symbols-rounded">download</span>
+              {t.hero.download}
+            </md-filled-button>
           </a>
         </div>
       </section>
@@ -109,33 +118,41 @@ const t = {
       <!-- Comparison Section -->
       <section id="comparison" class="comparison-section">
         <h2 class="section-title">
-          <span class="gradient-text">{t.comparison.title}</span>
+          {t.comparison.title}
         </h2>
         
         <div class="comparison-grid">
           <!-- Waydroid -->
-          <div class="glass-card comparison-card">
+          <div class="m3-card">
+            <md-elevation></md-elevation>
             <div class="card-header">
               <img src="https://hosted.inled.es/waydroid.svg" alt="Waydroid" class="comp-logo" />
               <h3>{t.comparison.waydroid.name}</h3>
             </div>
+            <md-divider></md-divider>
             <div class="card-body">
               <p class="desc">{t.comparison.waydroid.desc}</p>
-              <div class="vs-divider">VS</div>
-              <p class="diff"><i class="fa-solid fa-check gradient-icon"></i> {t.comparison.waydroid.diff}</p>
+              <p class="diff">
+                <span class="material-symbols-rounded check-icon">check</span>
+                <span>{t.comparison.waydroid.diff}</span>
+              </p>
             </div>
           </div>
 
           <!-- Scrcpy -->
-          <div class="glass-card comparison-card">
+          <div class="m3-card">
+            <md-elevation></md-elevation>
             <div class="card-header">
               <img src="https://hosted.inled.es/Scrcpy_logo.svg.png" alt="Scrcpy" class="comp-logo" />
               <h3>{t.comparison.scrcpy.name}</h3>
             </div>
+            <md-divider></md-divider>
             <div class="card-body">
               <p class="desc">{t.comparison.scrcpy.desc}</p>
-              <div class="vs-divider">VS</div>
-              <p class="diff"><i class="fa-solid fa-check gradient-icon"></i> {t.comparison.scrcpy.diff}</p>
+              <p class="diff">
+                <span class="material-symbols-rounded check-icon">check</span>
+                <span>{t.comparison.scrcpy.diff}</span>
+              </p>
             </div>
           </div>
         </div>
@@ -144,141 +161,166 @@ const t = {
       <!-- Screenshots Section -->
       <section id="screenshots" class="screenshots-section">
         <h2 class="section-title">
-          <span class="gradient-text">{t.nav.screenshots}</span>
+          {t.nav.screenshots}
         </h2>
         <div class="screenshot-showcase">
           <div class="screenshot-container">
+            <md-elevation></md-elevation>
             <img src="https://hosted.inled.es/apps-droidtux-integradas.png" alt="DroidTux Integrated Apps" class="main-screenshot" />
-            <div class="screenshot-caption">{lang === 'es' ? 'Apps integradas como ventanas nativas' : 'Apps integrated as native windows'}</div>
+            <div class="screenshot-caption">{lang === 'es' ? 'Apps integradas como ventanas nativas' : 'Apps integrated as native desktop windows'}</div>
           </div>
+
           <div class="screenshot-container">
+            <md-elevation></md-elevation>
             <img src="https://hosted.inled.es/apps-droidtux-demo2.png" alt="DroidTux Demo" class="main-screenshot" />
-            <div class="screenshot-caption">{lang === 'es' ? 'Multitarea real entre Android y Linux' : 'Real multitasking between Android and Linux'}</div>
+            <div class="screenshot-caption">{lang === 'es' ? 'Multitarea real entre Android y Linux' : 'Multi-window multitasking between Android phone and Linux'}</div>
           </div>
         </div>
       </section>
 
       <!-- Compatibility & Installation Section -->
-      <section id="compat" class="compat-section">
-        <h2 class="section-title">
-          <span class="gradient-text">{t.compat.title}</span>
-        </h2>
-        <div class="distro-grid">
-          <div class="distro-item" data-distro="debian">
-            <img src="https://hosted.inled.es/debian.svg" alt="Debian" />
-            <span>{t.compat.debian}</span>
-          </div>
-          <div class="distro-item" data-distro="fedora">
-            <img src="https://hosted.inled.es/Fedora_logo.svg" alt="Fedora" />
-            <span>{t.compat.fedora}</span>
-          </div>
-          <div class="distro-item" data-distro="arch">
-            <img src="https://hosted.inled.es/archlinux-logo.png" alt="Arch Linux" />
-            <span>{t.compat.arch}</span>
-          </div>
-        </div>
-        <p class="compat-hint">{t.compat.hint}</p>
-        <div class="install-cards">
-          <div class="install-toggle" id="install-debian">
-            <div class="install-card glass-card">
-              <div class="terminal-header">
-                <div class="dots"><span></span><span></span><span></span></div>
-                <span class="terminal-title">{t.install.debian.title}</span>
-              </div>
-              <div class="terminal-body">
+      <section id="install" class="install-section">
+        <h2 class="section-title">{t.install.title}</h2>
+        
+        <div class="install-container">
+          <md-elevation></md-elevation>
+          <md-tabs active-tab-index="0" id="distro-tabs">
+            <md-primary-tab>
+              <img slot="icon" src="https://hosted.inled.es/debian.svg" class="tab-distro-icon" alt="" />
+              {t.compat.debian}
+            </md-primary-tab>
+            <md-primary-tab>
+              <img slot="icon" src="https://hosted.inled.es/Fedora_logo.svg" class="tab-distro-icon" alt="" />
+              {t.compat.fedora}
+            </md-primary-tab>
+            <md-primary-tab>
+              <img slot="icon" src="https://hosted.inled.es/archlinux-logo.png" class="tab-distro-icon" alt="" />
+              {t.compat.arch}
+            </md-primary-tab>
+          </md-tabs>
+
+          <div class="install-panels">
+            <!-- Debian -->
+            <div class="install-panel active">
+              <div class="code-box">
+                <md-elevation></md-elevation>
                 <code>{t.install.debian.command}</code>
+                <md-outlined-button class="copy-btn">
+                  <span slot="icon" class="material-symbols-rounded">content_copy</span>
+                  Copy
+                </md-outlined-button>
               </div>
-              <p class="install-note">{t.install.debian.instructions}</p>
-              <div class="requirement-tag">
-                <i class="fa-solid fa-circle-info"></i> {t.install.requirements}
-              </div>
+              <p class="install-note" style="margin-top: 1.5rem;">{t.install.debian.instructions}</p>
             </div>
-          </div>
-          <div class="install-toggle" id="install-fedora">
-            <div class="install-card glass-card">
-              <div class="terminal-header">
-                <div class="dots"><span></span><span></span><span></span></div>
-                <span class="terminal-title">{t.install.fedora.title}</span>
-              </div>
-              <div class="terminal-body">
+
+            <!-- Fedora -->
+            <div class="install-panel">
+              <div class="code-box">
+                <md-elevation></md-elevation>
                 <code>{t.install.fedora.command}</code>
+                <md-outlined-button class="copy-btn">
+                  <span slot="icon" class="material-symbols-rounded">content_copy</span>
+                  Copy
+                </md-outlined-button>
               </div>
-              <p class="install-note">{t.install.fedora.instructions}</p>
-              <div class="requirement-tag">
-                <i class="fa-solid fa-circle-info"></i> {t.install.requirements}
+              <p class="install-note" style="margin-top: 1.5rem;">{t.install.fedora.instructions}</p>
+            </div>
+
+            <!-- Arch -->
+            <div class="install-panel">
+              <div class="code-box">
+                <md-elevation></md-elevation>
+                <code>{t.install.arch.command}</code>
+                <md-outlined-button class="copy-btn">
+                  <span slot="icon" class="material-symbols-rounded">content_copy</span>
+                  Copy
+                </md-outlined-button>
+              </div>
+              <p class="install-note" style="margin-top: 1.5rem; margin-bottom: 1.5rem;">{t.install.arch.instructions}</p>
+              <div class="install-warn install-note">
+                <span class="material-symbols-rounded warn-icon">warning</span>
+                <span>{t.install.arch.note}</span>
               </div>
             </div>
           </div>
-          <div class="install-toggle" id="install-arch">
-            <div class="install-card glass-card">
-              <div class="terminal-header">
-                <div class="dots"><span></span><span></span><span></span></div>
-                <span class="terminal-title">{t.install.arch.title}</span>
-              </div>
-              <div class="terminal-body">
-                <code>{t.install.arch.command}</code>
-              </div>
-              <p class="install-note">{t.install.arch.instructions}</p>
-              <div class="requirement-tag">
-                <i class="fa-solid fa-circle-info"></i> {t.install.requirements}
-              </div>
-              <p class="install-note install-warn">
-                <i class="fa-solid fa-triangle-exclamation"></i> {t.install.arch.note}
-              </p>
-            </div>
+
+          <div class="requirement-tag">
+            <span class="material-symbols-rounded info-icon">info</span>
+            <span>{t.install.requirements}</span>
           </div>
         </div>
       </section>
 
       <!-- Complementary Section -->
-      <section class="complement-section">
+      <section class="complements-section">
         <h2 class="section-title">
-          <span class="gradient-text">{t.complement.title}</span>
+          {t.complement.title}
         </h2>
-        <p class="section-subtitle">{t.complement.desc}</p>
+        <p class="complements-subtitle">{t.complement.desc}</p>
         
-        <div class="complement-grid">
-          <a href="https://kdeconnect.kde.org/" target="_blank" class="glass-card complement-card">
+        <div class="complements-grid">
+          <a href="https://kdeconnect.kde.org/" target="_blank" rel="noopener" class="m3-card complement-card">
+            <md-elevation></md-elevation>
             <img src="https://hosted.inled.es/KDE_connectLogo.png" alt="KDE Connect" />
             <h3>{t.complement.kde}</h3>
           </a>
-          <a href="https://github.com/GSConnect/gnome-shell-extension-gsconnect" target="_blank" class="glass-card complement-card">
+          <a href="https://github.com/GSConnect/gnome-shell-extension-gsconnect" target="_blank" rel="noopener" class="m3-card complement-card">
+            <md-elevation></md-elevation>
             <img src="https://hosted.inled.es/gsconnect.png" alt="GSConnect" />
             <h3>{t.complement.gs}</h3>
           </a>
         </div>
       </section>
-
     </main>
-
-    <footer class="page-footer">
-      <div class="support-badge">
-        <i class="fa-solid fa-heart gradient-icon"></i>
-        <span>Made by Inled Group</span>
-      </div>
-    </footer>
   </div>
 </Layout>
 
 <script>
-  document.querySelectorAll('.distro-item').forEach(function(item) {
-    item.addEventListener('click', function() {
-      var distro = this.dataset.distro;
-      var target = document.getElementById('install-' + distro);
-      if (!target) return;
-      var isActive = this.classList.contains('active');
-      document.querySelectorAll('.distro-item.active').forEach(function(el) {
-        el.classList.remove('active');
+  import '@material/web/button/filled-button.js';
+  import '@material/web/button/outlined-button.js';
+  import '@material/web/tabs/tabs.js';
+  import '@material/web/tabs/primary-tab.js';
+  import '@material/web/divider/divider.js';
+  import '@material/web/chips/chip-set.js';
+  import '@material/web/chips/assist-chip.js';
+  import '@material/web/elevation/elevation.js';
+
+  function initInstallToggles() {
+    const tabs = document.getElementById('distro-tabs');
+    const panels = document.querySelectorAll('.install-panel');
+    
+    if (tabs) {
+      tabs.addEventListener('change', () => {
+        const activeIdx = (tabs as any).activeTabIndex;
+        panels.forEach((panel, idx) => {
+          panel.classList.toggle('active', idx === activeIdx);
+        });
       });
-      document.querySelectorAll('.install-toggle.visible').forEach(function(el) {
-        el.classList.remove('visible');
+    }
+
+    // Copy command code logic
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const container = this.closest('.code-box');
+        if (!container) return;
+        const codeEl = container.querySelector('code');
+        if (!codeEl) return;
+        const codeText = codeEl.innerText.trim();
+
+        navigator.clipboard.writeText(codeText).then(() => {
+          const originalHTML = this.innerHTML;
+          this.innerHTML = '<span slot="icon" class="material-symbols-rounded">check</span> Copied!';
+          setTimeout(() => {
+            this.innerHTML = originalHTML;
+          }, 2000);
+        });
       });
-      if (!isActive) {
-        this.classList.add('active');
-        target.classList.add('visible');
-      }
     });
-  });
+  }
+
+  // Bind events on page load and support Astro transitions
+  document.addEventListener('astro:page-load', initInstallToggles);
+  initInstallToggles();
 </script>
 
 <style>
@@ -287,142 +329,248 @@ const t = {
     display: none !important;
   }
 
-  :root {
-    --dt-primary: #3DDC84; /* Android Green */
-    --dt-secondary: #073042;
-    --glass-bg: rgba(20, 20, 25, 0.6);
-    --glass-border: rgba(61, 220, 132, 0.2);
-    --text-color: #ffffff;
-    --text-muted: rgba(255, 255, 255, 0.6);
-  }
-
+  /* MD3 Base Theme Tokens */
   .droidtux-page {
-    background-color: #050505;
-    background-image: 
-      radial-gradient(circle at 20% 20%, rgba(61, 220, 132, 0.05) 0%, transparent 40%),
-      radial-gradient(circle at 80% 80%, rgba(7, 48, 66, 0.1) 0%, transparent 40%);
-    color: var(--text-color);
+    --md-sys-color-primary: #3DDC84; /* Android Green */
+    --md-sys-color-on-primary: #00391c;
+    --md-sys-color-primary-container: #00532d;
+    --md-sys-color-on-primary-container: #82f7a9;
+    
+    --md-sys-color-surface: #111412;
+    --md-sys-color-on-surface: #e1e3df;
+    --md-sys-color-on-surface-variant: #a2aba4;
+    --md-sys-color-surface-container: #1b1e1c;
+    --md-sys-color-surface-container-high: #242926;
+    --md-sys-color-background: #0a0d0b;
+    --md-sys-color-on-background: #e1e3df;
+    --md-sys-color-outline: #88938c;
+    --md-sys-color-outline-variant: #3f4942;
+    
+    /* Typography tokens - inherit site-wide font family (Ubuntu) */
+    --md-sys-typescale-label-large-font: 'Ubuntu', system-ui, -apple-system, sans-serif;
+    --md-sys-typescale-body-large-font: 'Ubuntu', system-ui, -apple-system, sans-serif;
+    --md-sys-typescale-body-medium-font: 'Ubuntu', system-ui, -apple-system, sans-serif;
+    --md-sys-typescale-title-large-font: 'Ubuntu', system-ui, -apple-system, sans-serif;
+    --md-sys-typescale-headline-large-font: 'Ubuntu', system-ui, -apple-system, sans-serif;
+    
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
     min-height: 100vh;
-    font-family: 'Inter', -apple-system, sans-serif;
-    padding-bottom: 50px;
+    font-family: var(--md-sys-typescale-body-large-font);
+    padding-bottom: 80px;
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(61, 220, 132, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 90% 80%, rgba(7, 48, 66, 0.08) 0%, transparent 50%);
   }
 
-  .gradient-icon {
-    background: linear-gradient(135deg, var(--dt-primary), #00ff88);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  /* Evita que los resets globales (* { padding: 0; margin: 0; }) rompan los componentes de Material Web */
+  md-filled-button,
+  md-outlined-button,
+  md-tabs,
+  md-primary-tab,
+  md-assist-chip,
+  md-divider,
+  md-elevation {
+    padding: revert !important;
+    margin: revert !important;
+  }
+
+  /* Custom typography inheritance and premium MD3 button size/weight tokens */
+  md-filled-button, md-outlined-button {
+    font-family: var(--md-sys-typescale-label-large-font) !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 24px !important;
+    height: 48px !important;
+    box-sizing: border-box !important;
+    --md-filled-button-container-height: 48px;
+    --md-outlined-button-container-height: 48px;
+    --md-filled-button-label-text-size: 15px;
+    --md-outlined-button-label-text-size: 15px;
+    --md-filled-button-label-text-weight: 700;
+    --md-outlined-button-label-text-weight: 700;
+  }
+
+  /* Spacing between icon and text inside host-flexed buttons */
+  md-filled-button .material-symbols-rounded, 
+  md-outlined-button .material-symbols-rounded {
+    font-size: 20px !important;
+    margin-right: 8px !important;
     display: inline-block;
+    line-height: 1;
+    vertical-align: middle;
   }
 
-  .gradient-text {
-    background: linear-gradient(135deg, var(--dt-primary), #00ff88);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  md-primary-tab, md-assist-chip {
+    font-family: var(--md-sys-typescale-label-large-font) !important;
   }
 
-  /* Hero Section */
+  md-primary-tab {
+    flex: 1; /* Distribuye las pestañas de forma proporcional a lo ancho de la barra */
+    --md-primary-tab-active-indicator-color: var(--md-sys-color-primary);
+    --md-primary-tab-active-label-text-color: var(--md-sys-color-primary);
+    --md-primary-tab-active-icon-color: var(--md-sys-color-primary);
+    --md-primary-tab-label-text-color: var(--md-sys-color-on-surface-variant);
+    --md-primary-tab-icon-color: var(--md-sys-color-on-surface-variant);
+    font-weight: 700;
+  }
+
+  md-tabs {
+    --md-tabs-divider-color: var(--md-sys-color-outline-variant);
+    width: 100%;
+  }
+
+  md-assist-chip {
+    --md-assist-chip-container-color: rgba(255, 255, 255, 0.03);
+    --md-assist-chip-outline-color: var(--md-sys-color-outline-variant);
+    --md-assist-chip-label-text-color: var(--md-sys-color-on-surface);
+  }
+
+  /* Icon styles in page */
+  .material-symbols-rounded {
+    font-family: 'Material Symbols Rounded' !important;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: 'liga';
+  }
+
+  .check-icon {
+    color: var(--md-sys-color-primary);
+    font-size: 20px;
+    margin-top: 0.2rem;
+  }
+
+  .warn-icon {
+    color: #ffbd2e;
+    font-size: 22px;
+  }
+
+  .info-icon {
+    color: var(--md-sys-color-primary);
+    font-size: 22px;
+  }
+
+  .heart-icon {
+    color: #ff5f56;
+    font-size: 20px;
+    z-index: 2;
+  }
+
+  /* Structural elements */
   .hero-section {
-    padding-top: 160px;
-    padding-bottom: 100px;
+    padding-top: 140px;
+    padding-bottom: 80px;
     text-align: center;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-logo {
+    width: 140px;
+    height: 140px;
+    margin-bottom: 2.5rem;
   }
 
   .hero-logo img {
-    width: 140px;
-    height: 140px;
-    filter: drop-shadow(0 0 30px rgba(61, 220, 132, 0.3));
-    margin-bottom: 40px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 35px rgba(61, 220, 132, 0.25));
   }
 
   .hero-title {
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 900;
     line-height: 1.1;
-    margin-bottom: 30px;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.04em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 650px;
+    margin-bottom: 3rem;
+    font-weight: 500;
   }
 
   .hero-actions {
     display: flex;
     justify-content: center;
-    gap: 24px;
-    margin-top: 40px;
-  }
-
-  .btn-primary, .btn-outline {
-    padding: 14px 32px;
-    border-radius: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    display: flex;
     align-items: center;
-    gap: 12px;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    gap: 1.5rem;
+    width: 100%;
   }
 
-  .btn-primary {
-    background: var(--dt-primary);
-    color: #000;
-  }
-
-  .btn-outline {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-  }
-
-  .btn-primary:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 20px rgba(61, 220, 132, 0.3);
-  }
-
-  .btn-outline:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--dt-primary);
-    transform: translateY(-4px);
+  .hero-actions a {
+    display: inline-flex;
+    text-decoration: none;
   }
 
   /* Comparison Section */
   .comparison-section {
-    padding: 80px 20px;
-    max-width: 1100px;
+    padding: 80px 24px;
+    max-width: 1000px;
     margin: 0 auto;
   }
 
   .section-title {
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 2.5rem);
     font-weight: 800;
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 4rem;
+    letter-spacing: -0.02em;
   }
 
   .comparison-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    flex-wrap: wrap;
   }
 
-  .glass-card {
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 40px;
-    backdrop-filter: blur(12px);
-    transition: transform 0.3s;
+  .comparison-grid .m3-card {
+    width: 100%;
+    max-width: 450px;
   }
 
-  .comparison-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--dt-primary);
+  .m3-card {
+    position: relative;
+    background: var(--md-sys-color-surface-container-low);
+    border-radius: var(--md-sys-shape-corner-medium, 12px);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    --md-elevation-level: 1;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .m3-card:hover {
+    --md-elevation-level: 2;
+    transform: translateY(-4px);
   }
 
   .card-header {
     display: flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 30px;
+    gap: 1.25rem;
+    z-index: 2;
   }
 
   .comp-logo {
@@ -432,336 +580,275 @@ const t = {
   }
 
   .card-header h3 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
+    margin: 0;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-grow: 1;
+    z-index: 2;
   }
 
   .card-body .desc {
-    color: var(--text-muted);
+    color: var(--md-sys-color-on-surface-variant);
     line-height: 1.6;
-    margin-bottom: 24px;
-    font-size: 1.05rem;
+    margin: 0;
+    font-size: 1rem;
   }
 
-  .vs-divider {
-    font-weight: 900;
-    font-size: 0.8rem;
-    color: var(--dt-primary);
-    text-align: center;
-    margin: 20px 0;
-    position: relative;
-    opacity: 0.5;
-  }
-
-  .vs-divider::before, .vs-divider::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background: var(--glass-border);
-  }
-
-  .vs-divider::before { left: 0; }
-  .vs-divider::after { right: 0; }
-
-  .diff {
+  .card-body .diff {
     font-weight: 600;
-    line-height: 1.5;
     color: #fff;
+    line-height: 1.5;
+    margin: 0;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
   }
 
   /* Screenshots Section */
   .screenshots-section {
-    padding: 80px 20px;
-    max-width: 1200px;
+    padding: 80px 24px;
+    max-width: 1100px;
     margin: 0 auto;
   }
 
   .screenshot-showcase {
     display: flex;
     flex-direction: column;
-    gap: 60px;
+    gap: 4rem;
   }
 
   .screenshot-container {
+    position: relative;
+    background: var(--md-sys-color-surface-container-low);
+    border-radius: var(--md-sys-shape-corner-medium, 12px);
+    padding: 1.5rem;
     text-align: center;
+    --md-elevation-level: 1;
+    transition: transform 0.3s ease;
   }
 
   .main-screenshot {
     width: 100%;
-    border-radius: 20px;
-    border: 1px solid var(--glass-border);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    transition: transform 0.5s ease;
+    border-radius: var(--md-sys-shape-corner-medium, 12px);
+    display: block;
+    z-index: 2;
+    position: relative;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .main-screenshot:hover {
-    transform: scale(1.02);
+  .screenshot-container:hover .main-screenshot {
+    transform: scale(1.01);
   }
 
   .screenshot-caption {
-    margin-top: 20px;
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  /* Compatibility Section */
-  .compat-section {
-    padding: 80px 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .distro-grid {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-  }
-
-  .distro-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-    padding: 20px;
-    border-radius: 16px;
-    transition: all 0.3s;
-    min-width: 120px;
-    border: 1px solid transparent;
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: var(--md-sys-color-on-surface-variant);
+    font-weight: 600;
+    z-index: 2;
     position: relative;
   }
 
-  .distro-item img {
-    width: 64px;
-    height: 64px;
+  /* Installation Section */
+  .install-section {
+    padding: 80px 24px;
+    max-width: 750px;
+    margin: 0 auto;
+  }
+
+  .install-container {
+    position: relative;
+    background: var(--md-sys-color-surface-container-low);
+    border-radius: var(--md-sys-shape-corner-medium, 12px);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    --md-elevation-level: 1;
+  }
+
+  .tab-distro-icon {
+    width: 24px;
+    height: 24px;
     object-fit: contain;
-    filter: grayscale(0.3);
-    transition: all 0.3s;
+    margin-right: 0.5rem;
   }
 
-  .distro-item span {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    transition: color 0.3s;
+  .install-panels {
+    z-index: 2;
   }
 
-  .distro-item:hover img {
-    filter: grayscale(0);
-    transform: scale(1.1);
+  .install-panel {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
   }
 
-  .distro-item:hover span {
-    color: #fff;
+  .install-panel.active {
+    display: block;
   }
 
-  .distro-item.active {
-    background: rgba(61, 220, 132, 0.08);
-    border-color: rgba(61, 220, 132, 0.2);
-  }
-
-  .distro-item.active img {
-    filter: grayscale(0);
-  }
-
-  .distro-item.active span {
-    color: var(--dt-primary);
-  }
-
-  .distro-item::after {
-    content: '\f078';
-    font-family: 'Font Awesome 6 Free';
-    font-weight: 900;
-    font-size: 0.7rem;
-    color: var(--dt-primary);
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-
-  .distro-item:hover::after,
-  .distro-item.active::after {
-    opacity: 1;
-  }
-
-  .compat-hint {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    opacity: 0.5;
-    margin-bottom: 30px;
-  }
-
-  .install-toggle {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.3s;
-    opacity: 0;
-    margin-bottom: 0;
-  }
-
-  .install-toggle.visible {
-    max-height: 400px;
-    opacity: 1;
-    margin-bottom: 20px;
-  }
-
-  .install-warn {
-    color: #ffbd2e !important;
-    font-size: 0.85rem;
+  .code-box {
+    position: relative;
+    background: #000;
+    border-radius: var(--md-sys-shape-corner-small, 8px);
+    padding: 1.5rem 2rem;
     display: flex;
     align-items: center;
-    gap: 8px;
-    border-top: 1px solid rgba(255, 189, 46, 0.15);
-    margin-top: 0;
-    padding-top: 16px;
+    justify-content: space-between;
+    gap: 1.5rem;
+    z-index: 2;
+    --md-elevation-level: 1;
   }
 
-  .install-warn i {
-    font-size: 1rem;
-  }
-
-  /* Install Card styles */
-  .install-card {
-    padding: 0;
-    overflow: hidden;
-  }
-
-  .terminal-header {
-    background: #1a1a1a;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    border-bottom: 1px solid #333;
-  }
-
-  .dots {
-    display: flex;
-    gap: 8px;
-  }
-
-  .dots span {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-  }
-
-  .dots span:nth-child(1) { background: #ff5f56; }
-  .dots span:nth-child(2) { background: #ffbd2e; }
-  .dots span:nth-child(3) { background: #27c93f; }
-
-  .terminal-title {
-    font-size: 0.8rem;
-    color: #888;
-    font-family: monospace;
-  }
-
-  .terminal-body {
-    padding: 30px;
-    background: #0c0c0c;
-  }
-
-  .terminal-body code {
+  .code-box code {
     font-family: 'Fira Code', monospace;
-    color: var(--dt-primary);
-    font-size: 1.2rem;
+    color: var(--md-sys-color-primary);
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    word-break: break-all;
+  }
+
+  .copy-btn {
+    flex-shrink: 0 !important; /* Previene que flexbox deforme y aplaste el botón en resoluciones bajas */
+    height: 40px !important;
+    padding: 0 16px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
   .install-note {
-    padding: 24px 30px;
-    color: var(--text-muted);
+    font-size: 0.95rem;
+    color: var(--md-sys-color-on-surface-variant);
     line-height: 1.6;
+    margin: 0;
+  }
+
+  .install-warn {
+    color: #ffbd2e;
+    font-weight: 500;
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    border-top: 1px solid rgba(255, 189, 46, 0.15);
+    padding-top: 1.25rem;
+  }
+
+  .install-warn .warn-icon {
+    margin-top: 0.1rem;
   }
 
   .requirement-tag {
-    margin: 0 30px 30px 30px;
-    background: rgba(61, 220, 132, 0.1);
+    background: rgba(61, 220, 132, 0.08);
     border: 1px solid rgba(61, 220, 132, 0.2);
-    padding: 12px 20px;
-    border-radius: 12px;
-    color: var(--dt-primary);
+    padding: 1rem 1.5rem;
+    border-radius: var(--md-sys-shape-corner-small, 8px);
+    color: var(--md-sys-color-primary);
     font-size: 0.9rem;
     font-weight: 600;
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    z-index: 2;
   }
 
-  /* Complementary Section */
-  .complement-section {
-    padding: 80px 20px;
-    max-width: 1000px;
+  /* Complements Section */
+  .complements-section {
+    padding: 80px 24px;
+    max-width: 900px;
     margin: 0 auto;
     text-align: center;
   }
 
-  .section-subtitle {
-    color: var(--text-muted);
-    margin-bottom: 40px;
+  .complements-subtitle {
     font-size: 1.1rem;
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 3rem;
   }
 
-  .complement-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
+  .complements-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
   }
 
   .complement-card {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
     text-decoration: none;
-    color: white;
-  }
-
-  .complement-card img {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
+    color: inherit;
+    width: 100%;
+    max-width: 320px;
+    align-items: center; /* Centrar elementos horizontalmente */
+    text-align: center;
   }
 
   .complement-card h3 {
-    font-size: 1.2rem;
+    margin: 0;
+    font-size: 1.25rem;
     font-weight: 700;
   }
 
-  .complement-card:hover {
-    transform: translateY(-5px);
-    background: rgba(61, 220, 132, 0.05);
+  .complement-card img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    z-index: 2;
   }
 
   /* Footer */
   .page-footer {
-    padding: 60px 20px;
+    padding: 60px 24px;
     display: flex;
     justify-content: center;
   }
 
   .support-badge {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    background: var(--md-sys-color-surface-container);
     border-radius: 50px;
     padding: 12px 24px;
     display: flex;
     align-items: center;
     gap: 12px;
     font-weight: 600;
+    font-size: 0.9rem;
+    --md-elevation-level: 1;
+  }
+
+  .support-badge span {
+    z-index: 2;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   @media (max-width: 768px) {
     .hero-actions {
       flex-direction: column;
-      align-items: center;
-    }
-    .btn-primary, .btn-outline {
       width: 100%;
-      max-width: 300px;
-      justify-content: center;
+      align-items: stretch;
+      max-width: 320px;
+    }
+
+    .install-container {
+      padding: 1.5rem;
+    }
+
+    .terminal-body {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .copy-btn {
+      align-self: flex-end;
     }
   }
 </style>

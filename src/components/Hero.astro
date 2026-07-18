@@ -1,34 +1,59 @@
 ---
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
-import ProductCarousel from './ProductCarousel.astro';
+import { apps } from '../config/apps';
+import { saas } from '../config/saas';
+import SocialLinks from './SocialLinks.astro';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 
-const stats = [
-  { value: 60, label: t('stats.apps'), suffix: '+' },
-  { value: 100, label: t('stats.users'), suffix: '%' },
-];
+const allProducts = [...saas, ...apps].filter(p => !p.archive);
 ---
 
 <section class="hero" id="hero">
-  <div class="hero-content">
-    <h1 class="hero-title">{t('hero.title')}</h1>
-    <p class="hero-subtitle">{t('hero.subtitle')}</p>
-    
-    <!-- Eliminada esta sección pero la dejo por si en el futuro es útil. Ya no es veraz el poner que todo el mundo esté contento por que enhabiendo errores no siemre va a estar todo el mundo contento y respecto a la cantidad es más importante la calidad. -->
-   <!--  <div class="hero-carousel-wrapper">
-      <ProductCarousel />
-    </div> 
+  <!-- Fogonazo Overlay -->
+  <div class="flash-overlay"></div>
 
-    <div class="hero-stats">
-      {stats.map(stat => (
-        <div class="stat-item">
-          <span class="stat-value">{stat.value}{stat.suffix}</span>
-          <span class="stat-label">{stat.label}</span>
-        </div>
-      ))}
-    </div> -->
+  <!-- ESTADO 1: INTRO (Escritura palabra por palabra con desenfoque) -->
+  <div class="intro-container">
+    <h1 class="intro-title">{t('hero.title')}</h1>
+    <p class="intro-subtitle">{t('hero.subtitle')}</p>
+  </div>
+
+  <!-- ESTADO 2: CASCADA DE ICONOS INCLINADOS (Acelera hasta el fogonazo) -->
+  <div class="matrix-container" data-count={allProducts.length}>
+    <div class="matrix-track">
+      <!-- Se generará dinámicamente en JS según la resolución de la pantalla -->
+    </div>
+  </div>
+
+  <!-- Plantilla HTML para clonar las columnas dinámicamente en JS -->
+  <template id="matrix-col-template">
+    <div class="matrix-column" data-dir="1">
+      {/* Repetimos los iconos para que haya suficiente altura para el scroll infinito */}
+      {Array.from({ length: 4 }).map(() => 
+        allProducts.map(p => (
+          <div class="matrix-card">
+            <img src={p.icon} alt="" class="matrix-icon" />
+          </div>
+        ))
+      )}
+    </div>
+  </template>
+
+  <!-- ESTADO 3: HERO FINAL (Título, subtítulo, redes sociales y scroll hint) -->
+  <div class="final-hero-container">
+    <h1 class="final-title">{t('hero.title')}</h1>
+    <p class="final-subtitle">{t('hero.subtitle')}</p>
+    
+    <div class="final-socials">
+      <SocialLinks />
+    </div>
+
+    <div class="scroll-hint">
+      <span class="scroll-dot"></span>
+      <span class="scroll-text">{lang === 'es' ? 'Desliza para explorar' : 'Scroll to explore'}</span>
+    </div>
   </div>
 </section>
 
@@ -47,14 +72,174 @@ const stats = [
     background: rgba(0, 0, 0, 0.45);
   }
 
-  .hero-content {
+  /* Fogonazo */
+  .flash-overlay {
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .flash-overlay.flash-active {
+    animation: flashAnimation 0.8s ease-out forwards;
+  }
+
+  @keyframes flashAnimation {
+    0% {
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+      background: #ffffff;
+      box-shadow: 0 0 100px 50px rgba(255, 255, 255, 0.5);
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  /* Estado 1: Intro */
+  .intro-container {
     position: relative;
     z-index: 2;
     text-align: center;
     width: 100%;
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .hero-title {
+  .intro-container.fade-out {
+    opacity: 0;
+    filter: blur(20px);
+    transform: scale(0.98);
+  }
+
+  .intro-title {
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    color: #fff;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .intro-subtitle {
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 850px;
+    margin: 0 auto;
+    line-height: 1.6;
+    padding: 0 2rem;
+    font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+
+  :global(.intro-word) {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(15px) scale(0.95);
+    display: inline-block;
+    margin-right: 0.35rem; /* Previene que las palabras se junten */
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .intro-container.active :global(.intro-word) {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+  }
+
+  /* Estado 2: Cascada de iconos inclinados (Efecto Matrix) */
+  .matrix-container {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .matrix-container.visible {
+    opacity: 0.35; /* Visibilidad óptima para servir de fondo/medio plano sin molestar */
+  }
+
+  .matrix-track {
+    display: flex;
+    gap: 2rem;
+    width: auto; /* Se auto-adaptará según el número de columnas generadas dinámicamente */
+    transform: rotate(-15deg) skewX(-8deg) scale(1.05);
+    transform-origin: center center;
+    will-change: transform;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .matrix-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    will-change: transform;
+  }
+
+  .matrix-card {
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+  }
+
+  .matrix-icon {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  /* Estado 3: Hero Final */
+  .final-hero-container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    display: none; /* Evita que descoloque el alineado flex del intro en el inicio */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(15px);
+    pointer-events: none;
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .final-hero-container.visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    pointer-events: auto;
+  }
+
+  .final-title {
     font-size: clamp(4rem, 15vw, 10rem);
     font-weight: 900;
     letter-spacing: -0.05em;
@@ -62,78 +247,77 @@ const stats = [
     margin-bottom: 1.5rem;
     color: #fff;
     text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .hero-subtitle {
+  .final-subtitle {
     font-size: clamp(1.1rem, 2.5vw, 1.4rem);
     color: #fff;
     max-width: 850px;
-    margin: 0 auto 1.5rem auto;
+    margin: 0 auto 2.5rem auto;
     line-height: 1.5;
     padding: 0 2rem;
-    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.2s backwards;
     font-weight: 500;
     text-shadow: 0 2px 10px rgba(0,0,0,0.5), 0 0 20px rgba(0,0,0,0.3);
   }
 
-  .hero-carousel-wrapper {
-    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s backwards;
-    width: 100%;
-    margin: 3rem 0;
-  }
-
-  .hero-stats {
+  .final-socials {
     display: flex;
     justify-content: center;
-    gap: 5rem;
-    margin-top: 2rem;
-    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.6s backwards;
+    margin-bottom: 2rem;
   }
 
-  .stat-item {
+  .scroll-hint {
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .stat-value {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #fff;
-    line-height: 1;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  }
-
-  .stat-label {
-    font-size: 0.8rem;
-    color: #fff;
-    text-transform: uppercase;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
     letter-spacing: 0.15em;
-    margin-top: 0.5rem;
-    font-weight: 600;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+    font-weight: 700;
+    pointer-events: none;
   }
 
-  @keyframes fadeInDown {
-    from {
-      opacity: 0;
-      transform: translateY(-40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .scroll-dot {
+    width: 20px;
+    height: 32px;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    position: relative;
   }
 
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
+  .scroll-dot::before {
+    content: '';
+    width: 4px;
+    height: 8px;
+    background: #fff;
+    border-radius: 2px;
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: scrollMouse 1.8s infinite ease-in-out;
+  }
+
+  .scroll-text {
+    opacity: 0.7;
+    font-size: 0.65rem;
+  }
+
+  @keyframes scrollMouse {
+    0% {
+      top: 4px;
       opacity: 1;
-      transform: translateY(0);
+    }
+    50% {
+      top: 16px;
+      opacity: 0.3;
+    }
+    100% {
+      top: 4px;
+      opacity: 1;
     }
   }
 
@@ -142,25 +326,221 @@ const stats = [
       padding: 10rem 0 4rem 0;
     }
     
-    .hero-title {
+    .intro-title {
+      font-size: clamp(2.5rem, 10vw, 4.5rem);
+    }
+
+    .final-title {
       font-size: clamp(3.5rem, 12vw, 6rem);
     }
 
-    .hero-subtitle {
+    .intro-subtitle,
+    .final-subtitle {
       font-size: 1.1rem;
     }
 
-    .hero-stats {
-      gap: 3rem;
-      margin-top: 3rem;
+    .matrix-track {
+      gap: 1rem;
     }
 
-    .stat-value {
-      font-size: 2rem;
+    .matrix-card {
+      width: 56px;
+      height: 56px;
+      padding: 0.8rem;
+      border-radius: 12px;
     }
 
-    .stat-label {
-      font-size: 0.7rem;
+    .scroll-hint {
+      margin-top: 2rem;
     }
   }
 </style>
+
+<script is:inline>
+  function startHeroAnimation() {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    
+    // Evitar doble ejecución en view transitions
+    if (hero.dataset.animated) return;
+    hero.dataset.animated = '1';
+
+    const intro = hero.querySelector('.intro-container');
+    const titleEl = hero.querySelector('.intro-title');
+    const subtitleEl = hero.querySelector('.intro-subtitle');
+    const flash = hero.querySelector('.flash-overlay');
+    const matrix = hero.querySelector('.matrix-container');
+    const track = hero.querySelector('.matrix-track');
+    const template = hero.querySelector('#matrix-col-template');
+    const finalHero = hero.querySelector('.final-hero-container');
+
+    if (!intro || !titleEl || !subtitleEl || !flash || !matrix || !track || !template || !finalHero) return;
+
+    // --- GENERAR COLUMNAS DINÁMICAMENTE SEGÚN LA ANCHURA DE PANTALLA ---
+    const isMobile = window.innerWidth <= 768;
+    const cardWidth = isMobile ? 56 : 80;
+    const gapVal = isMobile ? 16 : 32; // Coincide con gap: 1rem y gap: 2rem en CSS
+    const colWidth = cardWidth + gapVal;
+    
+    // Multiplicamos por 2.2 para garantizar cobertura completa con la rotación inclinada
+    const neededWidth = window.innerWidth * 2.2;
+    const colCount = Math.ceil(neededWidth / colWidth);
+
+    track.innerHTML = ''; // Limpiar track estático
+
+    for (let i = 0; i < colCount; i++) {
+      const clone = template.content.cloneNode(true).querySelector('.matrix-column');
+      if (clone) {
+        const dir = i % 2 === 0 ? 1 : -1;
+        clone.dataset.dir = dir.toString();
+        track.appendChild(clone);
+      }
+    }
+
+    const columns = track.querySelectorAll('.matrix-column');
+    if (!columns.length) return;
+
+    // --- FASE 1: DIVISION POR PALABRAS Y REVELADO ---
+    const titleText = titleEl.textContent.trim();
+    titleEl.innerHTML = '';
+    const titleWords = titleText.split(/\s+/);
+    titleWords.forEach((word, idx) => {
+      const span = document.createElement('span');
+      span.className = 'intro-word';
+      span.textContent = word + ' ';
+      span.style.transitionDelay = `${idx * 150}ms`;
+      titleEl.appendChild(span);
+    });
+
+    const subtitleText = subtitleEl.textContent.trim();
+    subtitleEl.innerHTML = '';
+    const subtitleWords = subtitleText.split(/\s+/);
+    const titleDelay = titleWords.length * 150;
+    subtitleWords.forEach((word, idx) => {
+      const span = document.createElement('span');
+      span.className = 'intro-word';
+      span.textContent = word + ' ';
+      span.style.transitionDelay = `${titleDelay + 150 + idx * 70}ms`;
+      subtitleEl.appendChild(span);
+    });
+
+    const introDuration = titleDelay + 150 + subtitleWords.length * 70;
+
+    // Activar intro
+    requestAnimationFrame(() => {
+      intro.classList.add('active');
+    });
+
+    // --- CONFIGURACIÓN DE FASE 2 (MATRIX CAROUSEL ACELERADO) ---
+    const productCount = parseInt(matrix.dataset.count) || 12;
+    let animFrameId = null;
+    let speed = 1.5;
+    let maxSpeed = 38;
+    let angle = -15;
+    let targetAngle = -30;
+    let skew = -8;
+    let targetSkew = -18;
+    let scale = 1.05;
+    let targetScale = 1.3;
+    let isMatrixActive = false;
+
+    // Inicializar desfases de columnas de forma escalonada para evitar sincronización
+    const colOffsets = Array.from(columns).map((_, idx) => idx * -220);
+
+    function updateMatrix() {
+      if (!isMatrixActive) return;
+
+      // Aceleración lineal del carrusel
+      if (speed < maxSpeed) {
+        speed += 0.18;
+      }
+
+      // Interpolación de ángulos y escala según la velocidad alcanzada
+      const ratio = (speed - 1.5) / (maxSpeed - 1.5);
+      const currentAngle = angle + (targetAngle - angle) * ratio;
+      const currentSkew = skew + (targetSkew - skew) * ratio;
+      const currentScale = scale + (targetScale - scale) * ratio;
+
+      track.style.transform = `rotate(${currentAngle}deg) skewX(${currentSkew}deg) scale(${currentScale})`;
+
+      // Calcular dimensiones dinámicamente según el primer card renderizado
+      const card = columns[0].querySelector('.matrix-card');
+      const style = window.getComputedStyle(columns[0]);
+      const gap = parseFloat(style.gap) || 32;
+      const itemHeight = card.offsetHeight + gap;
+      const unitHeight = itemHeight * productCount;
+
+      columns.forEach((col, idx) => {
+        const dir = parseInt(col.dataset.dir);
+        let offset = colOffsets[idx];
+
+        // Desplazamiento
+        offset += speed * dir;
+
+        // Loop infinito sin saltos
+        if (dir > 0) {
+          if (offset >= unitHeight) {
+            offset -= unitHeight;
+          }
+        } else {
+          if (offset <= -unitHeight) {
+            offset += unitHeight;
+          }
+        }
+
+        colOffsets[idx] = offset;
+        col.style.transform = `translate3d(0px, ${offset}px, 0px)`;
+      });
+
+      animFrameId = requestAnimationFrame(updateMatrix);
+    }
+
+    // Esperar a que se escriba todo + pausa de lectura, y luego desvanecer la intro y empezar matrix
+    setTimeout(() => {
+      intro.classList.remove('active');
+      intro.classList.add('fade-out');
+      
+      // Esperar a que acabe el desvanecimiento para lanzar el carrusel
+      setTimeout(() => {
+        intro.style.display = 'none';
+
+        // Mostrar cascada
+        matrix.classList.add('visible');
+        isMatrixActive = true;
+        animFrameId = requestAnimationFrame(updateMatrix);
+
+        // Aceleración durante 2.2 segundos y luego FOGONAZO
+        setTimeout(() => {
+          // Detener el bucle de la cascada
+          isMatrixActive = false;
+          if (animFrameId) cancelAnimationFrame(animFrameId);
+
+          // Lanzar fogonazo blanco
+          flash.classList.add('flash-active');
+          
+          // Ocultar la cascada al instante en el pico del fogonazo
+          matrix.classList.remove('visible');
+          matrix.style.display = 'none';
+
+          // Al desvanecerse el fogonazo, revelar Hero final
+          setTimeout(() => {
+            finalHero.style.display = 'flex';
+            // Forzar reflow del navegador para asegurar la transición de opacidad/blur/translate
+            finalHero.offsetHeight;
+            finalHero.classList.add('visible');
+          }, 200);
+
+        }, 2200); // Duración de la fase de aceleración
+
+      }, 800);
+
+    }, introDuration + 1500);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', startHeroAnimation);
+  } else {
+    startHeroAnimation();
+  }
+  document.addEventListener('astro:page-load', startHeroAnimation);
+</script>
