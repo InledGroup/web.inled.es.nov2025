@@ -10,7 +10,7 @@
   },
   {
     "appId": "codexbar-gnome",
-    "version": "17.1",
+    "version": "20",
     "date": "2026-08-18",
     "changes": {
       "es": "Contribuciones muy útiles de la comunidad y nueva funcionalidad para testear renderizado de datos.",
