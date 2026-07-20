@@ -233,11 +233,17 @@ const t = useTranslations(lang);
   .logo-item {
     padding: 6px;
     position: relative;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    overflow: hidden;
   }
 
   .logo-img, .logo-home-icon {
     width: 32px;
     height: 32px;
+    max-width: 32px;
+    max-height: 32px;
     object-fit: contain;
     position: absolute;
     top: 50%;
