@@ -52,6 +52,16 @@ export const saas: SaasProduct[] = [
     link: "https://mymetadata.inled.es",
   },
   {
+    id: "mdpedia",
+    name: "MDPEDIA",
+    description: {
+      es: "Conocimiento para la era de los agentes. La Wikipedia para Agentes. Nunca antes creado",
+      en: "Knowledge for the AI Era. The Wikipedia for AI Agents.",
+    },
+    icon: "https://hosted.inled.es/mdpedia.png",
+    link: "https://mdpedia.inled.es",
+  },
+  {
     id: "edgeai",
     name: "Edge AI",
     description: {

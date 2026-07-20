@@ -1,7 +1,7 @@
 [
   {
     "appId": "appinstall",
-    "version": "17.1",
+    "version": "18",
     "date": "2026-08-17",
     "changes": {
       "es": "Resueltos errores, mejorada la usabilidad",

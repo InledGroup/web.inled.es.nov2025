@@ -94,7 +94,7 @@ const archivedProducts = [
         subtitle={lang === 'es' ? 'Los límites de los sistemas operativos desaparecen gracias a estas aplicaciones, listas para que comiences a disfrutar de una experiencia del futuro' : 'The limits of operating systems disappear thanks to these applications, ready for you to start enjoying an experience of the future.'}The limits of operating systems disappear thanks to these applications, ready for you to start enjoying an experience of the future
  />
       <SaaSShowcase
-        ids={['codexbar-gnome', 'ai-exporter', 'web2skill', 'vozes']}
+        ids={['codexbar-gnome', 'mdpedia', 'ai-exporter', 'web2skill', 'vozes']}
         title={lang === 'es' ? 'Exprime las capacidades de la IA' : 'Unleash the capabilities of AI'}
         subtitle={lang === 'es' ? 'Todas estas apps son privadas y te permiten exprimir las capacidades de la IA' : 'All these apps are private and allow you to take advantage of the capabilities of AI'}
       />
@@ -133,7 +133,7 @@ const archivedProducts = [
     <BlogSection />
     <Contribute />
     <Changelog />
-    <Planning />
+   <!-- <Planning />  -->
 
 
 
@@ -194,7 +194,7 @@ const archivedProducts = [
 
 
   <NewsletterSection />
-  <NewsletterNotification />
+  <!-- <NewsletterNotification /> --> 
 
 </Layout>
 
@@ -448,7 +448,6 @@ const archivedProducts = [
       });
 
       if (progressRafId) cancelAnimationFrame(progressRafId);
-      if (currentIndex === count - 1) return;
 
       const currentFill = sections[currentIndex].querySelector('.sec-progress-fill');
       if (currentFill) {
@@ -471,10 +470,10 @@ const archivedProducts = [
     function startAutoRotation() {
       if (isVerticalOrMobile()) return;
       if (autoTimer) clearTimeout(autoTimer);
-      if (currentIndex === count - 1) return;
 
       autoTimer = setTimeout(() => {
-        scrollToShowcase(currentIndex + 1);
+        const next = currentIndex + 1;
+        scrollToShowcase(next >= count ? 0 : next);
       }, AUTO_DELAY);
     }
 
@@ -562,19 +561,13 @@ const archivedProducts = [
       cursor.classList.remove('active');
     });
 
-    // Intersection observer to control rotation and progress bar animation
+    // Intersection observer to control progress bar animation
     const observer = new IntersectionObserver((entries) => {
-      if (isVerticalOrMobile()) {
-        if (autoTimer) clearTimeout(autoTimer);
-        if (progressRafId) cancelAnimationFrame(progressRafId);
-        return;
-      }
+      if (isVerticalOrMobile()) return;
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           updateProgressBars();
-          startAutoRotation();
         } else {
-          if (autoTimer) clearTimeout(autoTimer);
           if (progressRafId) cancelAnimationFrame(progressRafId);
           const currentFill = sections[currentIndex].querySelector('.sec-progress-fill');
           if (currentFill) {

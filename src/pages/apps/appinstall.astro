@@ -6,577 +6,382 @@ import { getLangFromLocals } from '../../i18n/utils';
 const lang = getLangFromLocals(Astro.locals);
 
 const translations = {
-    es: {
-        title: "AppInstall - Tu gestor de paquetes todo en uno para cualquier distro Linux",
-        description: "Instala, desinstala y gestiona paquetes de forma profesional. Soporte para APT, Homebrew, DNF, PWAs y más.",
-        badge: "V17.1 ya disponible con correcciones de errores",
-        heroTitle: "TU GESTOR DE PAQUETES <br/><span class=\"gradient-text\">TODO EN UNO</span>",
-        heroDesc: "AppInstall es la herramienta definitiva para gestionar tu software en Linux. Olvídate de la terminal para gestionar aplicaciones y paquetes. Hazlo todo con un clic.",
-        btnDownload: "Descargar AppInstall",
-        btnFeatures: "Descubre más!",
-        gridTitle: "Todo lo que hacías con comandos, ahora con clics",
-        feat1Title: "Desinstalador",
-        feat1Desc: "Elimina aplicaciones que las stores no te listan, como paquetes del sistema y apps no graficas.",
-        feat2Title: "Busca apps",
-        feat2Desc: "Encuentra cualquier aplicación en los repositorios de APT, Homebrew, DNF, Flathub, Snap y AUR desde una sola interfaz.",
-        feat3Title: "Creador de PWAs",
-        feat3Desc: "Convierte cualquier sitio web en una aplicación de escritorio nativa con un solo clic. No pesa más, no te instala Electron.",
-        feat4Title: "Soporta todas las distros",
-        feat4Desc: "Disfruta de la comodidad de Appinstall en cualquier distro como Debian, Fedora o Arch",
-        feat5Title: "Instalador sencillo",
-        feat5Desc: "Instala cualquier paquete fácilmente",
-        feat6Title: "Limpia basura y soluciona errores",
-        feat6Desc: "Corrige instalaciones fallidas con un clic. Borra basura de tu sistema con otro clic.",
-        demo: "Ver demo",
-        searchBadge: "Novedad",
-        searchTitle: "Busca en cualquier sitio, todo desde uno",
-        searchDesc: "¿Cansado de buscar comandos para instalar una app? AppInstall busca en los repositorios de <strong>APT, Homebrew, DNF, Pacman, AUR, Flathub y Snap</strong> simultáneamente. Encuentra la app que buscas, como si fuera la App Store.",
-        searchL1: "Detección automática de tu distro.",
-        searchL2: "Resultados instantáneos de múltiples fuentes.",
-        searchL3: "Instalación en un clic desde los resultados.",
-        uninstallTitle: "Desinstalación de cualquier cosa",
-        uninstallDesc: "Las tiendas de apps de linux solo te listan apps gráficas, pero linux está lleno de apps que no ves... Pues con Appinstall las desinstalas con un clic, listandose todas desde apt, dnf, homebrew, pwas, appimages...",
-        uninstallL1: "Cualquier app instalada.",
-        uninstallL2: "deb, dnf, appimage, homebrew, snap, flathub, pacman, aur.",
-        integrationTitle: "Hazlo predeterminado a 3 clics",
-        integrationDesc: "",
-        integrationL1: "Asociación de archivos automática.",
-        integrationL2: "Menú contextual \"Abrir con...\".",
-        integrationL3: "Interfaz nativa y ligera.",
-        finalTitle: "Empieza a usar AppInstall hoy",
-        finalDesc: "Compatible con Ubuntu, Debian, Fedora y Arch Linux.",
-        btnFinalDownload: "Descargar",
-        oss: "Gratuito y de Código Abierto"
+  es: {
+    meta: {
+      title: "AppInstall - Tu gestor de paquetes todo en uno para cualquier distro Linux",
+      description: "Instala, desinstala y gestiona paquetes de forma profesional. Soporte para APT, Homebrew, DNF, PWAs y mas."
     },
-    en: {
-        title: "AppInstall - Your All-in-One Package Manager for Any Linux Distribution",
-        description: "Professionally install, uninstall, and manage packages. Full support for APT, Homebrew, DNF, PWAs, Pacman, AUR, Flathub, Snap, and more.",
-        badge: "V17.1 Now Available with Bug Fixes",
-        heroTitle: "YOUR ALL-IN-ONE <br/><span class=\"gradient-text\">PACKAGE MANAGER</span>",
-        heroDesc: "AppInstall is the ultimate tool for managing your software on Linux. Forget the terminal for managing applications and packages. Do it all with a single click.",
-        btnDownload: "Download AppInstall",
-        btnFeatures: "Explore Features",
-        gridTitle: "Everything You Did with Commands, Now with Clicks",
-        feat1Title: "Uninstaller",
-        feat1Desc: "Remove applications that app stores don't list, such as system packages and non-graphical apps.",
-        feat2Title: "Search Apps",
-        feat2Desc: "Find any application in APT, Homebrew, DNF, Flathub, Snap, and AUR repositories from a single interface.",
-        feat3Title: "PWA Creator",
-        feat3Desc: "Convert any website into a native desktop application with a single click. No extra weight, no Electron installation.",
-        feat4Title: "Multi-Distro Support",
-        feat4Desc: "Enjoy AppInstall on any distribution like Debian, Fedora, or Arch Linux.",
-        feat5Title: "Simple Installer",
-        feat5Desc: "Easily install any package with a single click.",
-        feat6Title: "Clean Junk & Fix Errors",
-        feat6Desc: "Fix failed installations with one click. Clear junk from your system with another.",
-        demo: "Watch Demo",
-        searchBadge: "New",
-        searchTitle: "Search Anywhere, Everything in One Place",
-        searchDesc: "Tired of searching for commands to install an app? AppInstall searches <strong>APT, Homebrew, DNF, Pacman, AUR, Flathub, and Snap</strong> repositories simultaneously. Find the app you're looking for, like a true App Store.",
-        searchL1: "Automatic distro detection.",
-        searchL2: "Instant results from multiple sources.",
-        searchL3: "One-click installation from search results.",
-        uninstallTitle: "Uninstall Anything",
-        uninstallDesc: "Linux app stores only list graphical apps, but Linux is full of hidden applications... With AppInstall, uninstall everything with one click. Includes apt, dnf, homebrew, PWAs, AppImages, and more...",
-        uninstallL1: "Any installed application.",
-        uninstallL2: "deb, dnf, appimage, homebrew, snap, flathub, pacman, aur.",
-        integrationTitle: "Make It Default in 3 Clicks",
-        integrationDesc: "",
-        integrationL1: "Automatic file association.",
-        integrationL2: "\"Open with...\" contextual menu.",
-        integrationL3: "Native and lightweight interface.",
-        finalTitle: "Start Using AppInstall Today",
-        finalDesc: "Compatible with Ubuntu, Debian, Fedora, and Arch Linux.",
-        btnFinalDownload: "Download",
-        oss: "Free and Open Source"
+    hero: {
+      title: "Tu gestor de paquetes, todo en uno",
+      desc: "AppInstall es la herramienta definitiva para gestionar tu software en Linux. Olvidate de la terminal para gestionar aplicaciones y paquetes. Hazlo todo con un clic.",
+      download: "Descargar AppInstall",
+      repo: "Ver en GitHub"
+    },
+    grid: {
+      title: "Todo lo que hacias con comandos, ahora con clics",
+      items: [
+        { title: "Desinstalador", desc: "Elimina aplicaciones que las stores no te listan, como paquetes del sistema y apps no graficas." },
+        { title: "Busca apps", desc: "Encuentra cualquier aplicacion en los repositorios de APT, Homebrew, DNF, Flathub, Snap y AUR desde una sola interfaz." },
+        { title: "Creador de PWAs", desc: "Convierte cualquier sitio web en una aplicacion de escritorio nativa con un solo clic. No pesa mas, no te instala Electron." },
+        { title: "Soporta todas las distros", desc: "Disfruta de la comodidad de Appinstall en cualquier distro como Debian, Fedora o Arch." },
+        { title: "Instalador sencillo", desc: "Instala cualquier paquete facilmente." },
+        { title: "Limpia basura y soluciona errores", desc: "Corrige instalaciones fallidas con un clic. Borra basura de tu sistema con otro clic." }
+      ]
+    },
+    demo: {
+      title: "En accion",
+      desc: "Mira como funciona AppInstall."
+    },
+    final: {
+      title: "Empieza a usar AppInstall hoy",
+      desc: "Compatible con Ubuntu, Debian, Fedora y Arch Linux.",
+      download: "Descargar",
+      oss: "Gratuito y de Codigo Abierto"
     }
+  },
+  en: {
+    meta: {
+      title: "AppInstall - Your All-in-One Package Manager for Any Linux Distribution",
+      description: "Professionally install, uninstall, and manage packages. Full support for APT, Homebrew, DNF, PWAs, and more."
+    },
+    hero: {
+      title: "Your all-in-one package manager",
+      desc: "AppInstall is the ultimate tool for managing your software on Linux. Forget the terminal for managing applications and packages. Do it all with a single click.",
+      download: "Download AppInstall",
+      repo: "View on GitHub"
+    },
+    grid: {
+      title: "Everything you did with commands, now with clicks",
+      items: [
+        { title: "Uninstaller", desc: "Remove applications that app stores don't list, such as system packages and non-graphical apps." },
+        { title: "Search Apps", desc: "Find any application in APT, Homebrew, DNF, Flathub, Snap, and AUR repositories from a single interface." },
+        { title: "PWA Creator", desc: "Convert any website into a native desktop application with a single click. No extra weight, no Electron installation." },
+        { title: "Multi-Distro Support", desc: "Enjoy AppInstall on any distribution like Debian, Fedora, or Arch Linux." },
+        { title: "Simple Installer", desc: "Easily install any package with a single click." },
+        { title: "Clean Junk & Fix Errors", desc: "Fix failed installations with one click. Clear junk from your system with another." }
+      ]
+    },
+    demo: {
+      title: "See it in action",
+      desc: "Watch how AppInstall works."
+    },
+    final: {
+      title: "Start using AppInstall today",
+      desc: "Compatible with Ubuntu, Debian, Fedora, and Arch Linux.",
+      download: "Download",
+      oss: "Free and Open Source"
+    }
+  }
 };
 
 const t = translations[lang] || translations.es;
 ---
 
-<Layout title={t.title} description={t.description}>
-    <Header />
-    <main class="swift-page">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container hero-content">
-                <div class="badge fade-up">{t.badge}</div>
-                <h1 class="fade-up" set:html={t.heroTitle}></h1>
-                <p class="hero-desc fade-up">
-                    {t.heroDesc}
-                </p>
-                <div class="hero-btns fade-up">
-                    <a href="#install" class="btn-primary">{t.btnDownload}</a>
-                    <a href="#features" class="btn-secondary">{t.btnFeatures}</a>
-                </div>
+<Layout title={t.meta.title} description={t.meta.description}>
+  <Header />
+
+  <div class="page">
+    <main>
+
+      <!-- Hero -->
+      <section class="hero">
+        <img src="https://hosted.inled.es/swiftinstall-logo.png" alt="AppInstall" class="hero-logo" />
+        <h1 class="hero-title">{t.hero.title}</h1>
+        <p class="hero-desc">{t.hero.desc}</p>
+        <div class="hero-btns">
+          <a href="https://github.com/InledGroup/appinstall/releases/latest" class="pill pill-white">
+            <span class="pill-inner">
+              <i class="fa-solid fa-download"></i>
+              {t.hero.download}
+            </span>
+          </a>
+          <a href="https://github.com/InledGroup/appinstall" class="pill pill-dark">
+            <span class="pill-inner">
+              <i class="fa-brands fa-github"></i>
+              {t.hero.repo}
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- Demo Video 
+      <section class="demo">
+        <div class="demo-wrap">
+          <div class="demo-video">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="AppInstall Demo"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </section> -->
+
+      <!-- Features Grid -->
+      <section class="features" id="features">
+        <h2 class="section-title">{t.grid.title}</h2>
+        <div class="features-grid">
+          {t.grid.items.map((f) => (
+            <div class="feature-card">
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
             </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
-        <!-- Features Grid -->
-        <section id="features" class="features-grid-section">
-            <div class="container">
-                <h2 class="section-title fade-up">{t.gridTitle}</h2>
-                <div class="grid">
-                    <div class="feature-card fade-up">
-                        <div class="icon"><i class="fa-solid fa-trash-can"></i></div>
-                        <h3>{t.feat1Title}</h3>
-                        <p>{t.feat1Desc}</p>
-                       <!-- <a href="#uninstall-detail" class="learn-more">{t.demo} →</a>  -->
-                    </div>
-                    <div class="feature-card fade-up" style="transition-delay: 0.1s;">
-                        <div class="icon"><i class="fa-solid fa-magnifying-glass"></i></div>
-                        <h3>{t.feat2Title}</h3>
-                        <p>{t.feat2Desc}</p>
-                       <!-- <a href="#search-detail" class="learn-more">{t.demo} →</a> -->
-                    </div>
-                    <div class="feature-card fade-up" style="transition-delay: 0.2s;">
-                        <div class="icon"><i class="fa-solid fa-globe"></i></div>
-                        <h3>{t.feat3Title}</h3>
-                        <p>{t.feat3Desc}</p>
-                    </div>
-                    <div class="feature-card fade-up" style="transition-delay: 0.3s;">
-                        <div class="icon"><i class="fa-solid fa-box-open"></i></div>
-                        <h3>{t.feat4Title}</h3>
-                        <p>{t.feat4Desc}</p>
-                    </div>
-                    <div class="feature-card fade-up" style="transition-delay: 0.4s;">
-                        <div class="icon"><i class="fa-solid fa-bolt"></i></div>
-                        <h3>{t.feat5Title}</h3>
-                        <p>{t.feat5Desc}</p>
-                      <!--  <a href="#integration-detail" class="learn-more">{t.demo} →</a> -->
-                    </div>
-                    <div class="feature-card fade-up" style="transition-delay: 0.5s;">
-                        <div class="icon"><i class="fa-solid fa-broom"></i></div>
-                        <h3>{t.feat6Title}</h3>
-                        <p>{t.feat6Desc}</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <!-- Final CTA -->
+      <section class="final">
+        <h2 class="final-title">{t.final.title}</h2>
+        <p class="final-desc">{t.final.desc}</p>
+        <a href="https://github.com/InledGroup/appinstall/releases/latest" class="pill pill-white">
+          <span class="pill-inner">
+            <i class="fa-solid fa-download"></i>
+            {t.final.download}
+          </span>
+        </a>
+        <p class="final-oss">{t.final.oss}</p>
+      </section>
 
-        <!-- Detailed Features with Videos -->
-
-        <!-- Search Detail -->
-       <!-- <section id="search-detail" class="detail-section">
-            <div class="container split">
-                <div class="detail-text fade-up">
-                    <div class="detail-badge">{t.searchBadge}</div>
-                    <h2>{t.searchTitle}</h2>
-                    <p set:html={t.searchDesc}></p>
-                    <ul class="detail-list">
-                        <li><i class="fa-solid fa-check"></i> {t.searchL1}</li>
-                        <li><i class="fa-solid fa-check"></i> {t.searchL2}</li>
-                        <li><i class="fa-solid fa-check"></i> {t.searchL3}</li>
-                    </ul>
-                </div>
-                <div class="detail-video fade-up">
-                    <video autoplay muted loop playsinline poster="https://hosted.inled.es/appinstall-logo.png">
-                        <source src="https://hosted.inled.es/swiftinstall-searchapps.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-        </section>
-
-  
-        <section id="uninstall-detail" class="detail-section alt-bg">
-            <div class="container split reverse">
-                <div class="detail-text fade-up">
-                    <h2>{t.uninstallTitle}</h2>
-                    <p>{t.uninstallDesc}</p>
-                    <ul class="detail-list">
-                        <li><i class="fa-solid fa-check"></i> {t.uninstallL1}</li>
-                        <li><i class="fa-solid fa-check"></i> {t.uninstallL2}</li>
-                    </ul>
-                </div>
-                <div class="detail-video fade-up">
-                    <video autoplay muted loop playsinline poster="https://hosted.inled.es/appinstall-logo.png">
-                        <source src="https://hosted.inled.es/uninstall-swiftinstall.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-        </section>
-
-
-   <section id="integration-detail" class="detail-section">
-            <div class="container split">
-                <div class="detail-text fade-up">
-                    <h2>{t.integrationTitle}</h2>
-                    <p set:html={t.integrationDesc}></p>
-                    <ul class="detail-list">
-                        <li><i class="fa-solid fa-check"></i> {t.integrationL1}</li>
-                        <li><i class="fa-solid fa-check"></i> {t.integrationL2}</li>
-                        <li><i class="fa-solid fa-check"></i> {t.integrationL3}</li>
-                    </ul>
-                </div>
-                <div class="detail-video fade-up">
-                    <video autoplay muted loop playsinline poster="https://hosted.inled.es/appinstall-logo.png">
-                        <source src="https://hosted.inled.es/openwith-swiftinstall.mp4" type="video/mp4">
-                    </video>
-                </div>
-            </div>
-        </section> -->
-
-        
-
-        <section id="install" class="download-section">
-            <div class="container">
-                <div class="download-card fade-up">
-                    <h2>{t.finalTitle}</h2>
-                    <p>{t.finalDesc}</p>
-                    <div class="download-options">
-                        <a href="https://github.com/InledGroup/appinstall/releases/latest" class="btn-download">
-                            <span>{t.btnFinalDownload}</span>
-                        </a>
-                        <p class="subtext">{t.oss}</p>
-                    </div>
-                </div>
-            </div>
-        </section>  
     </main>
+  </div>
 </Layout>
 
-<style>
-    .swift-page {
-        --primary: #5271ff;
-        --secondary: #1c00ff;
-        --accent: #00d2ff;
-        --bg: #000;
-        --card-bg: #0a0a0a;
-        --text: #fff;
-        --text-muted: #a0a0a0;
-        color: var(--text);
-        background: var(--bg);
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-    }
-
-    /* Hero */
-    .hero {
-        padding: 160px 0 100px;
-        text-align: center;
-        background: radial-gradient(circle at 50% 0%, rgba(82, 113, 255, 0.15), transparent 70%);
-    }
-
-    .badge {
-        display: inline-block;
-        padding: 0.5rem 1.2rem;
-        background: rgba(82, 113, 255, 0.1);
-        border: 1px solid rgba(82, 113, 255, 0.3);
-        border-radius: 50px;
-        color: var(--primary);
-        font-weight: 600;
-        font-size: 0.9rem;
-        margin-bottom: 2rem;
-    }
-
-    h1 {
-        font-size: clamp(2.5rem, 8vw, 5rem);
-        font-weight: 800;
-        line-height: 1.1;
-        margin-bottom: 1.5rem;
-    }
-
-    .gradient-text {
-        background: linear-gradient(135deg, var(--primary), var(--accent));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .hero-desc {
-        font-size: 1.25rem;
-        color: var(--text-muted);
-        max-width: 700px;
-        margin: 0 auto 3rem;
-    }
-
-    .hero-btns {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    /* Buttons */
-    .btn-primary {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        padding: 1rem 2.5rem;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 700;
-        transition: transform 0.2s, box-shadow 0.2s;
-        box-shadow: 0 10px 30px rgba(82, 113, 255, 0.3);
-    }
-
-    .btn-primary:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 15px 40px rgba(82, 113, 255, 0.4);
-    }
-
-    .btn-secondary {
-        background: rgba(255, 255, 255, 0.05);
-        color: white;
-        padding: 1rem 2.5rem;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 600;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.2s;
-    }
-
-    .btn-secondary:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Features Grid */
-    .features-grid-section {
-        padding: 100px 0;
-    }
-
-    .section-title {
-        text-align: center;
-        font-size: 2.5rem;
-        margin-bottom: 4rem;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-    }
-
-    .feature-card {
-        background: var(--card-bg);
-        padding: 2.5rem;
-        border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .feature-card:hover {
-        transform: translateY(-10px);
-        border-color: var(--primary);
-    }
-
-    .feature-card .icon {
-        font-size: 2rem;
-        color: var(--primary);
-        margin-bottom: 1.5rem;
-    }
-
-    .feature-card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .feature-card p {
-        color: var(--text-muted);
-        line-height: 1.6;
-        margin-bottom: 1.5rem;
-    }
-
-    .learn-more {
-        color: var(--primary);
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 0.9rem;
-    }
-
-    /* Detail Sections */
-    .detail-section {
-        padding: 120px 0;
-    }
-
-    .alt-bg {
-        background: #050505;
-    }
-
-    .split {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
-    }
-
-    .split.reverse {
-        direction: rtl;
-    }
-
-    .split.reverse .detail-text {
-        direction: ltr;
-    }
-
-    .detail-text h2 {
-        font-size: 3rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .detail-text p {
-        font-size: 1.1rem;
-        color: var(--text-muted);
-        margin-bottom: 2rem;
-    }
-
-    .detail-badge {
-        color: var(--accent);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-weight: 700;
-        font-size: 0.8rem;
-        margin-bottom: 1rem;
-    }
-
-    .detail-list {
-        list-style: none;
-        padding: 0;
-    }
-
-    .detail-list li {
-        display: flex;
-        gap: 1rem;
-        align-items: center;
-        margin-bottom: 1rem;
-        color: #eee;
-    }
-
-    .detail-list i {
-        color: var(--primary);
-    }
-
-    .detail-video {
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        background: #000;
-    }
-
-    .detail-video video {
-        width: 100%;
-        display: block;
-    }
-
-    /* Download Section */
-    .download-section {
-        padding: 100px 0;
-    }
-
-    .download-card {
-        background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-        padding: 5rem 2rem;
-        border-radius: 32px;
-        text-align: center;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .download-card h2 {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-    }
-
-    .download-card p {
-        color: var(--text-muted);
-        margin-bottom: 3rem;
-    }
-
-    .download-options {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-    }
-
-    .btn-download {
-        background: #fff;
-        color: #000;
-        padding: 1.2rem 3rem;
-        border-radius: 12px;
-        text-decoration: none;
-        font-weight: 800;
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        transition: transform 0.2s;
-    }
-
-    .btn-download:hover {
-        transform: scale(1.05);
-    }
-
-    .btn-download i {
-        font-size: 1.5rem;
-    }
-
-    .subtext {
-        font-size: 0.9rem;
-        opacity: 0.6;
-    }
-
-    /* Animations */
-    .fade-up {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    :global(.visible) .fade-up {
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-    /* Responsive */
-    @media (max-width: 968px) {
-        .split {
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            text-align: center;
-        }
-
-        .split.reverse {
-            direction: ltr;
-        }
-
-        .detail-list {
-            display: inline-block;
-            text-align: left;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-        }
-    }
+<style is:global>
+  body { background: #0a0a0a !important; }
 </style>
 
-<script>
-    // Simple intersection observer for animations
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
+<style>
+  :root {
+    --fg: #ffffff;
+    --fg-dim: rgba(255, 255, 255, 0.45);
+    --fg-mid: rgba(255, 255, 255, 0.6);
+    --bg: #0a0a0a;
+    --surface: rgba(255, 255, 255, 0.04);
+    --border: rgba(255, 255, 255, 0.08);
+    --depth-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5), inset 0 4px 12px rgba(0, 0, 0, 0.3);
+    --depth-border: 1px solid rgba(255, 255, 255, 0.06);
+    --radius: 10px;
+    --radius-pill: 9999px;
+  }
 
-    document.querySelectorAll('section').forEach(section => {
-        observer.observe(section);
-    });
+  .page {
+    min-height: 100vh;
+    background: var(--bg);
+    padding-top: 72px;
+    padding-bottom: 60px;
+  }
 
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-</script>
+  /* ============================
+     PILLS
+     ============================ */
+  .pill {
+    display: inline-flex;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+  }
+
+  .pill:hover { transform: translateY(-2px); }
+
+  .pill-inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    position: relative;
+    z-index: 2;
+    border-radius: var(--radius-pill);
+  }
+
+  .pill-white {
+    background: #fff;
+    color: #0a0a0a;
+    box-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+  }
+
+  .pill-white:hover {
+    box-shadow: 0 4px 30px rgba(255, 255, 255, 0.18);
+  }
+
+  .pill-white .pill-inner { color: #0a0a0a; }
+
+  .pill-dark {
+    background: #111;
+    color: var(--fg);
+    box-shadow: var(--depth-shadow);
+    border: var(--depth-border);
+  }
+
+  .pill-dark:hover {
+    box-shadow: var(--depth-shadow), 0 0 20px rgba(255, 255, 255, 0.04);
+  }
+
+  .pill-dark .pill-inner { color: var(--fg); }
+
+  /* ============================
+     HERO
+     ============================ */
+  .hero {
+    padding: 48px 32px 40px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .hero-logo {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 20px rgba(255, 255, 255, 0.08));
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--fg);
+    line-height: 1.2;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--fg-mid);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto 28px;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ============================
+     DEMO VIDEO
+     ============================ */
+  .demo {
+    padding: 16px 32px 48px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .demo-wrap {
+    width: 100%;
+  }
+
+  .demo-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--depth-shadow);
+    border: var(--depth-border);
+    background: #000;
+  }
+
+  .demo-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ============================
+     FEATURES
+     ============================ */
+  .features {
+    padding: 56px 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--fg);
+    text-align: center;
+    margin-bottom: 32px;
+    letter-spacing: -0.01em;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+
+  .feature-card {
+    padding: 24px;
+    background: var(--surface);
+    border: var(--depth-border);
+    box-shadow: var(--depth-shadow);
+    border-radius: var(--radius);
+    transition: border-color 0.3s ease;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+
+  .feature-card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--fg);
+    margin-bottom: 6px;
+  }
+
+  .feature-card p {
+    font-size: 0.85rem;
+    color: var(--fg-mid);
+    line-height: 1.5;
+  }
+
+  /* ============================
+     FINAL CTA
+     ============================ */
+  .final {
+    padding: 56px 32px 48px;
+    text-align: center;
+  }
+
+  .final-title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 8px;
+  }
+
+  .final-desc {
+    font-size: 0.95rem;
+    color: var(--fg-dim);
+    margin-bottom: 28px;
+  }
+
+  .final-oss {
+    font-size: 0.8rem;
+    color: var(--fg-dim);
+    margin-top: 16px;
+  }
+
+  /* ============================
+     RESPONSIVE
+     ============================ */
+  @media (max-width: 768px) {
+    .hero { padding: 32px 20px 32px; }
+    .demo { padding-left: 16px; padding-right: 16px; }
+    .features { padding-left: 16px; padding-right: 16px; }
+    .features-grid { grid-template-columns: 1fr; }
+  }
+</style>

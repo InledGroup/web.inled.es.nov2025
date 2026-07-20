@@ -1,5 +1,19 @@
 # Changelog 
 
+## 2026-07-20
+Dos días de intenso trabajo desde que adopté la decisión de centrarme en los proyectos principales.
+- Eliminando el 70% del AI-slop en la web de Inled
+- Creada [infra.inled.es](https://infra.inled.es) que lista todos los sitios y sistemas que componen la infra de Inled y que no estaban listados hasta ahora.
+- Eliminados más de 20 proyectos tanto en Cloudflare, Firebase y Vercel
+- Asegurada la infraestructura crítica: eliminado sub.inled.es, asegurado con captcha link.inled.es, que además incluye mejoras de apariencia.
+- Solucionado error de DB del repo de apt.inled.es. El error era relacionado con seafari el paquete para arch linux, que no se había subido correctamente.
+- Insuite con mejoras en inlinked e inx con un boton para copiar skill para la ia para que formatee via URL
+- Lanzada versión 20 de Codexbar para GNOME, recuperada una carpeta perdida en el historial, comienzo de uso de tags de version y revisión exhaustiva del codigo.
+- Mejoras de UI/UX en AppInstall y retirados errores de la IA.
+- **Revisiones a fondo del código**: Revisado el código de AppINstall, Codexbar, link.inled.es y la web principal para buscar cualquier error que al usar tanto IA antes se me pasara desapercibido.   
+
+**Llevo jornadas de 14 horas, estos dos ultimos días hasta más de las doce de la noche habiendo emepzado a las 10 de la mañana.**
+
 ## 2026-07-05
 - Solucionados errores críticos de firmas en Arch
 - Seafari ya se actualiza con normalidad
