@@ -1,0 +1,131 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const links = [
+  {
+    title: { es: 'Listado infraestructura', en: 'Infrastructure list' },
+    desc: { es: 'Incluye la lista completa de servicios de Inled que no se ven pero mantienen vivo todo el proyecto', en: 'Includes the complete list of Inled services that are unseen but keep the entire project alive' },
+    href: 'https://infra.inled.es',
+  },
+  {
+    title: { es: 'Status', en: 'Status' },
+    desc: { es: 'Comprueba el estado de todos los sitios y servidores', en: 'Check the status of all sites and servers' },
+    href: 'https://status.inled.es',
+  },
+  {
+    title: { es: 'Documentación', en: 'Documentation' },
+    desc: { es: 'Actualmente bastante incompleta, estoy pensando en cambiar el sitio o pasarlo a GH Wikis', en: 'Currently quite incomplete, Im thinking about changing the site or moving it to GH Wikis' },
+    href: 'https://help.inled.es',
+  },
+  {
+    title: { es: 'Tablero tareas e inicidencias', en: 'Tasks and incidents board' },
+    desc: { es: 'No es el roadmap, son solo tareas de mantenimiento y errores o mejoras a aplicar a apps ya creadas', en: 'It is not the roadmap, it is just maintenance tasks and errors or improvements to apply to apps already created' },
+    href: 'https://github.com/orgs/InledGroup/projects/1/views/1',
+  }
+];
+
+const header = {
+  es: { title: 'Enlaces de interés', subtitle: 'Recursos útiles para la comunidad' },
+  en: { title: 'Useful links', subtitle: 'Resources for the community' },
+}[lang];
+---
+
+<section class="links-section">
+  <div class="links-container">
+    <div class="links-header">
+      <h3 class="links-title">{header.title}</h3>
+      <!--  <p class="links-subtitle">{header.subtitle}</p> -->
+    </div>
+    <div class="links-grid">
+      {links.map(link => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="link-card">
+          <h4 class="link-title">{link.title[lang]}</h4>
+          <p class="link-desc">{link.desc[lang]}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .links-section {
+    padding: 4rem 2rem;
+    background: transparent;
+  }
+
+  .links-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .links-header {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.5rem;
+  }
+
+  .links-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.03em;
+  }
+
+  .links-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0.5rem 0 0 0;
+  }
+
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+  }
+
+  .link-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .link-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .link-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+  }
+
+  .link-desc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .links-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .links-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

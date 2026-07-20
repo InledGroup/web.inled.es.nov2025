@@ -18,6 +18,8 @@ import BlogSection from '../components/BlogSection.astro';
 import Changelog from '../components/Changelog.astro';
 import Planning from '../components/Planning.astro';
 import Contribute from '../components/Contribute.astro';
+import CommunityLinks from '../components/CommunityLinks.astro';
+import IncubatorProjects from '../components/IncubatorProjects.astro';
 import NewsletterNotification from '../components/NewsletterNotification.astro';
 import ContactForm from '../components/ContactForm.astro';
 
@@ -127,13 +129,38 @@ const archivedProducts = [
       <div class="comunidad-header-container">
         <h2 class="comunidad-title">{t('community.title')}</h2>
         <p class="comunidad-subtitle">{t('community.subtitle')}</p>
+        <div class="comunidad-contribute-inline">
+          <div class="contribute-card-inline">
+            <div class="contribute-card-content">
+              <h3 class="contribute-card-title">{t('contribute.title')}</h3>
+              <p class="contribute-card-text">{t('contribute.text')}</p>
+              <p class="contribute-card-warning">{t('contribute.warning')}</p>
+            </div>
+            <div class="contribute-card-actions">
+              <a href="https://discord.com/invite/PSeTkDMnr" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-discord">
+                <i class="fa-brands fa-discord"></i>
+                {t('contribute.discord')}
+              </a>
+              <a href="https://matrix.inled.es" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-matrix">
+                {t('contribute.matrix')}
+              </a>
+              <a href="https://github.com/InledGroup" target="_blank" rel="noopener noreferrer" class="btn-card btn-card-github">
+                <i class="fa-brands fa-github"></i>
+                {t('contribute.github')}
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
-      <AppUpdates />
+
+    <CommunityLinks />
+    <AppUpdates />
     <BlogSection />
-    <Contribute />
+    <IncubatorProjects />
     <Changelog />
    <!-- <Planning />  -->
+    <!-- <Contribute /> -->
 
 
 
@@ -264,6 +291,144 @@ const archivedProducts = [
     color: rgba(255, 255, 255, 0.6);
     margin: 0.75rem 0 0 0;
     font-weight: 400;
+  }
+
+  .comunidad-contribute-inline {
+    margin-top: 2rem;
+  }
+
+  .contribute-card-inline {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contribute-card-inline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      105deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(255, 255, 255, 0.03) 45%,
+      rgba(255, 255, 255, 0.08) 50%,
+      rgba(255, 255, 255, 0.03) 55%,
+      transparent 60%,
+      transparent 100%
+    );
+    animation: shimmer 4s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes shimmer {
+    0% { left: -100%; }
+    50% { left: 150%; }
+    100% { left: 150%; }
+  }
+
+  .contribute-card-content {
+    flex: 1;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contribute-card-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.02em;
+  }
+
+  .contribute-card-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 0;
+  }
+
+  .contribute-card-warning {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.45);
+    margin: 0;
+    border-left: 2px solid rgba(255, 255, 255, 0.15);
+    padding-left: 0.75rem;
+  }
+
+  .contribute-card-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.4rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .btn-card-discord {
+    background: rgba(88, 101, 242, 0.12);
+    color: #7289da;
+    border: 1px solid rgba(88, 101, 242, 0.3);
+  }
+
+  .btn-card-discord:hover {
+    background: #5865f2;
+    color: #fff;
+    border-color: #5865f2;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(88, 101, 242, 0.3);
+  }
+
+  .btn-card-matrix {
+    background: rgba(13, 189, 139, 0.1);
+    color: #0dbd8b;
+    border: 1px solid rgba(13, 189, 139, 0.25);
+  }
+
+  .btn-card-matrix:hover {
+    background: #0dbd8b;
+    color: #fff;
+    border-color: #0dbd8b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(13, 189, 139, 0.3);
+  }
+
+  .btn-card-github {
+    background: rgba(255, 255, 255, 0.04);
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-card-github:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
   }
 
   .archived-section {

@@ -1,0 +1,193 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const header = {
+  es: { title: 'En la incubadora', subtitle: 'Proyectos en fase muy temprana que aún no están listos para ser presentados. Estos proyectos pueden cancelarse' },
+  en: { title: 'In the incubator', subtitle: 'Projects in a very early phase that are not yet ready to be presented. These projects can be canceled' },
+}[lang];
+
+const projects = [
+  {
+    name: 'PulsarOS',
+    description: {
+      es: 'Alternativa a PearOS y Winux con enfoque en estabilidad y usabilidad. Libre y abierta a la comunidad.',
+      en: 'Alternative to PearOS and Winux with a focus on stability and usability. Free and open to the community.',
+    },
+    icon: 'https://hosted.inled.es/pulsar-logo-simple-sf.png',
+    link: 'https://os.inled.es',
+  },
+  {
+    name: 'Bitshare',
+    description: {
+      es: 'Compartir archivos de manera privada P2P entre navegadores. ',
+      en: 'Share files privately and P2P between browsers',
+    },
+    icon: 'https://bitshare.inled.es/logo.svg',
+    link: 'https://bitshare.inled.es',
+  }
+];
+---
+
+<section class="incubator-section">
+  <div class="incubator-container">
+    <div class="incubator-header">
+      <h2 class="incubator-title">{header.title}</h2>
+      <p class="incubator-subtitle">{header.subtitle}</p>
+    </div>
+
+    <div class="cards-row">
+      {projects.map(p => (
+        <a href={p.link} target="_blank" rel="noopener noreferrer" class="product-card">
+          <div class="card-icon">
+            <img src={p.icon} alt={p.name} loading="lazy" />
+          </div>
+          <h3 class="card-name">{p.name}</h3>
+          <p class="card-desc">{p.description[lang]}</p>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .incubator-section {
+    padding: 4rem 2rem;
+    background: transparent;
+  }
+
+  .incubator-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .incubator-header {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1.5rem;
+  }
+
+  .incubator-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    letter-spacing: -0.03em;
+  }
+
+  .incubator-subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0.5rem 0 0 0;
+    max-width: 600px;
+  }
+
+  .cards-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    align-items: stretch;
+    min-height: 0;
+  }
+
+  .cards-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .product-card {
+    flex: 1;
+    min-width: 320px;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+  }
+
+  .card-icon {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .card-name {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  .card-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  @media (max-width: 1024px), (orientation: portrait) {
+    .cards-row {
+      flex-direction: column;
+      overflow-x: visible;
+      gap: 1.25rem;
+    }
+
+    .product-card {
+      min-width: 0 !important;
+      max-width: 100% !important;
+      width: 100%;
+      flex: 1 1 auto !important;
+      padding: 2rem 1.5rem;
+      gap: 1rem;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+    }
+
+    .card-name {
+      font-size: 1.25rem;
+    }
+
+    .card-desc {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .incubator-section {
+      padding: 3rem 1.5rem;
+    }
+  }
+</style>

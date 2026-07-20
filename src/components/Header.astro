@@ -12,7 +12,8 @@ const t = useTranslations(lang);
   <div class="header-content-wrapper">
     <header class="taskbar">
       <a href="/" class="taskbar-item logo-item" aria-label="Home">
-        <img src="https://hosted.inled.es/INLED_simple-removebg-preview.png" alt="Inled Logo">
+        <img src="https://hosted.inled.es/INLED_simple-removebg-preview.png" alt="Inled Logo" class="logo-img">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-home-icon"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
       </a>
 
       <div class="taskbar-divider"></div>
@@ -231,12 +232,57 @@ const t = useTranslations(lang);
 
   .logo-item {
     padding: 6px;
+    position: relative;
   }
 
-  .logo-item img {
-    width: 100%;
-    height: 100%;
+  .logo-img, .logo-home-icon {
+    width: 32px;
+    height: 32px;
     object-fit: contain;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .logo-img {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate(calc(-50% + 8px), -50%) scale(0.8);
+    pointer-events: none;
+  }
+
+  .logo-home-icon {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .logo-item.loaded .logo-img {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .logo-item.loaded .logo-home-icon {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate(calc(-50% - 8px), -50%) scale(0.8);
+  }
+
+  .logo-item:hover .logo-img {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate(calc(-50% - 8px), -50%) scale(0.8);
+    pointer-events: none;
+  }
+
+  .logo-item:hover .logo-home-icon {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, -50%) scale(1);
   }
 
   .taskbar-divider {
@@ -425,6 +471,13 @@ const t = useTranslations(lang);
     const taskbar = document.querySelector('.taskbar');
     const langSelector = document.querySelector('.lang-selector-container');
     const appsGrid = document.querySelector('.apps-grid-container');
+    const logoItem = document.querySelector('.logo-item') as HTMLElement;
+
+    if (logoItem) {
+      setTimeout(() => {
+        logoItem.classList.add('loaded');
+      }, 1000);
+    }
 
     if (!taskbar) return;
 
