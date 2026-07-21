@@ -4,6 +4,99 @@
     "nodes": [
       {
         "content": {
+          "title": "Mejoras a realizar",
+          "url": "https://github.com/InledGroup/DroidTux/issues/4",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Mejoras a realizar",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Mejoras CLI",
+          "url": "https://github.com/InledGroup/appinstall/issues/4",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Mejoras CLI",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "brand.inled.es actualizar con indicaciones para ia",
+          "url": "https://github.com/InledGroup/web.inled.es.nov2025/issues/7",
+          "state": "OPEN",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "brand.inled.es actualizar con indicaciones para ia",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
           "title": "responsive to mobile",
           "url": "https://github.com/extensions-gnome/extensions-gnome.github.io/issues/1",
           "state": "OPEN",
@@ -433,39 +526,6 @@
       },
       {
         "content": {
-          "title": "Error loading fonts",
-          "url": "https://github.com/InledGroup/office/issues/1",
-          "state": "OPEN",
-          "labels": {
-            "nodes": [
-              {
-                "name": "bug"
-              }
-            ]
-          }
-        },
-        "fieldValues": {
-          "nodes": [
-            {},
-            {},
-            {},
-            {
-              "name": "Backlog",
-              "field": {
-                "name": "Status"
-              }
-            },
-            {
-              "text": "Error loading fonts",
-              "field": {
-                "name": "Title"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "content": {
           "title": "Soporte AUR, Flatpak y Snap",
           "url": "https://github.com/InledGroup/appinstall/issues/1",
           "state": "CLOSED",
@@ -538,60 +598,6 @@
             },
             {
               "text": "add repo once installed",
-              "field": {
-                "name": "Title"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "content": {
-          "title": "dependencias arch + subir a aur",
-          "url": "https://github.com/InledGroup/appinstall/issues/2",
-          "state": "CLOSED",
-          "labels": {
-            "nodes": []
-          }
-        },
-        "fieldValues": {
-          "nodes": [
-            {},
-            {
-              "name": "Done",
-              "field": {
-                "name": "Status"
-              }
-            },
-            {
-              "text": "dependencias arch + subir a aur",
-              "field": {
-                "name": "Title"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "content": {
-          "title": "apt repo",
-          "url": "https://github.com/InledGroup/DroidTux/issues/2",
-          "state": "CLOSED",
-          "labels": {
-            "nodes": []
-          }
-        },
-        "fieldValues": {
-          "nodes": [
-            {},
-            {
-              "name": "Done",
-              "field": {
-                "name": "Status"
-              }
-            },
-            {
-              "text": "apt repo",
               "field": {
                 "name": "Title"
               }
