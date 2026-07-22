@@ -6,7 +6,7 @@
         "content": {
           "title": "Mejoras a realizar",
           "url": "https://github.com/InledGroup/DroidTux/issues/4",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": [
               {
@@ -21,7 +21,7 @@
             {},
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
