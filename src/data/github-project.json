@@ -6,7 +6,7 @@
         "content": {
           "title": "usar fluent ui",
           "url": "https://github.com/InledGroup/mypdf/issues/1",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": []
           }
@@ -15,7 +15,7 @@
           "nodes": [
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
