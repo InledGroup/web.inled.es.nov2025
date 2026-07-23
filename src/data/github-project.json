@@ -4,6 +4,33 @@
     "nodes": [
       {
         "content": {
+          "title": "usar fluent ui",
+          "url": "https://github.com/InledGroup/mypdf/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Backlog",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "usar fluent ui",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
           "title": "Mejoras a realizar",
           "url": "https://github.com/InledGroup/DroidTux/issues/4",
           "state": "CLOSED",
@@ -39,7 +66,7 @@
         "content": {
           "title": "Mejoras CLI",
           "url": "https://github.com/InledGroup/appinstall/issues/4",
-          "state": "OPEN",
+          "state": "CLOSED",
           "labels": {
             "nodes": [
               {
@@ -54,40 +81,13 @@
             {},
             {},
             {
-              "name": "Backlog",
+              "name": "Done",
               "field": {
                 "name": "Status"
               }
             },
             {
               "text": "Mejoras CLI",
-              "field": {
-                "name": "Title"
-              }
-            }
-          ]
-        }
-      },
-      {
-        "content": {
-          "title": "brand.inled.es actualizar con indicaciones para ia",
-          "url": "https://github.com/InledGroup/web.inled.es.nov2025/issues/7",
-          "state": "OPEN",
-          "labels": {
-            "nodes": []
-          }
-        },
-        "fieldValues": {
-          "nodes": [
-            {},
-            {
-              "name": "Backlog",
-              "field": {
-                "name": "Status"
-              }
-            },
-            {
-              "text": "brand.inled.es actualizar con indicaciones para ia",
               "field": {
                 "name": "Title"
               }
