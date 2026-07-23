@@ -124,7 +124,28 @@ text-decoration: none;
 transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 ```
 
+Variantes de color:
+```css
+/* Discord */
+background: rgba(88, 101, 242, 0.12);
+color: #7289da;
+border: 1px solid rgba(88, 101, 242, 0.3);
+/* Hover → background: #5865f2; box-shadow: 0 4px 20px rgba(88, 101, 242, 0.3); */
 
+/* Matrix */
+background: rgba(13, 189, 139, 0.1);
+color: #0dbd8b;
+border: 1px solid rgba(13, 189, 139, 0.25);
+/* Hover → background: #0dbd8b; box-shadow: 0 4px 20px rgba(13, 189, 139, 0.3); */
+
+/* GitHub / neutro */
+background: rgba(255, 255, 255, 0.04);
+color: rgba(255, 255, 255, 0.8);
+border: 1px solid rgba(255, 255, 255, 0.1);
+/* Hover → background: rgba(255, 255, 255, 0.1); */
+```
+
+Hover general: `transform: translateY(-2px)` + `box-shadow` con el color correspondiente.
 
 ## Transiciones
 
@@ -256,4 +277,5 @@ border-radius: 50%;
 - **Siempre** incluir `-webkit-backdrop-filter` junto a `backdrop-filter`
 - **Siempre** usar `text-decoration: none` en enlaces
 - Las cards y secciones usan `position: relative; overflow: hidden` para contener pseudo-elementos
+- Iconos: Font Awesome (`fa-brands`, `fa-solid`) o SVGs inline con `stroke="currentColor"`
 - Imágenes de productos: `object-fit: contain` nunca `cover`

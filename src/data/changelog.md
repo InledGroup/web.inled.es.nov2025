@@ -1,5 +1,14 @@
 # Changelog 
 
+## 2026-07-23  
+Otro día más de la continua jornada de mejora de las aplicaciones ya existentes.
+- Seafari ahora es un clon mejor
+- Droidtux tiene mejoras significativas, nuevas funciones y correccion de errores
+- Appinstal ahora es capaz de abrir paquetes desde fuera de la app cuando es invocado por el explorador de archivos.
+- Nueva abstracción de cli de Appinstall llamada PKM
+- MyPDF rediseñado con fluent UI
+
+
 ## 2026-07-20
 Dos días de intenso trabajo desde que adopté la decisión de centrarme en los proyectos principales.
 - Eliminando el 70% del AI-slop en la web de Inled

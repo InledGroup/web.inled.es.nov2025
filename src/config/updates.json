@@ -1,20 +1,29 @@
 [
   {
-    "appId": "appinstall",
-    "version": "18",
-    "date": "2026-08-17",
+    "appId": "seafari",
+    "version": "2",
+    "date": "2026-07-23",
     "changes": {
-      "es": "Resueltos errores, mejorada la usabilidad",
-      "en": "Fixed bugs, improved usability"
+      "es": "Ahora sí que es un buen clon. Quedan cosas por pulir, pero está precioso.",
+      "en": "Now that's a good clone. There are still things to polish, but it is beautiful."
     }
-  },
+  }, 
   {
-    "appId": "codexbar-gnome",
-    "version": "20",
-    "date": "2026-08-18",
+    "appId": "appinstall",
+    "version": "20.15",
+    "date": "2026-07-23",
     "changes": {
-      "es": "Contribuciones muy útiles de la comunidad y nueva funcionalidad para testear renderizado de datos.",
-      "en": "Very useful contributions from the community and new functionality to test data rendering."
+      "es": "Nueva abrstracción en CLI de gestor de paquetes multi-distro agnóstico. Solucionado error de abrir archivos con Appinstall pero que no mostrara la ventana para instalarlos.",
+      "en": "New agnostic multi-distro package manager CLI abstraction. Fixed error opening files with Appinstall but not showing the window to install them."
+    }
+  }, 
+  {
+    "appId": "droidtux",
+    "version": "1.0.35",
+    "date": "2026-07-23",
+    "changes": {
+      "es": "Muchas nuevas features. Camara virtual, redirección de audio, solución de errores...",
+      "en": "Many new features. Virtual camera, audio redirection, error resolution..."
     }
   }
 ]
