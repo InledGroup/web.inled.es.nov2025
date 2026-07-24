@@ -1,11 +1,11 @@
 [
   {
     "appId": "seafari",
-    "version": "2",
+    "version": "2.5",
     "date": "2026-07-23",
     "changes": {
-      "es": "Ahora sí que es un buen clon. Quedan cosas por pulir, pero está precioso.",
-      "en": "Now that's a good clone. There are still things to polish, but it is beautiful."
+      "es": "Ahora sí que es un clon",
+      "en": "Now that's a good clone."
     }
   }, 
   {

@@ -71,11 +71,8 @@ const jsonLd = {
           <!-- Beta Warning & System Theme Requirement Notice (Apple styled alert banner) -->
           <!-- Aviso de Versión Beta y Requisito de Tema de Sistema (estilo banner de alerta Apple) -->
           <div class="warning-banner">
-            <div class="warning-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            </div>
             <div class="warning-content">
-              <strong>Beta & Work in Progress:</strong> Some UI elements are still unpolished.
+              <strong>Beta. v2.5 is out!</strong> This version stands out for being almost a clone, with more features that replicate those of Safari. There may still be things left, we encourage you to contribute!
             </div>
           </div>
 
@@ -93,7 +90,7 @@ const jsonLd = {
           <!-- Video Presentation: Resting on surface with dropshadow, no browser frame chrome -->
           <!-- Presentación de vídeo: apoyado directamente en el lienzo con sombra, sin el cromo del navegador -->
           <div class="video-container-raw">
-            <video src="https://hosted.inled.es/seafari-demo.mp4" autoplay loop muted playsinline></video>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/ogqPpcaFSjY?si=HrvvmDJA4HOBpM90" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
         </div>
       </section>
@@ -103,19 +100,14 @@ const jsonLd = {
       <section class="tile tile-light">
         <div class="section-container">
           <div class="apple-grid-split">
-            <!-- Left Side: Bold Solid Color Graphic Card (Firefox Extensions - mostly free) -->
-            <!-- Lado Izquierdo: Tarjeta de color sólido (Extensiones Firefox - en su mayoría gratuitas) -->
             <div class="graphic-card-solid">
-              <div class="solid-card-badge">Extensions Ecosystem</div>
-              <h3 class="solid-card-heading">Thousands of Firefox extensions. Mostly free.</h3>
+              <div class="solid-card-badge">v2.5</div>
+              <h3 class="solid-card-heading">Looks like Safari!</h3>
               <p class="solid-card-paragraph">
-                Access the vast, unrestricted Firefox Add-ons library. Enjoy password managers, developer toolkits, and themes without the proprietary restrictions of Chrome or Safari's paywalled ecosystems.
+                The new version 2.5 stands out for its complete similarity to Safari and maximum compatibility thanks to its Firefox core
               </p>
               <div class="solid-card-icon-container">
                 <svg xmlns="http://www.w3.org/2000/svg" class="solid-card-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-              </div>
-              <div class="plus-action-indicator">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
               </div>
             </div>
 
@@ -309,7 +301,7 @@ const jsonLd = {
       <!-- Sección del Repositorio de Actualizaciones (Lienzo Claro - sección clara alternante) -->
       <section class="tile tile-light repo-update-section">
         <div class="section-container text-center">
-          <span class="tile-badge badge-blue">Updates Portal</span>
+          <span class="tile-badge badge-blue">Repo</span>
           <h2 class="tile-title">Make sure you are updated, configure the Inled repo</h2>
           <p class="tile-text-narrow">
             Receive seamless automatic browser upgrades alongside your normal system updates. Follow the setup instructions to add Inled's package repository to your Linux distribution.
@@ -326,10 +318,10 @@ const jsonLd = {
       <!-- Sección 4: Llamada final a la acción (Lienzo Oscuro `#252527`) -->
       <section class="tile tile-dark-final">
         <div class="section-container text-center cta-container">
-          <h2 class="hero-title">Browse with elegance and freedom.</h2>
+          <h2 class="hero-title">Browse with elegance, as always</h2>
           <!-- White colored tagline/subtitle -->
           <!-- Subtítulo / tagline de color blanco -->
-          <p class="hero-tagline tagline-white">Set sail with Seafari. Secure, private, and fully customizable.</p>
+          <p class="hero-tagline tagline-white">Start a new browsing experience with Seafari.</p>
 
           <div class="cta-actions justify-center">
             <a href="https://github.com/InledGroup/seafari/releases" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
@@ -1057,8 +1049,8 @@ const jsonLd = {
     display: inline-flex;
     align-items: center;
     gap: 16px;
-    background-color: rgba(245, 158, 11, 0.07);
-    border: 1px solid rgba(245, 158, 11, 0.25);
+    background-color: rgba(11, 190, 245, 0.07);
+    border: 1px solid rgba(0, 157, 255, 0.25);
     border-radius: 12px; /* rounded.md style */
     padding: 16px 24px;
     text-align: left;
@@ -1073,7 +1065,7 @@ const jsonLd = {
   }
 
   .warning-icon {
-    color: #f59e0b;
+    color: #0b97f5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1085,7 +1077,7 @@ const jsonLd = {
   }
 
   .warning-highlight {
-    color: #b45309;
+    color: #0967b4;
     font-weight: 600;
   }
 
@@ -1163,7 +1155,7 @@ const jsonLd = {
     display: flex;
   }
 
-  .video-container-raw video {
+  .video-container-raw iframe {
     width: 100%;
     height: 100%;
     object-fit: cover;
