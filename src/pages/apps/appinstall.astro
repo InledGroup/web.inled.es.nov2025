@@ -8,8 +8,8 @@ const lang = getLangFromLocals(Astro.locals);
 const translations = {
   es: {
     meta: {
-      title: "AppInstall - Tu gestor de paquetes todo en uno para cualquier distro Linux",
-      description: "Instala, desinstala y gestiona paquetes de forma profesional. Soporte para APT, Homebrew, DNF, PWAs y mas."
+      title: "AppInstall - Your All-in-One Package Manager for Any Linux Distribution",
+      description: "Professionally install, uninstall, and manage packages. Full support for APT, Homebrew, DNF, PWAs, and more.."
     },
     hero: {
       title: "Tu gestor de paquetes, todo en uno",
@@ -27,6 +27,15 @@ const translations = {
         { title: "Instalador sencillo", desc: "Instala cualquier paquete facilmente." },
         { title: "Limpia basura y soluciona errores", desc: "Corrige instalaciones fallidas con un clic. Borra basura de tu sistema con otro clic." }
       ]
+    },
+    appstore: {
+      title: "Descubre la nueva App Store",
+      desc: "Appinstall estrena nuevo look y funcionalidades!"
+    },
+    pkm: {
+      pre: "Descubre",
+      title: "PKM",
+      desc: "El gestor de paquetes por terminal que es agnostico al sistema operativo y no tiene sintaxis. Viene integrado con AppInstall, solo ve a la CLI y escribe pkm help. Sin guiones, sin complicaciones. Es como si hablaras."
     },
     demo: {
       title: "En accion",
@@ -60,6 +69,15 @@ const translations = {
         { title: "Simple Installer", desc: "Easily install any package with a single click." },
         { title: "Clean Junk & Fix Errors", desc: "Fix failed installations with one click. Clear junk from your system with another." }
       ]
+    },
+    appstore: {
+      title: "Discover the new App Store",
+      desc: "Appinstall releases new look and features!"
+    },
+    pkm: {
+      pre: "Discover",
+      title: "PKM",
+      desc: "The terminal package manager that is OS-agnostic and has no syntax. It comes integrated with AppInstall, just go to the CLI and type pkm help. No flags, no complications. It's like you're talking."
     },
     demo: {
       title: "See it in action",
@@ -130,6 +148,33 @@ const t = translations[lang] || translations.es;
             </div>
           ))}
         </div>
+      </section>
+
+      <!-- New App Store -->
+      <section class="appstore">
+        <h2 class="section-title">{t.appstore.title}</h2>
+        <p class="appstore-desc">{t.appstore.desc}</p>
+        <div class="appstore-video">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/5121Vd27OQQ?si=mwqCIMVeevM1iZT6"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+
+      <!-- PKM -->
+      <section class="pkm">
+        <div class="pkm-text">
+          <span class="pkm-pre">{t.pkm.pre}</span>
+          <h2 class="pkm-title">{t.pkm.title}</h2>
+        </div>
+        <p class="pkm-desc">{t.pkm.desc}</p>
       </section>
 
       <!-- Final CTA -->
@@ -346,6 +391,85 @@ const t = translations[lang] || translations.es;
     font-size: 0.85rem;
     color: var(--fg-mid);
     line-height: 1.5;
+  }
+
+  /* ============================
+     APP STORE SECTION
+     ============================ */
+  .appstore {
+    padding: 56px 32px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .appstore-desc {
+    font-size: 0.95rem;
+    color: var(--fg-mid);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+
+  .appstore-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--depth-shadow);
+    border: var(--depth-border);
+    background: #000;
+  }
+
+  .appstore-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ============================
+     PKM SECTION
+     ============================ */
+  .pkm {
+    padding: 56px 32px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pkm-text {
+    margin-bottom: 16px;
+  }
+
+  .pkm-pre {
+    display: block;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    font-weight: 600;
+    color: var(--fg);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .pkm-title {
+    font-size: clamp(4rem, 12vw, 8rem);
+    font-weight: 900;
+    background: linear-gradient(to bottom, #ffffff, #1a1a1a);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  .pkm-desc {
+    font-size: 1.1rem;
+    color: var(--fg-mid);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 28px;
   }
 
   /* ============================

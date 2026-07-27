@@ -27,8 +27,18 @@ const t = {
     install: "Install",
     github: "GitHub"
   },
+  features: {
+    title: "You don't need an iPhone to connect it to your PC",
+    items: [
+      { icon: "apps", title: "Mobile apps as desktop apps", desc: "Choose to integrate all your Android apps or select only the ones you want on your desktop." },
+      { icon: "tune", title: "DPI, Resolution & Bitrate", desc: "Adjust display density, resolution and bitrate for the perfect experience on any screen." },
+      { icon: "volume_up", title: "Audio Redirection", desc: "Redirect audio from your phone apps to your PC" },
+      { icon: "videocam", title: "Virtual Camera", desc: "Use your phone's camera as a virtual webcam in any video call app on Linux." },
+      { icon: "wifi", title: "Wireless Mode", desc: "Connect once via cables and open the wireless mode configurator and you will never use them again" }
+    ]
+  },
   hero: {
-    title: "Use your phone's 📱 Android apps on 🐧 Linux",
+    title: "Use your 📱 Android on 🐧 Linux",
     subtitle: "Just connect your phone over USB or Wi-Fi",
     explore: "Contribute",
     download: "Download Latest Release"
@@ -155,6 +165,22 @@ const t = {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- Features Section -->
+      <section id="features" class="features-section">
+        <h2 class="section-title">{t.features.title}</h2>
+        <div class="features-grid">
+          {t.features.items.map((f) => (
+            <div class="feature-card">
+              <div class="feature-icon">
+                <span class="material-symbols-rounded">{f.icon}</span>
+              </div>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -608,6 +634,65 @@ const t = {
     display: flex;
     gap: 0.75rem;
     align-items: flex-start;
+  }
+
+  /* Features Section */
+  .features-section {
+    padding: 80px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    background: var(--md-sys-color-surface-container-low);
+    border-radius: var(--md-sys-shape-corner-medium, 12px);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    --md-elevation-level: 1;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .feature-card:hover {
+    --md-elevation-level: 2;
+    transform: translateY(-4px);
+  }
+
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(61, 220, 132, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-icon .material-symbols-rounded {
+    font-size: 26px;
+    color: var(--md-sys-color-primary);
+  }
+
+  .feature-card h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--md-sys-color-on-surface);
+  }
+
+  .feature-card p {
+    font-size: 0.95rem;
+    color: var(--md-sys-color-on-surface-variant);
+    line-height: 1.55;
+    margin: 0;
   }
 
   /* Screenshots Section */

@@ -52,13 +52,6 @@ Variantes:
 | Bordes internos / divider | `rgba(255, 255, 255, 0.05)` |
 | Bordes activos / fuertes | `rgba(255, 255, 255, 0.25)` |
 
-### Acentos de marca
-| Color | Uso |
-|-------|-----|
-| `#5865f2` | Discord |
-| `#0dbd8b` | Matrix |
-| `#f87171` | Errores / archivado |
-| `#22c55e` | Success |
 
 ### Backgrounds de hover
 ```css
