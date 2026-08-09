@@ -18,6 +18,16 @@ export interface App {
 }
 
 export const apps: App[] = [
+    {
+    id: "pulsar-os",
+    name: "Pulsar OS",
+    description: {
+      es: "La distribución Linux que reemplaza a Mac y reemplazará a Windows y Android TV",
+      en: "The Linux distribution that replaces Mac and will replace Windows and Android TV",
+    },
+    icon: "https://hosted.inled.es/pulsar-logo-simple-sf.png",
+    link: "https://os.inled.es",
+  },
   {
     id: "droidtux",
     name: "DroidTux",

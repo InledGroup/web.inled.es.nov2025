@@ -1,5 +1,8 @@
 # Changelog 
 
+## 2026-08-09  
+- Publicada la beta de Pulsar OS, buenas noches.
+
 ## 2026-07-23  
 Otro día más de la continua jornada de mejora de las aplicaciones ya existentes.
 - Seafari ahora es un clon mejor

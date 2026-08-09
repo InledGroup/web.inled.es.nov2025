@@ -1,29 +1,11 @@
 [
   {
-    "appId": "seafari",
-    "version": "2.5",
-    "date": "2026-07-23",
+    "appId": "pulsar-os",
+    "version": "09082026-beta",
+    "date": "2026-08-09",
     "changes": {
-      "es": "Ahora sí que es un clon",
-      "en": "Now that's a good clone."
-    }
-  }, 
-  {
-    "appId": "appinstall",
-    "version": "20.15",
-    "date": "2026-07-23",
-    "changes": {
-      "es": "Nueva abrstracción en CLI de gestor de paquetes multi-distro agnóstico. Solucionado error de abrir archivos con Appinstall pero que no mostrara la ventana para instalarlos.",
-      "en": "New agnostic multi-distro package manager CLI abstraction. Fixed error opening files with Appinstall but not showing the window to install them."
-    }
-  }, 
-  {
-    "appId": "droidtux",
-    "version": "1.0.35",
-    "date": "2026-07-23",
-    "changes": {
-      "es": "Muchas nuevas features. Camara virtual, redirección de audio, solución de errores...",
-      "en": "Many new features. Virtual camera, audio redirection, error resolution..."
+      "es": "Open beta for Pear Edition",
+      "en": "Open beta for Pear Edition"
     }
   }
 ]
