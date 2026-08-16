@@ -17,19 +17,18 @@ const t = useTranslations(lang);
 
 const allProducts = [...saas, ...apps];
 const products = ids.map(id => allProducts.find(p => p.id === id)).filter(Boolean);
-
-const hasMany = products.length > 4;
-const hasMedium = products.length === 4;
+const count = products.length;
 ---
 
-<section class="saas-showcase">
+<section class="saas-showcase" data-count={count}>
   <div class="showcase-inner">
     <div class="showcase-header">
+      {badge && <span class="badge">{badge}</span>}
       {title && <h2 class="showcase-title">{title}</h2>}
       {subtitle && <p class="showcase-subtitle">{subtitle}</p>}
     </div>
 
-    <div class:list={["cards-row", { "has-many": hasMany, "has-medium": hasMedium }]}>
+    <div class:list={["cards-row", `cards-count-${count}`]}>
       {products.map(p => (
         <a href={p.link} class="product-card">
           <div class="card-icon">
@@ -52,11 +51,12 @@ const hasMedium = products.length === 4;
 <style>
   .saas-showcase {
     min-width: 100vw;
+    width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3rem 4rem;
+    padding: clamp(1.5rem, 3.5vh, 3.5rem) clamp(1.25rem, 3.5vw, 4rem);
     flex-shrink: 0;
     position: relative;
     backdrop-filter: blur(6px);
@@ -64,6 +64,8 @@ const hasMedium = products.length === 4;
     background: rgba(0, 0, 0, 0.4);
     border-top: 1px solid rgba(255, 255, 255, 0.04);
     border-left: 1px solid rgba(255, 255, 255, 0.04);
+    box-sizing: border-box;
+    overflow: hidden;
   }
 
   .showcase-inner {
@@ -71,25 +73,28 @@ const hasMedium = products.length === 4;
     max-width: 1400px;
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: clamp(1.25rem, 2.5vh, 2.75rem);
     height: 100%;
+    max-height: 100%;
     justify-content: center;
-    padding: 2rem 0;
+    padding: clamp(0.5rem, 1.5vh, 1.5rem) 0;
+    box-sizing: border-box;
   }
 
   .showcase-header {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: clamp(0.4rem, 1vh, 0.75rem);
+    flex-shrink: 0;
   }
 
   .badge {
     display: inline-block;
     width: fit-content;
     background: rgba(255, 255, 255, 0.06);
-    padding: 0.4rem 1rem;
+    padding: 0.35rem 0.9rem;
     border-radius: 100px;
-    font-size: 0.75rem;
+    font-size: clamp(0.65rem, 0.8vw, 0.75rem);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
@@ -98,7 +103,7 @@ const hasMedium = products.length === 4;
   }
 
   .showcase-title {
-    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-size: clamp(1.75rem, min(3.5vw, 5.5vh), 3.5rem);
     font-weight: 900;
     line-height: 1.15;
     letter-spacing: -0.03em;
@@ -107,46 +112,41 @@ const hasMedium = products.length === 4;
   }
 
   .showcase-subtitle {
-    font-size: clamp(1rem, 1.3vw, 1.25rem);
+    font-size: clamp(0.85rem, min(1.1vw, 2vh), 1.25rem);
     color: rgba(255, 255, 255, 0.55);
-    line-height: 1.6;
+    line-height: 1.5;
     max-width: 720px;
     margin: 0;
   }
 
   .cards-row {
     display: flex;
-    gap: 2rem;
+    gap: clamp(0.75rem, 1.5vw, 1.75rem);
     flex-wrap: nowrap;
-    overflow-x: auto;
-    padding: 1rem 0;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    width: 100%;
     align-items: stretch;
+    justify-content: flex-start;
     min-height: 0;
-  }
-
-  .cards-row::-webkit-scrollbar {
-    display: none;
+    overflow: visible;
   }
 
   .product-card {
-    flex: 1;
-    min-width: 320px;
-    max-width: 400px;
+    flex: 1 1 0px;
+    min-width: 0;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: 2.5rem 2rem;
+    padding: clamp(1.25rem, min(2vw, 3vh), 2.25rem) clamp(1rem, 1.5vw, 1.75rem);
     text-decoration: none;
     color: inherit;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: clamp(0.6rem, 1.4vh, 1.25rem);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     cursor: none;
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .product-card:hover {
@@ -156,8 +156,8 @@ const hasMedium = products.length === 4;
   }
 
   .card-icon {
-    width: 56px;
-    height: 56px;
+    width: clamp(38px, min(3.5vw, 5.5vh), 56px);
+    height: clamp(38px, min(3.5vw, 5.5vh), 56px);
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -171,62 +171,91 @@ const hasMedium = products.length === 4;
   }
 
   .card-name {
-    font-size: 1.4rem;
+    font-size: clamp(1.05rem, min(1.3vw, 2.5vh), 1.4rem);
     font-weight: 800;
     color: #fff;
     margin: 0;
     line-height: 1.25;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .card-desc {
-    font-size: 1rem;
+    font-size: clamp(0.82rem, min(0.95vw, 1.8vh), 1rem);
     color: rgba(255, 255, 255, 0.55);
-    line-height: 1.6;
+    line-height: 1.55;
     margin: 0;
     flex: 1;
   }
 
-  /* Ajustes dinámicos si hay más de 4 tarjetas */
-  .cards-row.has-many {
-    gap: 1.25rem;
-  }
-  .cards-row.has-many .product-card {
-    min-width: 220px;
-    max-width: 250px;
-    padding: 1.75rem 1.25rem;
-    gap: 1rem;
-  }
-  .cards-row.has-many .card-icon {
-    width: 44px;
-    height: 44px;
-  }
-  .cards-row.has-many .card-name {
-    font-size: 1.15rem;
-  }
-  .cards-row.has-many .card-desc {
-    font-size: 0.9rem;
-    line-height: 1.5;
+  /* Specific count styling for optimal aesthetic density */
+  .cards-count-1 .product-card {
+    max-width: min(480px, 100%);
   }
 
-  /* Ajuste intermedio si hay exactamente 4 tarjetas */
-  .cards-row.has-medium {
-    gap: 1.5rem;
+  .cards-count-2 .product-card {
+    max-width: min(440px, 100%);
   }
-  .cards-row.has-medium .product-card {
-    min-width: 260px;
-    max-width: 300px;
-    padding: 2rem 1.5rem;
+
+  .cards-count-3 .product-card {
+    max-width: min(390px, 100%);
+  }
+
+  .cards-count-4 {
+    gap: clamp(0.6rem, 1.2vw, 1.4rem);
+  }
+  .cards-count-4 .product-card {
+    max-width: min(310px, 100%);
+    padding: clamp(1rem, min(1.5vw, 2.5vh), 1.85rem) clamp(0.85rem, 1.2vw, 1.4rem);
+    gap: clamp(0.5rem, 1vh, 1rem);
+  }
+  .cards-count-4 .card-icon {
+    width: clamp(34px, min(2.8vw, 4.5vh), 48px);
+    height: clamp(34px, min(2.8vw, 4.5vh), 48px);
+  }
+  .cards-count-4 .card-name {
+    font-size: clamp(0.98rem, min(1.15vw, 2.2vh), 1.25rem);
+  }
+  .cards-count-4 .card-desc {
+    font-size: clamp(0.78rem, min(0.88vw, 1.6vh), 0.92rem);
+    line-height: 1.45;
+  }
+
+  .cards-count-5,
+  .cards-row[class*="cards-count-"]:not(.cards-count-1):not(.cards-count-2):not(.cards-count-3):not(.cards-count-4) {
+    gap: clamp(0.5rem, 1vw, 1.15rem);
+  }
+  .cards-count-5 .product-card,
+  .cards-row[class*="cards-count-"]:not(.cards-count-1):not(.cards-count-2):not(.cards-count-3):not(.cards-count-4) .product-card {
+    max-width: min(260px, 100%);
+    padding: clamp(0.85rem, min(1.2vw, 2vh), 1.6rem) clamp(0.7rem, 1vw, 1.15rem);
+    gap: clamp(0.45rem, 0.8vh, 0.85rem);
+  }
+  .cards-count-5 .card-icon,
+  .cards-row[class*="cards-count-"]:not(.cards-count-1):not(.cards-count-2):not(.cards-count-3):not(.cards-count-4) .card-icon {
+    width: clamp(30px, min(2.4vw, 4vh), 40px);
+    height: clamp(30px, min(2.4vw, 4vh), 40px);
+  }
+  .cards-count-5 .card-name,
+  .cards-row[class*="cards-count-"]:not(.cards-count-1):not(.cards-count-2):not(.cards-count-3):not(.cards-count-4) .card-name {
+    font-size: clamp(0.9rem, min(1.05vw, 2vh), 1.15rem);
+  }
+  .cards-count-5 .card-desc,
+  .cards-row[class*="cards-count-"]:not(.cards-count-1):not(.cards-count-2):not(.cards-count-3):not(.cards-count-4) .card-desc {
+    font-size: clamp(0.74rem, min(0.82vw, 1.5vh), 0.88rem);
+    line-height: 1.4;
   }
 
   .sec-progress {
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-top: 1rem;
+    margin-top: clamp(0.5rem, 1.5vh, 1rem);
+    flex-shrink: 0;
   }
 
   .sec-progress-bar {
-    width: 200px;
+    width: min(200px, 40vw);
     height: 3px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 1px;
@@ -247,49 +276,66 @@ const hasMedium = products.length === 4;
       padding: 5rem 1.5rem;
       border-left: none;
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      overflow: visible;
     }
 
     .showcase-inner {
       height: auto;
+      max-height: none;
       padding: 0;
       gap: 2rem;
     }
 
+    .showcase-title {
+      font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    .showcase-subtitle {
+      font-size: clamp(1rem, 3.5vw, 1.25rem);
+    }
+
     .cards-row {
       flex-direction: column;
-      overflow-x: visible;
+      overflow: visible;
       gap: 1.25rem;
     }
 
-    .cards-row.has-many .product-card,
-    .cards-row.has-medium .product-card,
-    .product-card {
+    .product-card,
+    .cards-count-1 .product-card,
+    .cards-count-2 .product-card,
+    .cards-count-3 .product-card,
+    .cards-count-4 .product-card,
+    .cards-count-5 .product-card,
+    .cards-row[class*="cards-count-"] .product-card {
       min-width: 0 !important;
       max-width: 100% !important;
-      width: 100%;
+      width: 100% !important;
       flex: 1 1 auto !important;
-      padding: 2rem 1.5rem;
-      gap: 1rem;
+      padding: 2rem 1.5rem !important;
+      gap: 1rem !important;
     }
 
-    .cards-row.has-many .card-icon,
-    .cards-row.has-medium .card-icon,
-    .card-icon {
-      width: 48px;
-      height: 48px;
+    .card-icon,
+    .cards-count-4 .card-icon,
+    .cards-count-5 .card-icon,
+    .cards-row[class*="cards-count-"] .card-icon {
+      width: 48px !important;
+      height: 48px !important;
     }
 
-    .cards-row.has-many .card-name,
-    .cards-row.has-medium .card-name,
-    .card-name {
-      font-size: 1.25rem;
+    .card-name,
+    .cards-count-4 .card-name,
+    .cards-count-5 .card-name,
+    .cards-row[class*="cards-count-"] .card-name {
+      font-size: 1.25rem !important;
     }
 
-    .cards-row.has-many .card-desc,
-    .cards-row.has-medium .card-desc,
-    .card-desc {
-      font-size: 0.95rem;
-      line-height: 1.5;
+    .card-desc,
+    .cards-count-4 .card-desc,
+    .cards-count-5 .card-desc,
+    .cards-row[class*="cards-count-"] .card-desc {
+      font-size: 0.95rem !important;
+      line-height: 1.5 !important;
     }
 
     .sec-progress {
