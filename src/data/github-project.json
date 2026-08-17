@@ -1,1 +1,610 @@
-null
+{
+  "title": "Inled Issues and Errors",
+  "items": {
+    "nodes": [
+      {
+        "content": {
+          "title": "usar fluent ui",
+          "url": "https://github.com/InledGroup/mypdf/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "usar fluent ui",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Mejoras a realizar",
+          "url": "https://github.com/InledGroup/DroidTux/issues/4",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Mejoras a realizar",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Mejoras CLI",
+          "url": "https://github.com/InledGroup/appinstall/issues/4",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Mejoras CLI",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "responsive to mobile",
+          "url": "https://github.com/extensions-gnome/extensions-gnome.github.io/issues/1",
+          "state": "OPEN",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "To triage",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "responsive to mobile",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "[Bug] GUI shows no output for openrouter provider (CLI works correctly)",
+          "url": "https://github.com/InledGroup/codexbar-gnome/issues/2",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {
+              "text": "[Bug] GUI shows no output for openrouter provider (CLI works correctly)",
+              "field": {
+                "name": "Title"
+              }
+            },
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "GNOME 50 Cross Appearance",
+          "url": "https://github.com/InledGroup/cruzcristiana-gnome/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {
+              "text": "GNOME 50 Cross Appearance",
+              "field": {
+                "name": "Title"
+              }
+            },
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Gnome 42.9 Support",
+          "url": "https://github.com/InledGroup/screenshot-annotator/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "text": "Gnome 42.9 Support",
+              "field": {
+                "name": "Title"
+              }
+            },
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Incompatible relicensing to MIT.",
+          "url": "https://github.com/InledGroup/pulsaros-win11-icon-theme/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "text": "Incompatible relicensing to MIT.",
+              "field": {
+                "name": "Title"
+              }
+            },
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Actualizar web inled con este dashboard, roadmap y soporte claude de codexbar",
+          "url": "https://github.com/InledGroup/web.inled.es.nov2025/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Actualizar web inled con este dashboard, roadmap y soporte claude de codexbar",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Reportar mensajes de estado, error, falta de dependencias en el uso de cookie importer",
+          "url": "https://github.com/InledGroup/codexbar-gnome/issues/6",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Reportar mensajes de estado, error, falta de dependencias en el uso de cookie importer",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "image exporting correctly on pdf",
+          "url": "https://github.com/InledGroup/open-ai-exporter/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "bug"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "image exporting correctly on pdf",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Botones landing no redirigen a /search",
+          "url": "https://github.com/InledGroup/start-cf/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "bug"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Botones landing no redirigen a /search",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "bad guidance for ai models",
+          "url": "https://github.com/InledLabs/mdpedia/issues/15",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "bug"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "bad guidance for ai models",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Mejoras para relanzar el proyecto",
+          "url": "https://github.com/InledGroup/bastion.browser/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Mejoras para relanzar el proyecto",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "firmas repo",
+          "url": "https://github.com/InledGroup/DroidTux/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "firmas repo",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "rehacer todo",
+          "url": "https://github.com/InledGroup/macboat/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "enhancement"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "rehacer todo",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Do not modify websites",
+          "url": "https://github.com/InledGroup/seafari/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": [
+              {
+                "name": "bug"
+              }
+            ]
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {},
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Do not modify websites",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "Soporte AUR, Flatpak y Snap",
+          "url": "https://github.com/InledGroup/appinstall/issues/1",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "Soporte AUR, Flatpak y Snap",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "error triggering apt",
+          "url": "https://github.com/InledGroup/seafari/issues/2",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "error triggering apt",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "content": {
+          "title": "add repo once installed",
+          "url": "https://github.com/InledGroup/seafari/issues/3",
+          "state": "CLOSED",
+          "labels": {
+            "nodes": []
+          }
+        },
+        "fieldValues": {
+          "nodes": [
+            {},
+            {
+              "name": "Done",
+              "field": {
+                "name": "Status"
+              }
+            },
+            {
+              "text": "add repo once installed",
+              "field": {
+                "name": "Title"
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
