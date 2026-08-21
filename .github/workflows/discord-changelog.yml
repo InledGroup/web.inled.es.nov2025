@@ -1,0 +1,22 @@
+name: Publicar changelog en Discord
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/data/changelog.md'
+  workflow_dispatch:
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Publicar última sección del changelog
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_CHANGELOG_WEBHOOK }}
+        run: |
+          chmod +x scripts/notify-changelog-discord.sh
+          ./scripts/notify-changelog-discord.sh

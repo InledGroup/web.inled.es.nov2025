@@ -1,5 +1,14 @@
 # Changelog 
 
+## 2026-08-21
+
+Referring to Pulsar OS:
+
+- **Spotlight transitions to Rust.**: I discussed it with acquaintances who had been recommending Rust to me for a while. Rust is a compiled language, whereas Python (which it was previously written in) is interpreted in a microVM, slowing down the process. Given that Spotlight is such an important component, it shouldn't be built in a slow language.
+- **Nautilus Fork**: Finder, a file manager based on Nautilus designed to clone the Mac experience. It uses GNOME 48. This decision stems from the fact that the file manager is one of the most heavily used parts of an operating system, and if it doesn't look like a Mac, the job feels incomplete.
+- **Tested a Dash2Dock fork**: Not added yet; it isn't ready for production.
+- **macOS sounds**: Added macOS sounds for Pear Edition.
+
 ## 2026-08-09  
 - Publicada la beta de Pulsar OS, buenas noches.
 
