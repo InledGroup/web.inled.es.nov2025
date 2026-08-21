@@ -9,6 +9,8 @@ Referring to Pulsar OS:
 - **Tested a Dash2Dock fork**: Not added yet; it isn't ready for production.
 - **macOS sounds**: Added macOS sounds for Pear Edition.
 
+v1.0
+
 ## 2026-08-09  
 - Publicada la beta de Pulsar OS, buenas noches.
 

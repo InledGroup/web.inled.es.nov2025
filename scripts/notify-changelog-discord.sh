@@ -42,9 +42,9 @@ DAY=$((10#${DATE:8:2}))
 WEEKDAY=$(date -d "$DATE" +%u)
 PRETTY_DATE="${WEEKDAYS[$WEEKDAY-1]}, ${MONTHS[$MONTH-1]} $DAY, $YEAR"
 
-# Divide el contenido en trozos que caben en un embed de Discord,
+# Divide el contenido solo si supera el límite de un embed de Discord (4096),
 # respetando los saltos de línea para no romper el markdown
-CHUNK_MAX=1800
+CHUNK_MAX=3900
 CHUNKS=()
 build_chunks() {
     local current="" line
@@ -71,15 +71,15 @@ build_chunks
 
 echo "🔔 Publicando changelog de $PRETTY_DATE en Discord (${#CHUNKS[@]} parte(s))..."
 
-# Envía máximo 3 embeds por mensaje (límite de 6000 caracteres por mensaje)
-MAX_EMBEDS=3
+# Un embed por mensaje (Discord limita a 6000 caracteres en total por mensaje)
+MAX_EMBEDS=1
 TOTAL=${#CHUNKS[@]}
 i=0
 while [ $i -lt $TOTAL ]; do
     END=$(( i + MAX_EMBEDS ))
     [ $END -gt $TOTAL ] && END=$TOTAL
     SLICE=("${CHUNKS[@]:$i:$((END - i))}")
-    SLICE_JSON=$(printf '%s\n' "${SLICE[@]}" | jq -Rs 'split("\n")[:-1]')
+    SLICE_JSON=$(jq -n '$ARGS.positional' --args "${SLICE[@]}")
     PAYLOAD=$(jq -n --argjson cs "$SLICE_JSON" --arg d "$PRETTY_DATE" --argjson start "$i" '{
         username: "Changelog",
         embeds: ($cs | to_entries | map({
