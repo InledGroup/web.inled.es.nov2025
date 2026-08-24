@@ -4,6 +4,7 @@
 
 - Updated Pulsar OS website with animations and new info
 - Working hard on recovery functionality, now boots on the recovery debian but still fails to unlock.
+- apt.inled.es updated website appearance with some fixes
 
 ## 2026-08-21
 
