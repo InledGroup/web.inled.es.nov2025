@@ -1,5 +1,10 @@
 # Changelog 
 
+## 2026-08-24  
+
+- Updated Pulsar OS website with animations and new info
+- Working hard on recovery functionality, now boots on the recovery debian but still fails to unlock.
+
 ## 2026-08-21
 
 Referring to Pulsar OS:
