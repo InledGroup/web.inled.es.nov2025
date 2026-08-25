@@ -1,0 +1,359 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+import { apps } from '../config/apps';
+import { saas } from '../config/saas';
+
+const lang = getLangFromLocals(Astro.locals);
+
+// Orden del viejo SaaSShowcase (IDs únicos en orden de aparición)
+const showcaseOrder = [
+  'office', 'start', 'mypdf', 'mymetadata', 'seafari',
+  'pulsar-os',
+  'appinstall', 'codexbar-gnome', 'vozes',
+  'macboat', 'droidtux',
+  'mdpedia', 'ai-exporter', 'web2skill',
+  'bautilus', 'tabnest', 'cleany', 'moodlenotifier',
+  'oap',
+  'mdpdf', 'inlinked', 'inmd', 'inqr',
+  'edgeai', 'indoc',
+  'startchat', 'darkreaderpdf', 'weby', 'cruzcristiana',
+];
+
+const allProducts = [...saas, ...apps];
+
+function mapProduct(p: any, type: 'saas' | 'app') {
+  return {
+    id: p.id,
+    name: p.name,
+    description: p.description[lang],
+    icon: p.icon,
+    link: p.link,
+    type,
+  };
+}
+
+const activeProducts = showcaseOrder
+  .map(id => {
+    const s = saas.find(p => p.id === id);
+    if (s && !s.archive) return mapProduct(s, 'saas');
+    const a = apps.find(p => p.id === id);
+    if (a && !a.archive) return mapProduct(a, 'app');
+    return null;
+  })
+  .filter(Boolean);
+
+// Los que no están en showcaseOrder pero están activos
+const extraActive = allProducts
+  .filter(p => !p.archive && !showcaseOrder.includes(p.id))
+  .map(p => mapProduct(p, p.id in saas.reduce((a, s) => ({ ...a, [s.id]: true }), {}) ? 'saas' : 'app'));
+
+const archivedProducts = allProducts
+  .filter(p => p.archive)
+  .map(p => mapProduct(p, saas.some(s => s.id === p.id) ? 'saas' : 'app'));
+
+const allActive = [...activeProducts, ...extraActive];
+---
+
+<section class="projects-section" id="projects">
+  <div class="projects-container">
+    <div class="projects-header">
+      <h2 class="projects-title">{lang === 'es' ? 'Proyectos' : 'Projects'}</h2>
+      <p class="projects-subtitle">{lang === 'es' ? 'Todo lo que construimos' : 'Everything we build'}</p>
+    </div>
+
+    <div class="projects-hover-zone">
+      <div class="hover-preview" id="hoverPreview">
+        <img src="" alt="" class="hover-preview-img" id="hoverPreviewImg" />
+        <span class="hover-preview-name" id="hoverPreviewName"></span>
+        <span class="hover-preview-desc" id="hoverPreviewDesc"></span>
+      </div>
+
+      <div class="projects-list">
+        {allActive.map((project, i) => (
+          <a
+            href={project.link}
+            class="project-row"
+            data-icon={project.icon}
+            data-name={project.name}
+            data-desc={project.description}
+            style={`animation-delay: ${i * 30}ms`}
+          >
+            <span class="project-index">{String(i + 1).padStart(2, '0')}</span>
+            <span class="project-name">{project.name}</span>
+            <span class="project-type">{project.type}</span>
+            <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    {archivedProducts.length > 0 && (
+      <div class="archived-block">
+        <div class="archived-header">
+          <h3 class="archived-title">{lang === 'es' ? 'Archivados' : 'Archived'}</h3>
+          <p class="archived-subtitle">{lang === 'es' ? 'Proyectos que por ahora no se mantienen' : 'Projects not maintained for now'}</p>
+        </div>
+        <div class="projects-list archived-list">
+          {archivedProducts.map((project, i) => (
+            <a
+              href={project.link}
+              class="project-row archived-row"
+              data-icon={project.icon}
+              data-name={project.name}
+              data-desc={project.description}
+            >
+              <span class="project-index">{String(i + 1).padStart(2, '0')}</span>
+              <span class="project-name">{project.name}</span>
+              <span class="project-type">{project.type}</span>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    width: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .projects-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  .projects-header {
+    margin-bottom: 3rem;
+  }
+
+  .projects-title {
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    color: var(--accent-dim);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+
+  .projects-subtitle {
+    font-family: var(--mono-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.03em;
+  }
+
+  .projects-hover-zone {
+    position: relative;
+  }
+
+  .hover-preview {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .hover-preview.visible {
+    opacity: 1;
+  }
+
+  .hover-preview-img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    padding: 12px;
+  }
+
+  .hover-preview-name {
+    font-family: var(--mono-font);
+    font-size: 0.65rem;
+    color: #fff;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .hover-preview-desc {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: var(--accent-dim);
+    max-width: 320px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .projects-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .project-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--accent-dim);
+    transition: all 0.15s;
+    animation: rowFadeIn 0.4s ease-out both;
+  }
+
+  @keyframes rowFadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .project-row:last-child {
+    border-bottom: none;
+  }
+
+  .project-row:hover {
+    background: var(--surface);
+    color: #fff;
+  }
+
+  .project-index {
+    font-family: var(--mono-font);
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.2);
+    min-width: 24px;
+    font-weight: 400;
+  }
+
+  .project-name {
+    flex: 1;
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .project-type {
+    font-family: var(--mono-font);
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+
+  .project-arrow {
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: all 0.2s;
+  }
+
+  .project-row:hover .project-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+
+  /* Archivados */
+  .archived-block {
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .archived-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .archived-title {
+    font-family: var(--pixel-font);
+    font-size: 0.55rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .archived-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .archived-list {
+    opacity: 0.4;
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .archived-list .project-row {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .archived-row:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    .hover-preview { display: none !important; }
+    .project-type { display: none; }
+    .projects-container { padding: 3rem 1rem; }
+  }
+</style>
+
+<script is:inline>
+  function initProjectsList() {
+    const rows = document.querySelectorAll('.project-row');
+    const preview = document.getElementById('hoverPreview');
+    const previewImg = document.getElementById('hoverPreviewImg');
+    const previewName = document.getElementById('hoverPreviewName');
+    const previewDesc = document.getElementById('hoverPreviewDesc');
+
+    if (!preview || !previewImg || !previewName || !previewDesc) return;
+
+    let hideTimeout = null;
+
+    rows.forEach(row => {
+      row.addEventListener('mouseenter', () => {
+        if (hideTimeout) clearTimeout(hideTimeout);
+        const icon = row.getAttribute('data-icon');
+        const name = row.getAttribute('data-name');
+        const desc = row.getAttribute('data-desc');
+        if (icon) previewImg.src = icon;
+        if (name) previewName.textContent = name;
+        if (desc) previewDesc.textContent = desc;
+        preview.classList.add('visible');
+      });
+
+      row.addEventListener('mouseleave', () => {
+        hideTimeout = setTimeout(() => {
+          preview.classList.remove('visible');
+        }, 100);
+      });
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initProjectsList);
+  } else {
+    initProjectsList();
+  }
+  document.addEventListener('astro:page-load', initProjectsList);
+</script>

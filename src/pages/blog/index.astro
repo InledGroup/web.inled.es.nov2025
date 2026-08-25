@@ -3,230 +3,229 @@ import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import { getPosts, formatDate } from '../../lib/blogger';
 export const prerender = false;
-import AutoTranslate from '../../components/AutoTranslate.astro';
 import { getLangFromLocals } from '../../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
 const posts = await getPosts();
-const title = "Blog";
-const subtitle = "Novedades de Inled Group";
-const description = "Últimas noticias y actualizaciones de Inled Group";
 ---
 
-<Layout title={`${title} | Inled Group`} description={description}>
+<Layout title="Blog | Inled Group" description="Últimas noticias y actualizaciones de Inled Group">
   <Header />
-  
-  <main class="blog-index">
-    <section class="hero-section">
-      <div class="container">
-        <div class="section-header">
-          <p class="subtitle">{subtitle}</p>
-          <h1 class="section-title">{title}</h1>
-        </div>
+
+  <main class="blog-page">
+    <section class="blog-hero">
+      <div class="blog-hero-inner">
+        <p class="blog-hero-label">BLOG</p>
+        <h1 class="blog-hero-title">{lang === 'es' ? 'Novedades' : 'Updates'}</h1>
+        <p class="blog-hero-sub">{lang === 'es' ? 'Noticias y actualizaciones de Inled Group' : 'News and updates from Inled Group'}</p>
       </div>
     </section>
 
-    <section class="posts-section">
-      <div class="container">
-        <div class="posts-grid">
-          {posts.map((post, index) => (
-            <a href={`/blog/${post.slug}`} class="post-card" data-index={index}>
-              <div class="card-image">
-                {post.thumbnail ? (
-                  <img src={post.thumbnail} alt={post.title} loading="lazy" />
-                ) : (
-                  <div class="placeholder-image">
-                    <i class="fas fa-newspaper"></i>
-                  </div>
-                )}
+    <section class="blog-entries">
+      <div class="blog-entries-inner">
+        <div class="blog-entries-list">
+          {posts.map((post, i) => (
+            <a href={`/blog/${post.slug}`} class="entry-row" data-thumb={post.thumbnail || ''} style={`animation-delay: ${i * 30}ms`}>
+              <div class="entry-bg" style={`background-image: url(${post.thumbnail || ''})`}></div>
+              <div class="entry-content">
+                <div class="entry-meta">
+                  <span class="entry-index">{String(i + 1).padStart(2, '0')}</span>
+                  <span class="entry-date">{formatDate(post.published)}</span>
+                </div>
+                <h2 class="entry-title">{post.title}</h2>
               </div>
-              <div class="card-content">
-                <span class="post-date">{formatDate(post.published)}</span>
-                <h2 class="post-card-title translatable">{post.title}</h2>
-                {post.tags.length > 0 && (
-                  <div class="post-tags">
-                    {post.tags.slice(0, 2).map(tag => (
-                      <span class="tag">{tag}</span>
-                    ))}
-                  </div>
-                )}
-                <div class="read-more">Leer artículo →</div>
-              </div>
+              {post.tags.length > 0 && (
+                <span class="entry-tag">{post.tags[0]}</span>
+              )}
+              <svg class="entry-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
             </a>
           ))}
         </div>
       </div>
     </section>
-    <AutoTranslate />
   </main>
 </Layout>
 
 <style>
-  .blog-index {
-    position: relative;
+  .blog-page {
     min-height: 100vh;
-    background: #000;
-    padding-top: 80px;
-    overflow-x: hidden;
+    background: var(--bg);
   }
 
-  .blog-index::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: url('https://hosted.inled.es/better.inled.svg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    opacity: 0.3;
-    z-index: 0;
-    pointer-events: none;
-    filter: blur(15px) brightness(0.7);
+  .blog-hero {
+    padding: 8rem 5% 4rem;
+    border-bottom: 1px solid var(--border);
   }
 
-  .container {
-    max-width: 1400px;
+  .blog-hero-inner {
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
-    position: relative;
-    z-index: 1;
   }
 
-  .hero-section {
-    padding: 8rem 0 4rem;
-    text-align: center;
-  }
-
-  .subtitle {
-    font-size: 0.875rem;
+  .blog-hero-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: rgba(255, 255, 255, 0.5);
     margin-bottom: 1rem;
   }
 
-  .section-title {
-    font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 300;
+  .blog-hero-title {
+    font-family: var(--sans-font);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 600;
     color: #fff;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin-bottom: 0.5rem;
   }
 
-  .posts-section {
-    padding-bottom: 8rem;
+  .blog-hero-sub {
+    font-family: var(--mono-font);
+    font-size: 0.9rem;
+    color: var(--accent-dim);
   }
 
-  .posts-grid {
+  .blog-entries {
+    padding: 0 5% 6rem;
+  }
+
+  .blog-entries-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .blog-entries-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-    gap: 2.5rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 3rem;
   }
 
-  .post-card {
+  .entry-row {
     position: relative;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 1.5rem;
-    text-decoration: none;
-    overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
-  }
-
-  .post-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.07);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
-  }
-
-  .card-image {
-    aspect-ratio: 16/9;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0;
+    background: var(--bg);
+    border-bottom: none;
+    text-decoration: none;
+    color: var(--accent-dim);
     overflow: hidden;
+    animation: entryIn 0.4s ease-out both;
+    min-height: 160px;
+  }
+
+  .entry-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+  }
+
+  .entry-row:hover .entry-bg {
+    opacity: 0.15;
+  }
+
+  .entry-content {
     position: relative;
-  }
-
-  .card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .post-card:hover .card-image img {
-    transform: scale(1.1);
-  }
-
-  .card-content {
-    padding: 2.5rem;
+    z-index: 1;
     flex: 1;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    background: var(--bg);
+    transition: background 0.3s ease;
   }
 
-  .post-date {
-    font-size: 0.8rem;
+  .entry-row:hover .entry-content {
+    background: transparent;
+  }
+
+  .entry-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  @keyframes entryIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .entry-row:hover {
+    color: #fff;
+  }
+
+  .entry-row .entry-index {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  .entry-date {
+    font-family: var(--mono-font);
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .entry-title {
+    font-family: var(--sans-font);
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .entry-tag {
+    position: relative;
+    z-index: 1;
+    font-family: var(--mono-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.25);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 1rem;
-    display: block;
+    border: 1px solid var(--border);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-weight: 700;
+    margin: 0 1.5rem 1rem;
+    align-self: flex-start;
   }
 
-  .post-card-title {
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #fff;
-    line-height: 1.3;
-    margin-bottom: 1.5rem;
+  .entry-arrow {
+    position: absolute;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    z-index: 1;
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: all 0.2s;
   }
 
-  .post-tags {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .tag {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.2rem 0.6rem;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .read-more {
-    margin-top: auto;
-    font-size: 0.9rem;
-    color: #fff;
-    opacity: 0.6;
-    transition: all 0.3s ease;
-  }
-
-  .post-card:hover .read-more {
+  .entry-row:hover .entry-arrow {
     opacity: 1;
-    transform: translateX(5px);
+    transform: translate(0, 0);
   }
 
-  @media (max-width: 768px) {
-    .posts-grid {
+  @media (max-width: 640px) {
+    .blog-entries-list {
       grid-template-columns: 1fr;
     }
-    
-    .hero-section {
-        padding: 4rem 0 2rem;
-    }
-    
-    .section-title {
-        font-size: 3rem;
-    }
+    .entry-tag { display: none; }
+    .blog-hero { padding: 7rem 5% 3rem; }
+    .blog-entries { padding: 0 5% 4rem; }
   }
 </style>

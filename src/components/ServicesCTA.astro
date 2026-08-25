@@ -1,0 +1,135 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const services = [
+  { es: 'Páginas web profesionales', en: 'Professional websites' },
+  { es: 'WordPress', en: 'WordPress' },
+  { es: 'Software a medida', en: 'Custom software' },
+  { es: 'Distribuciones Linux', en: 'Linux distributions' },
+];
+---
+
+<section class="services-section">
+  <div class="services-container">
+    <div class="services-header">
+      <div class="services-label">{lang === 'es' ? 'SERVICIOS' : 'SERVICES'}</div>
+      <h2 class="services-title">{lang === 'es' ? '¿Necesitas algo?' : 'Need something?'}</h2>
+      <p class="services-subtitle">{lang === 'es' ? 'Apoya el proyecto y obtén un servicio profesional' : 'Support the project and get a professional service'}</p>
+    </div>
+
+    <div class="services-list">
+      {services.map((s, i) => (
+        <div class="service-row" style={`animation-delay: ${i * 30}ms`}>
+          <span class="service-index">{String(i + 1).padStart(2, '0')}</span>
+          <span class="service-name">{s[lang]}</span>
+        </div>
+      ))}
+    </div>
+
+    <a href="/servicios" class="services-cta">
+      {lang === 'es' ? 'Ver servicios' : 'View services'}
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    width: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  .services-header {
+    margin-bottom: 3rem;
+  }
+
+  .services-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .services-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin: 0 0 0.3rem 0;
+  }
+
+  .services-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+    margin: 0;
+  }
+
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .service-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    animation: rowIn 0.4s ease-out both;
+  }
+
+  .service-row:last-child {
+    border-bottom: none;
+  }
+
+  @keyframes rowIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .service-index {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    min-width: 24px;
+  }
+
+  .service-name {
+    font-family: var(--sans-font);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .services-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: var(--accent-dim);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .services-cta:hover {
+    color: #fff;
+  }
+</style>

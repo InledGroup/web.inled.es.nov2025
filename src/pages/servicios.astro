@@ -1,0 +1,568 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import GuideLines from '../components/GuideLines.astro';
+export const prerender = false;
+
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const services = [
+  {
+    id: '01',
+    name: { es: 'Páginas web profesionales', en: 'Professional websites' },
+    desc: { es: 'Sitios web modernos, rápidos y responsivos con diseño a medida.', en: 'Modern, fast, responsive websites with custom design.' },
+  },
+  {
+    id: '02',
+    name: { es: 'WordPress', en: 'WordPress' },
+    desc: { es: 'Sitios en WordPress si lo necesitas, aunque lo recomendable es web estática por rendimiento y seguridad.', en: 'WordPress sites if you need them, though static sites are recommended for performance and security.' },
+  },
+  {
+    id: '03',
+    name: { es: 'Software a medida', en: 'Custom software' },
+    desc: { es: 'Aplicaciones de escritorio, herramientas, scripts o cualquier solución de software adaptada a tu caso de uso.', en: 'Desktop applications, tools, scripts, or any software solution adapted to your use case.' },
+  },
+  {
+    id: '04',
+    name: { es: 'Distribuciones Linux', en: 'Linux distributions' },
+    desc: { es: 'Creación de distribuciones Linux personalizadas con los paquetes y configuración que necesites.', en: 'Custom Linux distributions with the packages and configuration you need.' },
+  },
+];
+
+const stats = [
+  { value: '+2.000', label: { es: 'descargas de una extensión GNOME en menos de 6 meses', en: 'downloads of a GNOME extension in under 6 months' } },
+  { value: '+100', label: { es: 'proyectos de software libre creados', en: 'open source projects created' } },
+  { value: '+1.800', label: { es: 'contribuciones en GitHub', en: 'GitHub contributions' } },
+];
+
+const trust = [
+  { es: 'Port de CodexBar reconocido por el creador de OpenClaw', en: 'CodexBar port recognized by the creator of OpenClaw' },
+  { es: 'Contribución a OpenClaw para añadir soporte de Mistral', en: 'Contribution to OpenClaw to add Mistral support' },
+  { es: 'Pear OS crea su edición Debian a partir de nuestro script de construcción de Pulsar OS', en: 'Pear OS builds their Debian edition from our Pulsar OS build script' },
+  { es: 'Fundación Conrado Blanco confía en Inled para su web', en: 'Fundación Conrado Blanco trusts Inled for their website' },
+];
+
+const faq = [
+  {
+    q: { es: '¿Se pueden hacer contratos B2B?', en: 'Can B2B contracts be made?' },
+    a: { es: 'No, aún no. Actualmente tengo 17 años y no puedo emitir facturas ni firmar contratos formales. Los servicios se prestan de forma informal.', en: 'No, not yet. I am currently 17 and cannot issue invoices or sign formal contracts. Services are provided informally.' },
+  },
+  {
+    q: { es: '¿Por qué se ofrecen estos servicios?', en: 'Why are these services offered?' },
+    a: { es: 'Para obtener una remuneración que me permita comprar material y solventar gastos derivados de Inled, mejorando así la infraestructura y los proyectos.', en: 'To earn compensation that allows me to buy equipment and cover Inled-related expenses, improving infrastructure and projects.' },
+  },
+  {
+    q: { es: '¿Qué métodos de pago se aceptan?', en: 'What payment methods are accepted?' },
+    a: { es: 'PayPal, transferencia bancaria o cualquier otra forma que acordemos. No hay sistema de facturación formal.', en: 'PayPal, bank transfer, or any other method we agree on. There is no formal invoicing system.' },
+  },
+  {
+    q: { es: '¿Cuál es el proceso?', en: 'What is the process?' },
+    a: { es: 'Contactas, me cuentas lo que necesitas, te doy un presupuesto y tras acordar los términos empiezo el trabajo. El pago se realiza por adelantado o a mitad de proyecto según se acuerde.', en: 'You reach out, tell me what you need, I give you a quote, and after agreeing on terms I start the work. Payment is made upfront or mid-project as agreed.' },
+  },
+  {
+    q: { es: '¿Qué calidad puedo esperar?', en: 'What quality can I expect?' },
+    a: { es: 'Servicio profesional con calidad superior a la de la competencia, con el único afán de obtener un poco de dinero para mantener y mejorar Inled. No soy una empresa, pero el trabajo se hace con seriedad y compromiso.', en: 'Professional service with quality superior to the competition, with the sole aim of earning some money to maintain and improve Inled. I am not a company, but the work is done with seriousness and commitment.' },
+  },
+];
+---
+
+<Layout title="Servicios - Inled Group" description="Servicios profesionales de desarrollo web, software y Linux">
+  <Header />
+  <GuideLines />
+
+  <main class="services-page">
+    <section class="services-hero">
+      <div class="services-hero-inner">
+        <div class="services-label">{lang === 'es' ? 'SERVICIOS' : 'SERVICES'}</div>
+        <h1 class="services-title">{lang === 'es' ? 'Servicios' : 'Services'}</h1>
+        <p class="services-subtitle">{lang === 'es' ? 'Apoya el proyecto Inled y obtén un servicio profesional a cambio' : 'Support the Inled project and get a professional service in return'}</p>
+      </div>
+    </section>
+
+    <section class="stats-section">
+      <div class="stats-inner">
+        <div class="stats-label">{lang === 'es' ? 'CONFIANZA' : 'TRUST'}</div>
+        <div class="stats-grid">
+          {stats.map((s) => (
+            <div class="stat-card">
+              <span class="stat-value">{s.value}</span>
+              <span class="stat-label">{s.label[lang]}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-section">
+      <div class="trust-inner">
+        <div class="trust-list">
+          {trust.map((t, i) => (
+            <div class="trust-row" style={`animation-delay: ${i * 30}ms`}>
+              <svg class="trust-check" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+              <span class="trust-text">{t[lang]}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="fundacion-card">
+          <img src="https://hosted.inled.es/logo.fundacionconradoblanco.sf_.png" alt="Fundación Conrado Blanco" class="fundacion-logo" />
+          <span class="fundacion-name">Fundación Conrado Blanco</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="services-list-section">
+      <div class="services-list-inner">
+        <div class="services-header">
+          <div class="services-section-label">{lang === 'es' ? 'QUÉ SE OFRECE' : 'WHAT IS OFFERED'}</div>
+          <h2 class="services-section-title">{lang === 'es' ? 'Servicios disponibles' : 'Available services'}</h2>
+          <p class="services-section-sub">{lang === 'es' ? 'Calidad superior a la competencia, con el único afán de obtener un poco de dinero para mejorar Inled' : 'Quality superior to the competition, with the sole aim of earning some money to improve Inled'}</p>
+        </div>
+
+        <div class="services-list">
+          {services.map((s) => (
+            <div class="service-card">
+              <div class="service-header">
+                <span class="service-index">{s.id}</span>
+                <h3 class="service-name">{s.name[lang]}</h3>
+              </div>
+              <p class="service-desc">{s.desc[lang]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section">
+      <div class="faq-inner">
+        <div class="faq-header">
+          <div class="faq-label">FAQ</div>
+          <h2 class="faq-title">{lang === 'es' ? 'Preguntas frecuentes' : 'Frequently asked questions'}</h2>
+        </div>
+
+        <div class="faq-list">
+          {faq.map((item, i) => (
+            <details class="faq-item" style={`animation-delay: ${i * 40}ms`}>
+              <summary class="faq-question">
+                <span>{item.q[lang]}</span>
+                <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="faq-answer">
+                <p>{item.a[lang]}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+
+        <div class="faq-cta">
+          <p class="faq-cta-text">{lang === 'es' ? '¿Tienes un proyecto en mente?' : 'Have a project in mind?'}</p>
+          <a href="/contacto" class="faq-cta-btn">
+            {lang === 'es' ? 'Contactar' : 'Contact'}
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .services-page {
+    min-height: 100vh;
+    background: var(--bg);
+  }
+
+  .services-hero {
+    padding: 8rem 5% 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .services-hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .services-title {
+    font-family: var(--sans-font);
+    font-size: clamp(2.5rem, 8vw, 4rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .services-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.9rem;
+    color: var(--accent-dim);
+    margin: 0;
+    max-width: 550px;
+  }
+
+  .stats-section {
+    padding: 0 5%;
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .stats-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    padding-top: 3rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 2rem 1.5rem;
+    background: var(--bg);
+    text-align: center;
+  }
+
+  .stat-value {
+    font-family: var(--sans-font);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.03em;
+  }
+
+  .stat-label {
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.5;
+  }
+
+  .trust-section {
+    padding: 0 5%;
+  }
+
+  .trust-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 0;
+  }
+
+  .trust-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .trust-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    animation: trustIn 0.4s ease-out both;
+  }
+
+  @keyframes trustIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .trust-check {
+    color: rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+  }
+
+  .trust-text {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  .fundacion-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+
+  .fundacion-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+
+  .fundacion-name {
+    font-family: var(--sans-font);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .services-list-section {
+    padding: 0 5%;
+    border-top: 1px solid var(--border);
+  }
+
+  .services-list-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 0;
+  }
+
+  .services-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .services-section-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .services-section-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin: 0 0 0.3rem 0;
+  }
+
+  .services-section-sub {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: var(--accent-dim);
+    margin: 0;
+  }
+
+  .services-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .service-card {
+    padding: 1.75rem 2rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .service-card:last-child {
+    border-bottom: none;
+  }
+
+  .service-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .service-index {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    min-width: 24px;
+  }
+
+  .service-name {
+    font-family: var(--sans-font);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+  }
+
+  .service-desc {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    line-height: 1.6;
+    margin: 0;
+    padding-left: calc(24px + 1rem);
+  }
+
+  .faq-section {
+    padding: 0 5% 8rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .faq-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 0 0;
+  }
+
+  .faq-header {
+    margin-bottom: 3rem;
+  }
+
+  .faq-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .faq-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    animation: faqIn 0.4s ease-out both;
+  }
+
+  .faq-item:last-child {
+    border-bottom: none;
+  }
+
+  @keyframes faqIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    font-family: var(--sans-font);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #fff;
+    list-style: none;
+    transition: background 0.15s;
+  }
+
+  .faq-question::-webkit-details-marker { display: none; }
+  .faq-question::marker { display: none; content: ''; }
+
+  .faq-question:hover {
+    background: var(--surface);
+  }
+
+  .faq-chevron {
+    flex-shrink: 0;
+    transition: transform 0.2s;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.25rem 1.25rem;
+    padding-left: calc(1.25rem + 24px + 1rem);
+  }
+
+  .faq-answer p {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .faq-cta {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+  }
+
+  .faq-cta-text {
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+    margin: 0;
+  }
+
+  .faq-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.4rem;
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #000;
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+
+  .faq-cta-btn:hover {
+    background: transparent;
+    color: #fff;
+  }
+
+  @media (max-width: 640px) {
+    .services-hero { padding: 7rem 5% 3rem; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .service-desc { padding-left: 0; }
+    .faq-answer { padding-left: 1.25rem; }
+    .faq-cta { flex-direction: column; gap: 1rem; text-align: center; }
+  }
+</style>

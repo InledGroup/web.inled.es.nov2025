@@ -1,0 +1,238 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+interface Contributor {
+  login: string;
+  avatar_url: string;
+  profile: string;
+  contributions: number;
+}
+
+let inledContributors: Contributor[] = [];
+let pulsarContributors: Contributor[] = [];
+
+try {
+  const [inledRes, pulsarRes] = await Promise.all([
+    fetch('https://inledgroup.github.io/.github/contributors.json'),
+    fetch('https://inled-pulsar-os.github.io/.github/contributors.json'),
+  ]);
+
+  if (inledRes.ok) {
+    const data = await inledRes.json();
+    inledContributors = (data.contributors || [])
+      .sort((a: Contributor, b: Contributor) => b.contributions - a.contributions);
+  }
+
+  if (pulsarRes.ok) {
+    const data = await pulsarRes.json();
+    pulsarContributors = (data.contributors || [])
+      .sort((a: Contributor, b: Contributor) => b.contributions - a.contributions);
+  }
+} catch {}
+
+const header = {
+  es: { title: 'Contribuidores', subtitle: 'Personas que hacen posible Inled' },
+  en: { title: 'Contributors', subtitle: 'People making Inled possible' },
+}[lang];
+
+const pulsarLabel = {
+  es: 'Pulsar OS',
+  en: 'Pulsar OS',
+}[lang];
+---
+
+<section class="contributors-section">
+  <div class="contributors-container">
+    <div class="contributors-header">
+      <div class="contributors-label">{lang === 'es' ? 'COMUNIDAD' : 'COMMUNITY'}</div>
+      <h2 class="contributors-title">{header.title}</h2>
+      <p class="contributors-subtitle">{header.subtitle}</p>
+    </div>
+
+    <div class="contributors-group">
+      <h3 class="group-title">Inled</h3>
+      <div class="contributors-grid">
+        {inledContributors.map((c) => (
+          <a href={c.profile} target="_blank" rel="noopener" class="contributor-card">
+            <img src={`${c.avatar_url}?s=128&v=4`} alt={c.login} class="contributor-avatar" loading="lazy" width="48" height="48" />
+            <div class="contributor-info">
+              <span class="contributor-name">{c.login}</span>
+              <span class="contributor-commits">{c.contributions} {lang === 'es' ? 'contribuciones' : 'contributions'}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="contributors-group">
+      <h3 class="group-title">{pulsarLabel}</h3>
+      <div class="contributors-grid-pulsar">
+        {pulsarContributors.map((c) => (
+          <a href={c.profile} target="_blank" rel="noopener" class="contributor-card">
+            <img src={`${c.avatar_url}?s=128&v=4`} alt={c.login} class="contributor-avatar" loading="lazy" width="48" height="48" />
+            <div class="contributor-info">
+              <span class="contributor-name">{c.login}</span>
+              <span class="contributor-commits">{c.contributions} {lang === 'es' ? 'contribuciones' : 'contributions'}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <a href="https://github.com/InledGroup" target="_blank" rel="noopener" class="contributors-cta">
+      {lang === 'es' ? 'Ver en GitHub' : 'View on GitHub'}
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .contributors-section {
+    width: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .contributors-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  .contributors-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .contributors-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .contributors-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: -0.03em;
+    margin: 0 0 0.3rem 0;
+  }
+
+  .contributors-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+    margin: 0;
+  }
+
+  .contributors-group {
+    margin-bottom: 3rem;
+  }
+
+  .contributors-group:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .group-title {
+    font-family: var(--mono-font);
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin: 0 0 1.25rem 0;
+  }
+
+  .contributors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .contributors-grid-pulsar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .contributors-grid-pulsar .contributor-card {
+    flex: 1 1 calc(33.333% - 1px);
+    min-width: 200px;
+  }
+
+  .contributor-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.85rem 1.1rem;
+    background: var(--bg);
+    text-decoration: none;
+    color: var(--accent-dim);
+    transition: background 0.15s;
+  }
+
+  .contributor-card:hover {
+    background: var(--surface);
+    color: #fff;
+  }
+
+  .contributor-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .contributor-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    min-width: 0;
+  }
+
+  .contributor-name {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contributor-commits {
+    font-family: var(--mono-font);
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .contributors-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: var(--accent-dim);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .contributors-cta:hover {
+    color: #fff;
+  }
+</style>

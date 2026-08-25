@@ -3,8 +3,6 @@ import { marked } from 'marked';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
 import AutoTranslate from './AutoTranslate.astro';
 
-// Usamos el import con ?raw de Vite: Esto es infalible para Cloudflare/SSR/SSG
-// porque el contenido se inyecta en el build. No requiere fs ni fetch.
 // @ts-ignore
 import changelogRaw from '../data/changelog.md?raw';
 
@@ -13,10 +11,8 @@ const t = useTranslations(lang);
 
 const changelogContent = changelogRaw || '# Changelog\nNo se pudo cargar el archivo.';
 
-// Separar por días (usando el encabezado ## YYYY-MM-DD como separador)
 const entries = changelogContent.split(/(?=## \d{4}-\d{2}-\d{2})/).slice(1);
 
-// Convertir cada entrada a HTML
 const parsedEntries = entries.map(entry => {
   const [title, ...content] = entry.split('\n');
   return {
@@ -25,40 +21,38 @@ const parsedEntries = entries.map(entry => {
   };
 });
 
-// El título del componente (primer encabezado # del archivo)
 const titleMatch = changelogContent.match(/^# (.*)/);
 const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
 ---
 
-<section class="changelog-full-width">
-  <div class="changelog-inner-container">
+<section class="changelog-section">
+  <div class="changelog-container">
     <div class="changelog-header">
-      <h2 class="translatable">{componentTitle}</h2>
-      <span class="version-tag">{lang === 'es' ? 'Actualizado' : 'Updated'}: {parsedEntries[0]?.date}</span>
+      <div class="changelog-label">{lang === 'es' ? 'CAMBIOS' : 'CHANGELOG'}</div>
+      <h2 class="changelog-title">{componentTitle}</h2>
+      <p class="changelog-subtitle">{lang === 'es' ? 'Historial de actualizaciones' : 'Update history'}</p>
     </div>
 
-    <div class="changelog-scroll-area" id="changelogContainer" data-lenis-prevent>
-      <div class="entries-wrapper">
-        {parsedEntries.map((entry, index) => (
-          <div 
-            class="changelog-entry" 
-            data-index={index}
-            style={index === 0 ? "" : "display: none;"}
-          >
-            <div class="entry-date">
-              <span class="dot"></span>
-              {entry.date}
-            </div>
-            <div class="entry-content translatable" set:html={entry.html} />
+    <div class="changelog-entries" id="changelogContainer" data-lenis-prevent>
+      {parsedEntries.map((entry, index) => (
+        <div 
+          class="changelog-entry" 
+          data-index={index}
+          style={index === 0 ? "" : "display: none;"}
+        >
+          <div class="entry-left">
+            <span class="entry-date-label">{entry.date}</span>
           </div>
-        ))}
-      </div>
+          <div class="entry-divider"></div>
+          <div class="entry-right translatable" set:html={entry.html} />
+        </div>
+      ))}
     </div>
 
     <div class="changelog-actions">
       <button id="showMoreBtn" class="expand-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down"><path d="m6 9 6 6 6-6"/></svg>
         <span id="btnText">{lang === 'es' ? 'Ver más cambios' : 'View more changes'}</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </button>
     </div>
   </div>
@@ -67,189 +61,178 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
 </section>
 
 <style>
-  .changelog-full-width {
+  .changelog-section {
     width: 100%;
-    padding: 5rem 1.5rem;
-    margin: 4rem 0;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
   }
 
-  .changelog-inner-container {
-    max-width: 900px;
+  .changelog-container {
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 5rem 5%;
   }
 
   .changelog-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 3rem;
   }
 
-  .changelog-header h2 {
-    margin: 0;
-    font-size: 2.5rem;
-    font-weight: 700;
+  .changelog-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .changelog-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
     color: #fff;
     letter-spacing: -0.03em;
+    margin: 0 0 0.3rem 0;
   }
 
-  .version-tag {
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.6);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.5rem 1.2rem;
-    border-radius: 100px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+  .changelog-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+    margin: 0;
   }
 
-  .changelog-scroll-area {
-    max-height: 550px;
-    overflow-y: auto;
-    padding-right: 2rem;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
-  }
-
-  .changelog-scroll-area::-webkit-scrollbar {
-    width: 3px;
-  }
-
-  .changelog-scroll-area::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 10px;
-  }
-
-  .entries-wrapper {
+  .changelog-entries {
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
-    position: relative;
-  }
-
-  .entries-wrapper::before {
-    content: '';
-    position: absolute;
-    left: 7px;
-    top: 10px;
-    bottom: 10px;
-    width: 1px;
-    background: linear-gradient(to bottom, 
-      rgba(255, 255, 255, 0.3) 0%, 
-      rgba(255, 255, 255, 0.1) 50%, 
-      rgba(255, 255, 255, 0.02) 100%
-    );
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
   }
 
   .changelog-entry {
-    position: relative;
-    padding-left: 3rem;
+    display: grid;
+    grid-template-columns: 140px 1px 1fr;
+    border-bottom: 1px solid var(--border);
   }
 
-  .entry-date {
+  .changelog-entry:last-child {
+    border-bottom: none;
+  }
+
+  .changelog-entry[style*="display: block"] {
+    animation: entryIn 0.3s ease-out both;
+  }
+
+  @keyframes entryIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .entry-left {
+    padding: 1.25rem 1.5rem;
     display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 1rem;
-    font-size: 1.2rem;
-    letter-spacing: -0.01em;
+    align-items: flex-start;
+    padding-top: 1.5rem;
   }
 
-  .dot {
-    position: absolute;
-    left: 0;
-    width: 15px;
-    height: 15px;
-    background: #fff;
-    border-radius: 50%;
-    border: 3px solid #000;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-    z-index: 2;
+  .entry-date-label {
+    font-family: var(--mono-font);
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.35);
+    white-space: nowrap;
   }
 
-  .entry-content {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 1rem;
+  .entry-divider {
+    background: var(--border);
+  }
+
+  .entry-right {
+    padding: 1.25rem 1.5rem;
+    color: rgba(255, 255, 255, 0.65);
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
     line-height: 1.7;
   }
 
-  .entry-content :global(h3) {
-    font-size: 0.75rem;
-    margin: 1.8rem 0 0.6rem 0;
+  .entry-right :global(h3) {
+    font-family: var(--sans-font);
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.5rem 0;
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.4);
-    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.35);
   }
 
-  .entry-content :global(ul) {
+  .entry-right :global(ul) {
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
-  .entry-content :global(li) {
+  .entry-right :global(li) {
     position: relative;
-    margin-bottom: 0.6rem;
-    padding-left: 1.5rem;
-    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 0.4rem;
+    padding-left: 1rem;
+    color: rgba(255, 255, 255, 0.55);
   }
 
-  .entry-content :global(li::before) {
+  .entry-right :global(li::before) {
     content: '';
     position: absolute;
     left: 0;
-    top: 10px;
-    width: 6px;
+    top: 0.55em;
+    width: 4px;
     height: 1px;
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.3);
   }
 
   .changelog-actions {
-    margin-top: 4rem;
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
   }
 
   .expand-btn {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.5rem;
     background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 0.9rem 2.5rem;
-    border-radius: 100px;
+    color: var(--accent-dim);
+    border: 1px solid var(--border);
+    padding: 0.65rem 1.4rem;
+    border-radius: 4px;
     cursor: pointer;
-    font-weight: 500;
-    font-size: 0.9rem;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    transition: all 0.15s;
   }
 
   .expand-btn:hover {
     background: #fff;
     color: #000;
     border-color: #fff;
-    transform: translateY(-3px);
   }
 
-  .changelog-entry[style*="display: block"] {
-    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
+  @media (max-width: 640px) {
+    .changelog-entry {
+      grid-template-columns: 1fr;
+    }
 
-  @keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    .entry-left {
+      padding-bottom: 0;
+    }
 
-  @media (max-width: 768px) {
-    .changelog-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
+    .entry-divider {
+      display: none;
+    }
+
+    .entry-right {
+      padding-top: 0.5rem;
     }
   }
 </style>

@@ -6,7 +6,7 @@ const lang = getLangFromLocals(Astro.locals);
 const links = [
   {
     title: { es: 'Listado infraestructura', en: 'Infrastructure list' },
-    desc: { es: 'Incluye la lista completa de servicios de Inled que no se ven pero mantienen vivo todo el proyecto', en: 'Includes the complete list of Inled services that are unseen but keep the entire project alive' },
+    desc: { es: 'Lista completa de servicios de Inled que mantienen vivo todo el proyecto', en: 'Complete list of Inled services that keep the entire project alive' },
     href: 'https://infra.inled.es',
   },
   {
@@ -16,12 +16,12 @@ const links = [
   },
   {
     title: { es: 'Documentación', en: 'Documentation' },
-    desc: { es: 'Actualmente bastante incompleta, estoy pensando en cambiar el sitio o pasarlo a GH Wikis', en: 'Currently quite incomplete, Im thinking about changing the site or moving it to GH Wikis' },
+    desc: { es: 'Documentación técnica y guías de uso', en: 'Technical documentation and usage guides' },
     href: 'https://help.inled.es',
   },
   {
-    title: { es: 'Tablero tareas e inicidencias', en: 'Tasks and incidents board' },
-    desc: { es: 'No es el roadmap, son solo tareas de mantenimiento y errores o mejoras a aplicar a apps ya creadas', en: 'It is not the roadmap, it is just maintenance tasks and errors or improvements to apply to apps already created' },
+    title: { es: 'Tablero de tareas', en: 'Task board' },
+    desc: { es: 'Tareas de mantenimiento, errores y mejoras a aplicaciones', en: 'Maintenance tasks, bugs and improvements for apps' },
     href: 'https://github.com/orgs/InledGroup/projects/1/views/1',
   }
 ];
@@ -35,14 +35,20 @@ const header = {
 <section class="links-section">
   <div class="links-container">
     <div class="links-header">
-      <h3 class="links-title">{header.title}</h3>
-      <!--  <p class="links-subtitle">{header.subtitle}</p> -->
+      <div class="links-label">{lang === 'es' ? 'RECURSOS' : 'RESOURCES'}</div>
+      <h2 class="links-title">{header.title}</h2>
+      <p class="links-subtitle">{header.subtitle}</p>
     </div>
-    <div class="links-grid">
-      {links.map(link => (
-        <a href={link.href} target="_blank" rel="noopener noreferrer" class="link-card">
-          <h4 class="link-title">{link.title[lang]}</h4>
-          <p class="link-desc">{link.desc[lang]}</p>
+
+    <div class="links-list">
+      {links.map((link, i) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" class="link-row" style={`animation-delay: ${i * 30}ms`}>
+          <span class="link-index">{String(i + 1).padStart(2, '0')}</span>
+          <div class="link-content">
+            <span class="link-title">{link.title[lang]}</span>
+            <span class="link-desc">{link.desc[lang]}</span>
+          </div>
+          <svg class="link-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
         </a>
       ))}
     </div>
@@ -51,81 +57,115 @@ const header = {
 
 <style>
   .links-section {
-    padding: 4rem 2rem;
-    background: transparent;
+    width: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
   }
 
   .links-container {
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 5rem 5%;
   }
 
   .links-header {
-    margin-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding-bottom: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .links-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
   }
 
   .links-title {
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 800;
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
     color: #fff;
-    margin: 0;
     letter-spacing: -0.03em;
+    margin: 0 0 0.3rem 0;
   }
 
   .links-subtitle {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.5);
-    margin: 0.5rem 0 0 0;
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+    margin: 0;
   }
 
-  .links-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1rem;
-  }
-
-  .link-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 12px;
-    padding: 1.5rem 1.75rem;
-    text-decoration: none;
-    color: inherit;
+  .links-list {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
   }
 
-  .link-card:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+  .link-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--accent-dim);
+    transition: all 0.15s;
+    animation: linkIn 0.4s ease-out both;
+  }
+
+  @keyframes linkIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .link-row:last-child {
+    border-bottom: none;
+  }
+
+  .link-row:hover {
+    background: var(--surface);
+    color: #fff;
+  }
+
+  .link-index {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    min-width: 24px;
+  }
+
+  .link-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
   }
 
   .link-title {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-family: var(--sans-font);
+    font-size: 0.9rem;
+    font-weight: 600;
     color: #fff;
-    margin: 0;
   }
 
   .link-desc {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.55);
-    margin: 0;
-    line-height: 1.5;
+    font-family: var(--mono-font);
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.35);
   }
 
-  @media (max-width: 768px) {
-    .links-section {
-      padding: 3rem 1.5rem;
-    }
+  .link-arrow {
+    opacity: 0;
+    transform: translate(-4px, 4px);
+    transition: all 0.2s;
+  }
 
-    .links-grid {
-      grid-template-columns: 1fr;
-    }
+  .link-row:hover .link-arrow {
+    opacity: 1;
+    transform: translate(0, 0);
   }
 </style>

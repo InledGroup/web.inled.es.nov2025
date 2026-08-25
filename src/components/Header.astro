@@ -1,509 +1,214 @@
 ---
-import { apps } from '../config/apps';
-import { saas } from '../config/saas';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
-import SocialLinks from './SocialLinks.astro';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 ---
 
-<div class="floating-header-container">
-  <div class="header-content-wrapper">
-    <header class="taskbar">
-      <a href="/" class="taskbar-item logo-item" aria-label="Home">
-        <img src="https://hosted.inled.es/INLED_simple-removebg-preview.png" alt="Inled Logo" class="logo-img">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-home-icon"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="header-logo" aria-label="Home">
+      <img src="https://hosted.inled.es/INLED_simple-removebg-preview.png" alt="Inled" class="logo-img" />
+      <span class="logo-text">INLED</span>
+    </a>
+
+    <nav class="header-center">
+      <a href="#projects" class="header-link">{lang === 'es' ? 'Proyectos' : 'Projects'}</a>
+      <a href="/blog" class="header-link">Blog</a>
+      <a href="/contacto" class="header-link">{t('nav.contact')}</a>
+
+      <span class="header-divider"></span>
+
+      <a href="https://github.com/InledGroup" target="_blank" rel="noopener" class="header-btn" aria-label="GitHub">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.012c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.337 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.579.688.481C19.138 20.174 22 16.426 22 12.012 22 6.484 17.523 2 12 2z"/></svg>
+      </a>
+      <a href="https://link.inled.es/discord" target="_blank" rel="noopener" class="header-btn" aria-label="Discord">
+        <i class="fa-brands fa-discord" style="font-size: 15px;"></i>
+      </a>
+      <a href="https://matrix.inled.es" target="_blank" rel="noopener" class="header-btn" aria-label="Matrix">
+        <svg width="15" height="15" viewBox="0 0 640 640" fill="currentColor"><path d="M125.6 91L92.7 91L92.7 549L125.6 549L125.6 560L80 560L80 80L125.6 80L125.6 91zM560 560L514.4 560L514.4 549L547.3 549L547.3 91L514.4 91L514.4 80L560 80L560 560zM388.1 231.6C397.1 231.6 405.5 232.7 413.3 234.9C421.1 237.1 427.6 240.6 433.1 245.5C438.6 250.4 442.9 256.7 446 264.5C449 272.3 450.6 281.8 450.6 292.8L450.6 407.3L403.6 407.3L403.6 310.3C403.6 304.6 403.4 299.1 403 294C402.6 288.9 401.3 284.5 399.4 280.8C397.4 277 394.5 274 390.7 271.8C386.9 269.6 381.6 268.5 375 268.5C368.4 268.5 363 269.8 358.9 272.3C354.8 274.9 351.6 278.1 349.3 282.3C347 286.4 345.4 291 344.7 296.2C344 301.4 343.5 306.6 343.5 311.9L343.5 407.2L296.5 407.2L296.5 311.2C296.5 306.1 296.4 301.1 296.1 296.2C295.9 291.2 294.9 286.7 293.2 282.4C291.5 278.3 288.8 274.8 284.9 272.3C281 269.8 275.4 268.5 267.8 268.5C265.6 268.5 262.6 269 259 270C255.4 271 251.8 272.9 248.4 275.6C245 278.3 242 282.3 239.6 287.5C237.2 292.7 236 299.5 236 307.9L236 407.2L189 407.2L189 235.9L233.3 235.9L233.3 259.1L234 259.1C240.2 250.2 247.7 243.4 256.3 238.6C265 233.7 275 231.3 286.3 231.3C297.1 231.3 307 233.4 315.9 237.6C324.8 241.8 331.6 249.2 336.3 259.8C341.4 252.3 348.3 245.7 357 240C365.7 234.3 376 231.4 387.9 231.4z"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@inledgroup" target="_blank" rel="noopener" class="header-btn" aria-label="YouTube">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8.001s-.2-1.429-.8-2.057c-.763-.8-1.617-.803-2.011-.849C16.2 5 12 5 12 5h-.01s-4.2 0-7 .095c-.394.046-1.248.049-2.011.849-.6.628-.8 2.057-.8 2.057S2 9.571 2 11.143v1.714c0 1.572.2 3.142.2 3.142s.2 1.429.8 2.057c.763.8 1.767.775 2.221.86C7.8 19 12 19 12 19s4.2 0 7-.095c.394-.046 1.248-.049 2.011-.849.6-.628.8-2.057.8-2.057s.2-1.57.2-3.142v-1.714c0-1.572-.2-3.142-.2-3.142zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
       </a>
 
-      <div class="taskbar-divider"></div>
-
-    <!-- Posiblemente se elimine la sección de apps, ya que no interesa tenerla ahí o al menos  quitar las apps que ya no se usan o hacer un overlay que se despliegue desde arriba y ocupe toda la pantalla -->
-    <!--  <div class="apps-grid-container">
-        <button class="taskbar-item apps-grid-toggle" aria-label="Apps Menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>
-        </button>
-
-        <div class="apps-grid-overlay" data-lenis-prevent>
-          <div class="apps-grid-content">
-            <div class="grid-section">
-              <h3>{t('grid.saas')}</h3>
-              <div class="grid-items">
-                {saas.filter(item => !item.archive).map((item) => (
-                  <a href={item.link} class="grid-item">
-                    <div class="grid-item-icon">
-                      <img src={item.icon} alt={item.name} loading="lazy" />
-                    </div>
-                    <span class="grid-item-name">{item.name}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            <div class="grid-divider"></div>
-
-            <div class="grid-section">
-              <h3>{t('grid.apps')}</h3>
-              <div class="grid-items">
-                {apps.filter(app => !app.archive).map((app) => (
-                  <a href={app.link} class="grid-item">
-                    <div class="grid-item-icon">
-                      <img src={app.icon} alt={app.name} loading="lazy" />
-                    </div>
-                    <span class="grid-item-name">{app.name}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="taskbar-divider"></div>  -->
+      <span class="header-divider"></span>
 
       <div class="lang-selector-container">
-          <button class="taskbar-item lang-toggle" aria-label="Change Language">
-              <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-languages"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
-          </button>
-          <div class="lang-menu">
-              <button class={`lang-btn ${lang === 'es' ? 'active' : ''}`} data-lang="es">Español</button>
-              <button class={`lang-btn ${lang === 'en' ? 'active' : ''}`} data-lang="en">English</button>
-          </div>
+        <button class="header-btn lang-toggle" aria-label="Change Language">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+        </button>
+        <div class="lang-menu">
+          <button class={`lang-btn ${lang === 'es' ? 'active' : ''}`} data-lang="es">ES</button>
+          <button class={`lang-btn ${lang === 'en' ? 'active' : ''}`} data-lang="en">EN</button>
+        </div>
       </div>
-
-
-      <div class="taskbar-divider"></div>
-
-      <a href="/contacto" class="taskbar-item contact-item" aria-label={t('nav.contact')}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-      </a>
-    </header>
-
-    <div class="social-header">
-      <SocialLinks />
-    </div>
+    </nav>
   </div>
-</div>
-
-<div class="mobile-social-dock">
-  <SocialLinks />
-</div>
+</header>
 
 <style>
-  .floating-header-container {
+  .site-header {
     position: fixed;
-    top: 1.5rem;
+    top: 0;
     left: 0;
     right: 0;
-    display: flex;
-    justify-content: center;
     z-index: 2000;
-    pointer-events: none;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 48px;
   }
 
-  .header-content-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    pointer-events: none;
-  }
-
-  @media (min-width: 769px) {
-    .header-content-wrapper {
-      flex-direction: row;
-      gap: 0.5rem;
-    }
-  }
-
-  .taskbar, .social-header {
-    pointer-events: auto;
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
     display: flex;
     align-items: center;
-    height: 60px; /* Fixed height for both to match */
+    justify-content: space-between;
+    padding: 0 1.5rem;
   }
 
-  .taskbar {
-    gap: 0.5rem;
-    padding: 0 0.5rem;
-    background: rgba(20, 20, 25, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .social-header {
-    background: rgba(20, 20, 25, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    padding: 0 0.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .social-header :global(.social-links) {
-    gap: 0.25rem;
-  }
-
-  .social-header :global(.social-links a) {
-    width: 44px;
-    height: 44px;
-    background: transparent;
-    border: none;
-  }
-
-  .social-header :global(.social-links a:hover) {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-4px);
-  }
-
-  .social-header:hover {
-    background: rgba(25, 25, 30, 0.85);
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: scale(1.02);
-  }
-
-  .taskbar:hover {
-    background: rgba(25, 25, 30, 0.85);
-    border-color: rgba(255, 255, 255, 0.25);
-    transform: scale(1.02);
-  }
-
-  /* Mobile Social Dock */
-  .mobile-social-dock {
-    display: none;
-    position: fixed;
-    bottom: 1.5rem;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(20, 20, 25, 0.8);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 20px;
-    padding: 0.5rem;
-    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.4);
-    z-index: 2000;
-  }
-
-  @media (max-width: 768px) {
-    .social-header {
-      display: none;
-    }
-    .mobile-social-dock {
-      display: flex;
-    }
-  }
-
-  .taskbar-item {
+  .header-logo {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    color: rgba(255, 255, 255, 0.85);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    gap: 0.6rem;
     text-decoration: none;
-    position: relative;
-  }
-
-  .taskbar-item:hover {
-    background: rgba(255, 255, 255, 0.1);
     color: #fff;
-    transform: translateY(-4px);
-  }
-
-  .taskbar-item svg {
-    transition: transform 0.2s ease;
-  }
-
-  .taskbar-item:hover svg {
-    transform: scale(1.1);
-  }
-
-  .logo-item {
-    padding: 6px;
-    position: relative;
-    width: 44px;
-    height: 44px;
     flex-shrink: 0;
-    overflow: hidden;
-  }
-
-  .logo-img, .logo-home-icon {
-    width: 32px;
-    height: 32px;
-    max-width: 32px;
-    max-height: 32px;
-    object-fit: contain;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.5s ease, filter 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .logo-img {
-    opacity: 0;
-    filter: blur(8px);
-    transform: translate(calc(-50% + 8px), -50%) scale(0.8);
-    pointer-events: none;
-  }
-
-  .logo-home-icon {
-    opacity: 1;
-    filter: blur(0);
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  .logo-item.loaded .logo-img {
-    opacity: 1;
-    filter: blur(0);
-    transform: translate(-50%, -50%) scale(1);
-    pointer-events: auto;
-  }
-
-  .logo-item.loaded .logo-home-icon {
-    opacity: 0;
-    filter: blur(8px);
-    transform: translate(calc(-50% - 8px), -50%) scale(0.8);
-  }
-
-  .logo-item:hover .logo-img {
-    opacity: 0;
-    filter: blur(8px);
-    transform: translate(calc(-50% - 8px), -50%) scale(0.8);
-    pointer-events: none;
-  }
-
-  .logo-item:hover .logo-home-icon {
-    opacity: 1;
-    filter: blur(0);
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  .taskbar-divider {
-    width: 1px;
+    width: 24px;
     height: 24px;
-    background: rgba(255, 255, 255, 0.15);
-    margin: 0 4px;
-  }
-
-  /* Apps Grid Overlay */
-  .apps-grid-container {
-    position: relative;
-  }
-
-  .apps-grid-overlay {
-    position: absolute;
-    top: calc(100% + 1rem);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(20, 20, 25, 0.98);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 24px;
-    width: 380px;
-    max-height: calc(100vh - 120px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-    z-index: 2001;
-    scrollbar-width: none;
-  }
-
-  .apps-grid-overlay::-webkit-scrollbar {
-    display: none;
-  }
-
-  .apps-grid-container.open .apps-grid-overlay {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .apps-grid-content {
-    padding: 1.5rem;
-    padding-bottom: 3rem;
-  }
-
-  .grid-section h3 {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 1rem;
-  }
-
-  .grid-items {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.5rem;
-  }
-
-  .grid-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 0.25rem;
-    border-radius: 16px;
-    text-decoration: none;
-    transition: all 0.2s ease;
-    text-align: center;
-  }
-
-  .grid-item:hover {
-    background: rgba(255, 255, 255, 0.08);
-    transform: translateY(-2px);
-  }
-
-  .grid-item-icon {
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .grid-item-icon img {
-    width: 100%;
-    height: 100%;
     object-fit: contain;
   }
 
-  .grid-item-name {
-    color: white;
-    font-size: 0.7rem;
+  .logo-text {
+    font-family: var(--mono-font);
+    font-size: 0.75rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    color: #fff;
+  }
+
+  .header-center {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  .header-divider {
+    width: 1px;
+    height: 16px;
+    background: var(--border);
+    margin: 0 0.3rem;
+  }
+
+  .header-link {
+    font-size: 0.75rem;
+    color: var(--accent-dim);
+    text-decoration: none;
+    padding: 0.3rem 0.6rem;
     font-weight: 500;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    transition: color 0.15s;
+    font-family: var(--mono-font);
+    letter-spacing: 0.02em;
   }
 
-  .grid-divider {
-    height: 1px;
-    background: rgba(255, 255, 255, 0.1);
-    margin: 1.25rem 0;
+  .header-link:hover {
+    color: #fff;
   }
 
-  /* Lang Selector */
+  .header-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: var(--accent-dim);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.15s, background 0.15s;
+    border-radius: 4px;
+  }
+
+  .header-btn:hover {
+    color: #fff;
+    background: var(--surface-hover);
+  }
+
   .lang-selector-container {
     position: relative;
   }
 
   .lang-menu {
     position: absolute;
-    top: calc(100% + 1rem);
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(25, 25, 30, 0.95);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: 0.5rem;
-    min-width: 120px;
+    top: calc(100% + 6px);
+    right: 0;
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px;
+    min-width: 56px;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease;
+    transform: translateY(-4px);
+    transition: all 0.15s;
     display: flex;
     flex-direction: column;
     gap: 2px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
   }
 
   .lang-selector-container.open .lang-menu {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
   }
 
   .lang-btn {
     background: transparent;
     border: none;
-    color: rgba(255, 255, 255, 0.7);
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    font-size: 0.85rem;
+    color: var(--accent-dim);
+    padding: 0.35rem 0.6rem;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-family: var(--mono-font);
     cursor: pointer;
-    text-align: left;
-    transition: all 0.2s ease;
+    text-align: center;
+    transition: all 0.15s;
   }
 
   .lang-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--surface-hover);
     color: #fff;
   }
 
   .lang-btn.active {
-    background: rgba(255, 255, 255, 0.15);
     color: #fff;
-    font-weight: 600;
+    background: var(--surface);
   }
 
-  @media (max-width: 480px) {
-    .taskbar {
-        gap: 0.25rem;
-    }
-    .apps-grid-overlay {
-        width: 300px;
-        grid-template-columns: repeat(2, 1fr);
-    }
-    .grid-items {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  @media (max-width: 768px) {
+    .header-link { display: none; }
+    .header-inner { padding: 0 1rem; }
   }
 </style>
 
 <script>
   function initHeader() {
-    const taskbar = document.querySelector('.taskbar');
     const langSelector = document.querySelector('.lang-selector-container');
-    const appsGrid = document.querySelector('.apps-grid-container');
-    const logoItem = document.querySelector('.logo-item') as HTMLElement;
+    const langToggle = document.querySelector('.lang-toggle');
 
-    if (logoItem) {
-      setTimeout(() => {
-        logoItem.classList.add('loaded');
-      }, 1000);
-    }
-
-    if (!taskbar) return;
-
-    // Toggle para el grid de apps
-    const appsToggle = taskbar.querySelector('.apps-grid-toggle');
-    appsToggle?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      langSelector?.classList.remove('open');
-      appsGrid?.classList.toggle('open');
-    });
-
-    // Toggle para el selector de idioma
-    const langToggle = taskbar.querySelector('.lang-toggle');
     langToggle?.addEventListener('click', (e) => {
       e.stopPropagation();
-      appsGrid?.classList.remove('open');
       langSelector?.classList.toggle('open');
     });
 
-    // Lógica para cambiar de idioma
     const langBtns = document.querySelectorAll('.lang-btn');
     langBtns.forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -516,21 +221,15 @@ const t = useTranslations(lang);
       });
     });
 
-    // Cerrar al hacer clic fuera
     document.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      if (!target.closest('.apps-grid-container')) {
-        appsGrid?.classList.remove('open');
-      }
       if (!target.closest('.lang-selector-container')) {
         langSelector?.classList.remove('open');
       }
     });
   }
 
-  // Ejecutar en cada carga de página (soporte para View Transitions si se activan luego)
   document.addEventListener('astro:page-load', initHeader);
-  // Ejecutar también en la carga inicial estándar
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     initHeader();
   } else {
