@@ -101,7 +101,6 @@ const header = {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
-    border-radius: 6px;
     overflow: hidden;
   }
 
@@ -113,22 +112,37 @@ const header = {
     border-bottom: 1px solid var(--border);
     text-decoration: none;
     color: var(--accent-dim);
-    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
     animation: linkIn 0.4s ease-out both;
   }
 
-  @keyframes linkIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
+  .link-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .link-row:hover::before {
+    transform: scaleX(1);
+  }
+
+  .link-row:hover {
+    color: #000;
+  }
+
+  .link-row > * {
+    position: relative;
+    z-index: 1;
   }
 
   .link-row:last-child {
     border-bottom: none;
-  }
-
-  .link-row:hover {
-    background: var(--surface);
-    color: #fff;
   }
 
   .link-index {
@@ -150,22 +164,37 @@ const header = {
     font-size: 0.9rem;
     font-weight: 600;
     color: #fff;
+    transition: color 0.2s;
+  }
+
+  .link-row:hover .link-title {
+    color: #000;
   }
 
   .link-desc {
     font-family: var(--mono-font);
     font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.35);
+    transition: color 0.2s;
+  }
+
+  .link-row:hover .link-desc {
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .link-arrow {
     opacity: 0;
-    transform: translate(-4px, 4px);
-    transition: all 0.2s;
+    transform: translateX(-8px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .link-row:hover .link-arrow {
     opacity: 1;
     transform: translate(0, 0);
+  }
+
+  @keyframes linkIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>

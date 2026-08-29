@@ -52,7 +52,7 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
     <div class="changelog-actions">
       <button id="showMoreBtn" class="expand-btn">
         <span id="btnText">{lang === 'es' ? 'Ver más cambios' : 'View more changes'}</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        <span><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
       </button>
     </div>
   </div>
@@ -106,7 +106,6 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
-    border-radius: 6px;
     overflow: hidden;
   }
 
@@ -200,22 +199,41 @@ const componentTitle = titleMatch ? titleMatch[1] : 'Changelog';
     gap: 0.5rem;
     background: transparent;
     color: var(--accent-dim);
-    border: 1px solid var(--border);
+    border: none;
+    border-bottom: 1px solid var(--border);
     padding: 0.65rem 1.4rem;
-    border-radius: 4px;
     cursor: pointer;
     font-family: var(--mono-font);
     font-size: 0.7rem;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .expand-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .expand-btn:hover::before {
+    transform: scaleX(1);
   }
 
   .expand-btn:hover {
-    background: #fff;
     color: #000;
-    border-color: #fff;
+  }
+
+  .expand-btn > * {
+    position: relative;
+    z-index: 1;
   }
 
   @media (max-width: 640px) {

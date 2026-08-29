@@ -70,6 +70,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/inledai.svg",
     link: "https://edge.inled.es/landing",
+    archive: true,
   },
   {
     id: "indoc",

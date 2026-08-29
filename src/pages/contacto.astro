@@ -35,7 +35,7 @@ const t = useTranslations(lang);
               <span class="method-name">Email</span>
               <span class="method-detail">hi@inled.es</span>
             </div>
-            <svg class="method-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="method-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
 
           <a href="https://link.inled.es/discord" target="_blank" rel="noopener" class="method-row">
@@ -44,7 +44,7 @@ const t = useTranslations(lang);
               <span class="method-name">Discord</span>
               <span class="method-detail">{lang === 'es' ? 'Únete a nuestro servidor' : 'Join our server'}</span>
             </div>
-            <svg class="method-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="method-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
 
           <a href="https://matrix.inled.es" target="_blank" rel="noopener" class="method-row">
@@ -53,7 +53,7 @@ const t = useTranslations(lang);
               <span class="method-name">Matrix</span>
               <span class="method-detail">{lang === 'es' ? 'Chat descentralizado' : 'Decentralized chat'}</span>
             </div>
-            <svg class="method-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="method-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         </div>
       </div>
@@ -133,7 +133,6 @@ const t = useTranslations(lang);
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
-    border-radius: 6px;
     overflow: hidden;
     margin: 3rem 0;
   }
@@ -146,16 +145,36 @@ const t = useTranslations(lang);
     border-bottom: 1px solid var(--border);
     text-decoration: none;
     color: var(--accent-dim);
-    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .method-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .method-row:hover::before {
+    transform: scaleX(1);
+  }
+
+  .method-row:hover {
+    color: #000;
+  }
+
+  .method-row > * {
+    position: relative;
+    z-index: 1;
   }
 
   .method-row:last-child {
     border-bottom: none;
-  }
-
-  .method-row:hover {
-    background: var(--surface);
-    color: #fff;
   }
 
   .method-index {
@@ -163,6 +182,11 @@ const t = useTranslations(lang);
     font-size: 0.5rem;
     color: rgba(255, 255, 255, 0.2);
     min-width: 24px;
+    transition: color 0.2s;
+  }
+
+  .method-row:hover .method-index {
+    color: rgba(0, 0, 0, 0.2);
   }
 
   .method-content {
@@ -177,23 +201,33 @@ const t = useTranslations(lang);
     font-size: 0.9rem;
     font-weight: 600;
     color: #fff;
+    transition: color 0.2s;
+  }
+
+  .method-row:hover .method-name {
+    color: #000;
   }
 
   .method-detail {
     font-family: var(--mono-font);
     font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.35);
+    transition: color 0.2s;
+  }
+
+  .method-row:hover .method-detail {
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .method-arrow {
     opacity: 0;
-    transform: translate(-4px, 4px);
-    transition: all 0.2s;
+    transform: translateX(-8px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .method-row:hover .method-arrow {
     opacity: 1;
-    transform: translate(0, 0);
+    transform: translateX(0);
   }
 
   .contact-form-section {
@@ -239,7 +273,6 @@ const t = useTranslations(lang);
     max-width: 650px;
     background: var(--bg);
     border: 1px solid var(--border);
-    border-radius: 6px;
     padding: 2.5rem;
   }
 
@@ -282,7 +315,6 @@ const t = useTranslations(lang);
     padding: 0.85rem 1rem !important;
     background: rgba(255, 255, 255, 0.03) !important;
     border: 1px solid var(--border) !important;
-    border-radius: 4px !important;
     color: white !important;
     font-size: 0.85rem !important;
     font-family: var(--mono-font) !important;
@@ -306,28 +338,29 @@ const t = useTranslations(lang);
 
   :global(#mailform .mailform-button) {
     width: 100% !important;
-    background: #fff !important;
+    background: transparent !important;
     border: none !important;
-    border-radius: 4px !important;
-    color: #000 !important;
+    border-bottom: 1px solid var(--border) !important;
+    color: #fff !important;
     padding: 0.85rem !important;
     font-size: 0.7rem !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.08em !important;
     cursor: pointer !important;
-    transition: all 0.15s !important;
+    transition: color 0.2s !important;
     font-family: var(--mono-font) !important;
+    position: relative !important;
+    overflow: hidden !important;
   }
 
   :global(#mailform .mailform-button:hover) {
-    background: rgba(255, 255, 255, 0.85) !important;
+    color: #000 !important;
   }
 
   :global(.mailform-success),
   :global(.mailform-error) {
     padding: 1rem;
-    border-radius: 4px;
     margin-top: 1.5rem;
     text-align: center;
     font-family: var(--mono-font);

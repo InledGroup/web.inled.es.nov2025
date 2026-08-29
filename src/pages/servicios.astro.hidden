@@ -47,7 +47,7 @@ const trust = [
 const faq = [
   {
     q: { es: '¿Se pueden hacer contratos B2B?', en: 'Can B2B contracts be made?' },
-    a: { es: 'No, aún no. Actualmente tengo 17 años y no puedo emitir facturas ni firmar contratos formales. Los servicios se prestan de forma informal.', en: 'No, not yet. I am currently 17 and cannot issue invoices or sign formal contracts. Services are provided informally.' },
+    a: { es: 'Aún no. Actualmente tengo 17 años y por ende no puedo emitir facturas. A partir de febrero del 2027 se podrá.', en: 'Not yet. I am currently 17 years old and therefore cannot issue invoices. Starting in February 2027 it will be possible.' },
   },
   {
     q: { es: '¿Por qué se ofrecen estos servicios?', en: 'Why are these services offered?' },
@@ -55,15 +55,15 @@ const faq = [
   },
   {
     q: { es: '¿Qué métodos de pago se aceptan?', en: 'What payment methods are accepted?' },
-    a: { es: 'PayPal, transferencia bancaria o cualquier otra forma que acordemos. No hay sistema de facturación formal.', en: 'PayPal, bank transfer, or any other method we agree on. There is no formal invoicing system.' },
+    a: { es: 'El metodo de pago se puede acordar durante al entrar en contacto.', en: 'The payment method can be agreed during contact.' },
   },
   {
     q: { es: '¿Cuál es el proceso?', en: 'What is the process?' },
-    a: { es: 'Contactas, me cuentas lo que necesitas, te doy un presupuesto y tras acordar los términos empiezo el trabajo. El pago se realiza por adelantado o a mitad de proyecto según se acuerde.', en: 'You reach out, tell me what you need, I give you a quote, and after agreeing on terms I start the work. Payment is made upfront or mid-project as agreed.' },
+    a: { es: 'Contactas, se ofrecen opciones de desarrollo, se intenta entender lo que necesitas, obtienes un presupuesto simple y competitivo. Una vez se finaliza el trabajo, se intercambia este por la remuneración.', en: 'You contact us, development options are offered, we try to understand what you need, you get a simple and competitive quote. Once the work is completed, it is exchanged for remuneration.' },
   },
   {
     q: { es: '¿Qué calidad puedo esperar?', en: 'What quality can I expect?' },
-    a: { es: 'Servicio profesional con calidad superior a la de la competencia, con el único afán de obtener un poco de dinero para mantener y mejorar Inled. No soy una empresa, pero el trabajo se hace con seriedad y compromiso.', en: 'Professional service with quality superior to the competition, with the sole aim of earning some money to maintain and improve Inled. I am not a company, but the work is done with seriousness and commitment.' },
+    a: { es: 'Máxima calidad, mucho mejor que el el promedio de empresas que prestan estos servicios y con un precio muy competitivo.', en: 'Maximum quality, much better than the average of companies that provide these services and with a very competitive price.' },
   },
 ];
 ---
@@ -156,13 +156,11 @@ const faq = [
           ))}
         </div>
 
-        <div class="faq-cta">
+        <a href="/contacto" class="faq-cta">
           <p class="faq-cta-text">{lang === 'es' ? '¿Tienes un proyecto en mente?' : 'Have a project in mind?'}</p>
-          <a href="/contacto" class="faq-cta-btn">
-            {lang === 'es' ? 'Contactar' : 'Contact'}
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </a>
-        </div>
+          <span class="faq-cta-label">{lang === 'es' ? 'Contactar' : 'Contact'}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
       </div>
     </section>
   </main>
@@ -236,7 +234,6 @@ const faq = [
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
-    border-radius: 6px;
     overflow: hidden;
   }
 
@@ -310,7 +307,6 @@ const faq = [
     gap: 1rem;
     padding: 1rem 1.5rem;
     border: 1px solid var(--border);
-    border-radius: 6px;
     background: var(--surface);
   }
 
@@ -318,7 +314,6 @@ const faq = [
     width: 40px;
     height: 40px;
     object-fit: contain;
-    border-radius: 4px;
   }
 
   .fundacion-name {
@@ -372,7 +367,6 @@ const faq = [
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
-    border-radius: 6px;
     overflow: hidden;
   }
 
@@ -382,6 +376,33 @@ const faq = [
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.2s;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .service-card:hover::before {
+    transform: scaleX(1);
+  }
+
+  .service-card:hover {
+    color: #000;
+  }
+
+  .service-card > * {
+    position: relative;
+    z-index: 1;
   }
 
   .service-card:last-child {
@@ -407,6 +428,11 @@ const faq = [
     font-weight: 600;
     color: #fff;
     margin: 0;
+    transition: color 0.2s;
+  }
+
+  .service-card:hover .service-name {
+    color: #000;
   }
 
   .service-desc {
@@ -416,6 +442,11 @@ const faq = [
     line-height: 1.6;
     margin: 0;
     padding-left: calc(24px + 1rem);
+    transition: color 0.2s;
+  }
+
+  .service-card:hover .service-desc {
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .faq-section {
@@ -455,17 +486,38 @@ const faq = [
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
-    border-radius: 6px;
     overflow: hidden;
   }
 
   .faq-item {
     border-bottom: 1px solid var(--border);
     animation: faqIn 0.4s ease-out both;
+    position: relative;
+    overflow: hidden;
   }
 
   .faq-item:last-child {
     border-bottom: none;
+  }
+
+  .faq-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .faq-item:hover::before {
+    transform: scaleX(1);
+  }
+
+  .faq-item > * {
+    position: relative;
+    z-index: 1;
   }
 
   @keyframes faqIn {
@@ -485,20 +537,24 @@ const faq = [
     font-weight: 600;
     color: #fff;
     list-style: none;
-    transition: background 0.15s;
+    transition: color 0.2s;
   }
 
   .faq-question::-webkit-details-marker { display: none; }
   .faq-question::marker { display: none; content: ''; }
 
-  .faq-question:hover {
-    background: var(--surface);
+  .faq-item:hover .faq-question {
+    color: #000;
   }
 
   .faq-chevron {
     flex-shrink: 0;
-    transition: transform 0.2s;
+    transition: transform 0.2s, color 0.2s;
     color: rgba(255, 255, 255, 0.3);
+  }
+
+  .faq-item:hover .faq-chevron {
+    color: rgba(0, 0, 0, 0.3);
   }
 
   .faq-item[open] .faq-chevron {
@@ -516,6 +572,11 @@ const faq = [
     color: rgba(255, 255, 255, 0.45);
     line-height: 1.7;
     margin: 0;
+    transition: color 0.2s;
+  }
+
+  .faq-item:hover .faq-answer p {
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .faq-cta {
@@ -525,7 +586,35 @@ const faq = [
     justify-content: space-between;
     padding: 1.5rem 2rem;
     border: 1px solid var(--border);
-    border-radius: 6px;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.2s;
+    color: inherit;
+  }
+
+  .faq-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .faq-cta:hover::before {
+    transform: scaleX(1);
+  }
+
+  .faq-cta:hover {
+    color: #000;
+  }
+
+  .faq-cta > * {
+    position: relative;
+    z-index: 1;
   }
 
   .faq-cta-text {
@@ -533,29 +622,25 @@ const faq = [
     font-size: 0.85rem;
     color: var(--accent-dim);
     margin: 0;
+    transition: color 0.2s;
   }
 
-  .faq-cta-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1.4rem;
+  .faq-cta:hover .faq-cta-text {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .faq-cta-label {
     font-family: var(--mono-font);
     font-size: 0.7rem;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #000;
-    background: #fff;
-    border: 1px solid #fff;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.15s;
+    color: #fff;
+    transition: color 0.2s;
   }
 
-  .faq-cta-btn:hover {
-    background: transparent;
-    color: #fff;
+  .faq-cta:hover .faq-cta-label {
+    color: #000;
   }
 
   @media (max-width: 640px) {

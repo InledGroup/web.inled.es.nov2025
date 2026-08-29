@@ -81,7 +81,7 @@ const allActive = [...activeProducts, ...extraActive];
             <span class="project-index">{String(i + 1).padStart(2, '0')}</span>
             <span class="project-name">{project.name}</span>
             <span class="project-type">{project.type}</span>
-            <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
           </a>
         ))}
       </div>
@@ -105,7 +105,7 @@ const allActive = [...activeProducts, ...extraActive];
               <span class="project-index">{String(i + 1).padStart(2, '0')}</span>
               <span class="project-name">{project.name}</span>
               <span class="project-type">{project.type}</span>
-              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+              <svg class="project-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
             </a>
           ))}
         </div>
@@ -165,21 +165,31 @@ const allActive = [...activeProducts, ...extraActive];
     gap: 0.75rem;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, background 0.3s;
+    padding: 2rem;
   }
 
   .hover-preview.visible {
     opacity: 1;
   }
 
+  .hover-preview.adapt-text {
+    background: #fff;
+  }
+
   .hover-preview-img {
     width: 80px;
     height: 80px;
     object-fit: contain;
-    border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--border);
     padding: 12px;
+    transition: background 0.3s, border-color 0.3s;
+  }
+
+  .hover-preview.adapt-text .hover-preview-img {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
   }
 
   .hover-preview-name {
@@ -189,6 +199,7 @@ const allActive = [...activeProducts, ...extraActive];
     letter-spacing: 0.1em;
     text-transform: uppercase;
     font-weight: 700;
+    transition: color 0.2s;
   }
 
   .hover-preview-desc {
@@ -198,13 +209,21 @@ const allActive = [...activeProducts, ...extraActive];
     max-width: 320px;
     text-align: center;
     line-height: 1.5;
+    transition: color 0.2s;
+  }
+
+  .hover-preview.adapt-text .hover-preview-name {
+    color: #000;
+  }
+
+  .hover-preview.adapt-text .hover-preview-desc {
+    color: rgba(0, 0, 0, 0.5);
   }
 
   .projects-list {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
-    border-radius: 6px;
     overflow: hidden;
   }
 
@@ -216,8 +235,33 @@ const allActive = [...activeProducts, ...extraActive];
     border-bottom: 1px solid var(--border);
     text-decoration: none;
     color: var(--accent-dim);
-    transition: all 0.15s;
+    position: relative;
+    overflow: hidden;
     animation: rowFadeIn 0.4s ease-out both;
+  }
+
+  .project-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #fff;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .project-row:hover::before {
+    transform: scaleX(1);
+  }
+
+  .project-row:hover {
+    color: #000;
+  }
+
+  .project-row > * {
+    position: relative;
+    z-index: 1;
   }
 
   @keyframes rowFadeIn {
@@ -227,11 +271,6 @@ const allActive = [...activeProducts, ...extraActive];
 
   .project-row:last-child {
     border-bottom: none;
-  }
-
-  .project-row:hover {
-    background: var(--surface);
-    color: #fff;
   }
 
   .project-index {
@@ -257,19 +296,18 @@ const allActive = [...activeProducts, ...extraActive];
     letter-spacing: 0.1em;
     border: 1px solid var(--border);
     padding: 0.2rem 0.5rem;
-    border-radius: 3px;
     font-weight: 700;
   }
 
   .project-arrow {
     opacity: 0;
-    transform: translate(-4px, 4px);
-    transition: all 0.2s;
+    transform: translateX(-8px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .project-row:hover .project-arrow {
     opacity: 1;
-    transform: translate(0, 0);
+    transform: translateX(0);
   }
 
   /* Archivados */
@@ -340,9 +378,11 @@ const allActive = [...activeProducts, ...extraActive];
         if (name) previewName.textContent = name;
         if (desc) previewDesc.textContent = desc;
         preview.classList.add('visible');
+        preview.classList.add('adapt-text');
       });
 
       row.addEventListener('mouseleave', () => {
+        preview.classList.remove('adapt-text');
         hideTimeout = setTimeout(() => {
           preview.classList.remove('visible');
         }, 100);

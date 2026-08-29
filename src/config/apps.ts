@@ -150,6 +150,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/weby.gif",
     link: "/apps/weby",
+    archive: true,
   },
 
   {
@@ -161,6 +162,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/darkreaderpdf.png",
     link: "/apps/darkreaderpdf",
+    archive: true,
   },
   {
     id: "oap",
@@ -221,6 +223,7 @@ export const apps: App[] = [
         en: "An update with English translation and PWA transformation is coming soon.",
       },
     },
+    archive: true,
   },
   {
     id: "inshare",
@@ -383,7 +386,7 @@ export const apps: App[] = [
     },
     archive: true,
   },
-  {
+  /*{
     id: "cruzcristiana",
     name: "Cruz Cristiana para GNOME",
     description: {
@@ -392,7 +395,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/cruzcristiana-gnome-logo.png",
     link: "/apps/cruzcristiana",
-  },
+  },*/
   {
     id: "memorywarn",
     name: "Memory Warn",

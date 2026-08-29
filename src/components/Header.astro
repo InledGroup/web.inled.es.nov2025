@@ -15,6 +15,7 @@ const t = useTranslations(lang);
     <nav class="header-center">
       <a href="#projects" class="header-link">{lang === 'es' ? 'Proyectos' : 'Projects'}</a>
       <a href="/blog" class="header-link">Blog</a>
+     <!--  <a href="/servicios" class="header-link header-link--accent">{lang === 'es' ? 'Servicios' : 'Services'}</a>-->
       <a href="/contacto" class="header-link">{t('nav.contact')}</a>
 
       <span class="header-divider"></span>
@@ -122,6 +123,15 @@ const t = useTranslations(lang);
     color: #fff;
   }
 
+  .header-link--accent {
+    color: var(--accent);
+    font-weight: 600;
+  }
+
+  .header-link--accent:hover {
+    color: #fff;
+  }
+
   .header-btn {
     display: flex;
     align-items: center;
@@ -134,7 +144,6 @@ const t = useTranslations(lang);
     cursor: pointer;
     text-decoration: none;
     transition: color 0.15s, background 0.15s;
-    border-radius: 4px;
   }
 
   .header-btn:hover {
@@ -152,7 +161,6 @@ const t = useTranslations(lang);
     right: 0;
     background: #111;
     border: 1px solid var(--border);
-    border-radius: 4px;
     padding: 4px;
     min-width: 56px;
     opacity: 0;
@@ -175,7 +183,6 @@ const t = useTranslations(lang);
     border: none;
     color: var(--accent-dim);
     padding: 0.35rem 0.6rem;
-    border-radius: 3px;
     font-size: 0.7rem;
     font-family: var(--mono-font);
     cursor: pointer;
