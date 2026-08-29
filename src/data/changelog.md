@@ -1,5 +1,13 @@
 # Changelog 
 
+## 2026-08-29  
+- Animations working on Pulsar OS
+- Installer now has wifi setup and vpn preinstalled to avoid censorship in spain
+- pulsar os pear edition is now bitten fruit
+- debug boot now shows percentage ok
+- new inled website published
+- website updated
+
 ## 2026-08-24  
 
 - Updated Pulsar OS website with animations and new info
