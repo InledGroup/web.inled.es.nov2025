@@ -1,5 +1,15 @@
 # Changelog 
 
+## 2026-08-30  
+- New Telegram group, synchronized bidirectionally with the Discord
+- Losckscreen + sddm now have automatic sleep on Pulsar OS
+- Redesigned SDDM, works in setups with multiple screens and has a loading spinner and visible numbers
+- Sayri setup
+- Sayri booting at startup now works
+- Fixed d2d error
+- Pulsar os website simplified and humanized.
+- New Pulsar OS documentation
+
 ## 2026-08-29  
 - Animations working on Pulsar OS
 - Installer now has wifi setup and vpn preinstalled to avoid censorship in spain
