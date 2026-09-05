@@ -1,5 +1,13 @@
 # Changelog 
 
+## 2026-09-05  
+- Pulsar OS 0.4 beta published
+- Time machine implemented
+- Discord webhook notification implemented
+- New website in progress
+- New sayri harness for stupid models implemented
+- Updates api for pulsar os implemented
+
 ## 2026-08-30  
 - New Telegram group, synchronized bidirectionally with the Discord
 - Losckscreen + sddm now have automatic sleep on Pulsar OS
