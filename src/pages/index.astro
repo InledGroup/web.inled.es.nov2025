@@ -5,27 +5,31 @@ import GuideLines from '../components/GuideLines.astro';
 export const prerender = false;
 
 import Hero from '../components/Hero.astro';
-import ProjectsList from '../components/ProjectsList.astro';
+import ProjectsGrouped from '../components/ProjectsGrouped.astro';
 import BlogList from '../components/BlogList.astro';
 import Changelog from '../components/Changelog.astro';
 import GitHubContributors from '../components/GitHubContributors.astro';
 import ServicesCTA from '../components/ServicesCTA.astro';
 import CommunityLinks from '../components/CommunityLinks.astro';
+import CommunityCTA from '../components/CommunityCTA.astro';
+import CoreValues from '../components/CoreValues.astro';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 ---
 
-<Layout title="Inled Group - Dream, Build" description={t('scroll.description')}>
+<Layout title="Inled Group — Dream, Build" description={t('scroll.description')}>
   <Header />
   <GuideLines />
   <div style="position: relative; z-index: 1;">
     <Hero />
-    <ProjectsList />
+    <ProjectsGrouped />
     <BlogList />
     <Changelog />
     <GitHubContributors />
+    <CoreValues />
+    <CommunityCTA />
     <!--  <ServicesCTA /> -->
     <CommunityLinks />
   </div>

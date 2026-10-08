@@ -1,0 +1,181 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const t = {
+  es: {
+    label: 'OUR CORE VALUES',
+    title: 'What defines us',
+    subtitle: 'The principles we build Inled on.',
+    values: [
+      {
+        title: 'No politics, no ideology',
+        desc: 'Politics divides people, and computing should never be mixed with ideology.',
+      },
+      {
+        title: 'Friendly community, no elitism',
+        desc: 'We are not elitists: we respect and help anyone who wants to contribute.',
+      },
+      {
+        title: 'Everything open-source',
+        desc: 'All our projects are e2e auditable, which sets us apart from many projects that claim to be "open-source".',
+      },
+      {
+        title: 'Privacy, P2P and freedom',
+        desc: 'Your data is yours: privacy by default, P2P whenever possible and complete freedom over your software.',
+      },
+      {
+        title: 'Open and free by design',
+        desc: "We're not against monetization: we favor an open and free model for the user.",
+      },
+      {
+        title: 'The user is our biggest collaborator',
+        desc: 'Developer or not: your ideas, bug reports and feedback are what make our projects better.',
+      },
+    ],
+  },
+  en: {
+    label: 'OUR CORE VALUES',
+    title: 'What defines us',
+    subtitle: 'The principles we build Inled on.',
+    values: [
+      {
+        title: 'No politics, no ideology',
+        desc: 'Politics divides people, and computing should never be mixed with ideology.',
+      },
+      {
+        title: 'Friendly community, no elitism',
+        desc: 'We are not elitists: we respect and help anyone who wants to contribute.',
+      },
+      {
+        title: 'Everything open-source',
+        desc: 'All our projects are e2e auditable, which sets us apart from many projects that claim to be "open-source".',
+      },
+      {
+        title: 'Privacy, P2P and freedom',
+        desc: 'Your data is yours: privacy by default, P2P whenever possible and complete freedom over your software.',
+      },
+      {
+        title: 'Open and free by design',
+        desc: "We're not against monetization: we favor an open and free model for the user.",
+      },
+      {
+        title: 'The user is our biggest collaborator',
+        desc: "Developer or not: your ideas, bug reports and feedback are what make our projects better.",
+      },
+    ],
+  },
+}[lang];
+
+---
+
+<section class="values-section">
+  <div class="values-container">
+    <div class="values-header">
+      <div class="values-label">{t.label}</div>
+      <h2 class="values-title">{t.title}</h2>
+      <p class="values-subtitle">{t.subtitle}</p>
+    </div>
+
+    <div class="values-grid">
+      {t.values.map((v) => (
+        <div class="value-card">
+          <h3 class="value-title">{v.title}</h3>
+          <p class="value-desc">{v.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .values-section {
+    width: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .values-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  .values-header {
+    margin-bottom: 3rem;
+  }
+
+  .values-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .values-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin: 0 0 0.3rem 0;
+  }
+
+  .values-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+    margin: 0;
+  }
+
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .value-card {
+    padding: 1.75rem 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .value-card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-hover);
+  }
+
+  .value-title {
+    font-family: var(--sans-font);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin: 0 0 0.45rem 0;
+    line-height: 1.35;
+  }
+
+  .value-desc {
+    font-family: var(--mono-font);
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  @media (max-width: 968px) {
+    .values-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .values-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -25,7 +25,7 @@ export const apps: App[] = [
       es: "La distribución Linux que reemplaza a Mac y reemplazará a Windows y Android TV",
       en: "The Linux distribution that replaces Mac and will replace Windows and Android TV",
     },
-    icon: "https://hosted.inled.es/pulsar-logo-simple-sf.png",
+    icon: "https://hosted.inled.es/cdn/pulsar-logo-simple-sf.png",
     link: "https://os.inled.es",
   },
   {
@@ -57,6 +57,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/macboat.png",
     link: "/apps/macboat",
+    archive: true,
   },
   {
     id: "ai-exporter",

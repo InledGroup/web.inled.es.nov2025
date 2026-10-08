@@ -20,6 +20,11 @@ const links = [
     href: 'https://help.inled.es',
   },
   {
+    title: { es: 'Press Kit', en: 'Press Kit' },
+    desc: { es: 'Kit de prensa y todas las imágenes y recursos de marca de Inled', en: 'Press kit and all Inled brand images and assets' },
+    href: 'https://hosted.inled.es/',
+  },
+  {
     title: { es: 'Tablero de tareas', en: 'Task board' },
     desc: { es: 'Tareas de mantenimiento, errores y mejoras a aplicaciones', en: 'Maintenance tasks, bugs and improvements for apps' },
     href: 'https://github.com/orgs/InledGroup/projects/1/views/1',
@@ -75,7 +80,7 @@ const header = {
   .links-label {
     font-family: var(--pixel-font);
     font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 0.75rem;
@@ -85,7 +90,7 @@ const header = {
     font-family: var(--sans-font);
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
     letter-spacing: -0.03em;
     margin: 0 0 0.3rem 0;
   }
@@ -121,7 +126,7 @@ const header = {
     content: '';
     position: absolute;
     inset: 0;
-    background: #fff;
+    background: var(--fill);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -133,7 +138,7 @@ const header = {
   }
 
   .link-row:hover {
-    color: #000;
+    color: var(--fill-text);
   }
 
   .link-row > * {
@@ -148,7 +153,7 @@ const header = {
   .link-index {
     font-family: var(--pixel-font);
     font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--text-muted);
     min-width: 24px;
   }
 
@@ -163,23 +168,23 @@ const header = {
     font-family: var(--sans-font);
     font-size: 0.9rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
     transition: color 0.2s;
   }
 
   .link-row:hover .link-title {
-    color: #000;
+    color: var(--fill-text);
   }
 
   .link-desc {
     font-family: var(--mono-font);
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--text-muted);
     transition: color 0.2s;
   }
 
   .link-row:hover .link-desc {
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--fill-dim);
   }
 
   .link-arrow {

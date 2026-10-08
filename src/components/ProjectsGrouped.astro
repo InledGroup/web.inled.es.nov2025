@@ -1,0 +1,465 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+import { apps } from '../config/apps';
+import { saas } from '../config/saas';
+
+const lang = getLangFromLocals(Astro.locals);
+
+interface GroupItem {
+  id: string;
+  featured?: boolean;
+}
+
+interface Group {
+  id: string;
+  title: { es: string; en: string };
+  subtitle: { es: string; en: string };
+  single?: boolean;
+  items: GroupItem[];
+}
+
+// Grupos de proyectos (antiguo diseño agrupado)
+const groups: Group[] = [
+  {
+    id: 'pulsar',
+    single: true,
+    title: { es: 'Pulsar OS', en: 'Pulsar OS' },
+    subtitle: {
+      es: '¿Quieres apariencia Mac, Windows o Android TV junto con estabilidad y seguridad? Esta es tu distro. Con más flavours que un helado.',
+      en: 'Do you want Mac, Windows or Android TV looks along with stability and security? This is your distro. With more flavors than ice cream.',
+    },
+    items: [{ id: 'pulsar-os', featured: true }],
+  },
+  {
+    id: 'office',
+    title: { es: 'Privado? Sí. Gratis? Sí. OpenSource? Sí.', en: 'Privacy? Yes. Free? Yes. OpenSource? Yes.' },
+    subtitle: {
+      es: 'Suite ofimática 100% privada hecha en España, los editores InSuite, MyPDF y MyMetadata.',
+      en: 'A 100% private office suite made in Spain, the InSuite editors, MyPDF and MyMetadata.',
+    },
+    items: [
+      { id: 'office', featured: true },
+      { id: 'mypdf' },
+      { id: 'mymetadata' },
+      { id: 'indoc' },
+      { id: 'inmd' },
+      { id: 'inlinked' },
+      { id: 'inqr' },
+      { id: 'mdpdf' },
+      { id: 'start', featured: true },
+    ],
+  },
+  {
+    id: 'linux',
+    title: { es: 'Apps para Linux', en: 'Apps for Linux' },
+    subtitle: {
+      es: 'Potentes herramientas para que Linux sea más fácil y tengas todo lo que necesitas.',
+      en: 'Powerful tools to make Linux easier and to have everything you need.',
+    },
+    items: [
+      { id: 'seafari', featured: true },
+      { id: 'codexbar-gnome', featured: true },
+      { id: 'vozes' },
+      { id: 'droidtux' },
+      { id: 'appinstall' },
+    ],
+  },
+  {
+    id: 'extensions',
+    title: { es: 'Extensiones de Chrome', en: 'Chrome extensions' },
+    subtitle: {
+      es: 'Extensiones que transforman tu navegador en algo mucho más potente.',
+      en: 'Extensions that turn your browser into something far more powerful.',
+    },
+    items: [
+      { id: 'bautilus'},
+      { id: 'tabnest' },
+      { id: 'cleany' },
+      { id: 'moodlenotifier' },
+      { id: 'ai-exporter' , featured: true  },
+      { id: 'web2skill' },
+    ],
+  },
+  {
+    id: 'others',
+    title: { es: 'Otros proyectos', en: 'Other projects' },
+    subtitle: {
+      es: 'El resto de herramientas y experimentos de Inled.',
+      en: "The rest of Inled's tools and experiments.",
+    },
+    items: [
+
+      { id: 'mdpedia' },
+      { id: 'oap' },
+    ],
+  },
+];
+
+const allProducts = [...saas, ...apps];
+
+function findProduct(id: string) {
+  return allProducts.find(p => p.id === id);
+}
+
+interface CardProduct {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  link: string;
+  featured: boolean;
+}
+
+function toCard(item: GroupItem): CardProduct | null {
+  const p = findProduct(item.id);
+  if (!p || p.archive) return null;
+  return {
+    id: p.id,
+    name: p.name,
+    description: p.description[lang],
+    icon: p.icon,
+    link: p.link,
+    featured: !!item.featured,
+  };
+}
+
+const resolvedGroups = groups
+  .map(g => ({ ...g, products: g.items.map(toCard).filter((p): p is CardProduct => p !== null) }))
+  .filter(g => g.products.length > 0);
+
+// Archivados (no aparecen en los grupos)
+const archivedProducts = allProducts
+  .filter(p => p.archive)
+  .map(p => ({
+    id: p.id,
+    name: p.name,
+    description: p.description[lang],
+    icon: p.icon,
+    link: p.link,
+  }));
+---
+
+<section class="projects-section" id="projects">
+  <div class="projects-container">
+    <div class="projects-header">
+      <h2 class="projects-title">{lang === 'es' ? 'Proyectos' : 'Projects'}</h2>
+      <p class="projects-subtitle">{lang === 'es' ? 'Todo lo que construimos' : 'Everything we build'}</p>
+    </div>
+
+    {resolvedGroups.map((group) => (
+      <div class="project-group" data-group={group.id}>
+        <div class="group-header">
+          <h3 class="group-title">{group.title[lang]}</h3>
+          <p class="group-subtitle">{group.subtitle[lang]}</p>
+        </div>
+
+        <div class:list={["group-grid", { single: group.single }]}>
+          {group.products.map((project) => (
+            <a
+              href={project.link}
+              class:list={["project-card", {
+                featured: project.featured && !group.single,
+                single: group.single,
+              }]}
+            >
+              <div class="card-top">
+                <div class="card-icon">
+                  <img src={project.icon} alt={project.name} loading="lazy" />
+                </div>
+              </div>
+              <div class="card-body">
+                <h4 class="card-name">{project.name}</h4>
+                <p class="card-desc">{project.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
+
+    {archivedProducts.length > 0 && (
+      <div class="project-group archived-group">
+        <div class="group-header">
+          <h3 class="group-title">{lang === 'es' ? 'Archivados' : 'Archived'}</h3>
+          <p class="group-subtitle">{lang === 'es' ? 'Proyectos que por ahora no se mantienen' : 'Projects not maintained for now'}</p>
+        </div>
+        <div class="group-grid archived-grid">
+          {archivedProducts.map((project) => (
+            <a href={project.link} class="project-card is-archived">
+              <div class="card-top">
+                <div class="card-icon">
+                  <img src={project.icon} alt={project.name} loading="lazy" />
+                </div>
+              </div>
+              <div class="card-body">
+                <h4 class="card-name">{project.name}</h4>
+                <p class="card-desc">{project.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  .projects-section {
+    width: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .projects-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  .projects-header {
+    margin-bottom: 4rem;
+  }
+
+  .projects-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.3rem;
+  }
+
+  .projects-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+  }
+
+  .project-group {
+    margin-bottom: 4.5rem;
+  }
+
+  .project-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .group-header {
+    margin-bottom: 1.75rem;
+  }
+
+  .group-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin: 0 0 0.35rem 0;
+  }
+
+  .group-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    margin: 0;
+    line-height: 1.6;
+    max-width: 640px;
+  }
+
+  .group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-hover);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    flex: 1;
+  }
+
+  .card-name {
+    font-family: var(--sans-font);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-family: var(--mono-font);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Card destacada dentro de un grid */
+  .project-card.featured {
+    grid-column: span 2;
+    padding: 2rem;
+  }
+
+  .project-card.featured .card-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .project-card.featured .card-name {
+    font-size: 1.3rem;
+  }
+
+  .project-card.featured .card-desc {
+    font-size: 0.85rem;
+  }
+
+  /* Grupo de un solo proyecto (Pulsar OS) */
+  .group-grid.single {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card.single {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: 2.25rem;
+    padding: 2.5rem 2.75rem;
+  }
+
+  .project-card.single .card-top {
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .project-card.single .card-icon {
+    width: 96px;
+    height: 96px;
+  }
+
+  .project-card.single .card-body {
+    flex: 1;
+    gap: 0.6rem;
+  }
+
+  .project-card.single .card-name {
+    font-size: 1.6rem;
+  }
+
+  .project-card.single .card-desc {
+    font-size: 0.9rem;
+    max-width: 560px;
+  }
+
+  /* Archivados */
+  .project-card.is-archived {
+    opacity: 0.45;
+  }
+
+  .archived-group {
+    padding-top: 3rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .archived-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  }
+
+  .archived-grid .project-card {
+    padding: 1.25rem;
+  }
+
+  .archived-grid .card-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .archived-grid .card-name {
+    font-size: 1rem;
+  }
+
+  .archived-grid .card-desc {
+    font-size: 0.72rem;
+  }
+
+  @media (max-width: 768px) {
+    .projects-container {
+      padding: 3.5rem 1.25rem;
+    }
+
+    .project-group {
+      margin-bottom: 3.5rem;
+    }
+
+    .project-card.featured {
+      grid-column: 1 / -1;
+    }
+
+    .project-card.single {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+
+    .project-card.single .card-top {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+    }
+
+    .project-card.single .card-icon {
+      width: 72px;
+      height: 72px;
+    }
+
+    .group-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

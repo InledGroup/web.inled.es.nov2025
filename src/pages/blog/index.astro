@@ -7,10 +7,26 @@ import { getLangFromLocals } from '../../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
 const posts = await getPosts();
+
+const blogJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "@id": "https://inled.es/blog#blog",
+  "name": "Inled Blog",
+  "url": "https://inled.es/blog",
+  "publisher": { "@id": "https://inled.es/#organization" },
+  "blogPost": posts.slice(0, 10).map(p => ({
+    "@type": "BlogPosting",
+    "headline": p.title,
+    "datePublished": p.published,
+    "url": `https://inled.es/blog/${p.slug}`,
+  })),
+};
 ---
 
-<Layout title="Blog | Inled Group" description="Últimas noticias y actualizaciones de Inled Group">
+<Layout title="Blog | Inled Group" description="Latest news and updates from Inled Group — releases, announcements and behind-the-scenes of our open source projects">
   <Header />
+  <script type="application/ld+json" set:html={JSON.stringify(blogJsonLd)} />
 
   <main class="blog-page">
     <section class="blog-hero">
@@ -65,7 +81,7 @@ const posts = await getPosts();
   .blog-hero-label {
     font-family: var(--pixel-font);
     font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -75,7 +91,7 @@ const posts = await getPosts();
     font-family: var(--sans-font);
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
     letter-spacing: -0.04em;
     line-height: 1.05;
     margin-bottom: 0.5rem;
@@ -165,26 +181,26 @@ const posts = await getPosts();
   }
 
   .entry-row:hover {
-    color: #fff;
+    color: var(--text);
   }
 
   .entry-row .entry-index {
     font-family: var(--pixel-font);
     font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--text-muted);
   }
 
   .entry-date {
     font-family: var(--mono-font);
     font-size: 0.6rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-muted);
   }
 
   .entry-title {
     font-family: var(--sans-font);
     font-size: 1rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
     margin: 0;
     line-height: 1.3;
   }
@@ -194,7 +210,7 @@ const posts = await getPosts();
     z-index: 1;
     font-family: var(--mono-font);
     font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     border: 1px solid var(--border);

@@ -1,0 +1,256 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const t = {
+  es: {
+    label: 'COMUNIDAD',
+    title: 'Únete a la comunidad',
+    subtitle: 'Somos una comunidad amigable: comparte ideas, pide ayuda y participa en lo que construimos.',
+    discord: { desc: 'Chat con la comunidad, soporte directo y avisos de todo lo que hacemos' },
+    telegram: { desc: 'Comunicación rápida con el equipo y avisos de lanzamientos' },
+    githubTitle: 'Todo nuestro código es open source',
+    githubDesc: 'Verificable de extremo a extremo en GitHub: desde esta web hasta cada una de nuestras apps. Lee, audita y contribuye.',
+  },
+  en: {
+    label: 'COMMUNITY',
+    title: 'Join the community',
+    subtitle: "We're a friendly community: share ideas, ask for help and take part in what we build.",
+    discord: { desc: 'Chat with the community, direct support and announcements of everything we do' },
+    telegram: { desc: 'Quick communication with the team and release announcements' },
+    githubTitle: 'All our code is open source',
+    githubDesc: 'Verifiable end-to-end on GitHub: from this website to every one of our apps. Read, audit and contribute.',
+  },
+}[lang];
+---
+
+<section class="community-section">
+  <div class="community-container">
+    <div class="community-header">
+      <div class="community-label">{t.label}</div>
+      <h2 class="community-title">{t.title}</h2>
+      <p class="community-subtitle">{t.subtitle}</p>
+    </div>
+
+    <div class="big-ctas">
+      <a href="https://link.inled.es/discord" target="_blank" rel="noopener" class="big-cta discord">
+        <i class="fa-brands fa-discord big-cta-icon" aria-hidden="true"></i>
+        <div class="big-cta-text">
+          <span class="big-cta-name">Discord</span>
+          <span class="big-cta-desc">{t.discord.desc}</span>
+        </div>
+        <svg class="big-cta-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+
+      <a href="https://link.inled.es/telegram" target="_blank" rel="noopener" class="big-cta telegram">
+        <i class="fa-brands fa-telegram big-cta-icon" aria-hidden="true"></i>
+        <div class="big-cta-text">
+          <span class="big-cta-name">Telegram</span>
+          <span class="big-cta-desc">{t.telegram.desc}</span>
+        </div>
+        <svg class="big-cta-arrow" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+    </div>
+
+    <a href="https://github.com/InledGroup" target="_blank" rel="noopener" class="github-row">
+      <i class="fa-brands fa-github github-icon" aria-hidden="true"></i>
+      <span class="github-text">
+        <span class="github-name">{t.githubTitle}</span>
+        <span class="github-desc">{t.githubDesc}</span>
+      </span>
+      <svg class="github-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .community-section {
+    width: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .community-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 5%;
+  }
+
+  .community-header {
+    margin-bottom: 3rem;
+  }
+
+  .community-label {
+    font-family: var(--pixel-font);
+    font-size: 0.5rem;
+    color: var(--text-muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .community-title {
+    font-family: var(--sans-font);
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.03em;
+    margin: 0 0 0.3rem 0;
+  }
+
+  .community-subtitle {
+    font-family: var(--mono-font);
+    font-size: 0.85rem;
+    color: var(--accent-dim);
+    margin: 0;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  /* --- CTAs principales: Discord y Telegram --- */
+  .big-ctas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .big-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2.25rem 2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .big-cta-icon {
+    font-size: 3.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .big-cta.discord .big-cta-icon {
+    color: #5865F2;
+  }
+
+  .big-cta.telegram .big-cta-icon {
+    color: #26A5E4;
+  }
+
+  .big-cta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .big-cta-name {
+    font-family: var(--sans-font);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .big-cta-desc {
+    font-family: var(--mono-font);
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+  }
+
+  .big-cta-arrow {
+    color: var(--text-muted);
+    opacity: 0;
+    transform: translateX(-8px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .big-cta:hover .big-cta-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .big-cta.discord:hover {
+    background: rgba(88, 101, 242, 0.08);
+    border-color: rgba(88, 101, 242, 0.5);
+  }
+
+  .big-cta.telegram:hover {
+    background: rgba(38, 165, 228, 0.08);
+    border-color: rgba(38, 165, 228, 0.5);
+  }
+
+  /* --- GitHub: secundario --- */
+  .github-row {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1.1rem 1.25rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .github-row:hover {
+    background: var(--card-hover);
+    border-color: var(--border-hover);
+  }
+
+  .github-icon {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--text);
+    flex-shrink: 0;
+  }
+
+  .github-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .github-name {
+    font-family: var(--sans-font);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  .github-desc {
+    font-family: var(--mono-font);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .github-arrow {
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .community-container {
+      padding: 3.5rem 1.25rem;
+    }
+
+    .big-ctas {
+      grid-template-columns: 1fr;
+    }
+
+    .big-cta {
+      gap: 1.25rem;
+      padding: 1.75rem;
+    }
+  }
+</style>

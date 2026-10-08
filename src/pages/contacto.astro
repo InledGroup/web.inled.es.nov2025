@@ -11,8 +11,9 @@ const t = useTranslations(lang);
 ---
 
 <Layout
-  title="Contacto - Inled Group"
-  description={lang === 'es' ? '¿Alguna duda? Resuélvela con nosotros.' : 'Any questions? Resolve them with us.'}
+  title="Contact - Inled Group"
+  description="Any questions? Reach out to us and we will get back to you as soon as possible.">
+
 >
   <Header />
   <GuideLines />
@@ -97,7 +98,7 @@ const t = useTranslations(lang);
   .contact-label {
     font-family: var(--pixel-font);
     font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -107,7 +108,7 @@ const t = useTranslations(lang);
     font-family: var(--sans-font);
     font-size: clamp(2.5rem, 8vw, 4rem);
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
     letter-spacing: -0.04em;
     line-height: 1.05;
     margin: 0 0 0.5rem 0;
@@ -153,7 +154,7 @@ const t = useTranslations(lang);
     content: '';
     position: absolute;
     inset: 0;
-    background: #fff;
+    background: var(--fill);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -165,7 +166,7 @@ const t = useTranslations(lang);
   }
 
   .method-row:hover {
-    color: #000;
+    color: var(--fill-text);
   }
 
   .method-row > * {
@@ -180,7 +181,7 @@ const t = useTranslations(lang);
   .method-index {
     font-family: var(--pixel-font);
     font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.2);
+    color: var(--text-muted);
     min-width: 24px;
     transition: color 0.2s;
   }
@@ -200,18 +201,18 @@ const t = useTranslations(lang);
     font-family: var(--sans-font);
     font-size: 0.9rem;
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
     transition: color 0.2s;
   }
 
   .method-row:hover .method-name {
-    color: #000;
+    color: var(--fill-text);
   }
 
   .method-detail {
     font-family: var(--mono-font);
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.35);
+    color: var(--text-muted);
     transition: color 0.2s;
   }
 
@@ -247,7 +248,7 @@ const t = useTranslations(lang);
   .form-label {
     font-family: var(--pixel-font);
     font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-muted);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     margin-bottom: 0.75rem;
@@ -257,7 +258,7 @@ const t = useTranslations(lang);
     font-family: var(--sans-font);
     font-size: clamp(1.8rem, 4vw, 2.5rem);
     font-weight: 600;
-    color: #fff;
+    color: var(--text);
     letter-spacing: -0.03em;
     margin: 0 0 0.3rem 0;
   }
@@ -279,17 +280,17 @@ const t = useTranslations(lang);
   .form-note {
     font-family: var(--mono-font);
     font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.25);
+    color: var(--text-muted);
     margin: 1.5rem 0 0 0;
     text-align: center;
   }
 
   :global(#mailform) {
-    color: white;
+    color: var(--text);
     font-family: var(--mono-font);
   }
 
-  :global(#mailform .mailform-group) {
+  :global(#mailform .mailform-field) {
     margin-bottom: 1.5rem !important;
     display: flex !important;
     flex-direction: column !important;
@@ -321,6 +322,11 @@ const t = useTranslations(lang);
     transition: all 0.15s !important;
     box-sizing: border-box !important;
     outline: none !important;
+  }
+
+  :global(#mailform .mailform-input::placeholder),
+  :global(#mailform .mailform-textarea::placeholder) {
+    color: rgba(255, 255, 255, 0.3) !important;
   }
 
   :global(#mailform .mailform-input:focus),
@@ -358,8 +364,8 @@ const t = useTranslations(lang);
     color: #000 !important;
   }
 
-  :global(.mailform-success),
-  :global(.mailform-error) {
+  :global(.mailform-message-success),
+  :global(.mailform-message-error) {
     padding: 1rem;
     margin-top: 1.5rem;
     text-align: center;
@@ -367,13 +373,13 @@ const t = useTranslations(lang);
     font-size: 0.8rem;
   }
 
-  :global(.mailform-success) {
-    background: rgba(255, 255, 255, 0.03);
-    color: #fff;
+  :global(.mailform-message-success) {
+    background: var(--surface);
+    color: var(--text);
     border: 1px solid var(--border);
   }
 
-  :global(.mailform-error) {
+  :global(.mailform-message-error) {
     background: rgba(239, 68, 68, 0.05);
     color: #f87171;
     border: 1px solid rgba(239, 68, 68, 0.2);
@@ -382,5 +388,37 @@ const t = useTranslations(lang);
   @media (max-width: 640px) {
     .contact-hero { padding: 7rem 5% 3rem; }
     .form-widget-wrapper { padding: 1.5rem; }
+  }
+
+  /* Modo claro */
+  :global(html[data-theme="light"]) .method-row:hover .method-index {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  :global(html[data-theme="light"]) .method-row:hover .method-detail {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  :global(html[data-theme="light"] #mailform .mailform-label) {
+    color: var(--text-muted) !important;
+  }
+
+  :global(html[data-theme="light"] #mailform .mailform-input),
+  :global(html[data-theme="light"] #mailform .mailform-textarea) {
+    background: var(--surface) !important;
+    color: var(--text) !important;
+  }
+
+  :global(html[data-theme="light"] #mailform .mailform-input::placeholder),
+  :global(html[data-theme="light"] #mailform .mailform-textarea::placeholder) {
+    color: var(--text-muted) !important;
+  }
+
+  :global(html[data-theme="light"] #mailform .mailform-button) {
+    color: var(--text) !important;
+  }
+
+  :global(html[data-theme="light"] #mailform .mailform-button:hover) {
+    color: var(--fill-text) !important;
   }
 </style>
