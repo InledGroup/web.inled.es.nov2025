@@ -202,7 +202,7 @@ const faq = [
   }
 
   .services-subtitle {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.9rem;
     color: var(--accent-dim);
     margin: 0;
@@ -255,7 +255,7 @@ const faq = [
   }
 
   .stat-label {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.7rem;
     color: rgba(255, 255, 255, 0.4);
     line-height: 1.5;
@@ -296,7 +296,7 @@ const faq = [
   }
 
   .trust-text {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.55);
   }
@@ -357,7 +357,7 @@ const faq = [
   }
 
   .services-section-sub {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.8rem;
     color: var(--accent-dim);
     margin: 0;
@@ -436,7 +436,7 @@ const faq = [
   }
 
   .service-desc {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.4);
     line-height: 1.6;
@@ -567,7 +567,7 @@ const faq = [
   }
 
   .faq-answer p {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.45);
     line-height: 1.7;
@@ -618,7 +618,7 @@ const faq = [
   }
 
   .faq-cta-text {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.85rem;
     color: var(--accent-dim);
     margin: 0;
@@ -630,7 +630,7 @@ const faq = [
   }
 
   .faq-cta-label {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;

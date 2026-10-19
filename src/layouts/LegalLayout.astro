@@ -42,7 +42,7 @@ const { title, description, updatedAt } = Astro.props;
     EN: Content rendered from Markdown.
   */
   .legal-content {
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
   }
 
   .legal-content h1 {
@@ -134,7 +134,7 @@ const { title, description, updatedAt } = Astro.props;
   }
 
   .legal-content code {
-    font-family: var(--mono-font);
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
     background: var(--surface);
     border: 1px solid var(--border);
     padding: 0.15rem 0.4rem;
@@ -207,7 +207,7 @@ const { title, description, updatedAt } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: var(--mono-font);
+    font-family: var(--sans-font);
     font-size: 0.65rem;
     color: var(--text-muted);
     background: var(--surface);
