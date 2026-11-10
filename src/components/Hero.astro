@@ -33,13 +33,18 @@ const stats = [
     </div>
 
     <div class="hero-actions">
-      <a href="#projects" class="btn-flat btn-primary">
-        <span>{lang === 'es' ? 'Ver Proyectos' : 'View Projects'}</span>
+      <a href="https://link.inled.es/discord" class="btn-flat btn-primary" target="_blank" rel="noopener noreferrer">
+        <span>{t('hero.btnDiscord')}</span>
       </a>
-      <!--  <a href="/servicios" class="btn-flat btn-accent">
-        <span>{lang === 'es' ? 'Servicios' : 'Services'}</span>
-      </a> -->
+      <a href="https://link.inled.es/telegram" class="btn-flat btn-primary" target="_blank" rel="noopener noreferrer">
+        <span>{t('hero.btnTelegram')}</span>
+      </a>
     </div>
+
+    <a href="https://os.inled.es" class="hero-banner" target="_blank" rel="noopener noreferrer">
+      <img src="https://hosted.inled.es/cdn/pulsar-logo-simple-sf.png" alt="Pulsar OS" class="hero-banner-logo" loading="lazy" />
+      <span class="hero-banner-text">{t('hero.banner')}</span>
+    </a>
   </div>
 
   <div class="hero-scroll">
@@ -197,6 +202,60 @@ const stats = [
     color: #fff;
   }
 
+  .hero-banner {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    text-decoration: none;
+    font-family: var(--sans-font, system-ui);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    overflow: hidden;
+    max-width: fit-content;
+  }
+
+  .hero-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--fill);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+  }
+
+  .hero-banner:hover::before {
+    transform: scaleX(1);
+  }
+
+  .hero-banner:hover {
+    color: var(--fill-text);
+  }
+
+  .hero-banner-logo {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-banner-text {
+    color: inherit;
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+  }
+
   .hero-scroll {
     position: absolute;
     bottom: 2rem;
@@ -239,6 +298,19 @@ const stats = [
     .btn-flat {
       justify-content: center;
       width: 100%;
+    }
+    .hero-banner {
+      font-size: 0.7rem;
+      padding: 0.5rem 1rem;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+    .hero-banner-logo {
+      width: 28px;
+      height: 28px;
+    }
+    .hero-banner-text {
+      white-space: normal;
     }
   }
 </style>

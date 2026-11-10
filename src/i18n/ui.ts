@@ -13,6 +13,10 @@ export const ui = {
     "hero.title": "Dream, Build",
     "hero.subtitle":
       "Desarrollamos software libre innovador, útil y que respeta al usuario. ¡Únete a la comunidad!",
+    "hero.btnDiscord": "Únete a Discord",
+    "hero.btnTelegram": "Únete a Telegram",
+    "hero.banner":
+      "Descubre nuestro gran proyecto Pulsar OS, en el que estamos invirtiendo la mayoría de tiempo y recursos",
     "scroll.title": "Hacemos el software de tus sueños",
     "scroll.description":
       "Inled Group es una marca de software pionera en el desarrollo con agentes de inteligencia artificial y tecnologías libres. En Inled construimos el software que todos han soñado, por ello nuestro lema es Dream, build.",
@@ -107,6 +111,10 @@ export const ui = {
     "hero.title": "Dream, Build",
     "hero.subtitle":
       "We develop innovative, useful free software that respects the user. Join the community!",
+    "hero.btnDiscord": "Join on Discord",
+    "hero.btnTelegram": "Join on Telegram",
+    "hero.banner":
+      "Discover our great Pulsar OS project, where we invest most of our time and resources",
     "scroll.title": "We build the software of your dreams",
     "scroll.description":
       "Inled Group is a software brand pioneering development with artificial intelligence agents and free technologies. At Inled, we build the software everyone has dreamed of, which is why our motto is Dream, build.",
