@@ -88,6 +88,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/web2skill-w2s.png",
     link: "/apps/web2skill",
+    archive: true,
   },
   {
     id: "codexbar-gnome",
@@ -119,6 +120,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/bautilus.png",
     link: "/apps/bautilus",
+    archive: true,
   },
   {
     id: "tabnest",
@@ -141,6 +143,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/vozes.png",
     link: "/apps/vozes",
+    archive: true,
   },
   {
     id: "weby",
@@ -174,6 +177,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/oap.png",
     link: "https://oap.inled.es",
+    archive: true,
   },
   {
     id: "tuby",
@@ -207,6 +211,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/cleany.png",
     link: "/apps/cleany",
+    archive: true,
   },
   {
     id: "startchat",
@@ -253,6 +258,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/moodlenotifier.png",
     link: "/apps/moodlenotifier",
+    archive: true,
     notice: {
       type: "info",
       message: {
@@ -417,6 +423,7 @@ export const apps: App[] = [
     },
     icon: "https://hosted.inled.es/bautilus.png",
     link: "/apps/bautilus",
+    archive: true,
     notice: {
       type: "info",
       message: {

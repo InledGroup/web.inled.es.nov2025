@@ -68,9 +68,9 @@ const header = {
   }
 
   .links-container {
-    max-width: 1200px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 5rem 5%;
+    padding: 6rem 1.5rem;
   }
 
   .links-header {
@@ -78,27 +78,30 @@ const header = {
   }
 
   .links-label {
-    font-family: var(--pixel-font);
-    font-size: 0.5rem;
+    font-family: var(--sans-font);
+    font-size: 0.72rem;
+    font-weight: 600;
     color: var(--text-muted);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.9rem;
   }
 
   .links-title {
     font-family: var(--sans-font);
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 600;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 700;
     color: var(--text);
-    letter-spacing: -0.03em;
-    margin: 0 0 0.3rem 0;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    margin: 0 0 0.9rem 0;
   }
 
   .links-subtitle {
     font-family: var(--sans-font);
-    font-size: 0.85rem;
-    color: var(--accent-dim);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    color: var(--text-dim);
+    line-height: 1.55;
     margin: 0;
   }
 
@@ -106,6 +109,7 @@ const header = {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border);
+    border-radius: 20px;
     overflow: hidden;
   }
 
@@ -113,7 +117,7 @@ const header = {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.1rem 1.25rem;
+    padding: 1.25rem 1.5rem;
     border-bottom: 1px solid var(--border);
     text-decoration: none;
     color: var(--accent-dim);
@@ -151,8 +155,9 @@ const header = {
   }
 
   .link-index {
-    font-family: var(--pixel-font);
-    font-size: 0.5rem;
+    font-family: var(--sans-font);
+    font-size: 0.72rem;
+    font-weight: 500;
     color: var(--text-muted);
     min-width: 24px;
   }
@@ -166,8 +171,9 @@ const header = {
 
   .link-title {
     font-family: var(--sans-font);
-    font-size: 0.9rem;
+    font-size: 0.98rem;
     font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--text);
     transition: color 0.2s;
   }
@@ -178,8 +184,9 @@ const header = {
 
   .link-desc {
     font-family: var(--sans-font);
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
+    line-height: 1.5;
     transition: color 0.2s;
   }
 

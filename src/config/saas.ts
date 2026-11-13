@@ -30,6 +30,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/start-simple-blanco-sinfondo.png",
     link: "https://start.inled.es",
+    archive: true,
   },
   {
     id: "mypdf",
@@ -81,6 +82,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/INDOC.png",
     link: "https://insuite.inled.es/indoc",
+    archive: true,
   },
   {
     id: "inmd",
@@ -91,6 +93,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/inMD.png",
     link: "https://insuite.inled.es/inmd",
+    archive: true,
   },
   {
     id: "mdpdf",
@@ -121,6 +124,7 @@ export const saas: SaasProduct[] = [
     },
     icon: "https://hosted.inled.es/inqr.png",
     link: "https://insuite.inled.es/inqr",
+    archive: true,
   },
   {
     id: "mdocx",

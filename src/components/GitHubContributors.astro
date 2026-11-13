@@ -96,9 +96,9 @@ const pulsarLabel = {
   }
 
   .contributors-container {
-    max-width: 1200px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 5rem 5%;
+    padding: 6rem 1.5rem;
   }
 
   .contributors-header {
@@ -106,27 +106,34 @@ const pulsarLabel = {
   }
 
   .contributors-label {
-    font-family: var(--pixel-font);
-    font-size: 0.5rem;
+    font-family: var(--sans-font);
+    font-size: 0.72rem;
+    font-weight: 600;
     color: rgba(255, 255, 255, 0.3);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.9rem;
+  }
+
+  :global(html[data-theme="light"]) .contributors-label {
+    color: rgba(0, 0, 0, 0.4);
   }
 
   .contributors-title {
     font-family: var(--sans-font);
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
-    font-weight: 600;
-    color: #fff;
-    letter-spacing: -0.03em;
-    margin: 0 0 0.3rem 0;
+    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    margin: 0 0 0.9rem 0;
   }
 
   .contributors-subtitle {
     font-family: var(--sans-font);
-    font-size: 0.85rem;
-    color: var(--accent-dim);
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    color: var(--text-dim);
+    line-height: 1.55;
     margin: 0;
   }
 
@@ -158,6 +165,7 @@ const pulsarLabel = {
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
+    border-radius: 18px;
     overflow: hidden;
   }
 
@@ -167,6 +175,7 @@ const pulsarLabel = {
     gap: 1px;
     background: var(--border);
     border: 1px solid var(--border);
+    border-radius: 18px;
     overflow: hidden;
   }
 
@@ -208,9 +217,9 @@ const pulsarLabel = {
 
   .contributor-name {
     font-family: var(--sans-font);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

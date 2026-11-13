@@ -3,42 +3,91 @@ import { getLangFromLocals, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
+
+const productLinks = [
+  { label: 'Pulsar OS', href: 'https://os.inled.es' },
+  { label: 'CodexBar', href: '/apps/codexbar-gnome' },
+  { label: 'Seafari', href: '/apps/seafari' },
+  { label: 'InSuite Office', href: 'https://office.inled.es' },
+];
+
+const sectionLinks = [
+  { label: lang === 'es' ? 'Proyectos' : 'Projects', href: '/#projects' },
+  { label: 'Blog', href: '/blog' },
+  { label: t('nav.contact'), href: '/contacto' },
+];
+
+const socials = [
+  {
+    label: 'GitHub',
+    href: 'https://github.com/InledGroup',
+    icon: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.012c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.337 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.579.688.481C19.138 20.174 22 16.426 22 12.012 22 6.484 17.523 2 12 2z"/></svg>`,
+  },
+  {
+    label: 'Discord',
+    href: 'https://link.inled.es/discord',
+    icon: `<i class="fa-brands fa-discord" style="font-size: 15px;"></i>`,
+  },
+  {
+    label: 'Telegram',
+    href: 'https://link.inled.es/telegram',
+    icon: `<i class="fa-brands fa-telegram" style="font-size: 15px;"></i>`,
+  },
+  {
+    label: 'Matrix',
+    href: 'https://matrix.inled.es',
+    icon: `<svg width="15" height="15" viewBox="0 0 640 640" fill="currentColor"><path d="M125.6 91L92.7 91L92.7 549L125.6 549L125.6 560L80 560L80 80L125.6 80L125.6 91zM560 560L514.4 560L514.4 549L547.3 549L547.3 91L514.4 91L514.4 80L560 80L560 560zM388.1 231.6C397.1 231.6 405.5 232.7 413.3 234.9C421.1 237.1 427.6 240.6 433.1 245.5C438.6 250.4 442.9 256.7 446 264.5C449 272.3 450.6 281.8 450.6 292.8L450.6 407.3L403.6 407.3L403.6 310.3C403.6 304.6 403.4 299.1 403 294C402.6 288.9 401.3 284.5 399.4 280.8C397.4 277 394.5 274 390.7 271.8C386.9 269.6 381.6 268.5 375 268.5C368.4 268.5 363 269.8 358.9 272.3C354.8 274.9 351.6 278.1 349.3 282.3C347 286.4 345.4 291 344.7 296.2C344 301.4 343.5 306.6 343.5 311.9L343.5 407.2L296.5 407.2L296.5 311.2C296.5 306.1 296.4 301.1 296.1 296.2C295.9 291.2 294.9 286.7 293.2 282.4C291.5 278.3 288.8 274.8 284.9 272.3C281 269.8 275.4 268.5 267.8 268.5C265.6 268.5 262.6 269 259 270C255.4 271 251.8 272.9 248.4 275.6C245 278.3 242 282.3 239.6 287.5C237.2 292.7 236 299.5 236 307.9L236 407.2L189 407.2L189 235.9L233.3 235.9L233.3 259.1L234 259.1C240.2 250.2 247.7 243.4 256.3 238.6C265 233.7 275 231.3 286.3 231.3C297.1 231.3 307 233.4 315.9 237.6C324.8 241.8 331.6 249.2 336.3 259.8C341.4 252.3 348.3 245.7 357 240C365.7 234.3 376 231.4 387.9 231.4z"/></svg>`,
+  },
+  {
+    label: 'YouTube',
+    href: 'https://www.youtube.com/@inledgroup',
+    icon: `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8.001s-.2-1.429-.8-2.057c-.763-.8-1.617-.803-2.011-.849C16.2 5 12 5 12 5h-.01s-4.2 0-7 .095c-.394.046-1.248.049-2.011.849-.6.628-.8 2.057-.8 2.057S2 9.571 2 11.143v1.714c0 1.572.2 3.142.2 3.142s.2 1.429.8 2.057c.763.8 1.767.775 2.221.86C7.8 19 12 19 12 19s4.2 0 7-.095c.394-.046 1.248-.049 2.011-.849.6-.628.8-2.057.8-2.057s.2-1.57.2-3.142v-1.714c0-1.572-.2-3.142-.2-3.142zM10 15.5v-7l6 3.5-6 3.5z"/></svg>`,
+  },
+];
 ---
 
-<header class="site-header">
+<header class="site-header" id="siteHeader">
   <div class="header-inner">
-    <a href="/" class="header-logo" aria-label="Home">
+    <a href="/" class="header-logo" aria-label="Inled Group">
       <img src="https://hosted.inled.es/inled-logo-full.png" alt="Inled" class="logo-img" />
     </a>
 
-    <nav class="header-center">
-      <a href="#projects" class="header-link">{lang === 'es' ? 'Proyectos' : 'Projects'}</a>
-      <a href="/blog" class="header-link">Blog</a>
-     <!--  <a href="/servicios" class="header-link header-link--accent">{lang === 'es' ? 'Servicios' : 'Services'}</a>-->
-      <a href="/contacto" class="header-link">{t('nav.contact')}</a>
-
+    <nav class="header-nav" aria-label="Principal">
+      {productLinks.map((link) => (
+        <a
+          href={link.href}
+          class="header-link"
+          target={link.href.startsWith('http') ? '_blank' : undefined}
+          rel={link.href.startsWith('http') ? 'noopener' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
       <span class="header-divider"></span>
+      {sectionLinks.map((link) => (
+        <a href={link.href} class="header-link">{link.label}</a>
+      ))}
+    </nav>
 
-      <a href="https://github.com/InledGroup" target="_blank" rel="noopener" class="header-btn" aria-label="GitHub">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.012c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.337 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.579.688.481C19.138 20.174 22 16.426 22 12.012 22 6.484 17.523 2 12 2z"/></svg>
-      </a>
-      <a href="https://link.inled.es/discord" target="_blank" rel="noopener" class="header-btn" aria-label="Discord">
-        <i class="fa-brands fa-discord" style="font-size: 15px;"></i>
-      </a>
-      <a href="https://link.inled.es/telegram" target="_blank" rel="noopener" class="header-btn" aria-label="Discord">
-        <i class="fa-brands fa-telegram" style="font-size: 15px;"></i>
-      </a>
-      <a href="https://matrix.inled.es" target="_blank" rel="noopener" class="header-btn" aria-label="Matrix">
-        <svg width="15" height="15" viewBox="0 0 640 640" fill="currentColor"><path d="M125.6 91L92.7 91L92.7 549L125.6 549L125.6 560L80 560L80 80L125.6 80L125.6 91zM560 560L514.4 560L514.4 549L547.3 549L547.3 91L514.4 91L514.4 80L560 80L560 560zM388.1 231.6C397.1 231.6 405.5 232.7 413.3 234.9C421.1 237.1 427.6 240.6 433.1 245.5C438.6 250.4 442.9 256.7 446 264.5C449 272.3 450.6 281.8 450.6 292.8L450.6 407.3L403.6 407.3L403.6 310.3C403.6 304.6 403.4 299.1 403 294C402.6 288.9 401.3 284.5 399.4 280.8C397.4 277 394.5 274 390.7 271.8C386.9 269.6 381.6 268.5 375 268.5C368.4 268.5 363 269.8 358.9 272.3C354.8 274.9 351.6 278.1 349.3 282.3C347 286.4 345.4 291 344.7 296.2C344 301.4 343.5 306.6 343.5 311.9L343.5 407.2L296.5 407.2L296.5 311.2C296.5 306.1 296.4 301.1 296.1 296.2C295.9 291.2 294.9 286.7 293.2 282.4C291.5 278.3 288.8 274.8 284.9 272.3C281 269.8 275.4 268.5 267.8 268.5C265.6 268.5 262.6 269 259 270C255.4 271 251.8 272.9 248.4 275.6C245 278.3 242 282.3 239.6 287.5C237.2 292.7 236 299.5 236 307.9L236 407.2L189 407.2L189 235.9L233.3 235.9L233.3 259.1L234 259.1C240.2 250.2 247.7 243.4 256.3 238.6C265 233.7 275 231.3 286.3 231.3C297.1 231.3 307 233.4 315.9 237.6C324.8 241.8 331.6 249.2 336.3 259.8C341.4 252.3 348.3 245.7 357 240C365.7 234.3 376 231.4 387.9 231.4z"/></svg>
-      </a>
-      <a href="https://www.youtube.com/@inledgroup" target="_blank" rel="noopener" class="header-btn" aria-label="YouTube">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8.001s-.2-1.429-.8-2.057c-.763-.8-1.617-.803-2.011-.849C16.2 5 12 5 12 5h-.01s-4.2 0-7 .095c-.394.046-1.248.049-2.011.849-.6.628-.8 2.057-.8 2.057S2 9.571 2 11.143v1.714c0 1.572.2 3.142.2 3.142s.2 1.429.8 2.057c.763.8 1.767.775 2.221.86C7.8 19 12 19 12 19s4.2 0 7-.095c.394-.046 1.248-.049 2.011-.849.6-.628.8-2.057.8-2.057s.2-1.57.2-3.142v-1.714c0-1.572-.2-3.142-.2-3.142zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
-      </a>
+    <div class="header-actions">
+      <div class="header-socials">
+        {socials.map((social) => (
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener"
+            class="header-icon"
+            aria-label={social.label}
+            title={social.label}
+            set:html={social.icon}
+          />
+        ))}
+      </div>
 
-      <span class="header-divider"></span>
+      <span class="header-divider header-divider--actions"></span>
 
       <div class="lang-selector-container">
-        <button class="header-btn lang-toggle" aria-label="Change Language">
+        <button class="header-icon lang-toggle" aria-label="Change Language">
           <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
         </button>
         <div class="lang-menu">
@@ -47,11 +96,36 @@ const t = useTranslations(lang);
         </div>
       </div>
 
-      <button class="header-btn theme-toggle" aria-label={lang === 'es' ? 'Cambiar tema' : 'Toggle theme'} title={lang === 'es' ? 'Modo claro / oscuro' : 'Light / dark mode'}>
+      <button class="header-icon theme-toggle" aria-label={lang === 'es' ? 'Cambiar tema' : 'Toggle theme'} title={lang === 'es' ? 'Modo claro / oscuro' : 'Light / dark mode'}>
         <svg class="theme-icon theme-icon-sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
         <svg class="theme-icon theme-icon-moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
       </button>
-    </nav>
+
+      <button class="header-icon menu-toggle" aria-label={lang === 'es' ? 'Abrir menú' : 'Open menu'} aria-expanded="false" aria-controls="mobileMenu">
+        <span class="menu-bar"></span>
+        <span class="menu-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <p class="mobile-menu-label">{lang === 'es' ? 'Productos' : 'Products'}</p>
+      {productLinks.map((link) => (
+        <a href={link.href} class="mobile-link" target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noopener' : undefined}>
+          {link.label}
+        </a>
+      ))}
+      <p class="mobile-menu-label">{lang === 'es' ? 'Inled' : 'Inled'}</p>
+      {sectionLinks.map((link) => (
+        <a href={link.href} class="mobile-link">{link.label}</a>
+      ))}
+      <div class="mobile-socials">
+        {socials.map((social) => (
+          <a href={social.href} target="_blank" rel="noopener" class="header-icon" aria-label={social.label} set:html={social.icon} />
+        ))}
+      </div>
+    </div>
   </div>
 </header>
 
@@ -62,134 +136,128 @@ const t = useTranslations(lang);
     left: 0;
     right: 0;
     z-index: 2000;
-    background: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    height: 48px;
+    background: rgba(12, 12, 14, 0.62);
+    -webkit-backdrop-filter: saturate(180%) blur(24px);
+    backdrop-filter: saturate(180%) blur(24px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: #f5f5f7;
   }
 
   .header-inner {
     max-width: 1200px;
     margin: 0 auto;
-    height: 100%;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     padding: 0 1.5rem;
   }
 
   .header-logo {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
-    text-decoration: none;
-    color: #fff;
     flex-shrink: 0;
   }
 
   .logo-img {
     width: auto;
-    height: 30px;
+    height: 26px;
     object-fit: contain;
+    display: block;
   }
 
-  .logo-text {
-    font-family: var(--sans-font);
-    font-size: 0.75rem;
-    font-weight: 900;
-    letter-spacing: 0.15em;
-    color: #fff;
-  }
-
-  .header-center {
+  .header-nav {
     display: flex;
     align-items: center;
-    gap: 0.15rem;
+    gap: 0.1rem;
   }
 
   .header-divider {
     width: 1px;
-    height: 16px;
-    background: var(--border);
-    margin: 0 0.3rem;
+    height: 14px;
+    background: rgba(255, 255, 255, 0.14);
+    margin: 0 0.5rem;
+    flex-shrink: 0;
   }
 
   .header-link {
-    font-size: 0.75rem;
-    color: var(--accent-dim);
-    text-decoration: none;
-    padding: 0.3rem 0.6rem;
-    font-weight: 500;
-    transition: color 0.15s;
     font-family: var(--sans-font);
-    letter-spacing: 0.02em;
+    font-size: 0.75rem;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+    color: rgba(255, 255, 255, 0.78);
+    text-decoration: none;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
   }
 
   .header-link:hover {
     color: #fff;
+    background: rgba(255, 255, 255, 0.07);
   }
 
-  .header-link--accent {
-    color: var(--accent);
-    font-weight: 600;
-  }
-
-  .header-link--accent:hover {
-    color: #fff;
-  }
-
-  .header-btn {
+  .header-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border: none;
-    background: transparent;
-    color: var(--accent-dim);
-    cursor: pointer;
-    text-decoration: none;
-    transition: color 0.15s, background 0.15s;
+    gap: 0.1rem;
+    flex-shrink: 0;
   }
 
-  .header-btn:hover {
+  .header-socials {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+  }
+
+  .header-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 6px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.72);
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .header-icon:hover {
     color: #fff;
-    background: var(--surface-hover);
+    background: rgba(255, 255, 255, 0.08);
   }
 
   .lang-selector-container {
     position: relative;
   }
 
-  .theme-icon-sun {
-    display: block;
-  }
+  .theme-icon-sun { display: block; }
+  .theme-icon-moon { display: none; }
 
-  .theme-icon-moon {
-    display: none;
-  }
-
-  :global(html[data-theme="light"]) .theme-icon-sun {
-    display: none;
-  }
-
-  :global(html[data-theme="light"]) .theme-icon-moon {
-    display: block;
-  }
+  :global(html[data-theme="light"]) .theme-icon-sun { display: none; }
+  :global(html[data-theme="light"]) .theme-icon-moon { display: block; }
 
   .lang-menu {
     position: absolute;
-    top: calc(100% + 6px);
+    top: calc(100% + 8px);
     right: 0;
-    background: #111;
-    border: 1px solid var(--border);
+    background: rgba(24, 24, 27, 0.92);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
     padding: 4px;
-    min-width: 56px;
+    min-width: 64px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4px);
-    transition: all 0.15s;
+    transition: all 0.15s ease;
     display: flex;
     flex-direction: column;
     gap: 2px;
@@ -204,28 +272,104 @@ const t = useTranslations(lang);
   .lang-btn {
     background: transparent;
     border: none;
-    color: var(--accent-dim);
-    padding: 0.35rem 0.6rem;
-    font-size: 0.7rem;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.65);
+    padding: 0.4rem 0.6rem;
+    font-size: 0.72rem;
     font-family: var(--sans-font);
     cursor: pointer;
     text-align: center;
-    transition: all 0.15s;
+    transition: all 0.15s ease;
   }
 
   .lang-btn:hover {
-    background: var(--surface-hover);
+    background: rgba(255, 255, 255, 0.08);
     color: #fff;
   }
 
   .lang-btn.active {
     color: #fff;
-    background: var(--surface);
+    background: rgba(255, 255, 255, 0.12);
   }
 
-  @media (max-width: 768px) {
-    .header-link { display: none; }
-    .header-inner { padding: 0 1rem; }
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .menu-bar {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: currentColor;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  @media (max-width: 1080px) {
+    .header-socials { display: none; }
+    .header-divider--actions { display: none; }
+  }
+
+  @media (max-width: 900px) {
+    .header-nav { display: none; }
+    .menu-toggle { display: flex; }
+    .header-inner { padding: 0 1rem; height: 52px; }
+
+    .mobile-menu {
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background: rgba(12, 12, 14, 0.9);
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .mobile-menu.open {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .mobile-menu-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      padding: 0.75rem 1rem 1.5rem;
+    }
+
+    .mobile-menu-label {
+      font-family: var(--sans-font);
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.4);
+      margin: 1rem 0 0.4rem;
+    }
+
+    .mobile-link {
+      font-family: var(--sans-font);
+      font-size: 1.35rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #f5f5f7;
+      text-decoration: none;
+      padding: 0.35rem 0;
+    }
+
+    .mobile-socials {
+      display: flex;
+      gap: 0.25rem;
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
   }
 </style>
 
@@ -267,6 +411,28 @@ const t = useTranslations(lang);
         localStorage.setItem('theme', next);
       } catch (e) {}
     });
+
+    const menuToggle = document.querySelector('.menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuToggle?.addEventListener('click', () => {
+      const isOpen = mobileMenu?.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(!!isOpen));
+    });
+
+    mobileMenu?.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => {
+      if (!header) return;
+      header.classList.toggle('is-scrolled', window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
   }
 
   document.addEventListener('astro:page-load', initHeader);

@@ -1,0 +1,218 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+---
+
+<div class="join-banner" id="join-banner" role="region" aria-label={lang === 'es' ? 'Únete a la comunidad' : 'Join the community'}>
+  <div class="join-banner-body">
+    <p class="join-banner-title">
+      {lang === 'es' ? '¿Te está gustando Inled?' : 'Liking Inled so far?'}
+    </p>
+    <p class="join-banner-text">
+      {lang === 'es'
+        ? 'Únete a la comunidad en Discord o Telegram y ayúdanos a construir lo siguiente.'
+        : 'Join the community on Discord or Telegram and help us build what comes next.'}
+    </p>
+  </div>
+
+  <div class="join-banner-actions">
+    <a href="https://link.inled.es/discord" class="join-banner-btn join-banner-btn--primary" target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-discord" aria-hidden="true"></i>
+      Discord
+    </a>
+    <a href="https://link.inled.es/telegram" class="join-banner-btn join-banner-btn--ghost" target="_blank" rel="noopener noreferrer">
+      <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+      Telegram
+    </a>
+  </div>
+
+  <button type="button" class="join-banner-close" id="join-banner-close" aria-label={lang === 'es' ? 'Cerrar' : 'Close'}>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  </button>
+</div>
+
+<style>
+  .join-banner {
+    position: fixed;
+    left: 50%;
+    bottom: 1.25rem;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: calc(100% - 2rem);
+    max-width: 820px;
+    padding: 0.95rem 1.1rem 0.95rem 1.4rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(22, 22, 26, 0.86);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    box-shadow: 0 24px 70px -18px rgba(0, 0, 0, 0.75);
+    color: #f5f5f7;
+    font-family: var(--sans-font);
+    opacity: 0;
+    transform: translate(-50%, calc(100% + 2rem));
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  .join-banner.is-visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+    pointer-events: auto;
+  }
+
+  .join-banner-body {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .join-banner-title {
+    margin: 0 0 0.2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+
+  .join-banner-text {
+    margin: 0;
+    font-size: 0.83rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.66);
+  }
+
+  .join-banner-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .join-banner-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1rem;
+    border-radius: 980px;
+    font-size: 0.83rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .join-banner-btn--primary {
+    background: #5865f2;
+    border: 1px solid #5865f2;
+  }
+
+  .join-banner-btn--primary:hover {
+    background: #4752c4;
+    border-color: #4752c4;
+  }
+
+  .join-banner-btn--ghost {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .join-banner-btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.38);
+  }
+
+  .join-banner-close {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.55);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .join-banner-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+  }
+
+  @media (max-width: 720px) {
+    .join-banner {
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      padding: 1rem;
+      border-radius: 18px;
+    }
+
+    .join-banner-close {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+    }
+
+    .join-banner-body {
+      flex-basis: 100%;
+      padding-right: 2rem;
+    }
+
+    .join-banner-actions {
+      width: 100%;
+    }
+
+    .join-banner-btn {
+      flex: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .join-banner {
+      transition: opacity 0.2s ease;
+    }
+  }
+</style>
+
+<script>
+  const banner = document.getElementById('join-banner');
+  const closeBtn = document.getElementById('join-banner-close');
+  const STORAGE_KEY = 'inled-join-banner-dismissed';
+
+  if (banner && closeBtn && !localStorage.getItem(STORAGE_KEY)) {
+    let rafId = 0;
+
+    const update = () => {
+      rafId = 0;
+      const y = window.scrollY || window.pageYOffset;
+      const nearBottom =
+        y + window.innerHeight >= document.documentElement.scrollHeight - 480;
+
+      banner.classList.toggle('is-visible', y > 650 && !nearBottom);
+    };
+
+    const onScroll = () => {
+      if (!rafId) rafId = requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+
+    closeBtn.addEventListener('click', () => {
+      localStorage.setItem(STORAGE_KEY, '1');
+      banner.classList.remove('is-visible');
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    });
+  }
+</script>

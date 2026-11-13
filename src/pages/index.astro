@@ -1,18 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
-import GuideLines from '../components/GuideLines.astro';
 export const prerender = false;
 
 import Hero from '../components/Hero.astro';
 import ProjectsGrouped from '../components/ProjectsGrouped.astro';
-import BlogList from '../components/BlogList.astro';
-import Changelog from '../components/Changelog.astro';
-import GitHubContributors from '../components/GitHubContributors.astro';
-import ServicesCTA from '../components/ServicesCTA.astro';
-import CommunityLinks from '../components/CommunityLinks.astro';
-import CommunityCTA from '../components/CommunityCTA.astro';
+import NewsSection from '../components/NewsSection.astro';
 import CoreValues from '../components/CoreValues.astro';
+import CommunityLinks from '../components/CommunityLinks.astro';
+import GitHubContributors from '../components/GitHubContributors.astro';
+import CommunityCTA from '../components/CommunityCTA.astro';
+import JoinBanner from '../components/JoinBanner.astro';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
@@ -21,19 +19,14 @@ const t = useTranslations(lang);
 
 <Layout title="Inled Group — Dream, Build" description={t('scroll.description')}>
   <Header />
-  <GuideLines />
   <div style="position: relative; z-index: 1;">
     <Hero />
     <ProjectsGrouped />
-    <BlogList />
-    <Changelog />
-    <GitHubContributors />
+    <NewsSection />
     <CoreValues />
-    <CommunityCTA />
-    <!--  <ServicesCTA /> -->
     <CommunityLinks />
+    <GitHubContributors />
+    <CommunityCTA />
   </div>
+  <JoinBanner />
 </Layout>
-
-<style>
-</style>
