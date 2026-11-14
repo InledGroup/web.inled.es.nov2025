@@ -20,7 +20,7 @@ export interface LandingUpdate {
  * Edita libremente: imagen (logo o foto), título, subtítulo y enlace.
  */
 export const landingUpdates: LandingUpdate[] = [
-  {
+ /* {
     date: '2026-08-09',
     image: 'https://hosted.inled.es/cdn/pulsar-logo-simple-sf.png',
     imageFit: 'contain',
@@ -34,5 +34,5 @@ export const landingUpdates: LandingUpdate[] = [
       es: 'Open beta for Pear Edition',
       en: 'Open beta for Pear Edition',
     },
-  },
+  },*/
 ];
