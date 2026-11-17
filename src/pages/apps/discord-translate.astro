@@ -1,0 +1,656 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import { getLangFromLocals } from '../../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const app = {
+  name: 'Discord Translate',
+  logo: 'https://hosted.inled.es/cdn/discord-translate.png',
+  downloadUrl:
+    'https://github.com/InledGroup/discordtranslate/releases/latest/download/discord-translate.zip',
+  githubUrl: 'https://github.com/InledGroup/discordtranslate',
+  releasesUrl: 'https://github.com/InledGroup/discordtranslate/releases',
+  videoUrl: 'https://hosted.inled.es/cdn/discordtranslate-demo-discord-translate.mp4',
+};
+
+const translations = {
+  es: {
+    meta: {
+      title: 'Discord Translate | Traduce mensajes de Discord sin API key',
+      description:
+        'Extensión de Chrome que traduce mensajes de Discord con Google Translate: traducción automática o manual desde el menú contextual, debajo del original o reemplazándolo. Gratis y sin API key.',
+    },
+    hero: {
+      badge: 'Extensión para Chrome',
+      title: 'Traduce Discord sin salir del chat',
+      description:
+        'Traducción automática o manual, mensaje a mensaje, con el texto debajo del original o reemplazándolo. Sin cuenta y sin API key.',
+      download: 'Descargar .zip',
+      github: 'Código en GitHub',
+      meta: 'Manifest V3 · Chrome, Edge, Brave y Vivaldi',
+    },
+    demo: {
+      title: 'Cómo funciona',
+      subtitle: 'Clic derecho sobre un mensaje, «Traducir mensaje», y la traducción aparece donde elijas.',
+    },
+    features: {
+      title: 'Qué hace',
+      items: [
+        {
+          icon: 'zap',
+          title: 'Traducción automática',
+          desc: 'Los mensajes nuevos se traducen al llegar y el historial a medida que haces scroll. No hay que pulsar nada.',
+        },
+        {
+          icon: 'pointer',
+          title: 'Manual, mensaje a mensaje',
+          desc: 'Clic derecho en un mensaje y «Traducir mensaje». Solo se traduce ese, cuando tú quieres.',
+        },
+        {
+          icon: 'layers',
+          title: 'Debajo o reemplazando',
+          desc: 'La traducción puede ir bajo el texto original o sustituirlo, con el original al pasar el cursor. El modo automático y el manual guardan cada uno su ajuste.',
+        },
+        {
+          icon: 'send',
+          title: '100% gratuito',
+          desc: 'Sin cuenta, sin claves y sin servidores propios: tu navegador consulta directamente a Google Translate.',
+        },
+      ],
+    },
+    install: {
+      title: 'Instalación',
+      subtitle:
+        'Todavía no está en la Chrome Web Store, así que se carga como extensión descomprimida. Tarda un minuto.',
+      steps: [
+        {
+          title: 'Descarga el ZIP',
+          desc: 'Baja el paquete de la última release y descomprímelo en una carpeta que vayas a conservar.',
+        },
+        {
+          title: 'Abre las extensiones',
+          desc: 'Entra en chrome://extensions/ y activa el «Modo de desarrollador» arriba a la derecha.',
+        },
+        {
+          title: 'Carga la carpeta',
+          desc: 'Pulsa «Cargar descomprimida» y elige la carpeta que contiene manifest.json.',
+        },
+        {
+          title: 'Recarga Discord',
+          desc: 'Refresca la pestaña de Discord (F5). El botón aparecerá en el menú de cada mensaje.',
+        },
+      ],
+      note: 'Para actualizar, sustituye los archivos, pulsa el icono de recargar en la tarjeta de la extensión y refresca Discord.',
+      releases: 'Ver versiones',
+    },
+    cta: {
+      title: 'Traduce el próximo mensaje con dos clics',
+      button: 'Descargar Discord Translate',
+      github: 'Ver en GitHub',
+    },
+    note: 'Escrita con IA y revisada por una persona.',
+  },
+  en: {
+    meta: {
+      title: 'Discord Translate | Translate Discord messages without an API key',
+      description:
+        'Chrome extension that translates Discord messages with Google Translate: automatic or manual from the right-click menu, below the original or replacing it. Free and no API key.',
+    },
+    hero: {
+      badge: 'Chrome extension',
+      title: 'Translate Discord without leaving the chat',
+      description:
+        'Automatic or manual translation, message by message, with the text below the original or replacing it. No account, no API key.',
+      download: 'Download .zip',
+      github: 'Code on GitHub',
+      meta: 'Manifest V3 · Chrome, Edge, Brave and Vivaldi',
+    },
+    demo: {
+      title: 'How it works',
+      subtitle: 'Right-click a message, pick “Translate message”, and the translation shows up where you choose.',
+    },
+    features: {
+      title: 'What it does',
+      items: [
+        {
+          icon: 'zap',
+          title: 'Automatic translation',
+          desc: 'New messages are translated as they arrive and history as you scroll. Nothing to click.',
+        },
+        {
+          icon: 'pointer',
+          title: 'Manual, message by message',
+          desc: 'Right-click a message and hit “Translate message”. Only that one is translated, when you want it.',
+        },
+        {
+          icon: 'layers',
+          title: 'Below or replacing',
+          desc: 'The translation can sit under the original text or replace it, with the original on hover. Automatic and manual each keep their own setting.',
+        },
+        {
+          icon: 'send',
+          title: '100% free',
+          desc: 'No account, no keys and no servers of ours: your browser talks to Google Translate directly.',
+        },
+      ],
+    },
+    install: {
+      title: 'Installation',
+      subtitle:
+        'It is not on the Chrome Web Store yet, so it loads as an unpacked extension. Takes a minute.',
+      steps: [
+        {
+          title: 'Download the ZIP',
+          desc: 'Grab the package from the latest release and unzip it into a folder you will keep.',
+        },
+        {
+          title: 'Open the extensions page',
+          desc: 'Go to chrome://extensions/ and turn on “Developer mode” in the top-right corner.',
+        },
+        {
+          title: 'Load the folder',
+          desc: 'Click “Load unpacked” and pick the folder that contains manifest.json.',
+        },
+        {
+          title: 'Reload Discord',
+          desc: 'Refresh the Discord tab (F5). The item shows up in the menu of every message.',
+        },
+      ],
+      note: 'To update, replace the files, click the reload icon on the extension card and refresh Discord.',
+      releases: 'View releases',
+    },
+    cta: {
+      title: 'Translate the next message in two clicks',
+      button: 'Download Discord Translate',
+      github: 'View on GitHub',
+    },
+    note: 'Written with AI and reviewed by a human.',
+  },
+};
+
+const t = translations[lang] || translations.en;
+
+const icons: Record<string, string> = {
+  zap: '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
+  pointer:
+    '<path d="M9 9l5 12 1.8-5.2L21 14Z"/><path d="M7.2 2.2 8 5.1"/><path d="m5.1 8-2.9-.8"/><path d="M14 4.1 12 6"/><path d="m6 12-1.9 2"/>',
+  layers:
+    '<path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m6.08 9.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/><path d="m6.08 14.5-3.5 1.6a1 1 0 0 0 0 1.81l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9a1 1 0 0 0 0-1.83l-3.5-1.59"/>',
+  send: '<path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/>',
+};
+
+const downloadIcon =
+  '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: app.name,
+  operatingSystem: 'ChromeOS, Windows, macOS, Linux',
+  applicationCategory: 'BrowserApplication',
+  downloadUrl: app.downloadUrl,
+  softwareVersion: 'latest',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+  },
+  description: t.meta.description,
+  publisher: {
+    '@type': 'Organization',
+    name: 'Inled Group',
+    url: 'https://inled.es',
+  },
+};
+---
+
+<Layout title={t.meta.title} description={t.meta.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <Header />
+
+  <div class="dt">
+    <main>
+      <section class="hero">
+        <div class="hero-text">
+          <span class="badge">{t.hero.badge}</span>
+          <h1>{t.hero.title}</h1>
+          <p class="hero-desc">{t.hero.description}</p>
+          <div class="actions">
+            <a href={app.downloadUrl} class="btn btn-primary">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={downloadIcon} />
+              {t.hero.download}
+            </a>
+            <a href={app.githubUrl} target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+              <i class="fa-brands fa-github"></i>
+              {t.hero.github}
+            </a>
+          </div>
+          <p class="hero-meta">{t.hero.meta}</p>
+        </div>
+
+        <div class="hero-logo">
+          <img src={app.logo} alt="Discord Translate" width="128" height="128" />
+        </div>
+      </section>
+
+      <section class="demo">
+        <div class="section-head">
+          <h2>{t.demo.title}</h2>
+          <p>{t.demo.subtitle}</p>
+        </div>
+        <div class="video-frame">
+          <video src={app.videoUrl} controls playsinline preload="metadata" aria-label={t.demo.title}></video>
+        </div>
+      </section>
+
+      <section class="features">
+        <h2>{t.features.title}</h2>
+        <div class="features-grid">
+          {t.features.items.map((f) => (
+            <article class="feature">
+              <span class="feature-icon">
+                <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" set:html={icons[f.icon]} />
+              </span>
+              <h3>{f.title}</h3>
+              <p>{f.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="install" id="instalacion">
+        <div class="section-head">
+          <h2>{t.install.title}</h2>
+          <p>{t.install.subtitle}</p>
+        </div>
+        <ol class="steps">
+          {t.install.steps.map((step) => (
+            <li>
+              <h3>{step.title}</h3>
+              <p>{step.desc}</p>
+            </li>
+          ))}
+        </ol>
+        <p class="install-note">
+          {t.install.note}
+          <a href={app.releasesUrl} target="_blank" rel="noopener noreferrer">{t.install.releases}</a>
+        </p>
+      </section>
+
+      <section class="cta">
+        <h2>{t.cta.title}</h2>
+        <div class="actions">
+          <a href={app.downloadUrl} class="btn btn-light">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" set:html={downloadIcon} />
+            {t.cta.button}
+          </a>
+          <a href={app.githubUrl} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            <i class="fa-brands fa-github"></i>
+            {t.cta.github}
+          </a>
+        </div>
+        <p class="note">{t.note}</p>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<style is:global>
+  html,
+  body {
+    background: #0b0b0e !important;
+    color-scheme: dark;
+  }
+
+  html[data-theme='light'] body {
+    background: #0b0b0e !important;
+    color: #fff;
+  }
+</style>
+
+<style>
+  .dt {
+    --brand: #5865f2;
+    --line: rgba(255, 255, 255, 0.1);
+    --line-strong: rgba(255, 255, 255, 0.18);
+    --panel: #131318;
+    --muted: rgba(255, 255, 255, 0.62);
+    --dim: rgba(255, 255, 255, 0.42);
+
+    min-height: 100vh;
+    padding: 128px 24px 96px;
+    background: #0b0b0e;
+    color: #fff;
+  }
+
+  .dt main {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    margin: 0;
+  }
+
+  /* Hero */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    align-items: center;
+    gap: 48px;
+    padding-bottom: 72px;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 5px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    max-width: 620px;
+  }
+
+  .hero-desc {
+    margin-top: 16px;
+    max-width: 560px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .btn svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .btn-primary {
+    background: var(--brand);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background: #6d79f5;
+  }
+
+  .btn-ghost {
+    border-color: var(--line-strong);
+    color: #fff;
+  }
+
+  .btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .hero-meta {
+    margin-top: 16px;
+    font-size: 0.78rem;
+    color: var(--dim);
+  }
+
+  .hero-logo {
+    justify-self: end;
+  }
+
+  .hero-logo img {
+    width: 168px;
+    height: 168px;
+    border-radius: 34px;
+    border: 1px solid var(--line);
+  }
+
+  /* Sections */
+  section + section {
+    border-top: 1px solid var(--line);
+    padding-top: 64px;
+    margin-top: 64px;
+  }
+
+  h2 {
+    font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .section-head p {
+    font-size: 0.9rem;
+    color: var(--dim);
+    max-width: 520px;
+  }
+
+  /* Demo */
+  .video-frame {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
+  }
+
+  .video-frame video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* Features */
+  .features h2 {
+    margin-bottom: 28px;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .feature {
+    padding: 24px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+
+  .feature-icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    background: rgba(88, 101, 242, 0.14);
+    color: var(--brand);
+  }
+
+  .feature-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .feature h3 {
+    font-size: 1rem;
+    font-weight: 650;
+    margin-bottom: 6px;
+  }
+
+  .feature p {
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  /* Install */
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    counter-reset: step;
+  }
+
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 52px 20px 20px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+  }
+
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--brand);
+  }
+
+  .steps h3 {
+    font-size: 0.9rem;
+    font-weight: 650;
+    margin-bottom: 6px;
+  }
+
+  .steps p {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  .install-note {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    color: var(--dim);
+  }
+
+  .install-note a {
+    color: var(--muted);
+    text-underline-offset: 2px;
+  }
+
+  /* CTA */
+  .cta {
+    border: none;
+    margin-top: 64px;
+    padding: 48px 40px;
+    border-radius: 18px;
+    background: var(--brand);
+    text-align: center;
+  }
+
+  .cta h2 {
+    margin-bottom: 24px;
+  }
+
+  .cta .actions {
+    justify-content: center;
+    margin-top: 0;
+  }
+
+  .btn-light {
+    background: #fff;
+    color: #14151a;
+  }
+
+  .btn-light:hover {
+    background: #eceef5;
+  }
+
+  .btn-outline {
+    border-color: rgba(255, 255, 255, 0.45);
+    color: #fff;
+  }
+
+  .btn-outline:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .note {
+    margin-top: 24px;
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  @media (max-width: 860px) {
+    .dt {
+      padding: 104px 20px 72px;
+    }
+
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      padding-bottom: 56px;
+    }
+
+    .hero-logo {
+      justify-self: start;
+      order: -1;
+    }
+
+    .hero-logo img {
+      width: 96px;
+      height: 96px;
+      border-radius: 22px;
+    }
+
+    .features-grid,
+    .steps {
+      grid-template-columns: 1fr;
+    }
+
+    .cta {
+      padding: 36px 24px;
+    }
+  }
+</style>

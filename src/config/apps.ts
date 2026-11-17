@@ -29,6 +29,16 @@ export const apps: App[] = [
     link: "https://os.inled.es",
   },
   {
+    id: "discord-translate",
+    name: "Discord Translate",
+    description: {
+      es: "Traducción automática o manual desde el menú contextual, debajo del mensaje o reemplazándolo. Gratis y sin API key.",
+      en: "Automatic or manual translation from the right-click menu, below the message or replacing it. Free, no API key.",
+    },
+    icon: "https://hosted.inled.es/cdn/discord-translate.png",
+    link: "/apps/discord-translate",
+  },
+  {
     id: "droidtux",
     name: "DroidTux",
     description: {
