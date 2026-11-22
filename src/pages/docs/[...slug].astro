@@ -1,0 +1,23 @@
+---
+import { getEntry, render } from 'astro:content';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+export const prerender = false;
+
+const slug = Astro.params.slug;
+const entry = slug ? await getEntry('docs', slug) : undefined;
+
+const isDraft =
+  entry && (entry.data.draft || entry.id.split('/').pop()?.startsWith('_'));
+
+if (!entry || isDraft) {
+  return Astro.redirect('/404');
+}
+
+const { title, description, updatedAt } = entry.data;
+const { Content } = await render(entry);
+---
+
+<LegalLayout title={title} description={description} updatedAt={updatedAt}>
+  <Content />
+</LegalLayout>

@@ -7,5 +7,9 @@ export default defineConfig({
   site: 'https://inled.es',
   output: 'server',
   adapter: cloudflare(),
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/brand-strategy'),
+    }),
+  ],
 });

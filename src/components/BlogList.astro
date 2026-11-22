@@ -1,8 +1,9 @@
 ---
 import { getPosts, formatDate } from '../lib/blogger';
-import { getLangFromLocals } from '../i18n/utils';
+import { getLangFromLocals, useTranslatedPath } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
+const localize = useTranslatedPath(lang);
 const posts = await getPosts();
 const latestPosts = posts.slice(0, 4);
 ---
@@ -16,7 +17,7 @@ const latestPosts = posts.slice(0, 4);
 
     <div class="blog-grid">
       {latestPosts.map((post, i) => (
-        <a href={`/blog/${post.slug}`} class="blog-card" data-thumb={post.thumbnail || ''} style={`animation-delay: ${i * 60}ms`}>
+        <a href={localize(`/blog/${post.slug}`)} class="blog-card" data-thumb={post.thumbnail || ''} style={`animation-delay: ${i * 60}ms`}>
           <div class="card-bg" style={`background-image: url(${post.thumbnail || ''})`}></div>
           <div class="card-content">
             <div class="card-top">
@@ -40,7 +41,7 @@ const latestPosts = posts.slice(0, 4);
       ))}
     </div>
 
-    <a href="/blog" class="blog-view-all">
+    <a href={localize('/blog')} class="blog-view-all">
       {lang === 'es' ? 'Ver todo el blog' : 'View all posts'}
       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </a>

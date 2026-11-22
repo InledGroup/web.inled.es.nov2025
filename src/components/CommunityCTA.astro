@@ -1,7 +1,8 @@
 ---
-import { getLangFromLocals } from '../i18n/utils';
+import { getLangFromLocals, useTranslatedPath } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
+const localize = useTranslatedPath(lang);
 
 const t = {
   es: {
@@ -11,6 +12,11 @@ const t = {
     telegram: 'Únete a Telegram',
     githubTitle: 'Todo nuestro código es open source',
     githubDesc: 'Verificable de extremo a extremo en GitHub: desde esta web hasta cada una de nuestras apps.',
+    collabLabel: 'Colaboraciones',
+    collabTitle: '¿Quieres colaborar con Inled?',
+    collabDesc: 'Además del plano comunitario, adaptamos nuestro software a tu empresa, te ayudamos a implantarlo o desarrollamos software a medida.',
+    collabNote: 'Las colaboraciones están disponibles únicamente en A Coruña actualmente.',
+    collabCta: 'Cuéntanos tu caso',
   },
   en: {
     title: 'Join the community',
@@ -19,36 +25,49 @@ const t = {
     telegram: 'Join Telegram',
     githubTitle: 'All our code is open source',
     githubDesc: 'Verifiable end-to-end on GitHub: from this website to every one of our apps.',
+    collabLabel: 'Collaborations',
+    collabTitle: 'Want to work with Inled?',
+    collabDesc: 'Beyond the community, we adapt our software to your company, help you deploy it or build custom software.',
+    collabNote: 'Collaborations are currently only available in A Coruña.',
+    collabCta: 'Tell us about your case',
   },
 }[lang];
 ---
 
 <section class="community-section">
-  <div class="community-panel">
-    <div class="community-glow" aria-hidden="true"></div>
+  <div class="community-inner">
+    <div class="community-main">
+      <h2 class="community-title">{t.title}</h2>
+      <p class="community-subtitle">{t.subtitle}</p>
 
-    <h2 class="community-title">{t.title}</h2>
-    <p class="community-subtitle">{t.subtitle}</p>
+      <div class="community-actions">
+        <a href="https://link.inled.es/discord" target="_blank" rel="noopener" class="btn btn--primary">
+          <i class="fa-brands fa-discord" aria-hidden="true"></i>
+          {t.discord}
+        </a>
+        <a href="https://link.inled.es/telegram" target="_blank" rel="noopener" class="btn btn--secondary">
+          <i class="fa-brands fa-telegram" aria-hidden="true"></i>
+          {t.telegram}
+        </a>
+      </div>
 
-    <div class="community-actions">
-      <a href="https://link.inled.es/discord" target="_blank" rel="noopener" class="pill pill--primary">
-        <i class="fa-brands fa-discord" aria-hidden="true"></i>
-        {t.discord}
-      </a>
-      <a href="https://link.inled.es/telegram" target="_blank" rel="noopener" class="pill pill--ghost">
-        <i class="fa-brands fa-telegram" aria-hidden="true"></i>
-        {t.telegram}
+      <a href="https://github.com/InledGroup" target="_blank" rel="noopener" class="github-row">
+        <i class="fa-brands fa-github github-icon" aria-hidden="true"></i>
+        <span class="github-text">
+          <span class="github-name">{t.githubTitle}</span>
+          <span class="github-desc">{t.githubDesc}</span>
+        </span>
+        <svg class="github-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
       </a>
     </div>
 
-    <a href="https://github.com/InledGroup" target="_blank" rel="noopener" class="github-row">
-      <i class="fa-brands fa-github github-icon" aria-hidden="true"></i>
-      <span class="github-text">
-        <span class="github-name">{t.githubTitle}</span>
-        <span class="github-desc">{t.githubDesc}</span>
-      </span>
-      <svg class="github-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-    </a>
+    <div class="collab">
+      <p class="collab-label">{t.collabLabel}</p>
+      <h3 class="collab-title">{t.collabTitle}</h3>
+      <p class="collab-desc">{t.collabDesc}</p>
+      <p class="collab-note">{t.collabNote}</p>
+      <a class="btn btn--primary collab-cta" href={localize('/contacto')}>{t.collabCta}</a>
+    </div>
   </div>
 </section>
 
@@ -56,125 +75,94 @@ const t = {
   .community-section {
     width: 100%;
     background: var(--bg);
-    padding: 3rem 1.5rem 6rem;
+    border-top: 1px solid var(--border);
   }
 
-  .community-panel {
-    position: relative;
-    max-width: 1180px;
+  .community-inner {
+    max-width: 980px;
     margin: 0 auto;
-    padding: 5.5rem 2rem 4rem;
-    border: 1px solid var(--border);
-    border-radius: 32px;
-    background: var(--card);
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    isolation: isolate;
-  }
-
-  .community-glow {
-    position: absolute;
-    top: -60%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 900px;
-    height: 600px;
-    background: radial-gradient(ellipse at center, rgba(88, 101, 242, 0.22), transparent 65%);
-    pointer-events: none;
-    z-index: -1;
+    padding: 6rem 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 4.5rem;
+    align-items: start;
   }
 
   .community-title {
     font-family: var(--sans-font);
-    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
     font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1.04;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
     color: var(--text);
     margin: 0 0 1rem;
   }
 
   .community-subtitle {
     font-family: var(--sans-font);
-    font-size: clamp(0.98rem, 1.7vw, 1.15rem);
+    font-size: 1.05rem;
     line-height: 1.55;
     color: var(--text-dim);
-    max-width: 560px;
     margin: 0;
+    max-width: 46ch;
+    text-wrap: pretty;
   }
 
   .community-actions {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.85rem;
-    margin-top: 2.25rem;
+    gap: 0.75rem;
+    margin-top: 1.9rem;
   }
 
-  .pill {
+  .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
+    min-height: 46px;
+    padding: 0 1.5rem;
+    border-radius: 980px;
     font-family: var(--sans-font);
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: -0.01em;
     line-height: 1;
-    padding: 0.85rem 1.6rem;
-    border-radius: 980px;
     text-decoration: none;
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
 
-  .pill--primary {
-    background: #0071e3;
-    border: 1px solid #0071e3;
+  .btn:active {
+    transform: scale(0.975);
+  }
+
+  .btn--primary {
+    background: var(--accent);
     color: #fff;
   }
 
-  .pill--primary:hover {
-    background: #0077ed;
-    border-color: #0077ed;
+  .btn--primary:hover {
+    background: var(--accent-hover);
   }
 
-  .pill--ghost {
-    background: transparent;
-    border: 1px solid rgba(41, 151, 255, 0.55);
-    color: #2997ff;
+  .btn--secondary {
+    background: rgba(118, 118, 128, 0.12);
+    color: var(--text);
   }
 
-  .pill--ghost:hover {
-    background: rgba(41, 151, 255, 0.1);
-    border-color: #2997ff;
-  }
-
-  :global(html[data-theme="light"]) .pill--ghost {
-    color: #06c;
-    border-color: rgba(0, 102, 204, 0.45);
-  }
-
-  :global(html[data-theme="light"]) .pill--ghost:hover {
-    background: rgba(0, 102, 204, 0.07);
-    border-color: #06c;
+  .btn--secondary:hover {
+    background: rgba(118, 118, 128, 0.18);
   }
 
   .github-row {
     display: flex;
     align-items: center;
     gap: 0.8rem;
-    width: 100%;
-    max-width: 560px;
-    margin-top: 3.5rem;
-    padding: 1rem 1.25rem;
+    margin-top: 2.75rem;
+    padding-top: 1.25rem;
     border-top: 1px solid var(--border);
     text-decoration: none;
     color: var(--text);
-    transition: color 0.2s ease;
   }
 
   .github-icon {
@@ -190,12 +178,11 @@ const t = {
     gap: 0.15rem;
     flex: 1;
     min-width: 0;
-    text-align: left;
   }
 
   .github-name {
     font-family: var(--sans-font);
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--text);
@@ -203,7 +190,7 @@ const t = {
 
   .github-desc {
     font-family: var(--sans-font);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     line-height: 1.5;
     color: var(--text-muted);
   }
@@ -211,35 +198,88 @@ const t = {
   .github-arrow {
     color: var(--text-muted);
     flex-shrink: 0;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, color 0.2s ease;
   }
 
   .github-row:hover .github-arrow {
+    color: var(--accent);
     transform: translate(2px, -2px);
   }
 
-  @media (max-width: 700px) {
-    .community-section {
-      padding: 2rem 1rem 4rem;
+  .collab {
+    border-left: 1px solid var(--border);
+    padding-left: 4.5rem;
+  }
+
+  .collab-label {
+    font-family: var(--sans-font);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .collab-title {
+    font-family: var(--sans-font);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.2;
+    color: var(--text);
+    margin: 0 0 0.9rem;
+  }
+
+  .collab-desc {
+    font-family: var(--sans-font);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  .collab-note {
+    font-family: var(--sans-font);
+    font-size: 0.8125rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+    margin: 0.9rem 0 0;
+  }
+
+  .collab-cta {
+    margin-top: 1.5rem;
+  }
+
+  @media (max-width: 860px) {
+    .community-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding: 4.5rem 1.25rem;
     }
 
-    .community-panel {
-      padding: 4rem 1.25rem 3rem;
-      border-radius: 26px;
+    .collab {
+      border-left: none;
+      border-top: 1px solid var(--border);
+      padding-left: 0;
+      padding-top: 2.5rem;
     }
+  }
 
+  @media (max-width: 560px) {
     .community-actions {
       flex-direction: column;
       width: 100%;
       max-width: 320px;
     }
 
-    .pill {
+    .btn {
       width: 100%;
     }
+  }
 
-    .github-row {
-      margin-top: 2.75rem;
+  @media (prefers-reduced-motion: reduce) {
+    .btn,
+    .github-arrow {
+      transition: none;
     }
   }
 </style>

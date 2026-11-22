@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /brand-strategy
+Disallow: /es/brand-strategy
 
 Sitemap: https://inled.es/sitemap-index.xml
 Sitemap: https://inled.es/sitemap-0.xml

@@ -52,8 +52,8 @@ export const apps: App[] = [
     id: "seafari",
     name: "Seafari",
     description: {
-      es: "Navegador clon de Safari construido sobre Firefox, con máxima libertad, compatibilidad y miles de extensiones.",
-      en: "Safari browser clone built on Firefox, offering maximum freedom, compatibility, and thousands of extensions.",
+      es: "La experiencia de Safari en Linux, ya estable: cambia cómo te ven las webs y personaliza el navegador con live wallpapers.",
+      en: "The Safari experience on Linux, now stable: switch how websites see you and make the browser yours with live wallpapers.",
     },
     icon: "https://hosted.inled.es/seafari.png",
     link: "/apps/seafari",

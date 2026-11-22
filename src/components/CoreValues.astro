@@ -108,12 +108,11 @@ const t = {
 
   .values-label {
     font-family: var(--sans-font);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    color: var(--text-muted);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 0.9rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
   }
 
   .values-title {
@@ -137,20 +136,12 @@ const t = {
   .values-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.25rem;
+    gap: 2.75rem 3rem;
   }
 
   .value-card {
-    padding: 2rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    transition: background 0.2s ease, border-color 0.2s ease;
-  }
-
-  .value-card:hover {
-    background: var(--card-hover);
-    border-color: var(--border-hover);
+    padding-top: 1.15rem;
+    border-top: 1px solid var(--border);
   }
 
   .value-title {
@@ -165,9 +156,9 @@ const t = {
 
   .value-desc {
     font-family: var(--sans-font);
-    font-size: 0.87rem;
+    font-size: 0.9rem;
     color: var(--text-dim);
-    line-height: 1.65;
+    line-height: 1.6;
     margin: 0;
   }
 

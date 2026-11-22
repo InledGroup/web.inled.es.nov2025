@@ -45,12 +45,12 @@ const lang = getLangFromLocals(Astro.locals);
     max-width: 820px;
     padding: 0.95rem 1.1rem 0.95rem 1.4rem;
     border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    background: rgba(22, 22, 26, 0.86);
+    border: 1px solid var(--border);
+    background: rgba(255, 255, 255, 0.88);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     backdrop-filter: blur(24px) saturate(180%);
-    box-shadow: 0 24px 70px -18px rgba(0, 0, 0, 0.75);
-    color: #f5f5f7;
+    box-shadow: 0 24px 70px -18px rgba(0, 0, 0, 0.28);
+    color: var(--text);
     font-family: var(--sans-font);
     opacity: 0;
     transform: translate(-50%, calc(100% + 2rem));
@@ -74,14 +74,14 @@ const lang = getLangFromLocals(Astro.locals);
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: -0.02em;
-    color: #fff;
+    color: var(--text);
   }
 
   .join-banner-text {
     margin: 0;
     font-size: 0.83rem;
     line-height: 1.45;
-    color: rgba(255, 255, 255, 0.66);
+    color: var(--text-dim);
   }
 
   .join-banner-actions {
@@ -108,23 +108,23 @@ const lang = getLangFromLocals(Astro.locals);
   }
 
   .join-banner-btn--primary {
-    background: #5865f2;
-    border: 1px solid #5865f2;
+    background: var(--accent);
+    border: 1px solid var(--accent);
   }
 
   .join-banner-btn--primary:hover {
-    background: #4752c4;
-    border-color: #4752c4;
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
   }
 
   .join-banner-btn--ghost {
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.22);
+    background: rgba(118, 118, 128, 0.1);
+    border: 1px solid transparent;
+    color: var(--text);
   }
 
   .join-banner-btn--ghost:hover {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.38);
+    background: rgba(118, 118, 128, 0.16);
   }
 
   .join-banner-close {
@@ -138,14 +138,14 @@ const lang = getLangFromLocals(Astro.locals);
     border: none;
     border-radius: 50%;
     background: transparent;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--text-muted);
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease;
   }
 
   .join-banner-close:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background: rgba(118, 118, 128, 0.12);
+    color: var(--text);
   }
 
   @media (max-width: 720px) {

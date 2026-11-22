@@ -33,8 +33,8 @@ try {
 } catch {}
 
 const header = {
-  es: { title: 'Contribuidores', subtitle: 'Personas que hacen posible Inled' },
-  en: { title: 'Contributors', subtitle: 'People making Inled possible' },
+  es: { title: 'Reconociendo cada aportación', subtitle: 'Personas que han aportado su PR o tiempo a InledGroup' },
+  en: { title: 'Recognizing each contribution', subtitle: 'People who have contributed their PR or time to InledGroup' },
 }[lang];
 
 const pulsarLabel = {
@@ -107,16 +107,11 @@ const pulsarLabel = {
 
   .contributors-label {
     font-family: var(--sans-font);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    color: rgba(255, 255, 255, 0.3);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 0.9rem;
-  }
-
-  :global(html[data-theme="light"]) .contributors-label {
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
   }
 
   .contributors-title {
@@ -147,40 +142,28 @@ const pulsarLabel = {
 
   .group-title {
     font-family: var(--sans-font);
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: rgba(255, 255, 255, 0.35);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-muted);
     text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin: 0 0 1.25rem 0;
-  }
-
-  :global(html[data-theme="light"]) .group-title {
-    color: rgba(0, 0, 0, 0.45);
+    letter-spacing: 0.1em;
+    margin: 0 0 1rem 0;
   }
 
   .contributors-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    overflow: hidden;
+    gap: 0.5rem;
   }
 
   .contributors-grid-pulsar {
     display: flex;
     flex-wrap: wrap;
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    overflow: hidden;
+    gap: 0.5rem;
   }
 
   .contributors-grid-pulsar .contributor-card {
-    flex: 1 1 calc(33.333% - 1px);
+    flex: 1 1 calc(33.333% - 0.5rem);
     min-width: 200px;
   }
 
@@ -188,16 +171,13 @@ const pulsarLabel = {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.85rem 1.1rem;
-    background: var(--bg);
+    padding: 0.6rem 0;
     text-decoration: none;
-    color: var(--accent-dim);
-    transition: background 0.15s;
+    color: var(--text);
   }
 
-  .contributor-card:hover {
-    background: var(--surface);
-    color: #fff;
+  .contributor-card:hover .contributor-name {
+    color: var(--accent);
   }
 
   .contributor-avatar {
@@ -227,8 +207,8 @@ const pulsarLabel = {
 
   .contributor-commits {
     font-family: var(--sans-font);
-    font-size: 0.6rem;
-    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.65rem;
+    color: var(--text-muted);
   }
 
   .contributors-cta {
@@ -244,6 +224,6 @@ const pulsarLabel = {
   }
 
   .contributors-cta:hover {
-    color: #fff;
+    color: var(--accent);
   }
 </style>

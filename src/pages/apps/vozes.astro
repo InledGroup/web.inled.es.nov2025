@@ -1,7 +1,8 @@
 ---
-import { getLangFromLocals } from "../../i18n/utils";
+import { getLangFromLocals, useTranslatedPath } from "../../i18n/utils";
 
 const lang = getLangFromLocals(Astro.locals);
+const localize = useTranslatedPath(lang);
 
 const translations = {
     "es": {
@@ -134,7 +135,7 @@ const video = "https://hosted.inled.es/vozesdemo.mp4";
 <body>
     <nav class="navbar">
         <div class="container nav-content">
-            <a href="/" class="logo">
+            <a href={localize('/')} class="logo">
                 <img src={logo} alt="Vozes Logo">
                 <span>Vozes</span>
             </a>

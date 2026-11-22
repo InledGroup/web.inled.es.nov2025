@@ -3,11 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import { apps } from "../config/apps";
 import { saas } from "../config/saas";
-import { getLangFromLocals } from "../i18n/utils";
+import { getLangFromLocals, useTranslatedPath } from "../i18n/utils";
 
 export const prerender = false;
 
 const lang = getLangFromLocals(Astro.locals);
+const localize = useTranslatedPath(lang);
 
 const allProducts = [...saas, ...apps].filter(
   (product, index, list) => list.findIndex(p => p.id === product.id) === index
@@ -50,7 +51,7 @@ const copy = {
 
   <main class="archive-page">
     <div class="archive-inner">
-      <a href="/" class="archive-back">
+      <a href={localize('/')} class="archive-back">
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
         {copy.back}
       </a>
@@ -65,7 +66,7 @@ const copy = {
       <div class="archive-grid">
         {archived.map((product) => (
           <a
-            href={product.link}
+            href={localize(product.link)}
             class="archive-item"
             target={product.link.startsWith("http") ? "_blank" : undefined}
             rel={product.link.startsWith("http") ? "noopener noreferrer" : undefined}

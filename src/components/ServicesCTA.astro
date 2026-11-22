@@ -1,7 +1,8 @@
 ---
-import { getLangFromLocals } from '../i18n/utils';
+import { getLangFromLocals, useTranslatedPath } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
+const localize = useTranslatedPath(lang);
 
 const services = [
   { es: 'Páginas web profesionales', en: 'Professional websites' },
@@ -28,7 +29,7 @@ const services = [
       ))}
     </div>
 
-    <a href="/servicios" class="services-cta">
+    <a href={localize('/servicios')} class="services-cta">
       <span>{lang === 'es' ? 'Ver todos los servicios' : 'View all services'}</span>
       <span><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
     </a>

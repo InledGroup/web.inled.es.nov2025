@@ -79,12 +79,11 @@ const header = {
 
   .links-label {
     font-family: var(--sans-font);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    color: var(--text-muted);
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin-bottom: 0.9rem;
+    color: var(--accent);
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
   }
 
   .links-title {
@@ -108,50 +107,18 @@ const header = {
   .links-list {
     display: flex;
     flex-direction: column;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    overflow: hidden;
+    border-top: 1px solid var(--border);
   }
 
   .link-row {
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1.25rem 1.5rem;
+    padding: 1.2rem 0;
     border-bottom: 1px solid var(--border);
     text-decoration: none;
-    color: var(--accent-dim);
-    position: relative;
-    overflow: hidden;
+    color: var(--text);
     animation: linkIn 0.4s ease-out both;
-  }
-
-  .link-row::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: var(--fill);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 0;
-  }
-
-  .link-row:hover::before {
-    transform: scaleX(1);
-  }
-
-  .link-row:hover {
-    color: var(--fill-text);
-  }
-
-  .link-row > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .link-row:last-child {
-    border-bottom: none;
   }
 
   .link-index {
@@ -171,38 +138,33 @@ const header = {
 
   .link-title {
     font-family: var(--sans-font);
-    font-size: 0.98rem;
+    font-size: 1rem;
     font-weight: 600;
     letter-spacing: -0.01em;
     color: var(--text);
-    transition: color 0.2s;
+    transition: color 0.18s ease;
   }
 
   .link-row:hover .link-title {
-    color: var(--fill-text);
+    color: var(--accent);
   }
 
   .link-desc {
     font-family: var(--sans-font);
-    font-size: 0.8rem;
-    color: var(--text-muted);
+    font-size: 0.85rem;
+    color: var(--text-dim);
     line-height: 1.5;
-    transition: color 0.2s;
-  }
-
-  .link-row:hover .link-desc {
-    color: var(--fill-dim);
   }
 
   .link-arrow {
-    opacity: 0;
-    transform: translateX(-8px);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform 0.18s ease, color 0.18s ease;
   }
 
   .link-row:hover .link-arrow {
-    opacity: 1;
-    transform: translate(0, 0);
+    color: var(--accent);
+    transform: translate(2px, -2px);
   }
 
   @keyframes linkIn {

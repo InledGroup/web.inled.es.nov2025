@@ -7,7 +7,7 @@ import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/u
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
-const translatePath = useTranslatedPath();
+const translatePath = useTranslatedPath(lang);
 
 // Get priority helper
 const getPriority = (id: string) => {
@@ -85,7 +85,7 @@ const displayProducts = [...sortedProducts, ...sortedProducts, ...sortedProducts
         </div>
         <div class="card-overlay">
           <p class="product-description">{product.description[lang]}</p>
-          <a href={product.link} class="view-button">
+          <a href={translatePath(product.link)} class="view-button">
             {t('grid.explore')}
           </a>
         </div>

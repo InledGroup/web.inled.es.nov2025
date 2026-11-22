@@ -1,171 +1,387 @@
 ---
-import { getLangFromLocals } from '../i18n/utils';
+import { getLangFromLocals, useTranslatedPath } from '../i18n/utils';
 import { apps } from '../config/apps';
 import { saas } from '../config/saas';
 
 const lang = getLangFromLocals(Astro.locals);
+const localize = useTranslatedPath(lang);
+const t = (spanish: string, english: string) => (lang === 'es' ? spanish : english);
+
+type Slide =
+  | { type: 'video'; src: string; poster?: string; title?: string; desc?: string }
+  | { type: 'image'; src: string; title?: string; desc?: string }
+  | { type: 'placeholder'; title?: string; desc?: string };
+
+const bittenfruitVideo = (name: string) => ({
+  type: 'video' as const,
+  src: `https://bittenfruit.inled.es/videos/${name}.webm`,
+  poster: `https://bittenfruit.inled.es/videos/${name}.webp`,
+});
+
+const pulsarSlides: Slide[] = [
+  { ...bittenfruitVideo('touch-face-id'), title: 'Touch & Face ID', desc: 'Touch ID and Face ID, with protection against identity theft' },
+  { ...bittenfruitVideo('live-wallpaper'), title: 'Live Wallpapers', desc: 'Live wallpapers on the desktop and login screen. Lock screen support in progress.' },
+  { ...bittenfruitVideo('liquid-glass'), title: 'Liquid Glass', desc: 'A gorgeous, translucent material design that flows across the UI. Depth, light, and refinement in every surface. Made by our contributor Angelo, expert in UI' },
+  { ...bittenfruitVideo('notch'), title: 'Notch', desc: 'What you always wanted from the notch on your MacOS, and you had to install a thousand plugins, here it is all in one.' },
+  { ...bittenfruitVideo('circle-to-search'), title: 'Circle to Search', desc: 'Shake the cursor, circle anything on your screen and search it on Google, ask Sayri about it, or grab the text with OCR.' },
+  { ...bittenfruitVideo('firewall'), title: 'Pulsar Firewall', desc: "Pulsaros has UFW by default. The only firewall interfaze that's actually easy to configure. When an app tries to listen on a port, Pulsar asks you so you dont have to fight with firewall settings" },
+  { ...bittenfruitVideo('global-menu'), title: 'Real Global Menu', desc: 'No Linux distro has this on GNOME. A true global menu bar at the top of the screen, just like macOS, for every app.' },
+  { type: 'image' as const, src: 'https://hosted.inled.es/cdn/pulsar-vpn-static-pulsar-demos.png', title: 'Pulsar VPN', desc: 'Forget the headache of Wireguard: Pulsar OS comes with a simple interface for Tailscale, just log in and go' },
+  { ...bittenfruitVideo('pulsar-windows'), title: 'Pulsar Windows', desc: "Windows apps as native apps on desktop. Below, a real Windows consuming as little as possible. You don't need to activate Windows to use it." },
+  { ...bittenfruitVideo('encryption'), title: 'File vault (encryption)', desc: "Encrypt your drive and protect your data, so that if your computer is stolen, they don't steal the most important thing: its content." },
+  { ...bittenfruitVideo('spotlight'), title: 'The Best Spotlight', desc: 'Say goodbye to the shitty spotlight that Apple created for the latest macOS. This spotlight is smart and can do a lot more things than the macOS one.' },
+  { ...bittenfruitVideo('session-restore'), title: 'Session Restore', desc: 'Reboot or power on, and every app, window, and document reopens on its own. Pick up right where you left off. No Linux distro does this' },
+  { ...bittenfruitVideo('sayri'), title: 'Sayri AI Assistant', desc: 'The safe, less expensive and functional alternative to Openclaw! try it now' },
+  { ...bittenfruitVideo('window-mode'), title: 'Window Management', desc: 'Split view, Mission Control gestures, full screen on dynamic workspaces, and fluid window snapping built for power users.' },
+  { ...bittenfruitVideo('nautilus-providers'), title: 'Finder, Rebuilt', desc: 'The file manager you already know: Mac-style navigation, previews, tags, and Google Drive, Dropbox, OneDrive, Nextcloud and 50+ cloud providers right where your files live.' },
+  { ...bittenfruitVideo('app-store'), title: 'App Store', desc: 'Install any package (pkg, deb, aur, gnome extension, pulsar store), ask AI for security of an app and ask it what is the best app you need.' },
+  { ...bittenfruitVideo('time-machine'), title: 'Time Machine', desc: 'Copies of your whole system, stored wherever you like: a network server, one of the 50 cloud providers, or a USB stick. If your computer ever breaks, put everything back.' },
+  { ...bittenfruitVideo('recovery'), title: 'Recovery, Built In', desc: 'The only Linux distribution with an isolated recovery system, specifically designed for the most extreme cases, so you can recover your computer, your data and your system without losing files' },
+  { ...bittenfruitVideo('remap-live-wallpaper'), title: 'Keyboard Remap', desc: 'Are you more of a Mac universe or do you prefer to keep the Linux and Windows commands? No problem: change all shortcuts from Mac to Linux and vice versa.' },
+];
+
+// PLACEHOLDER: sustituye estos slides por tus textos y fotos de InSuite.
+const inSuiteSlides: Slide[] = [
+  { type: 'image' as const, src: 'https://hosted.inled.es/cdn/word-demo-insuite.png', title: 'Full featured Word', desc: 'Edit, open and create word documents with 100% compatibility' },
+  { type: 'image' as const, src: 'https://hosted.inled.es/cdn/powerpoint-demo-insuite.png', title: 'Your known features of PowerPoint', desc: 'Create the best presentations of powerpoint' },
+  { type: 'image' as const, src: 'https://hosted.inled.es/cdn/excel-demo-insuite.png', title: 'EXCELlent', desc: 'Your spreadsheets, here' },
+  { type: 'image' as const, src: 'https://hosted.inled.es/cdn/forms-demo-insuite.png', title: 'Private Forms', desc: 'Not like others !' },
+  { type: 'image' as const, src: 'https://hosted.inled.es/cdn/mymetadata-demo-insuite.png', title: 'Remove and edit metadata and ai marks', desc: 'Without uploading the file to the cloud' },
+  { type: 'image' as const, src: 'https://hosted.inled.es/cdn/mypdf-demo-insuite.png', title: 'Your full PDF suite', desc: 'Dont use ilovepdf!' },
+];
+
+const seafariSlides: Slide[] = [
+  {
+    type: 'video' as const,
+    src: 'https://hosted.inled.es/cdn/seafari-user-agent-demo.mp4',
+    title: t('User agent personalizado', 'Custom user agent'),
+    desc: t(
+      'Elige cómo se presenta Seafari en cada web y accede a las versiones que necesites.',
+      'Choose how Seafari identifies itself on every site and access the versions you need.'
+    ),
+  },
+    { type: 'image' as const, src: 'https://hosted.inled.es/cdn/seafari-v3-demo.png', title: 'New V3 with lots of improvements!', desc: 'Download it!' },
+
+];
+
+const features = [
+  {
+    id: 'pulsar-os',
+    name: 'Pulsar OS',
+    logo: 'https://hosted.inled.es/cdn/pulsar-logo-simple-sf.png',
+    href: 'https://os.inled.es',
+    cta: t('Probar Pulsar OS', 'Try Pulsar OS'),
+    desc: t(
+      'La distribución Linux que reemplaza a Mac y reemplazará a Windows y Android TV.',
+      'The Linux distribution that replaces Mac and will replace Windows and Android TV.'
+    ),
+    tone: 'os',
+    slides: pulsarSlides,
+  },
+  {
+    id: 'office',
+    name: 'InSuite',
+    logo: 'https://hosted.inled.es/cdn/insuite.svg',
+    href: 'https://insuite.inled.es',
+    cta: t('Abrir InSuite', 'Open InSuite'),
+    desc: t(
+      'El Office privado y 100% compatible además de sus editores tipo ilovepdf o el borrador de metadatos privado y offline..',
+      'The private and 100% compatible Office in addition to its ilovepdf type editors or the private and offline metadata eraser.'
+    ),
+    tone: 'suite',
+    slides: inSuiteSlides,
+  },
+  {
+    id: 'seafari',
+    name: 'Seafari',
+    logo: 'https://hosted.inled.es/seafari.png',
+    href: '/apps/seafari',
+    cta: t('Descubrir Seafari', 'Discover Seafari'),
+    desc: t(
+      'La experiencia de Safari en Linux, ya estable: cambia cómo te ven las webs y personaliza el navegador con live wallpapers.',
+      'The Safari experience on Linux, now stable: switch how websites see you and make the browser yours with live wallpapers.'
+    ),
+    tone: 'browser',
+    slides: seafariSlides,
+  },
+];
 
 const allProducts = [...saas, ...apps].filter(
   (product, index, list) => list.findIndex(p => p.id === product.id) === index
 );
 
-function findProduct(id: string) {
-  return allProducts.find(p => p.id === id && !p.archive);
-}
+// Los tres proyectos principales tienen su propia sección; el resto se lista debajo.
+const FEATURED = ['pulsar-os', 'office', 'seafari'];
+const HIDDEN = ['mypdf', 'mymetadata', 'droidtux', 'tabnest', 'mdpedia'];
 
-interface HeadlineProduct {
-  id: string;
-  repo: string;
-  video?: string;
-}
-
-const headlineProducts: HeadlineProduct[] = [
-  {
-    id: 'office',
-    repo: 'https://github.com/InledGroup/office',
-  },
-  {
-    id: 'seafari',
-    repo: 'https://github.com/InledGroup/seafari',
-  },
-  {
-    id: 'codexbar-gnome',
-    repo: 'https://github.com/InledGroup/codexbar-gnome',
-  },
+const ORDER = [
+  'iccount',
+  'codexbar-gnome',
+  'discord-translate',
+  'appinstall',
+  'ai-exporter',
 ];
 
-const PULSAR_VIDEO = 'https://hosted.inled.es/cdn/pulsar-pc-cool.mp4';
-
-const pulsar = findProduct('pulsar-os');
-
-const featured = headlineProducts
-  .map(item => {
-    const product = findProduct(item.id);
-    if (!product) return null;
-    return {
-      id: product.id,
-      name: product.name,
-      description: product.description[lang],
-      icon: product.icon,
-      link: product.link,
-      repo: item.repo,
-    };
-  })
-  .filter((p): p is NonNullable<typeof p> => p !== null);
-
-const featuredIds = ['pulsar-os', ...headlineProducts.map(p => p.id)];
-
-const otherProducts = allProducts
-  .filter(p => !p.archive && !featuredIds.includes(p.id))
-  .map(p => ({
-    id: p.id,
-    name: p.name,
-    description: p.description[lang],
-    icon: p.icon,
-    link: p.link,
-  }));
-
-const githubIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.012c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.53 2.341 1.088 2.91.832.091-.646.35-1.088.636-1.339-2.221-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.338 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.847-2.337 4.695-4.566 4.944.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.749 0 .268.18.579.688.481C19.138 20.174 22 16.426 22 12.012 22 6.484 17.523 2 12 2z"/></svg>`;
+const products = allProducts
+  .filter(product => !product.archive && !FEATURED.includes(product.id) && !HIDDEN.includes(product.id))
+  .sort((a, b) => {
+    const ai = ORDER.indexOf(a.id);
+    const bi = ORDER.indexOf(b.id);
+    return (ai === -1 ? ORDER.length : ai) - (bi === -1 ? ORDER.length : bi);
+  });
 ---
 
 <section class="projects-section" id="projects">
   <div class="projects-container">
-    <div class="section-head">
-      <p class="section-eyebrow">{lang === 'es' ? 'Productos' : 'Products'}</p>
-      <h2 class="section-title">{lang === 'es' ? 'Todo lo que construimos' : 'Everything we build'}</h2>
+    <header class="section-head">
+      <h2 class="section-title">{t('Diseñado para tí, para tu comodidad y privacidad', 'Designed for you, for your comfort and privacy')}</h2>
       <p class="section-subtitle">
-        {lang === 'es'
-          ? 'Software libre, privado y hecho para durar. Cada proyecto, abierto de extremo a extremo.'
-          : 'Free, private software built to last. Every project, open end to end.'}
+        {t(
+          'Descubre las mejores alternativas privadas, gratuitas y diseñadas para tí .',
+          'Discover the best private, free alternatives designed for you'
+        )}
       </p>
-    </div>
+    </header>
 
-    {pulsar && (
-      <article class="hero-product">
-        <div class="hero-product-copy">
-          <img src={pulsar.icon} alt={pulsar.name} class="hero-product-logo" loading="lazy" />
-          <h3 class="hero-product-name">{pulsar.name}</h3>
-          <p class="hero-product-desc">{pulsar.description[lang]}</p>
-          <div class="card-actions">
-            <a href={pulsar.link} class="btn btn--primary" target="_blank" rel="noopener noreferrer">
-              {lang === 'es' ? 'Descubrir' : 'Discover'}
-            </a>
-            <a href="https://github.com/Inled-Pulsar-OS/ISO" class="btn btn--ghost" target="_blank" rel="noopener noreferrer">
-              <span set:html={githubIcon}></span>
-              Repo
-            </a>
-          </div>
-        </div>
-
-        <a href={pulsar.link} class="hero-product-media" target="_blank" rel="noopener noreferrer" tabindex="-1" aria-hidden="true">
-          <video
-            class="hero-product-video"
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            disablepictureinpicture
-          >
-            <source src={PULSAR_VIDEO} type="video/mp4" />
-          </video>
-        </a>
-      </article>
-    )}
-
-    <div class="featured-grid">
-      {featured.map((product) => (
-        <article class="product-card">
-          <div class="product-card-top">
-            <img src={product.icon} alt={product.name} class="product-logo" loading="lazy" />
-          </div>
-          <h3 class="product-name">{product.name}</h3>
-          <p class="product-desc">{product.description}</p>
-          <div class="card-actions">
-            <a href={product.link} class="btn btn--primary" target={product.link.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
-              {lang === 'es' ? 'Descubrir' : 'Discover'}
-            </a>
-            <a href={product.repo} class="btn btn--ghost" target="_blank" rel="noopener noreferrer" aria-label={`${product.name} repo`}>
-              <span set:html={githubIcon}></span>
-              Repo
-            </a>
-          </div>
-        </article>
-      ))}
-    </div>
-
-    {otherProducts.length > 0 && (
-      <div class="others">
-        <h3 class="others-title">{lang === 'es' ? 'Más proyectos' : 'More projects'}</h3>
-        <div class="others-grid">
-          {otherProducts.map((product) => (
-            <a href={product.link} class="other-card" target={product.link.startsWith('http') ? '_blank' : undefined} rel="noopener noreferrer">
-              <img src={product.icon} alt="" class="other-logo" loading="lazy" />
-              <span class="other-body">
-                <span class="other-name">{product.name}</span>
-                <span class="other-desc">{product.description}</span>
+    <div class="features">
+      {features.map((feature) => {
+        const external = feature.href.startsWith('http');
+        return (
+          <article class={`feature feature--${feature.tone}`}>
+            <div class="feature-copy">
+              <span class="feature-brand">
+                <img src={feature.logo} alt="" loading="lazy" />
+                <span>{feature.name}</span>
               </span>
-              <svg class="other-arrow" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-            </a>
-          ))}
-        </div>
-      </div>
-    )}
+              <p class="feature-desc">{feature.desc}</p>
+              <a
+                class="btn btn--primary"
+                href={localize(feature.href)}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
+              >
+                {feature.cta}
+              </a>
+            </div>
 
-    <div class="archived-cta">
-      <a href="/archivados" class="btn btn--ghost">
-        {lang === 'es' ? 'Ver proyectos archivados' : 'View archived projects'}
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
+            <div
+              class="carousel"
+              data-carousel
+              data-label-prev={t('Anterior', 'Previous')}
+              data-label-next={t('Siguiente', 'Next')}
+              aria-roledescription="carousel"
+            >
+              <div class="carousel-viewport">
+                <div class="carousel-track" data-track>
+                {feature.slides.map((slide, index) => (
+                  <figure
+                    class:list={['carousel-slide', index === 0 && 'is-active', slide.title && 'has-caption']}
+                    data-slide
+                    aria-hidden={index === 0 ? 'false' : 'true'}
+                  >
+                    <span class="slide-media">
+                      {slide.type === 'video' && (
+                        <video
+                          src={slide.src}
+                          poster={slide.poster}
+                          muted
+                          loop
+                          playsinline
+                          preload="none"
+                          aria-label={slide.title ?? feature.name}
+                          data-slide-video
+                        ></video>
+                      )}
+                      {slide.type === 'image' && (
+                        <img src={slide.src} alt={slide.title ?? feature.name} loading="lazy" />
+                      )}
+                      {slide.type === 'placeholder' && (
+                        <span class="slide-placeholder">
+                          <img src={feature.logo} alt="" loading="lazy" />
+                        </span>
+                      )}
+                    </span>
+
+                    {slide.title && <span class="slide-shade" aria-hidden="true"></span>}
+
+                    {slide.title && (
+                      <figcaption class="slide-caption">
+                        <span class="slide-title">{slide.title}</span>
+                        {slide.desc && <span class="slide-desc">{slide.desc}</span>}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
+                </div>
+              </div>
+
+              {feature.slides.length > 1 && (
+                <div class="carousel-controls">
+                  <button class="carousel-arrow" type="button" data-prev aria-label={t('Anterior', 'Previous')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+                  </button>
+                  <span class="carousel-count" data-count>1 / {feature.slides.length}</span>
+                  <button class="carousel-arrow" type="button" data-next aria-label={t('Siguiente', 'Next')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+                  </button>
+                </div>
+              )}
+            </div>
+          </article>
+        );
+      })}
     </div>
+
+    <div class="more">
+      <h3 class="more-title">{t('Más del ecosistema', 'More from the ecosystem')}</h3>
+
+      <div class="product-list">
+        {products.map((product) => {
+          const external = product.link.startsWith('http');
+          return (
+            <a
+              class="product-row"
+              href={localize(product.link)}
+              target={external ? '_blank' : undefined}
+              rel={external ? 'noopener noreferrer' : undefined}
+            >
+              <img class="product-icon" src={product.icon} alt="" loading="lazy" />
+              <span class="product-copy">
+                <span class="product-name">{product.name}</span>
+                <span class="product-desc">{product.description[lang]}</span>
+              </span>
+              <span class="product-link">
+                {t('Más información', 'Learn more')}
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+              </span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+
+    <a class="archived-link" href={localize('/archivados')}>
+      {t('Ver proyectos archivados', 'See archived projects')} →
+    </a>
+
+    <section class="brand-strategy">
+      <div class="brand-strategy-copy">
+        <h3 class="brand-strategy-title">
+          {t('Estrategia de marca', 'Brand strategy')}
+        </h3>
+        <p class="brand-strategy-desc">
+          {t(
+            'Cómo organizamos la identidad y los proyectos de Inled.',
+            'How we organize Inled’s identity and projects.'
+          )}
+        </p>
+      </div>
+      <a class="brand-strategy-link" href={localize('/brand-strategy')}>
+        {t('Leer más', 'Learn more')}
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+      </a>
+    </section>
   </div>
 </section>
 
+<script>
+  function initCarousels() {
+    const root = document.querySelectorAll<HTMLElement>('[data-carousel]');
+
+    root.forEach((carousel) => {
+      if (carousel.dataset.initialized === 'true') return;
+      carousel.dataset.initialized = 'true';
+
+      const slides = Array.from(carousel.querySelectorAll<HTMLElement>('[data-slide]'));
+      const track = carousel.querySelector<HTMLElement>('[data-track]');
+      const count = carousel.querySelector<HTMLElement>('[data-count]');
+      const prev = carousel.querySelector<HTMLButtonElement>('[data-prev]');
+      const next = carousel.querySelector<HTMLButtonElement>('[data-next]');
+      if (slides.length < 2) return;
+
+      let index = 0;
+      let timer: number | undefined;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const playActiveVideo = () => {
+        slides.forEach((slide, i) => {
+          const video = slide.querySelector<HTMLVideoElement>('video');
+          if (!video) return;
+          if (i === index) video.play().catch(() => {});
+          else video.pause();
+        });
+      };
+
+      const updateTransform = () => {
+        if (!track || !slides[index]) return;
+        const offset = slides[index].offsetLeft - slides[0].offsetLeft;
+        track.style.transform = `translateX(-${offset}px)`;
+      };
+
+      const go = (target: number) => {
+        index = (target + slides.length) % slides.length;
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('is-active', i === index);
+          slide.setAttribute('aria-hidden', i === index ? 'false' : 'true');
+        });
+        if (count) count.textContent = `${index + 1} / ${slides.length}`;
+        updateTransform();
+        playActiveVideo();
+      };
+
+      const stop = () => window.clearInterval(timer);
+      const start = () => {
+        if (reducedMotion) return;
+        stop();
+        timer = window.setInterval(() => go(index + 1), 7000);
+      };
+
+      prev?.addEventListener('click', () => { go(index - 1); start(); });
+      next?.addEventListener('click', () => { go(index + 1); start(); });
+
+      carousel.addEventListener('mouseenter', stop);
+      carousel.addEventListener('mouseleave', start);
+      carousel.addEventListener('focusin', stop);
+      carousel.addEventListener('focusout', start);
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            playActiveVideo();
+            start();
+          } else {
+            stop();
+            slides.forEach((slide) => slide.querySelector<HTMLVideoElement>('video')?.pause());
+          }
+        });
+      }, { threshold: 0.25 });
+
+      observer.observe(carousel);
+
+      let resizeTimer: number | undefined;
+      window.addEventListener('resize', () => {
+        window.clearTimeout(resizeTimer);
+        resizeTimer = window.setTimeout(updateTransform, 120);
+      });
+
+      go(0);
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCarousels);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initCarousels();
+  } else {
+    document.addEventListener('DOMContentLoaded', initCarousels);
+  }
+</script>
+
 <style>
   .projects-section {
-    width: 100%;
+    position: relative;
+    padding: 5rem 1.5rem 6rem;
     background: var(--bg);
-    padding: 7rem 1.5rem 6rem;
+    border-top: 1px solid var(--border);
   }
 
   .projects-container {
@@ -174,335 +390,526 @@ const githubIcon = `<svg width="14" height="14" viewBox="0 0 24 24" fill="curren
   }
 
   .section-head {
-    max-width: 720px;
-    margin-bottom: 3rem;
+    max-width: 680px;
+    margin-bottom: 1.5rem;
   }
 
   .section-eyebrow {
-    font-family: var(--sans-font);
-    font-size: 0.72rem;
+    margin: 0 0 0.75rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin: 0 0 0.9rem;
+    letter-spacing: 0.02em;
+    color: var(--accent);
   }
 
   .section-title {
-    font-family: var(--sans-font);
-    font-size: clamp(2rem, 4.5vw, 3.2rem);
+    margin: 0;
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
     font-weight: 700;
-    letter-spacing: -0.035em;
     line-height: 1.08;
+    letter-spacing: -0.035em;
     color: var(--text);
-    margin: 0 0 0.9rem;
   }
 
   .section-subtitle {
-    font-family: var(--sans-font);
-    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    margin: 1rem 0 0;
+    font-size: 1.05rem;
     line-height: 1.55;
     color: var(--text-dim);
-    margin: 0;
+    text-wrap: pretty;
   }
 
-  /* ---- Pulsar OS destacado ---- */
-  .hero-product {
+  /* ---- Secciones principales ---- */
+  .feature {
     display: grid;
-    grid-template-columns: 0.85fr 1.15fr;
+    grid-template-columns: 0.8fr 1.2fr;
     align-items: center;
-    gap: 3rem;
-    padding: 3rem;
-    border-radius: 30px;
-    border: 1px solid var(--border);
-    background:
-      radial-gradient(circle at 15% 0%, rgba(80, 110, 255, 0.14), transparent 55%),
-      var(--card);
-    margin-bottom: 1.25rem;
-    overflow: hidden;
+    gap: 3.5rem;
+    padding: 4rem 0;
+    border-top: 1px solid var(--border);
   }
 
-  .hero-product-copy {
+  .feature:first-child {
+    border-top: none;
+  }
+
+  .feature:nth-child(even) {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+
+  .feature:nth-child(even) .feature-copy {
+    order: 2;
+  }
+
+  .feature-copy {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
   }
 
-  .hero-product-logo {
-    width: 64px;
-    height: 64px;
-    object-fit: contain;
-    margin-bottom: 1.25rem;
-  }
-
-  .hero-product-name {
+  .feature-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
     font-family: var(--sans-font);
-    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-    font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1.05;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
     color: var(--text);
-    margin: 0 0 0.85rem;
   }
 
-  .hero-product-desc {
-    font-family: var(--sans-font);
-    font-size: clamp(0.92rem, 1.4vw, 1.02rem);
-    line-height: 1.6;
-    color: var(--text-dim);
-    margin: 0 0 1.75rem;
-    max-width: 40ch;
-  }
-
-  .hero-product-media {
-    display: block;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    background: #050507;
-    box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.8);
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s ease;
-  }
-
-  .hero-product-media:hover {
-    transform: translateY(-3px);
-    border-color: var(--border-hover);
-  }
-
-  .hero-product-video {
-    display: block;
-    width: 100%;
-    aspect-ratio: 882 / 462;
-    object-fit: cover;
-    background: #050507;
-  }
-
-  /* ---- Grid de productos principales ---- */
-  .featured-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem;
-  }
-
-  .product-card {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    border-radius: 26px;
-    border: 1px solid var(--border);
-    background: var(--card);
-    transition: background 0.25s ease, border-color 0.25s ease, transform 0.3s ease;
-  }
-
-  .product-card:hover {
-    background: var(--card-hover);
-    border-color: var(--border-hover);
-    transform: translateY(-3px);
-  }
-
-  .product-card-top {
-    margin-bottom: 1.35rem;
-  }
-
-  .product-logo {
-    width: 48px;
-    height: 48px;
+  .feature-brand img {
+    width: 34px;
+    height: 34px;
     object-fit: contain;
   }
 
-  .product-name {
+  .feature-desc {
+    margin: 1rem 0 1.75rem;
     font-family: var(--sans-font);
-    font-size: 1.35rem;
-    font-weight: 700;
-    letter-spacing: -0.025em;
-    line-height: 1.15;
-    color: var(--text);
-    margin: 0 0 0.6rem;
-  }
-
-  .product-desc {
-    font-family: var(--sans-font);
-    font-size: 0.86rem;
-    line-height: 1.6;
+    font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+    line-height: 1.45;
+    letter-spacing: -0.015em;
     color: var(--text-dim);
-    margin: 0 0 1.6rem;
-    flex: 1;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  .card-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    max-width: 44ch;
+    text-wrap: pretty;
   }
 
   .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.4rem;
-    font-family: var(--sans-font);
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: -0.005em;
-    line-height: 1;
-    padding: 0.65rem 1.05rem;
+    gap: 0.45rem;
+    min-height: 44px;
+    padding: 0 1.4rem;
     border-radius: 980px;
+    font-family: var(--sans-font);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     text-decoration: none;
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    white-space: nowrap;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .btn:active {
+    transform: scale(0.975);
   }
 
   .btn--primary {
-    background: #0071e3;
-    border: 1px solid #0071e3;
+    background: var(--accent);
     color: #fff;
   }
 
   .btn--primary:hover {
-    background: #0077ed;
-    border-color: #0077ed;
+    background: var(--accent-hover);
   }
 
-  .btn--ghost {
-    background: transparent;
-    border: 1px solid var(--border-hover);
-    color: var(--text);
+  /* ---- Carrusel ---- */
+  .carousel {
+    width: 100%;
+    min-width: 0;
   }
 
-  .btn--ghost:hover {
-    background: var(--surface-hover);
+  .carousel-viewport {
+    overflow: hidden;
+    /* Suaviza el corte de la diapositiva que asoma a la derecha */
+    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 84%, transparent 100%);
+    mask-image: linear-gradient(90deg, #000 0%, #000 84%, transparent 100%);
   }
 
-  /* ---- Otros proyectos ---- */
-  .others {
-    margin-top: 4rem;
-    padding-top: 3rem;
-    border-top: 1px solid var(--border);
+  .carousel-track {
+    display: flex;
+    gap: 1rem;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
   }
 
-  .others-title {
+  .carousel-slide {
+    position: relative;
+    flex: 0 0 86%;
+    aspect-ratio: 16 / 9;
+    margin: 0;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #0b0b0f;
+    opacity: 0.4;
+    transition: opacity 0.45s ease;
+  }
+
+  .carousel-slide.is-active {
+    opacity: 1;
+  }
+
+  .slide-media {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .slide-media video,
+  .slide-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .slide-shade {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.62) 0%, rgba(0, 0, 0, 0.32) 40%, rgba(0, 0, 0, 0.04) 72%),
+      rgba(0, 0, 0, 0.14);
+    pointer-events: none;
+  }
+
+  .slide-caption {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1.4rem 1.5rem;
+    text-align: left;
+    margin: 0;
+  }
+
+  .slide-title {
     font-family: var(--sans-font);
-    font-size: 0.72rem;
+    font-size: 1.05rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin: 0 0 1.5rem;
+    letter-spacing: -0.015em;
+    color: #fff;
   }
 
-  .others-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 20px;
+  .slide-desc {
+    font-family: var(--sans-font);
+    font-size: 0.84rem;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 48ch;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
   }
 
-  .other-card {
+  .slide-placeholder {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #f8f8fa, #e9e9ef);
+  }
+
+  .feature--os .slide-placeholder {
+    background: linear-gradient(145deg, #eef3ff, #dfe7fb);
+  }
+
+  .feature--suite .slide-placeholder {
+    background: linear-gradient(145deg, #eefaf4, #dcefe6);
+  }
+
+  .feature--browser .slide-placeholder {
+    background: linear-gradient(145deg, #fff2ec, #f6e2d8);
+  }
+
+  .slide-media .slide-placeholder img {
+    width: 26%;
+    max-width: 120px;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.85;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     gap: 0.9rem;
-    padding: 1.15rem 1.25rem;
-    background: var(--bg);
-    text-decoration: none;
-    transition: background 0.2s ease;
+    margin-top: 1rem;
   }
 
-  .other-card:hover {
-    background: var(--surface);
-  }
-
-  .other-logo {
+  .carousel-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     width: 30px;
     height: 30px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: color 0.18s ease;
+  }
+
+  .carousel-arrow:hover {
+    color: var(--accent);
+  }
+
+  .carousel-arrow:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .carousel-count {
+    font-family: var(--sans-font);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    min-width: 3.5rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- Resto del ecosistema ---- */
+  .more {
+    margin-top: 2rem;
+  }
+
+  .more-title {
+    font-family: var(--sans-font);
+    font-size: 1.35rem;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    color: var(--text);
+    margin: 0 0 0.5rem;
+  }
+
+  .product-list {
+    border-top: 1px solid var(--border);
+  }
+
+  .product-row {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.35rem 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+  }
+
+  .product-icon {
+    width: 44px;
+    height: 44px;
     object-fit: contain;
     flex-shrink: 0;
   }
 
-  .other-body {
+  .product-copy {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: 0.22rem;
     min-width: 0;
-    flex: 1;
   }
 
-  .other-name {
-    font-family: var(--sans-font);
-    font-size: 0.88rem;
+  .product-name {
+    font-size: 1.05rem;
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.015em;
+    color: var(--text);
+    transition: color 0.18s ease;
+  }
+
+  .product-desc {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-dim);
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .product-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .product-link svg {
+    transition: transform 0.18s ease;
+  }
+
+  .product-row:hover .product-name {
+    color: var(--accent);
+  }
+
+  .product-row:hover .product-link svg {
+    transform: translate(2px, -2px);
+  }
+
+  .product-row:focus-visible,
+  .archived-link:focus-visible,
+  .brand-strategy-link:focus-visible,
+  .feature .btn:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  .archived-link {
+    display: inline-block;
+    margin-top: 1.75rem;
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    text-decoration: none;
+  }
+
+  .archived-link:hover {
+    color: var(--accent);
+  }
+
+  .brand-strategy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: 3rem;
+    padding: 1.75rem 0 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .brand-strategy-title {
+    margin: 0 0 0.35rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
     color: var(--text);
   }
 
-  .other-desc {
-    font-family: var(--sans-font);
-    font-size: 0.72rem;
-    line-height: 1.45;
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  .brand-strategy-desc {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--text-dim);
   }
 
-  .other-arrow {
-    color: var(--text-muted);
+  .brand-strategy-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     flex-shrink: 0;
-    opacity: 0;
-    transform: translate(-3px, 3px);
-    transition: all 0.2s ease;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
   }
 
-  .other-card:hover .other-arrow {
-    opacity: 1;
-    transform: translate(0, 0);
+  .brand-strategy-link svg {
+    transition: transform 0.18s ease;
   }
 
-  .archived-cta {
-    display: flex;
-    justify-content: center;
-    margin-top: 3rem;
+  .brand-strategy-link:hover svg {
+    transform: translate(2px, -2px);
   }
 
-  @media (max-width: 1024px) {
-    .hero-product {
+  @media (max-width: 820px) {
+    .feature,
+    .feature:nth-child(even) {
       grid-template-columns: 1fr;
       gap: 2rem;
-      padding: 2.25rem;
+      padding: 3rem 0;
     }
 
-    .featured-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .feature:nth-child(even) .feature-copy {
+      order: 0;
+    }
+
+    .feature-copy {
+      align-items: center;
+      text-align: center;
+    }
+
+    .feature-desc {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .carousel-slide {
+      flex-basis: 88%;
+      border-radius: 18px;
+    }
+
+    .carousel-viewport {
+      -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 86%, transparent 100%);
+      mask-image: linear-gradient(90deg, #000 0%, #000 86%, transparent 100%);
+    }
+
+    .slide-caption {
+      padding: 1.1rem 1.15rem;
+    }
+
+    .slide-title {
+      font-size: 0.98rem;
+    }
+
+    .slide-desc {
+      font-size: 0.8rem;
     }
   }
 
-  @media (max-width: 700px) {
+  @media (max-width: 560px) {
+    .carousel-slide {
+      flex-basis: 92%;
+    }
+
+    .carousel-viewport {
+      -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 90%, transparent 100%);
+      mask-image: linear-gradient(90deg, #000 0%, #000 90%, transparent 100%);
+    }
+
+    .slide-media .slide-placeholder img {
+      width: 36%;
+    }
+  }
+
+  @media (max-width: 720px) {
     .projects-section {
-      padding: 4.5rem 1rem 4rem;
+      padding: 4rem 1rem 4.5rem;
     }
 
-    .hero-product {
-      padding: 1.75rem;
-      border-radius: 24px;
+    .product-row {
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 1rem;
+      padding: 1.2rem 0;
     }
 
-    .featured-grid {
-      grid-template-columns: 1fr;
+    .product-icon {
+      width: 38px;
+      height: 38px;
     }
 
-    .product-card {
-      padding: 1.75rem;
-      border-radius: 22px;
+    .product-link {
+      grid-column: 2;
+      font-size: 0.8125rem;
     }
 
-    .others-grid {
-      grid-template-columns: 1fr;
+    .product-desc {
+      -webkit-line-clamp: 3;
+    }
+
+    .brand-strategy {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carousel-track {
+      transition: none;
     }
   }
 </style>

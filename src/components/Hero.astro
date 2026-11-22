@@ -1,49 +1,92 @@
 ---
-import { getLangFromLocals, useTranslations } from '../i18n/utils';
+import { getLangFromLocals, useTranslatedPath } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
-const t = useTranslations(lang);
+const localize = useTranslatedPath(lang);
 
-const HERO_VIDEO = 'https://hosted.inled.es/cdn/demo-inled.mp4';
+const projects = [
+  {
+    name: 'Pulsar OS',
+    logo: 'https://hosted.inled.es/cdn/pulsar-logo-simple-sf.png',
+    href: 'https://os.inled.es',
+  },
+  {
+    name: 'InSuite',
+    logo: 'https://hosted.inled.es/cdn/insuite.svg',
+    href: 'https://insuite.inled.es',
+  },
+  {
+    name: 'Seafari',
+    logo: 'https://hosted.inled.es/seafari.png',
+    href: '/apps/seafari',
+  },
+  {
+    name: 'iccount',
+    logo: 'https://hosted.inled.es/cdn/inled-ring-v2-logo.png',
+    href: 'https://iccount.inled.es',
+  },
+];
+
+const copy = {
+  es: {
+    motto: 'Dream, Build.',
+    title: 'El ecosistema privado, gratuito y hecho por la comunidad.',
+    subtitle:
+      'Descubre todo nuestro software diseñado pensando en tus necesidades. Todo el software de Inled, incluida la infra, es libre. Únete también a nuestra comunidad, que desarrolla Pulsar OS',
+    primary: 'Únete en Discord',
+    secondary: 'Chat en Telegram',
+    donate: 'Ayudanos',
+    projectsLabel: 'Esto es solo parte del ecosistema:',
+  },
+  en: {
+    motto: 'Dream, Build.',
+    title: 'The private, free ecosystem built by the community.',
+    subtitle:
+      'Discover all our software designed with your needs in mind. All Inled software, including the infra, is free. Also join our community, which develops Pulsar OS.',
+    primary: 'Join Discord',
+    secondary: 'Chat on Telegram',
+    donate: 'Help us',
+    projectsLabel: 'This is part of our ecosystem:0',
+  },
+}[lang];
 ---
 
 <section class="hero" id="hero">
-  <video
-    class="hero-bg-video"
-    autoplay
-    muted
-    loop
-    playsinline
-    preload="auto"
-    disablepictureinpicture
-    aria-hidden="true"
-    tabindex="-1"
-  >
-    <source src={HERO_VIDEO} type="video/mp4" />
-  </video>
-
-  <div class="hero-overlay" aria-hidden="true"></div>
-  <div class="hero-fade" aria-hidden="true"></div>
-
   <div class="hero-content">
-    <p class="hero-eyebrow">Inled Group</p>
+    <p class="hero-motto">{copy.motto}</p>
 
-    <h1 class="hero-title">
-      <span class="hero-title-main">Dream,</span>
-      <span class="hero-title-soft">Build.</span>
-    </h1>
+    <h1 class="hero-title">{copy.title}</h1>
 
-    <p class="hero-subtitle">{t('hero.subtitle')}</p>
+    <p class="hero-subtitle">{copy.subtitle}</p>
 
     <div class="hero-actions">
-      <a href="https://link.inled.es/discord" class="pill pill--primary" target="_blank" rel="noopener noreferrer">
-        <i class="fa-brands fa-discord" aria-hidden="true"></i>
-        {t('hero.btnDiscord')}
-      </a>
-      <a href="https://link.inled.es/telegram" class="pill pill--ghost" target="_blank" rel="noopener noreferrer">
+      <a href="https://link.inled.es/discord" class="btn btn--primary"><i class="fa-brands fa-discord" aria-hidden="true"></i>{copy.primary}</a>
+      <a href="https://link.inled.es/telegram" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">
         <i class="fa-brands fa-telegram" aria-hidden="true"></i>
-        {t('hero.btnTelegram')}
+        {copy.secondary}
       </a>
+     <!--  <a href="https://donate.inled.es" class="btn btn--secondary">
+        <i class="fa-solid fa-heart" aria-hidden="true"></i>
+        {copy.donate}
+      </a> -->
+    </div>
+
+    <div class="hero-projects">
+      <p class="hero-projects-label">{copy.projectsLabel}</p>
+      <div class="hero-logos">
+        {projects.map((project) => (
+          <a
+            class="hero-logo"
+            href={localize(project.href)}
+            target={project.href.startsWith('http') ? '_blank' : undefined}
+            rel={project.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+            title={project.name}
+          >
+            <img src={project.logo} alt={project.name} loading="lazy" />
+            <span>{project.name}</span>
+          </a>
+        ))}
+      </div>
     </div>
   </div>
 </section>
@@ -52,54 +95,20 @@ const HERO_VIDEO = 'https://hosted.inled.es/cdn/demo-inled.mp4';
   .hero {
     position: relative;
     width: 100%;
-    min-height: 94svh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 170px 1.5rem 9rem;
-    background: #050507;
-    color: #fff;
+    padding: 170px 1.5rem 7rem;
+    background: var(--bg);
+    color: var(--text);
     overflow: hidden;
-    isolation: isolate;
-  }
-
-  .hero-bg-video {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    pointer-events: none;
-  }
-
-  .hero-overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    background:
-      radial-gradient(ellipse at 50% 45%, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.55) 72%),
-      linear-gradient(180deg, rgba(3, 3, 6, 0.72) 0%, rgba(3, 3, 6, 0.42) 40%, rgba(3, 3, 6, 0.82) 100%);
-    pointer-events: none;
-  }
-
-  .hero-fade {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    height: 28%;
-    min-height: 120px;
-    background: linear-gradient(to bottom, transparent, var(--bg));
-    pointer-events: none;
   }
 
   .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 1000px;
+    width: 100%;
+    max-width: 960px;
     margin: 0 auto;
     text-align: center;
     display: flex;
@@ -107,138 +116,171 @@ const HERO_VIDEO = 'https://hosted.inled.es/cdn/demo-inled.mp4';
     align-items: center;
   }
 
-  .hero-eyebrow {
+  .hero-motto {
     font-family: var(--sans-font);
-    font-size: 0.72rem;
+    font-size: 0.9rem;
     font-weight: 600;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.66);
+    letter-spacing: 0.02em;
+    color: var(--accent);
     margin: 0 0 1.1rem;
   }
 
   .hero-title {
     font-family: var(--sans-font);
-    font-size: clamp(3.4rem, 10.5vw, 8rem);
+    font-size: clamp(2.6rem, 6.4vw, 4.9rem);
     font-weight: 700;
-    line-height: 1.02;
-    letter-spacing: -0.05em;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
     margin: 0;
-    color: #fff;
-    text-shadow: 0 2px 40px rgba(0, 0, 0, 0.35);
-  }
-
-  .hero-title-main {
-    display: inline;
-  }
-
-  .hero-title-soft {
-    display: inline;
-    margin-left: 0.2em;
-    background: linear-gradient(180deg, #fff 25%, rgba(255, 255, 255, 0.5) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--text);
+    max-width: 900px;
+    text-wrap: balance;
   }
 
   .hero-subtitle {
     font-family: var(--sans-font);
-    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-size: clamp(1.05rem, 1.9vw, 1.3rem);
     font-weight: 400;
-    line-height: 1.45;
-    letter-spacing: -0.01em;
-    color: rgba(255, 255, 255, 0.74);
+    line-height: 1.5;
+    letter-spacing: -0.012em;
+    color: var(--text-dim);
     max-width: 620px;
-    margin: 1.5rem 0 0;
+    margin: 1.4rem 0 0;
+    text-wrap: pretty;
   }
 
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 0.85rem;
-    margin-top: 2.25rem;
+    gap: 0.75rem;
+    margin-top: 2.1rem;
   }
 
-  .pill {
+  .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 0.45rem;
+    min-height: 46px;
+    padding: 0 1.5rem;
+    border-radius: 980px;
     font-family: var(--sans-font);
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: -0.01em;
-    line-height: 1;
-    padding: 0.85rem 1.6rem;
-    border-radius: 980px;
     text-decoration: none;
-    transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
-    white-space: nowrap;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
   }
 
-  .pill--primary {
-    background: #0071e3;
+  .btn:active {
+    transform: scale(0.975);
+  }
+
+  .btn--primary {
+    background: var(--accent);
     color: #fff;
-    border: 1px solid #0071e3;
   }
 
-  .pill--primary:hover {
-    background: #0077ed;
-    border-color: #0077ed;
+  .btn--primary:hover {
+    background: var(--accent-hover);
   }
 
-  .pill--ghost {
-    background: rgba(0, 0, 0, 0.25);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+  .btn--secondary {
+    background: rgba(118, 118, 128, 0.12);
+    color: var(--text);
   }
 
-  .pill--ghost:hover {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.7);
+  .btn--secondary:hover {
+    background: rgba(118, 118, 128, 0.18);
   }
 
-  :global(html[data-theme="light"]) .pill--ghost {
-    color: #fff;
-    border-color: rgba(255, 255, 255, 0.45);
+  .hero-projects {
+    margin-top: 4.5rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
-  :global(html[data-theme="light"]) .pill--ghost:hover {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: rgba(255, 255, 255, 0.7);
+  .hero-projects-label {
+    font-family: var(--sans-font);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 1.5rem;
+  }
+
+  .hero-logos {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem 2.5rem;
+  }
+
+  .hero-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    opacity: 0.72;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .hero-logo:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+
+  .hero-logo img {
+    height: 30px;
+    width: auto;
+    max-width: 110px;
+    object-fit: contain;
+  }
+
+  .hero-logo span {
+    font-family: var(--sans-font);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: -0.005em;
   }
 
   @media (max-width: 900px) {
     .hero {
-      min-height: 88svh;
-      padding: 130px 1.25rem 7rem;
+      padding: 130px 1.25rem 5rem;
     }
   }
 
   @media (max-width: 560px) {
     .hero {
-      min-height: 86svh;
-      padding: 118px 1rem 6rem;
+      padding: 118px 1rem 4rem;
     }
 
     .hero-actions {
       flex-direction: column;
       width: 100%;
       max-width: 320px;
-      gap: 0.6rem;
     }
 
-    .pill {
+    .btn {
       width: 100%;
     }
-  }
 
-  @media (prefers-reduced-motion: reduce) {
-    .hero-bg-video {
-      display: none;
+    .hero-projects {
+      margin-top: 3.25rem;
+    }
+
+    .hero-logos {
+      gap: 1rem 1.75rem;
+    }
+
+    .hero-logo img {
+      height: 26px;
     }
   }
 </style>

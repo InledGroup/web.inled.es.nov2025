@@ -4,11 +4,13 @@ import Header from '../components/Header.astro';
 export const prerender = false;
 
 import Hero from '../components/Hero.astro';
+import Stats from '../components/Stats.astro';
 import ProjectsGrouped from '../components/ProjectsGrouped.astro';
 import NewsSection from '../components/NewsSection.astro';
 import CoreValues from '../components/CoreValues.astro';
 import CommunityLinks from '../components/CommunityLinks.astro';
 import GitHubContributors from '../components/GitHubContributors.astro';
+import About from '../components/About.astro';
 import CommunityCTA from '../components/CommunityCTA.astro';
 import JoinBanner from '../components/JoinBanner.astro';
 import { getLangFromLocals, useTranslations } from '../i18n/utils';
@@ -26,7 +28,9 @@ const t = useTranslations(lang);
     <CoreValues />
     <CommunityLinks />
     <GitHubContributors />
+    <About />
     <CommunityCTA />
   </div>
   <JoinBanner />
+  <Stats />
 </Layout>

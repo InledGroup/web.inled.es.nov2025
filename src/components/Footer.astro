@@ -1,22 +1,19 @@
 ---
 import { getLangFromLocals, useTranslations, useTranslatedPath } from '../i18n/utils';
-import { getFeaturedItems } from '../config/featured';
 
 const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
-const translatePath = useTranslatedPath();
+const localize = useTranslatedPath(lang);
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="footer-gradient-line"></div>
-
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="/" class="footer-logo">
-          <img src="https://hosted.inled.es/inled-logo-full.png" alt="Inled" />
+        <a href={localize('/')} class="footer-logo">
+          <img src="/inled-logo-full.png" alt="Inled" />
         </a>
         <p class="footer-desc">{t('footer.description')}</p>
       </div>
@@ -24,15 +21,15 @@ const year = new Date().getFullYear();
       <div class="footer-grid">
         <div class="footer-col">
           <h4 class="footer-col-title">{lang === 'es' ? 'Proyectos' : 'Projects'}</h4>
-          <a href="https://office.inled.es" target="_blank" rel="noopener">Insuite Office</a>
-          <a href="/apps/seafari">Seafari</a>
+          <a href="https://insuite.inled.es" target="_blank" rel="noopener">InSuite</a>
+          <a href={localize('/apps/seafari')}>Seafari</a>
           <a href="https://os.inled.es" target="_blank" rel="noopener">Pulsar OS</a>
-          <a href="/apps/codexbar-gnome">CodexBar</a>
-          <a href="#projects" class="footer-more">{lang === 'es' ? 'Ver todos' : 'View all'}</a>
+          <a href={localize('/apps/codexbar-gnome')}>CodexBar</a>
+          <a href={localize('/#projects')} class="footer-more">{lang === 'es' ? 'Ver todos' : 'View all'}</a>
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">{lang === 'es' ? 'Recursos' : 'Resources'}</h4>
-          <a href="/blog">Blog</a>
+          <a href={localize('/blog')}>Blog</a>
           <a href="https://github.com/InledGroup" target="_blank" rel="noopener">GitHub</a>
           <a href="https://link.inled.es/discord" target="_blank" rel="noopener">Discord</a>
           <a href="https://matrix.inled.es" target="_blank" rel="noopener">Matrix</a>
@@ -40,11 +37,11 @@ const year = new Date().getFullYear();
         </div>
         <div class="footer-col">
           <h4 class="footer-col-title">{t('footer.legaltitle')}</h4>
-          <a href={translatePath('/aviso-legal')}>{t('footer.legal')}</a>
-          <a href={translatePath('/privacy-policy')}>{t('footer.privacy')}</a>
-          <a href={translatePath('/cookie-policy')}>{t('footer.cookies')}</a>
-          <a href={translatePath('/eu-ai-act')}>{t('footer.aiact')}</a>
-          <a href={translatePath('/contacto')}>{t('nav.contact')}</a>
+          <a href={localize('/aviso-legal')}>{t('footer.legal')}</a>
+          <a href={localize('/privacy-policy')}>{t('footer.privacy')}</a>
+          <a href={localize('/cookie-policy')}>{t('footer.cookies')}</a>
+          <a href={localize('/eu-ai-act')}>{t('footer.aiact')}</a>
+          <a href={localize('/contacto')}>{t('nav.contact')}</a>
         </div>
       </div>
     </div>
@@ -61,24 +58,11 @@ const year = new Date().getFullYear();
     position: relative;
     background: var(--bg);
     padding: 0 1.5rem;
-  }
-
-  .footer-gradient-line {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.08) 20%,
-      rgba(255, 255, 255, 0.15) 50%,
-      rgba(255, 255, 255, 0.08) 80%,
-      transparent 100%
-    );
-    margin-bottom: 4rem;
+    border-top: 1px solid var(--border);
   }
 
   .footer-inner {
-    max-width: 1200px;
+    max-width: 1180px;
     margin: 0 auto;
   }
 
@@ -86,7 +70,7 @@ const year = new Date().getFullYear();
     display: grid;
     grid-template-columns: 1.2fr 2fr;
     gap: 4rem;
-    padding-bottom: 3rem;
+    padding: 3.5rem 0 3rem;
     border-bottom: 1px solid var(--border);
   }
 
@@ -101,26 +85,18 @@ const year = new Date().getFullYear();
     align-items: center;
     gap: 0.5rem;
     text-decoration: none;
-    color: #fff;
   }
 
   .footer-logo img {
     width: auto;
-    height: 40px;
+    height: 34px;
     object-fit: contain;
-  }
-
-  .footer-logo span {
-    font-family: var(--sans-font);
-    font-size: 0.7rem;
-    font-weight: 900;
-    letter-spacing: 0.15em;
   }
 
   .footer-desc {
     font-family: var(--sans-font);
-    font-size: 0.8rem;
-    color: var(--accent-dim);
+    font-size: 0.8125rem;
+    color: var(--text-dim);
     line-height: 1.6;
     max-width: 280px;
   }
@@ -134,35 +110,33 @@ const year = new Date().getFullYear();
   .footer-col {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.55rem;
   }
 
   .footer-col-title {
     font-family: var(--sans-font);
-    font-size: 0.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.35);
-    margin-bottom: 0.4rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.25rem;
   }
 
   .footer-col a {
     font-family: var(--sans-font);
-    font-size: 0.8rem;
-    color: var(--accent-dim);
+    font-size: 0.8125rem;
+    color: var(--text-dim);
     text-decoration: none;
     transition: color 0.15s;
   }
 
   .footer-col a:hover {
-    color: #fff;
+    color: var(--accent);
   }
 
   .footer-more {
-    font-size: 0.75rem !important;
-    color: rgba(255, 255, 255, 0.3) !important;
-    margin-top: 0.3rem;
+    font-size: 0.8125rem !important;
+    color: var(--accent) !important;
+    margin-top: 0.2rem;
   }
 
   .footer-bottom {
@@ -172,17 +146,15 @@ const year = new Date().getFullYear();
     padding: 1.5rem 0;
   }
 
-  .footer-copy {
+  .footer-copy,
+  .footer-license {
     font-family: var(--sans-font);
-    font-size: 0.7rem;
-    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+    color: var(--text-muted);
   }
 
   .footer-license {
-    font-family: var(--pixel-font);
-    font-size: 0.5rem;
-    color: rgba(255, 255, 255, 0.2);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
 
   @media (max-width: 768px) {

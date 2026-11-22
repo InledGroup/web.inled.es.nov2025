@@ -2,7 +2,7 @@
 import { getLangFromLocals, useTranslatedPath } from '../i18n/utils';
 
 const lang = getLangFromLocals(Astro.locals);
-const translatePath = useTranslatedPath();
+const translatePath = useTranslatedPath(lang);
 ---
 
 <div id="newsletter-notification" class="notification-container">

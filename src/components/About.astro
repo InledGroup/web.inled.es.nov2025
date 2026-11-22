@@ -1,0 +1,171 @@
+---
+import { getLangFromLocals } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+
+const copy = {
+  es: {
+    label: 'Sobre Inled',
+    title: 'Construimos el software que hemos soñado',
+    /* PLACEHOLDER: sustituye estos textos por los tuyos. */
+    paragraphs: [
+      'Inled es una marca (r) cuyo nombre surgió hace mucho tiempo, se me ocurrió a mi de pequeño, cuando ya de aquellas soñaba con tener una marca. No recuerdo qué significado tenía o como surgio el nombre, pero lo más bonito es en lo que se ha convertido y en lo que avanzaremos en el futuro.',
+      'Inled comenzó teniendo proyectos desarrollados por su fundador a titulo personal, y adquirió el plano comunitario tras el lanzamiento del port de Codexbar para GNOME, el cual fue elogiado por el propio Peter Steinberger. Actualmente, tenemos una comunidad en crecimiento que desarrolla el sistema operativo PulsarOS activamente. Las aportaciones de los diferente spuntos de vista de cada persona son las que hacenque Inled evolucione y llegue más lejos, aprendiendo nuevas cosas cada día. ',
+    ],
+    founderRole: 'JaimeGH',
+    contributors: 'Fundador de Inled Group y desarrollador',
+    cta: 'Ver el proyecto en GitHub',
+  },
+  en: {
+    label: 'About Inled',
+    title: 'We build the software we dreamed of.',
+    /* PLACEHOLDER: replace these texts with your own. */
+    paragraphs: [
+      'Inled is a registered brand whose name came about a long time ago. It occurred to me when I was young, when I already dreamed of having a brand. I don’t remember what meaning it had or how the name came about, but the best part is what it has become and what we will achieve in the future.',
+      'Inled began with projects developed by its founder on a personal basis, and took on a community dimension following the launch of the Codexbar port for GNOME, which was praised by Peter Steinberger himself. Today, we have a growing community actively developing the PulsarOS operating system. Contributions from the different perspectives of each person are what make Inled evolve and go further, learning new things every day.',
+    ],
+    founderRole: 'JaimeGH',
+    contributors: 'Founder of Inled Group and developer.',
+    cta: 'See the project on GitHub',
+  },
+}[lang];
+---
+
+<section class="about-section" id="about">
+  <div class="about-container">
+    <p class="about-label">{copy.label}</p>
+    <h2 class="about-title">{copy.title}</h2>
+
+    <div class="about-body">
+      {copy.paragraphs.map((paragraph) => <p class="about-text">{paragraph}</p>)}
+    </div>
+
+    <div class="about-founder">
+      <img
+        class="about-avatar"
+        src="https://avatars.githubusercontent.com/u/200265524?v=4"
+        alt={copy.founderRole}
+        loading="lazy"
+      />
+      <div class="about-founder-text">
+        <span class="about-founder-role">{copy.founderRole}</span>
+        <span class="about-founder-note">{copy.contributors}</span>
+      </div>
+    </div>
+
+    <a class="about-cta" href="https://github.com/InledGroup" target="_blank" rel="noopener noreferrer">
+      {copy.cta}
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .about-section {
+    width: 100%;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .about-container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem;
+  }
+
+  .about-label {
+    font-family: var(--sans-font);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 0 0 0.75rem;
+  }
+
+  .about-title {
+    font-family: var(--sans-font);
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    color: var(--text);
+    margin: 0 0 1.5rem;
+  }
+
+  .about-body {
+    max-width: 700px;
+  }
+
+  .about-text {
+    font-family: var(--sans-font);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text-dim);
+    margin: 0 0 1rem;
+    text-wrap: pretty;
+  }
+
+  .about-founder {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .about-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+
+  .about-founder-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .about-founder-role {
+    font-family: var(--sans-font);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+
+  .about-founder-note {
+    font-family: var(--sans-font);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--text-muted);
+  }
+
+  .about-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 1.75rem;
+    font-family: var(--sans-font);
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .about-cta:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 720px) {
+    .about-container {
+      padding: 4.5rem 1rem;
+    }
+
+    .about-founder {
+      align-items: flex-start;
+    }
+  }
+</style>

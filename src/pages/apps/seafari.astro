@@ -13,12 +13,12 @@ const lang = getLangFromLocals(Astro.locals);
 // Definir traducciones para metadatos (ambas muestran inglés para cumplir con el requisito)
 const translations = {
   es: {
-    title: "Seafari - Out-of-the-box Safari experience on Linux",
-    description: "Seafari is a Firefox-based Safari clone for Linux. Works completely out of the box, with daily updates, uBlock Origin pre-enabled, and maximum compatibility."
+    title: "Seafari - The Safari experience on Linux, now stable",
+    description: "Seafari is a Firefox-based Safari experience for Linux. Now stable with v3: custom user agent switching, live wallpapers, uBlock Origin and daily updates."
   },
   en: {
-    title: "Seafari - Out-of-the-box Safari experience on Linux",
-    description: "Seafari is a Firefox-based Safari clone for Linux. Works completely out of the box, with daily updates, uBlock Origin pre-enabled, and maximum compatibility."
+    title: "Seafari - The Safari experience on Linux, now stable",
+    description: "Seafari is a Firefox-based Safari experience for Linux. Now stable with v3: custom user agent switching, live wallpapers, uBlock Origin and daily updates."
   }
 };
 
@@ -66,13 +66,12 @@ const jsonLd = {
           </div>
 
           <h1 class="hero-title">Seafari</h1>
-          <p class="hero-tagline">The Safari experience on Linux. Powered by Firefox core.</p>
+          <p class="hero-tagline">The Safari experience on Linux. Stable, fast and powered by Firefox core.</p>
 
-          <!-- Beta Warning & System Theme Requirement Notice (Apple styled alert banner) -->
-          <!-- Aviso de Versión Beta y Requisito de Tema de Sistema (estilo banner de alerta Apple) -->
+          <!-- Stable release notice (Apple styled alert banner) -->
           <div class="warning-banner">
             <div class="warning-content">
-              <strong>Beta. v2.5 is out!</strong> This version stands out for being almost a clone, with more features that replicate those of Safari. There may still be things left, we encourage you to contribute!
+              <strong>Stable release. v3 is out!</strong> Seafari leaves beta behind with a convincing custom user agent, live wallpapers and a long list of improvements. This is the version we ship and use every day.
             </div>
           </div>
 
@@ -101,10 +100,10 @@ const jsonLd = {
         <div class="section-container">
           <div class="apple-grid-split">
             <div class="graphic-card-solid">
-              <div class="solid-card-badge">v2.5</div>
-              <h3 class="solid-card-heading">Looks like Safari!</h3>
+              <div class="solid-card-badge">v3 · Stable</div>
+              <h3 class="solid-card-heading">Looks like Safari. Feels like home.</h3>
               <p class="solid-card-paragraph">
-                The new version 2.5 stands out for its complete similarity to Safari and maximum compatibility thanks to its Firefox core
+                Version 3 is the most complete Seafari yet: a faithful Safari interface, maximum compatibility thanks to the Firefox core, and no beta label.
               </p>
               <div class="solid-card-icon-container">
                 <svg xmlns="http://www.w3.org/2000/svg" class="solid-card-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
@@ -155,9 +154,74 @@ const jsonLd = {
                     Stay secure without waiting. Seafari downloads updates directly from Mozilla repositories daily, ensuring immediate patches for zero-days and browser performance.
                   </p>
                 </div>
-
-
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 1b: v3 headline features (custom user agent, live wallpapers, distro support) -->
+      <section class="tile tile-light new-v3-section">
+        <div class="section-container">
+          <div class="text-center section-header-wrap">
+            <span class="tile-badge badge-blue">New in v3</span>
+            <h2 class="tile-title">One switch. The whole web believes you.</h2>
+            <p class="tile-text-narrow">
+              Choose how Seafari introduces itself to websites. It is not a fake flag or a broken spoof: sites detect a convincing Safari 18 on macOS X, or Firefox 158 on Linux.
+            </p>
+          </div>
+
+          <div class="ua-demo">
+            <div class="ua-video">
+              <video
+                src="https://hosted.inled.es/cdn/seafari-user-agent-demo.mp4"
+                controls
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                aria-label="Demo of Seafari switching its user agent between Safari on macOS and Firefox on Linux"
+              ></video>
+              <span class="ua-video-label">Demo · Custom user agent switch</span>
+            </div>
+
+            <div class="ua-copy">
+              <h3 class="ua-title">Safari 18 on macOS X, or Firefox 158 on Linux</h3>
+              <p class="ua-text">
+                Some sites behave differently depending on the browser they think you are using. With one button, Seafari changes its identity between those two profiles, and websites accept it as genuine. Useful, and honestly quite fun.
+              </p>
+              <ul class="ua-list">
+                <li>Switch identities instantly, without restarting the browser.</li>
+                <li>Recognised as a real Safari 18 on macOS X or Firefox 158 on Linux.</li>
+                <li>Keep your extensions, sessions and privacy protections.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="v3-grid">
+            <article class="v3-card">
+              <span class="v3-card-kicker">Personalisation</span>
+              <h3 class="v3-card-title">Live wallpapers, including your own</h3>
+              <p class="v3-card-text">
+                Seafari supports live wallpapers and custom wallpapers, so the browser can feel as personal as the rest of your desktop.
+              </p>
+            </article>
+
+            <article class="v3-card">
+              <span class="v3-card-kicker">Stable</span>
+              <h3 class="v3-card-title">v3 is no longer a beta</h3>
+              <p class="v3-card-text">
+                The v3 update brought the user agent switch and many other improvements. We now consider Seafari stable and ready for daily use.
+              </p>
+            </article>
+
+            <article class="v3-card">
+              <span class="v3-card-kicker">In your distro</span>
+              <h3 class="v3-card-title">Part of Pulsar OS, also used on PearOS</h3>
+              <p class="v3-card-text">
+                Seafari is the browser we ship in Pulsar OS, and it is also used on PearOS. It is built to be the default browser, not an experiment.
+              </p>
+            </article>
           </div>
         </div>
       </section>
@@ -219,6 +283,24 @@ const jsonLd = {
                   </tr>
                   <tr>
                     <td class="feature-cell">Daily security updates directly from Mozilla source</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                  </tr>
+                  <tr>
+                    <td class="feature-cell">Custom user agent: Safari 18 on macOS X or Firefox 158 on Linux</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                  </tr>
+                  <tr>
+                    <td class="feature-cell">Live and custom wallpapers</td>
+                    <td class="status-cell"><span class="check-circle">✓</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                    <td class="status-cell"><span class="cross-circle">✗</span></td>
+                  </tr>
+                  <tr>
+                    <td class="feature-cell">Ships with Pulsar OS and used on PearOS</td>
                     <td class="status-cell"><span class="check-circle">✓</span></td>
                     <td class="status-cell"><span class="cross-circle">✗</span></td>
                     <td class="status-cell"><span class="cross-circle">✗</span></td>
@@ -1161,6 +1243,144 @@ const jsonLd = {
     object-fit: cover;
   }
 
+  /* v3 feature section */
+  .new-v3-section .section-header-wrap {
+    max-width: 820px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ua-demo {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-bottom: 64px;
+  }
+
+  .ua-video {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid var(--color-hairline);
+    box-shadow: rgba(0, 0, 0, 0.16) 3px 5px 30px 0px;
+    aspect-ratio: 16 / 10;
+  }
+
+  .ua-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ua-video-label {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.62);
+    color: #fff;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    pointer-events: none;
+  }
+
+  .ua-copy {
+    text-align: left;
+  }
+
+  .ua-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: clamp(24px, 3vw, 32px);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    margin: 0 0 16px;
+  }
+
+  .ua-text {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--color-ink-muted-80);
+    margin: 0 0 20px;
+  }
+
+  .ua-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ua-list li {
+    position: relative;
+    padding-left: 22px;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-ink-muted-80);
+  }
+
+  .ua-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #34c759;
+    font-weight: 700;
+  }
+
+  .v3-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .v3-card {
+    padding: 32px;
+    border-radius: 22px;
+    border: 1px solid var(--color-hairline);
+    background: var(--color-canvas-parchment);
+  }
+
+  .v3-card-kicker {
+    display: block;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+  }
+
+  .v3-card-title {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    margin: 0 0 10px;
+  }
+
+  .v3-card-text {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--color-ink-muted-80);
+    margin: 0;
+  }
+
   /* Specifications layout (Parchment Tile 3) */
   /* Layout de especificaciones técnicas (Lienzo Parchment Tile 3) */
   .section-header-wrap {
@@ -1253,6 +1473,16 @@ const jsonLd = {
       gap: 32px;
     }
 
+    .ua-demo {
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 48px;
+    }
+
+    .v3-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .graphic-card-solid {
       min-height: 320px;
       padding: 32px;
@@ -1295,6 +1525,15 @@ const jsonLd = {
       text-align: center;
       gap: 12px;
       padding: 16px;
+    }
+
+    .v3-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .v3-card {
+      padding: 24px;
     }
 
     .cta-actions {
