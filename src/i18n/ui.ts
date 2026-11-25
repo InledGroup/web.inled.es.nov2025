@@ -67,6 +67,10 @@ export const ui = {
     "announcement.text":
       "¡Edge AI ya está en Product Hunt! Por favor, apóyanos con tu voto.",
     "announcement.close": "Cerrar anuncio",
+    "migration.title": "Migración de infraestructura a Vercel",
+    "migration.text":
+      "Por los bloqueos indiscriminados a Cloudflare en España (orden de LaLiga), estamos moviendo parte de la infra de Inled a Vercel. Durante la transición es posible que tiremos abajo algunos servicios temporalmente. Volvemos pronto.",
+    "migration.close": "Cerrar aviso",
     "hero.slide1.title": "Edge AI",
     "hero.slide1.subtitle":
       "La mejor alternativa privada, de ejecución en local y gratuita a ChatGPT, Perplexity y NotebookLM",
@@ -163,6 +167,10 @@ export const ui = {
     "announcement.text":
       "Edge AI is now on Product Hunt! Please support us with your vote.",
     "announcement.close": "Close announcement",
+    "migration.title": "Infrastructure migration to Vercel",
+    "migration.text":
+      "Due to indiscriminate Cloudflare blocks in Spain (LaLiga order), we are moving part of Inled's infrastructure to Vercel. Some services may be temporarily taken down during the transition. We will be back soon.",
+    "migration.close": "Close notice",
     "hero.slide1.title": "Edge AI",
     "hero.slide1.subtitle":
       "The best private, local execution, and free alternative to ChatGPT, Perplexity, and NotebookLM",

@@ -128,7 +128,7 @@ const socials = [
 <style>
   .site-header {
     position: fixed;
-    top: 0;
+    top: var(--migration-banner-height, 0px);
     left: 0;
     right: 0;
     z-index: 2000;
@@ -137,6 +137,7 @@ const socials = [
     backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--border);
     color: var(--text);
+    transition: top 0.25s ease;
   }
 
   .header-inner {

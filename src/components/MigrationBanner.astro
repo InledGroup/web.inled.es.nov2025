@@ -1,0 +1,185 @@
+---
+import { getLangFromLocals, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromLocals(Astro.locals);
+const t = useTranslations(lang);
+---
+
+{lang === 'es' || lang === 'en' ? (
+  <div id="migration-banner" class="migration-banner" role="alert" aria-live="polite">
+    <div class="migration-inner">
+      <div class="migration-icon" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <div class="migration-content">
+        <strong class="migration-title">{t('migration.title')}</strong>
+        <span class="migration-text">{t('migration.text')}</span>
+      </div>
+      <button id="close-migration-banner" class="close-migration-banner" aria-label={t('migration.close')} title={t('migration.close')}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+) : null}
+
+<style>
+  .migration-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2500;
+    background: rgba(255, 255, 255, 0.94);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    box-shadow: 0 1px 4px rgba(60, 60, 67, 0.05);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .migration-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0.65rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .migration-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #0071e3;
+    flex-shrink: 0;
+  }
+
+  .migration-content {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .migration-title {
+    color: var(--text);
+    font-weight: 600;
+    font-size: 0.8125rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .migration-title::after {
+    content: " —";
+  }
+
+  .migration-text {
+    color: var(--text-dim);
+    font-size: 0.8125rem;
+  }
+
+  .close-migration-banner {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.35rem;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: auto;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .close-migration-banner:hover {
+    background: rgba(118, 118, 128, 0.12);
+    color: var(--text);
+  }
+
+  @media (max-width: 900px) {
+    .migration-inner {
+      padding: 0.6rem 1rem;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+    .migration-icon {
+      margin-top: 0.15rem;
+    }
+    .migration-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.15rem;
+    }
+    .migration-title {
+      white-space: normal;
+    }
+    .migration-title::after {
+      content: "";
+    }
+    .close-migration-banner {
+      margin-top: 0.1rem;
+    }
+  }
+</style>
+
+<script>
+  function initMigrationBanner() {
+    const banner = document.getElementById('migration-banner');
+    const closeBtn = document.getElementById('close-migration-banner');
+    const STORAGE_KEY = 'inled-migration-banner-v2-closed';
+
+    if (!banner) return;
+
+    if (localStorage.getItem(STORAGE_KEY) === 'true') {
+      document.documentElement.classList.add('migration-banner-closed');
+      document.documentElement.style.setProperty('--migration-banner-height', '0px');
+      return;
+    }
+
+    const updateHeight = () => {
+      if (document.documentElement.classList.contains('migration-banner-closed')) {
+        document.documentElement.style.setProperty('--migration-banner-height', '0px');
+        return;
+      }
+      const height = banner.getBoundingClientRect().height;
+      document.documentElement.style.setProperty('--migration-banner-height', `${height}px`);
+    };
+
+    updateHeight();
+
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(() => updateHeight());
+      ro.observe(banner);
+    } else {
+      window.addEventListener('resize', updateHeight);
+    }
+
+    closeBtn?.addEventListener('click', () => {
+      document.documentElement.classList.add('migration-banner-closed');
+      document.documentElement.style.setProperty('--migration-banner-height', '0px');
+      try {
+        localStorage.setItem(STORAGE_KEY, 'true');
+      } catch (e) {}
+    });
+  }
+
+  document.addEventListener('astro:page-load', initMigrationBanner);
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    initMigrationBanner();
+  } else {
+    document.addEventListener('DOMContentLoaded', initMigrationBanner);
+  }
+</script>

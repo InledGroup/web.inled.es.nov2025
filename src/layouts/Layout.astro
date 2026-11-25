@@ -1,7 +1,7 @@
 ---
 import Footer from '../components/Footer.astro';
 import DocsLinks from '../components/DocsLinks.astro';
-import AnnouncementBanner from '../components/AnnouncementBanner.astro';
+import MigrationBanner from '../components/MigrationBanner.astro';
 import { getLangFromLocals } from '../i18n/utils';
 import { getFeaturedItems } from '../config/featured';
 import { apps } from '../config/apps';
@@ -209,6 +209,15 @@ const jsonLd = {
     })(window, document, "clarity", "script", "rkxkde17af");
         </script>
 
+    <script is:inline>
+      (function() {
+        try {
+          if (localStorage.getItem('inled-migration-banner-v2-closed') === 'true') {
+            document.documentElement.classList.add('migration-banner-closed');
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class={isArchivedPage ? "archive-active-body" : ""}>
     <div class="splash" id="splash" role="status" aria-label={lang === 'es' ? 'Cargando' : 'Loading'}>
@@ -264,6 +273,7 @@ const jsonLd = {
         </div>
       </div>
     )}
+    <MigrationBanner />
     <slot />
     <DocsLinks />
     {!noFooter && <Footer />}
@@ -303,6 +313,7 @@ const jsonLd = {
 
   :root {
     color-scheme: light;
+    --migration-banner-height: 0px;
 
     --pixel-font: 'Press Start 2P', monospace;
     --sans-font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
@@ -334,6 +345,14 @@ const jsonLd = {
     --header-bg: rgba(245, 245, 247, 0.72);
   }
 
+  html.migration-banner-closed {
+    --migration-banner-height: 0px !important;
+  }
+
+  html.migration-banner-closed #migration-banner {
+    display: none !important;
+  }
+
   html {
     scroll-behavior: auto; /* Desactivar para que Lenis tome control */
   }
@@ -346,6 +365,8 @@ const jsonLd = {
     color: var(--text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding-top: var(--migration-banner-height, 0px);
+    transition: padding-top 0.25s ease;
   }
 
   html.lenis {
@@ -370,7 +391,7 @@ const jsonLd = {
 
   .archive-overlay-banner {
     position: fixed;
-    top: 0;
+    top: var(--migration-banner-height, 0px);
     left: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.82);
@@ -386,6 +407,7 @@ const jsonLd = {
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: top 0.25s ease;
   }
 
   .archive-overlay-content {
@@ -395,7 +417,7 @@ const jsonLd = {
   }
 
   body.archive-active-body .site-header {
-    top: 3.5rem !important;
+    top: calc(3.5rem + var(--migration-banner-height, 0px)) !important;
   }
 
   .pixel-text {
