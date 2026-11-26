@@ -32,15 +32,47 @@ try {
   }
 } catch {}
 
+const seen = new Set<string>();
+const marqueeContributors = [...inledContributors, ...pulsarContributors].filter((c) => {
+  if (seen.has(c.login)) return false;
+  seen.add(c.login);
+  return true;
+});
+
+// Repeat the list so the row always fills the screen, then duplicate it for a seamless loop.
+const minItems = 14;
+const repeats = Math.max(1, Math.ceil(minItems / Math.max(marqueeContributors.length, 1)));
+const loopGroup = Array.from({ length: repeats }, () => marqueeContributors).flat();
+const marqueeDuration = Math.max(20, loopGroup.length * 2.6);
+
+const discordContributors = [
+  {
+    name: 'Angelo',
+    avatar: 'https://avatars.githubusercontent.com/u/332994032?s=128&v=4',
+    role: { es: 'Interfaz y Liquid Glass', en: 'UI & Liquid Glass' },
+  },
+  {
+    name: 'hhh',
+    avatar: 'https://bittenfruit.inled.es/assets/people/hhh.png',
+    role: { es: 'UI y diseño', en: 'UI & design' },
+  },
+  {
+    name: 'Victor',
+    avatar: 'https://bittenfruit.inled.es/assets/people/victor1890.png',
+    role: { es: 'Frontend y web', en: 'Frontend & web' },
+  },
+];
+
 const header = {
   es: { title: 'Reconociendo cada aportación', subtitle: 'Personas que han aportado su PR o tiempo a InledGroup' },
   en: { title: 'Recognizing each contribution', subtitle: 'People who have contributed their PR or time to InledGroup' },
 }[lang];
 
-const pulsarLabel = {
-  es: 'Pulsar OS',
-  en: 'Pulsar OS',
+const discordLabel = {
+  es: 'Contribuidores en Discord',
+  en: 'Discord contributors',
 }[lang];
+
 ---
 
 <section class="contributors-section">
@@ -51,32 +83,47 @@ const pulsarLabel = {
       <p class="contributors-subtitle">{header.subtitle}</p>
     </div>
 
-    <div class="contributors-group">
-      <h3 class="group-title">Inled</h3>
-      <div class="contributors-grid">
-        {inledContributors.map((c) => (
-          <a href={c.profile} target="_blank" rel="noopener" class="contributor-card">
-            <img src={`${c.avatar_url}?s=128&v=4`} alt={c.login} class="contributor-avatar" loading="lazy" width="48" height="48" />
-            <div class="contributor-info">
-              <span class="contributor-name">{c.login}</span>
-              <span class="contributor-commits">{c.contributions} {lang === 'es' ? 'contribuciones' : 'contributions'}</span>
+    {marqueeContributors.length > 0 && (
+      <div class="contributors-marquee">
+        <div class="marquee-track" style={`--marquee-duration: ${marqueeDuration}s`}>
+          {[0, 1].map((copy) => (
+            <div class="marquee-group" aria-hidden={copy === 1 ? 'true' : undefined}>
+              {loopGroup.map((c) => (
+                <a
+                  href={c.profile}
+                  target="_blank"
+                  rel="noopener"
+                  class="marquee-avatar"
+                  tabindex={copy === 1 ? -1 : undefined}
+                >
+                  <img
+                    src={`${c.avatar_url}?s=128&v=4`}
+                    alt={copy === 1 ? '' : c.login}
+                    loading="lazy"
+                    width="48"
+                    height="48"
+                  />
+                </a>
+              ))}
             </div>
-          </a>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    )}
 
-    <div class="contributors-group">
-      <h3 class="group-title">{pulsarLabel}</h3>
-      <div class="contributors-grid-pulsar">
-        {pulsarContributors.map((c) => (
-          <a href={c.profile} target="_blank" rel="noopener" class="contributor-card">
-            <img src={`${c.avatar_url}?s=128&v=4`} alt={c.login} class="contributor-avatar" loading="lazy" width="48" height="48" />
-            <div class="contributor-info">
-              <span class="contributor-name">{c.login}</span>
-              <span class="contributor-commits">{c.contributions} {lang === 'es' ? 'contribuciones' : 'contributions'}</span>
+    <div class="discord-contributors">
+      <div class="discord-head">
+        <h3 class="group-title">{discordLabel}</h3>
+      </div>
+      <div class="discord-grid">
+        {discordContributors.map((c) => (
+          <div class="discord-card">
+            <img class="discord-avatar" src={c.avatar} alt={c.name} loading="lazy" width="128" height="128" />
+            <div class="discord-info">
+              <span class="discord-name">{c.name}</span>
+              <span class="discord-role">{c.role[lang]}</span>
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </div>
@@ -93,6 +140,7 @@ const pulsarLabel = {
     width: 100%;
     background: var(--bg);
     border-top: 1px solid var(--border);
+    overflow: hidden;
   }
 
   .contributors-container {
@@ -102,7 +150,7 @@ const pulsarLabel = {
   }
 
   .contributors-header {
-    margin-bottom: 3.5rem;
+    margin-bottom: 3rem;
   }
 
   .contributors-label {
@@ -132,83 +180,141 @@ const pulsarLabel = {
     margin: 0;
   }
 
-  .contributors-group {
-    margin-bottom: 3rem;
+  .contributors-marquee {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 0.5rem 0;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
   }
 
-  .contributors-group:last-of-type {
-    margin-bottom: 0;
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: contributors-marquee var(--marquee-duration, 40s) linear infinite;
+  }
+
+  .contributors-marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  .marquee-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding-right: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .marquee-avatar {
+    display: block;
+    flex-shrink: 0;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+
+  .marquee-avatar:hover {
+    transform: scale(1.12);
+  }
+
+  .marquee-avatar img {
+    display: block;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    object-fit: cover;
+    background: var(--bg);
+  }
+
+  @keyframes contributors-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+
+  .discord-contributors {
+    margin-top: 3rem;
+  }
+
+  .discord-head {
+    margin-bottom: 1.1rem;
   }
 
   .group-title {
     font-family: var(--sans-font);
-    font-size: 0.72rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    color: var(--text-muted);
+    color: var(--accent);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    margin: 0 0 1rem 0;
+    margin: 0;
   }
 
-  .contributors-grid {
+  .discord-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
   }
 
-  .contributors-grid-pulsar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .contributors-grid-pulsar .contributor-card {
-    flex: 1 1 calc(33.333% - 0.5rem);
-    min-width: 200px;
-  }
-
-  .contributor-card {
+  .discord-card {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    padding: 0.6rem 0;
-    text-decoration: none;
-    color: var(--text);
+    gap: 0.9rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: rgba(118, 118, 128, 0.06);
+    transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
   }
 
-  .contributor-card:hover .contributor-name {
-    color: var(--accent);
+  .discord-card:hover {
+    border-color: var(--accent);
+    background: rgba(118, 118, 128, 0.1);
+    transform: translateY(-2px);
   }
 
-  .contributor-avatar {
-    width: 40px;
-    height: 40px;
+  .discord-avatar {
+    display: block;
+    width: 54px;
+    height: 54px;
     border-radius: 50%;
     border: 1px solid var(--border);
+    object-fit: cover;
+    background: var(--bg);
     flex-shrink: 0;
   }
 
-  .contributor-info {
+  .discord-info {
     display: flex;
     flex-direction: column;
-    gap: 0.1rem;
+    gap: 0.15rem;
     min-width: 0;
   }
 
-  .contributor-name {
+  .discord-name {
     font-family: var(--sans-font);
-    font-size: 0.85rem;
-    font-weight: 500;
+    font-size: 0.98rem;
+    font-weight: 600;
     color: var(--text);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    letter-spacing: -0.01em;
   }
 
-  .contributor-commits {
+  .discord-role {
     font-family: var(--sans-font);
-    font-size: 0.65rem;
-    color: var(--text-muted);
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    line-height: 1.35;
   }
 
   .contributors-cta {
@@ -225,5 +331,16 @@ const pulsarLabel = {
 
   .contributors-cta:hover {
     color: var(--accent);
+  }
+
+  @media (max-width: 560px) {
+    .contributors-container {
+      padding: 4rem 1.25rem;
+    }
+
+    .marquee-avatar img {
+      width: 42px;
+      height: 42px;
+    }
   }
 </style>

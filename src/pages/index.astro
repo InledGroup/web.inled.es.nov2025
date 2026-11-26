@@ -19,7 +19,12 @@ const lang = getLangFromLocals(Astro.locals);
 const t = useTranslations(lang);
 ---
 
-<Layout title="Inled Group — Dream, Build" description={t('scroll.description')}>
+<Layout
+  title={lang === 'es'
+    ? 'Inled Group | Software gratuito, privado y open source'
+    : 'Inled Group | Free, private and open-source software'}
+  description={t('scroll.description')}
+>
   <Header />
   <div style="position: relative; z-index: 1;">
     <Hero />
