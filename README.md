@@ -7,6 +7,22 @@ Esta es nuestra nueva web, preparada para un 2026 próspero y fructífero.
 
 Descúbrela en [inled.es](https://inled.es)
 
+## Despliegue (Vercel y Cloudflare)
+
+El sitio es SSR (`output: 'server'`), así que necesita un adaptador real. En
+`astro.config.mjs` se elige automáticamente:
+
+- **Vercel:** usa `@astrojs/vercel` cuando existe la variable `VERCEL`, que
+  Vercel define sola al compilar. El build genera `.vercel/output` y las rutas
+  dinámicas funcionan como funciones serverless.
+- **Cloudflare Pages:** en cualquier otro entorno usa `@astrojs/cloudflare`
+  (`dist/_worker.js`), como hasta ahora.
+
+En Vercel no hace falta configurar nada más: detecta Astro y ejecuta
+`npm run build`. Las redirecciones cortas (`/warp`, `/cleany`, …) se declaran en
+`astro.config.mjs`, por lo que funcionan en ambas plataformas; `/upload/*` se
+resuelve en servidor en `src/pages/upload/[...slug].astro`.
+
 ## Documentos Markdown (`/docs`)
 
 Cualquier `*.md` en la carpeta `docs/` se publica automáticamente en

@@ -2,3 +2,5 @@ node_modules
 .astro
 dist
 firebase-debug.log
+.vercel
+.wrangler

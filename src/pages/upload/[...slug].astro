@@ -1,12 +1,8 @@
 ---
-// Esta página captura todas las rutas /upload/*
-// y redirige a hosted.inled.es
-
-export function getStaticPaths() {
-  // Para sitios estáticos, necesitamos pre-generar algunas rutas comunes
-  // o dejar que Astro genere una página 404 fallback
-  return [];
-}
+// Esta página captura todas las rutas /upload/* y redirige a hosted.inled.es.
+// Se renderiza en el servidor para que el comodín funcione en cualquier host
+// (Vercel, Cloudflare Pages, etc.) en lugar de depender de getStaticPaths.
+export const prerender = false;
 
 const { slug } = Astro.params;
 const targetUrl = `https://hosted.inled.es/${slug || ''}`;
